@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* LIGHT MODE - Warm Premium Whites & Enterprise SaaS */
+  --background: #FCFCFD;
+  --foreground: #1A1D23;
+  
+  --card: #FFFFFF;
+  --card-foreground: #1A1D23;
+  
+  --popover: #FFFFFF;
+  --popover-foreground: #1A1D23;
+  
+  --primary: #C5A059; /* Elegant Gold */
+  --primary-foreground: #FFFFFF;
+  
+  --secondary: #F8F9FA;
+  --secondary-foreground: #374151;
+  
+  --muted: #F3F4F6;
+  --muted-foreground: #6B7280;
+  
+  --accent: #FDFBF7; /* Very light gold tint */
+  --accent-foreground: #C5A059;
+  
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+  
+  --border: #E5E7EB;
+  --input: #E5E7EB;
+  --ring: #C5A059;
+  
+  --radius: 0.5rem;
+}
+
+.dark {
+  /* DARK MODE - Matte Charcoal & Luxury Gold */
+  --background: #0B0D12; /* Deep matte charcoal */
+  --foreground: #F9FAFB;
+  
+  --card: #13161C;
+  --card-foreground: #F9FAFB;
+  
+  --popover: #13161C;
+  --popover-foreground: #F9FAFB;
+  
+  --primary: #D4AF37; /* Bright Luxury Gold */
+  --primary-foreground: #000000;
+  
+  --secondary: #1F242F;
+  --secondary-foreground: #E5E7EB;
+  
+  --muted: #1F242F;
+  --muted-foreground: #9CA3AF;
+  
+  --accent: #2A2416; /* Dark gold tint */
+  --accent-foreground: #D4AF37;
+  
+  --destructive: #991B1B;
+  --destructive-foreground: #F87171;
+  
+  --border: #262B36;
+  --input: #262B36;
+  --ring: #D4AF37;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar for Premium Feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+/* Premium Animations & Effects */
+@layer utilities {
+  .glass-panel {
+    @apply bg-card/70 backdrop-blur-xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)];
+  }
+  .hover-lift {
+    @apply transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg;
+  }
+  .glow-effect {
+    @apply relative before:absolute before:inset-0 before:bg-primary/20 before:blur-xl before:-z-10 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500;
+  }
+  .fade-in-up {
+    animation: fadeInUp 0.5s ease-out forwards;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

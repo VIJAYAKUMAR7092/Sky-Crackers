@@ -1,0 +1,267 @@
+﻿'use client';
+
+import React, { useState, useRef, useCallback } from 'react';
+import { Upload, X, Star, ArrowLeft, ArrowRight, Loader2, CloudUpload } from 'lucide-react';
+import { cn } from './utils';
+
+export interface ImageItem {
+  id?: string;
+  url: string;
+  altText?: string | null;
+  displayOrder: number;
+  isPrimary: boolean;
+}
+
+interface ImageUploaderProps {
+  images: ImageItem[];
+  onChange: (images: ImageItem[]) => void;
+  maxImages?: number;
+  className?: string;
+}
+
+export function ImageUploader({ images, onChange, maxImages = 10, className }: ImageUploaderProps) {
+  const [isUploading, setIsUploading] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const processFiles = async (files: FileList | File[]) => {
+    if (!files || files.length === 0) return;
+
+    if (images.length + files.length > maxImages) {
+      alert(`You can only upload up to ${maxImages} images.`);
+      return;
+    }
+
+    setIsUploading(true);
+    const newImages = [...images];
+
+    try {
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        
+        if (!file.type.startsWith('image/')) {
+          alert('Only image files (PNG, JPG, WEBP) are allowed.');
+          continue;
+        }
+
+        const formData = new FormData();
+        formData.append('file', file);
+
+        const res = await fetch('/api/admin/upload', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (!res.ok) {
+          throw new Error('Upload failed');
+        }
+
+        const data = await res.json();
+        if (data.success) {
+          newImages.push({
+            url: data.data.url,
+            displayOrder: newImages.length,
+            isPrimary: newImages.length === 0, // First image is primary by default
+          });
+        }
+      }
+      onChange(newImages);
+    } catch (error) {
+      console.error('Error uploading images:', error);
+      alert('Failed to upload image(s). Please try again.');
+    } finally {
+      setIsUploading(false);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
+  };
+
+  const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      processFiles(e.target.files);
+    }
+  };
+
+  const onDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const onDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+  };
+
+  const onDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      processFiles(e.dataTransfer.files);
+    }
+  };
+
+  const handleRemove = (index: number) => {
+    const newImages = images.filter((_, i) => i !== index);
+    if (newImages.length > 0 && !newImages.some(img => img.isPrimary)) {
+      newImages[0].isPrimary = true;
+    }
+    newImages.forEach((img, i) => img.displayOrder = i);
+    onChange(newImages);
+  };
+
+  const handleSetPrimary = (index: number) => {
+    const newImages = images.map((img, i) => ({
+      ...img,
+      isPrimary: i === index,
+    }));
+    onChange(newImages);
+  };
+
+  const handleMove = (index: number, direction: 'left' | 'right') => {
+    if (direction === 'left' && index === 0) return;
+    if (direction === 'right' && index === images.length - 1) return;
+
+    const newImages = [...images];
+    const targetIndex = direction === 'left' ? index - 1 : index + 1;
+    
+    const temp = newImages[index];
+    newImages[index] = newImages[targetIndex];
+    newImages[targetIndex] = temp;
+
+    newImages.forEach((img, i) => img.displayOrder = i);
+    onChange(newImages);
+  };
+
+  return (
+    <div className={cn("space-y-6", className)}>
+      
+      {/* Premium Drag and Drop Zone */}
+      {images.length < maxImages && (
+        <div 
+          onDragOver={onDragOver}
+          onDragLeave={onDragLeave}
+          onDrop={onDrop}
+          onClick={() => fileInputRef.current?.click()}
+          className={cn(
+            "relative w-full h-40 rounded-2xl border-2 border-dashed flex flex-col items-center justify-center cursor-pointer transition-all duration-300 overflow-hidden",
+            isDragging 
+              ? "border-primary bg-primary/5 scale-[1.02] shadow-[0_0_30px_rgba(212,175,55,0.15)]" 
+              : "border-border hover:border-primary/50 hover:bg-white/5",
+            isUploading ? "pointer-events-none opacity-80" : ""
+          )}
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/10 z-0" />
+          
+          <div className="relative z-10 flex flex-col items-center gap-3 text-center px-4">
+            {isUploading ? (
+              <>
+                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-1">
+                  <Loader2 className="w-6 h-6 text-primary animate-spin" />
+                </div>
+                <div className="space-y-1">
+                  <p className="text-sm font-bold text-white">Uploading Images...</p>
+                  <p className="text-xs text-zinc-400">Please wait while we process your files</p>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className={cn(
+                  "w-14 h-14 rounded-full flex items-center justify-center mb-1 transition-colors duration-300",
+                  isDragging ? "bg-primary/20 text-primary" : "bg-white/5 text-zinc-400 group-hover:text-primary"
+                )}>
+                  <CloudUpload className="w-7 h-7" />
+                </div>
+                <div className="space-y-1">
+                  <p className="text-sm font-bold text-white">
+                    <span className="text-primary">Click to upload</span> or drag and drop
+                  </p>
+                  <p className="text-xs text-zinc-500 font-medium tracking-wide uppercase">
+                    Supported formats: PNG, JPG, WEBP
+                  </p>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Image Gallery Grid */}
+      {images.length > 0 && (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          {images.map((img, i) => (
+            <div key={i} className="group relative aspect-square rounded-xl border border-white/10 bg-black/50 overflow-hidden shadow-lg transition-transform hover:scale-[1.02]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img 
+                src={img.url} 
+                alt={img.altText || `Product image ${i + 1}`} 
+                className="w-full h-full object-contain p-2"
+              />
+              
+              {/* Premium Hover Overlay */}
+              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-3 backdrop-blur-sm">
+                
+                <div className="flex justify-between items-center">
+                  <button
+                    type="button"
+                    onClick={(e) => { e.stopPropagation(); handleSetPrimary(i); }}
+                    className={cn(
+                      "p-2 rounded-full transition-all duration-300 shadow-lg transform hover:scale-110", 
+                      img.isPrimary ? "bg-primary text-black opacity-100" : "bg-white/10 text-white hover:bg-primary/80 hover:text-black"
+                    )}
+                    title="Set as Primary"
+                  >
+                    <Star className={cn("w-3.5 h-3.5", img.isPrimary ? "fill-current" : "")} />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(e) => { e.stopPropagation(); handleRemove(i); }}
+                    className="p-2 rounded-full bg-red-500/80 hover:bg-red-500 text-white transition-all duration-300 shadow-lg transform hover:scale-110"
+                    title="Remove Image"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+
+                <div className="flex justify-center gap-3">
+                  <button
+                    type="button"
+                    onClick={(e) => { e.stopPropagation(); handleMove(i, 'left'); }}
+                    disabled={i === 0}
+                    className="p-2 rounded-full bg-white/10 hover:bg-white/20 disabled:opacity-30 transition-all text-white shadow-lg backdrop-blur-md"
+                  >
+                    <ArrowLeft className="w-3.5 h-3.5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(e) => { e.stopPropagation(); handleMove(i, 'right'); }}
+                    disabled={i === images.length - 1}
+                    className="p-2 rounded-full bg-white/10 hover:bg-white/20 disabled:opacity-30 transition-all text-white shadow-lg backdrop-blur-md"
+                  >
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Primary Badge */}
+              {img.isPrimary && (
+                <div className="absolute top-0 left-0 bg-primary/90 text-black text-[9px] font-black uppercase tracking-widest px-3 py-1 shadow-md group-hover:hidden backdrop-blur-md rounded-br-lg">
+                  Primary
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      <input
+        type="file"
+        ref={fileInputRef}
+        onChange={handleUpload}
+        accept="image/png, image/jpeg, image/webp"
+        multiple
+        className="hidden"
+      />
+    </div>
+  );
+}

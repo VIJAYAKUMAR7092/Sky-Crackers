@@ -1,0 +1,1 @@
+import 'dotenv/config'; import { PrismaClient } from '@prisma/client'; async function main() { const prisma = new PrismaClient(); console.log(await prisma.product.count()); } main().catch(console.error);
