@@ -5,6 +5,7 @@ import prisma from "../../lib/db/prisma";
 import { AdminRole } from "@prisma/client";
 
 export const authOptions: NextAuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60, // 30 days
@@ -20,39 +21,49 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
+        console.log("authorize function called");
         if (!credentials?.email || !credentials?.password) {
+          console.log("Missing credentials");
           return null;
         }
 
-        // Find user
-        const user = await prisma.adminUser.findUnique({
-          where: { email: credentials.email },
-        });
+        try {
+          // Find user
+          const user = await prisma.adminUser.findUnique({
+            where: { email: credentials.email },
+          });
 
-        if (!user || !user.active) {
-          return null;
+          console.log("admin record found:", !!user);
+
+          if (!user || !user.active) {
+            return null;
+          }
+
+          // Verify password
+          const isValid = await bcrypt.compare(credentials.password, user.password);
+          console.log("password comparison success:", isValid);
+
+          if (!isValid) {
+            return null;
+          }
+
+          // Restrict current system access to SUPERADMIN only. 
+          // For future scalability, you can add 'ADMIN' or 'MANAGER' to this array.
+          const allowedRoles = ['SUPERADMIN'];
+          if (!allowedRoles.includes(user.role)) {
+            console.warn(`User ${user.email} attempted login but has insufficient role: ${user.role}`);
+            return null; // Return null to trigger the generic "Invalid email or password" UI error
+          }
+
+          return {
+            id: user.id,
+            email: user.email,
+            role: user.role,
+          };
+        } catch (error) {
+          console.error("Error in authorize function:", error);
+          throw error;
         }
-
-        // Verify password
-        const isValid = await bcrypt.compare(credentials.password, user.password);
-
-        if (!isValid) {
-          return null;
-        }
-
-        // Restrict current system access to SUPERADMIN only. 
-        // For future scalability, you can add 'ADMIN' or 'MANAGER' to this array.
-        const allowedRoles = ['SUPERADMIN'];
-        if (!allowedRoles.includes(user.role)) {
-          console.warn(`User ${user.email} attempted login but has insufficient role: ${user.role}`);
-          return null; // Return null to trigger the generic "Invalid email or password" UI error
-        }
-
-        return {
-          id: user.id,
-          email: user.email,
-          role: user.role,
-        };
       },
     }),
   ],

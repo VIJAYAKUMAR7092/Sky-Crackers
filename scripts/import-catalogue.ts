@@ -1,4 +1,4 @@
-﻿import prisma from "../lib/db/prisma";
+import prisma from "../lib/db/prisma";
 
 const catalogue = {
   "Combo Packs": [
@@ -230,9 +230,8 @@ function slugify(text: string) {
 async function main() {
   console.log("Starting catalogue import...");
   
-  // First, let's delete all existing products to prevent duplicates from our previous sample seed.
-  await prisma.product.deleteMany({});
-  console.log("Cleared existing products.");
+  // Safe restoration: Do not drop tables
+  console.log("Preserving existing products...");
   
   let successCount = 0;
   let failCount = 0;
@@ -241,6 +240,40 @@ async function main() {
   const existingCategories = await prisma.category.findMany();
   console.log(`Found ${existingCategories.length} categories.`);
   
+  // Mapping for Category Images to attach to Product Image relations
+  const CATEGORY_IMAGES: Record<string, string> = {
+    'sparklers': "/images/categories/sparklers.jpg",
+    'special-color-sparklers': "/images/categories/sparklers.jpg",
+    'flower-pots': "/images/categories/flower-pots.jpg",
+    'special-fountain-exotic-series': "/images/categories/flower-pots.jpg",
+    'peacock-fountain': "/images/categories/flower-pots.jpg",
+    'rockets': "/images/categories/rockets.jpg",
+    'ground-chakkar': "/images/categories/chakkars.jpg",
+    'fancy-wheels': "/images/categories/chakkars.jpg",
+    'single-ariel-fancy': "/images/categories/fancy-shots.jpg",
+    'single-ariel-fancy-5-pcs': "/images/categories/fancy-shots.jpg",
+    'special-color-ariel-fancy': "/images/categories/fancy-shots.jpg",
+    'combo-ariel-fancy': "/images/categories/fancy-shots.jpg",
+    'repeating-multi-color-shots': "/images/categories/fancy-shots.jpg",
+    'vanitha-fireworks-special-fancy-outs': "/images/categories/fancy-shots.jpg",
+    'sonny-fancy': "/images/categories/fancy-shots.jpg",
+    'special-multi-color-shots-2026': "/images/categories/fancy-shots.jpg",
+    'festival-display-set-out': "/images/categories/fancy-shots.jpg",
+    'one-sound-crackers': "/images/categories/sound-crackers.jpg",
+    'bombs': "/images/categories/sound-crackers.jpg",
+    'paper-bombs': "/images/categories/sound-crackers.jpg",
+    'loose-crackers': "/images/categories/sound-crackers.jpg",
+    'digital-lar': "/images/categories/sound-crackers.jpg",
+    'kids-novelties': "/images/categories/kids-collection.jpg",
+    'fancy-novelties': "/images/categories/kids-collection.jpg",
+    'torches-pencils': "/images/categories/kids-collection.jpg",
+    'color-matches': "/images/categories/kids-collection.jpg",
+    'guns': "/images/categories/kids-collection.jpg",
+    'gift-boxes': "/images/categories/gift-boxes.jpg",
+    'combo-packs': "/images/categories/gift-boxes.jpg",
+    'new-arrivals-2026': "/images/categories/fancy-shots.jpg",
+  };
+
   for (const [catName, products] of Object.entries(catalogue)) {
     const slug = slugify(catName);
     const category = existingCategories.find(c => c.slug === slug || c.name.toLowerCase() === catName.toLowerCase());
@@ -251,12 +284,27 @@ async function main() {
       continue;
     }
     
+    // Resolve the appropriate image for this category, fallback to placeholder
+    const imageUrl = CATEGORY_IMAGES[category.slug] || "/placeholder.png";
+    
     for (const prod of products) {
       const prodSlug = slugify(prod.name);
       
       try {
         const exists = await prisma.product.findUnique({ where: { slug: prodSlug } });
         if (exists) {
+          // If product exists, just ensure it has an image (upsert approach for images)
+          const existingImage = await prisma.productImage.findFirst({ where: { productId: exists.id } });
+          if (!existingImage && imageUrl !== "/placeholder.png") {
+            await prisma.productImage.create({
+              data: {
+                productId: exists.id,
+                url: imageUrl,
+                altText: prod.name,
+                isPrimary: true
+              }
+            });
+          }
           skippedDuplicatesCount++;
           continue;
         }
@@ -275,7 +323,14 @@ async function main() {
             description: `Premium ${prod.name} from Sky Crackers.`,
             stockStatus: 'IN_STOCK',
             featured: false,
-            active: true
+            active: true,
+            images: {
+              create: {
+                url: imageUrl,
+                altText: prod.name,
+                isPrimary: true
+              }
+            }
           }
         });
         successCount++;
