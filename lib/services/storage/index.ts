@@ -1,5 +1,5 @@
-import { LocalStorageService } from './local-storage.service';
+import { CloudinaryStorageService } from './cloudinary-storage.service';
 import { StorageService } from './storage.interface';
 
-// We can switch this to CloudinaryStorageService in the future based on env variables
-export const storageService: StorageService = new LocalStorageService();
+// Automatically use CloudinaryStorageService in production environments
+export const storageService: StorageService = new CloudinaryStorageService();
