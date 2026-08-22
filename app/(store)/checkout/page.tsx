@@ -141,14 +141,14 @@ export default function CheckoutPage() {
           {/* Left Column - Delivery Details or Confirmation Details */}
           <div className="w-full lg:w-3/5">
             {step === 2 ? (
-              <form id="checkout-form" onSubmit={handleProceedToConfirm} className="bg-white rounded-2xl border border-pink-200 shadow-sm p-6 lg:p-8">
+              <form id="checkout-form" onSubmit={handleProceedToConfirm} className="bg-white rounded-2xl border border-pink-200 shadow-sm p-4 sm:p-6 lg:p-8">
                 <h2 className="text-lg font-black text-gray-900 flex items-center gap-2 mb-6">
                   <User className="w-5 h-5 text-primary" />
                   Delivery Details
                 </h2>
 
                 <div className="space-y-5">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                     <div className="space-y-1">
                       <label className="text-xs font-bold text-primary tracking-wide uppercase">Full Name *</label>
                       <input required type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} className="w-full border border-pink-200 rounded-lg px-3 py-2.5 text-sm text-gray-900 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="Enter your full name" />
@@ -209,7 +209,7 @@ export default function CheckoutPage() {
                 </div>
               </form>
             ) : (
-              <div className="bg-white rounded-2xl border border-pink-200 shadow-sm p-6 lg:p-8">
+              <div className="bg-white rounded-2xl border border-pink-200 shadow-sm p-4 sm:p-6 lg:p-8">
                 <div className="flex items-center justify-between mb-6 border-b border-gray-100 pb-4">
                   <h2 className="text-lg font-black text-gray-900 flex items-center gap-2">
                     <User className="w-5 h-5 text-primary" />
@@ -308,7 +308,7 @@ export default function CheckoutPage() {
               </div>
             </div>
 
-            <div className="bg-pink-50/50 p-5 border-t border-pink-100">
+            <div className="bg-pink-50/50 p-4 sm:p-5 border-t border-pink-100">
               <div className="flex justify-between items-center text-sm font-bold text-gray-600 mb-2 border-b border-pink-100 border-dashed pb-3">
                 <span>Subtotal <span className="text-xs text-gray-400 font-medium">({totalQty} items)</span></span>
                 <span>Rs. {subtotal.toFixed(2)}</span>

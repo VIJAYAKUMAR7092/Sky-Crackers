@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
@@ -43,8 +43,8 @@ export default function Navbar({ settings }: { settings?: any }) {
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Shop", href: "/shop" },
-    { name: "About Us", href: "/pages/about-us" },
-    { name: "Contact", href: "/pages/contact" },
+    { name: "About Us", href: "/#about" },
+    { name: "Contact", href: "/#contact" },
   ];
 
   return (

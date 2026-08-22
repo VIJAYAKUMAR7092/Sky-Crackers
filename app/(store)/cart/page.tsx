@@ -63,8 +63,8 @@ export default function CartPage() {
             </div>
 
             {items.map((item) => (
-              <div key={item.product.id} className="flex flex-col sm:flex-row gap-6 p-6 bg-white/5 rounded-3xl border border-white/10 relative group">
-                <div className="relative h-28 w-28 sm:h-32 sm:w-32 rounded-2xl overflow-hidden shrink-0 bg-black/50 border border-white/5">
+              <div key={item.product.id} className="flex flex-row gap-4 sm:gap-6 p-4 sm:p-6 items-center sm:items-stretch bg-white/5 rounded-3xl border border-white/10 relative group">
+                <div className="relative h-20 w-20 sm:h-32 sm:w-32 shrink-0 rounded-2xl overflow-hidden shrink-0 bg-black/50 border border-white/5">
                   <Image 
                     src={item.product.imageUrl || "/placeholder.png"} 
                     alt={item.product.name}
@@ -75,7 +75,7 @@ export default function CartPage() {
                 
                 <div className="flex-1 flex flex-col justify-center">
                   <div className="flex justify-between items-start gap-4 mb-2">
-                    <Link href={`/product/${item.product.slug}`} className="text-lg font-bold text-white hover:text-primary transition-colors line-clamp-2">
+                    <Link href={`/product/${item.product.slug}`} className="text-sm sm:text-lg font-bold text-white hover:text-primary transition-colors line-clamp-2">
                       {item.product.name}
                     </Link>
                     <button 
@@ -121,7 +121,7 @@ export default function CartPage() {
 
           {/* Order Summary */}
           <div className="lg:col-span-4">
-            <div className="bg-white/5 border border-white/10 rounded-3xl p-8 sticky top-32">
+            <div className="bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-8 sticky top-32">
               <h2 className="text-xl font-extrabold text-white mb-6">Order Summary</h2>
               
               <div className="space-y-4 text-sm mb-8">

@@ -1,7 +1,7 @@
-import React from "react";
+﻿import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Sparkles, ShieldCheck, Truck, Clock, PhoneCall, MapPin, MessageCircle, PlayCircle, Star, Quote, Package } from "lucide-react";
+import { ArrowRight, Sparkles, ShieldCheck, Truck, Clock, PhoneCall, MapPin, Mail, MessageCircle, PlayCircle, Star, Quote, Package } from "lucide-react";
 import FeaturedProductCard from "@/components/public/home/FeaturedProductCard";
 import HeroSlider from "@/components/public/home/HeroSlider";
 import BrandMarquee from "@/components/public/home/BrandMarquee";
@@ -112,7 +112,7 @@ export default async function HomePage() {
         {/* 2. WHY CHOOSE US / FEATURES (Cracker City Style) */}
       <section className="py-12 bg-white relative z-30 -mt-10">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-4 sm:gap-6">
             
             <ScrollReveal animation="fade-up" delay={100}>
               <div className="group bg-white hover:bg-primary rounded-[2rem] p-8 text-center shadow-[0_10px_40px_rgba(0,0,0,0.06)] border border-gray-100 h-full flex flex-col items-center justify-center hover:-translate-y-2 transition-all duration-300">
@@ -156,13 +156,13 @@ export default async function HomePage() {
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 uppercase tracking-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 uppercase tracking-tight">
               Shop By Category
             </h2>
             <div className="h-1 w-20 bg-primary mx-auto rounded-full" />
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-4 sm:gap-6 lg:gap-8">
             {displayCategories.map((category, index) => (
               <ScrollReveal key={category.id} animation="fade-up" delay={index * 100}>
                 <Link href={`/shop?category=${category.slug}`} className="group block">
@@ -175,8 +175,8 @@ export default async function HomePage() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80" />
                     
-                    <div className="absolute inset-0 p-6 flex flex-col justify-end items-center text-center">
-                      <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 group-hover:text-secondary transition-colors duration-300">
+                    <div className="absolute inset-0 p-4 sm:p-6 flex flex-col justify-end items-center text-center">
+                      <h3 className="text-lg sm:text-2xl font-bold text-white mb-1 sm:mb-2 leading-tight group-hover:text-secondary transition-colors duration-300">
                         {category.name}
                       </h3>
                       <div className="flex items-center text-white/90 text-sm font-bold opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
@@ -195,12 +195,12 @@ export default async function HomePage() {
       {featuredProducts.length > 0 && (
         <section className="py-20 bg-gray-50 border-t border-gray-100">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+            <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4 sm:gap-6">
               <div>
                 <span className="text-primary font-bold tracking-widest uppercase text-sm mb-2 block">
                   Premium Sivakasi Fireworks
                 </span>
-                <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 uppercase">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 uppercase">
                   Featured Collection
                 </h2>
               </div>
@@ -209,7 +209,7 @@ export default async function HomePage() {
               </Link>
             </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
               {featuredProducts.slice(0, 4).map((product: any, idx: number) => (
                 <ScrollReveal key={product.id} animation="fade-up" delay={idx * 150}>
                   <FeaturedProductCard product={product} />
@@ -221,13 +221,13 @@ export default async function HomePage() {
       )}
 
       {/* 6. YOUTUBE SHOWCASE */}
-      <section className="py-24 bg-gray-50 border-t border-gray-100 overflow-hidden">
+      <section className="py-12 md:py-24 bg-gray-50 border-t border-gray-100 overflow-hidden">
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
           <div className="flex flex-col lg:flex-row gap-16 items-center">
             
             {/* Left: Video */}
             <div className="w-full lg:w-1/2 relative">
-              <div className="grid grid-cols-1 gap-6">
+              <div className="grid grid-cols-1 gap-4 sm:gap-6">
                 {displayVideos.slice(0, 1).map((video: any, i: number) => (
                   <ScrollReveal key={video.id} animation="fade-right">
                     <a href={video.youtubeUrl} target="_blank" rel="noopener noreferrer" className="block bg-white p-2 rounded-[2rem] shadow-2xl border border-gray-200 group cursor-pointer relative overflow-hidden aspect-video">
@@ -263,7 +263,7 @@ export default async function HomePage() {
             <div className="w-full lg:w-1/2 text-center lg:text-left pl-0 lg:pl-4">
               <ScrollReveal animation="fade-left">
                 <p className="text-red-600 font-bold uppercase tracking-widest text-sm mb-4">Premium Quality in Action</p>
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 uppercase tracking-tight leading-[1.1]">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 uppercase tracking-tight leading-[1.1]">
                   Experience The <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-500">Magic of Sivakasi</span>
                 </h2>
                 <div className="h-1.5 w-24 bg-red-600 rounded-full mt-8 mx-auto lg:mx-0" />
@@ -313,7 +313,7 @@ export default async function HomePage() {
                 <p className="text-gray-600 leading-relaxed mb-8">
                   With years of experience in the pyrotechnic industry, our mission is to deliver safe, vibrant, and innovative fireworks right to your doorstep. We offer an extensive range of products including sparklers, flower pots, rockets, and exclusive gift boxes at unbeatable wholesale prices. 
                 </p>
-                <div className="grid grid-cols-2 gap-6 mb-8">
+                <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-8">
                   <div className="flex items-center gap-3">
                     <div className="h-12 w-12 rounded-full bg-green-50 flex items-center justify-center shrink-0">
                       <ShieldCheck className="h-6 w-6 text-primary" />
@@ -338,13 +338,14 @@ export default async function HomePage() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <span className="text-primary font-bold tracking-[0.2em] uppercase text-xs mb-3 block">REACH OUT</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 uppercase tracking-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 uppercase tracking-tight">
               Contact Us
             </h2>
             <div className="h-1 w-20 bg-primary mx-auto rounded-full" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {/* DESKTOP CONTACT VIEW */}
+          <div className="hidden md:grid grid-cols-3 gap-8 max-w-5xl mx-auto">
             <ScrollReveal animation="fade-up" delay={100}>
               <div className="bg-white rounded-2xl p-8 text-center shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 flex flex-col items-center h-full">
                 <div className="h-16 w-16 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mb-6">
@@ -377,8 +378,51 @@ export default async function HomePage() {
               </div>
             </ScrollReveal>
           </div>
-        </div>
-      </section>
+
+          {/* MOBILE CONTACT VIEW */}
+          <div className="grid md:hidden grid-cols-2 gap-4 max-w-sm mx-auto">
+            <ScrollReveal animation="fade-up" delay={100}>
+              <a href="tel:+916383511818" className="bg-white rounded-xl p-4 text-center shadow-sm border border-gray-100 active:shadow-inner active:scale-95 transition-all duration-200 flex flex-col items-center justify-center aspect-square h-full">
+                <div className="h-12 w-12 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mb-3">
+                  <PhoneCall className="h-6 w-6" />
+                </div>
+                <h3 className="text-sm font-bold text-gray-900 mb-1">Phone</h3>
+                <span className="text-xs font-bold text-primary">+91 6383511818</span>
+              </a>
+            </ScrollReveal>
+
+            <ScrollReveal animation="fade-up" delay={150}>
+              <a href="mailto:info@skycrackers.com" className="bg-white rounded-xl p-4 text-center shadow-sm border border-gray-100 active:shadow-inner active:scale-95 transition-all duration-200 flex flex-col items-center justify-center aspect-square h-full">
+                <div className="h-12 w-12 bg-orange-50 text-orange-500 rounded-full flex items-center justify-center mb-3">
+                  <Mail className="h-6 w-6" />
+                </div>
+                <h3 className="text-sm font-bold text-gray-900 mb-1">Email</h3>
+                <span className="text-xs font-bold text-primary">Mail Us</span>
+              </a>
+            </ScrollReveal>
+
+            <ScrollReveal animation="fade-up" delay={200}>
+              <div className="bg-white rounded-xl p-4 text-center shadow-sm border border-gray-100 flex flex-col items-center justify-center aspect-square h-full">
+                <div className="h-12 w-12 bg-red-50 text-red-500 rounded-full flex items-center justify-center mb-3">
+                  <MapPin className="h-6 w-6" />
+                </div>
+                <h3 className="text-sm font-bold text-gray-900 mb-1">Address</h3>
+                <span className="text-[10px] leading-tight text-gray-500">Sivakasi,<br/>Tamil Nadu</span>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal animation="fade-up" delay={250}>
+              <div className="bg-white rounded-xl p-4 text-center shadow-sm border border-gray-100 flex flex-col items-center justify-center aspect-square h-full">
+                <div className="h-12 w-12 bg-green-50 text-green-500 rounded-full flex items-center justify-center mb-3">
+                  <Clock className="h-6 w-6" />
+                </div>
+                <h3 className="text-sm font-bold text-gray-900 mb-1">Hours</h3>
+                <span className="text-xs font-bold text-gray-500">8 AM - 10 PM</span>
+              </div>
+            </ScrollReveal>
+          </div>
+          </div>
+        </section>
 
       {/* 7. TESTIMONIALS SECTION */}
       <TestimonialMarquee />

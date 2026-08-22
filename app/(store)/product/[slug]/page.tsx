@@ -71,11 +71,11 @@ export default async function ProductDetailPage({
           <span className="text-white truncate max-w-[200px] sm:max-w-none">{product.name}</span>
         </nav>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 mb-20">
           <div className="relative">
             <div className="absolute top-6 left-6 z-20 flex flex-col gap-2">
               {hasDiscount && !isOutOfStock && (
-                <div className="bg-primary/90 text-black text-xs font-bold px-4 py-2 rounded-full uppercase tracking-wider backdrop-blur-md shadow-[0_0_20px_rgba(212,175,55,0.4)]">
+                <div className="bg-primary/90 text-black text-xs font-bold px-4 py-2 rounded-full uppercase tracking-wider backdrop-blur-md shadow-[0_0_20px_rgba(212₹75,55,0.4)]">
                   Save ₹{Number(product.discount).toFixed(0)}
                 </div>
               )}
@@ -99,14 +99,14 @@ export default async function ProductDetailPage({
               {product.sku && <span className="text-zinc-600">| SKU: {product.sku}</span>}
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-[1.1] tracking-tight drop-shadow-lg">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-[1.1] tracking-tight drop-shadow-lg">
               {product.name}
             </h1>
             
             <div className="flex items-center gap-4 mb-8 pb-8 border-b border-white/10">
               <div className="flex flex-col gap-1">
                 <div className="flex items-end gap-3">
-                  <span className="text-4xl font-extrabold text-white tracking-tight drop-shadow-sm">
+                  <span className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight drop-shadow-sm">
                     ₹{Number(product.sellingPrice).toFixed(2)}
                   </span>
                   {Number(product.mrp) > Number(product.sellingPrice) && (
@@ -136,7 +136,7 @@ export default async function ProductDetailPage({
               }} 
             />
 
-            <div className="mt-12 grid grid-cols-2 gap-4 border-t border-white/10 pt-8">
+            <div className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 border-t border-white/10 pt-8">
               <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-primary/30 transition-colors">
                 <div className="bg-zinc-900 p-3 rounded-full text-primary border border-white/10">
                   <ShieldCheck className="h-5 w-5" />

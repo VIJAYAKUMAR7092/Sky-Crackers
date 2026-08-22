@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import ZoomableImage from "@/components/public/ui/ZoomableImage";
 import { ShoppingCart } from "lucide-react";
 import { useCartStore } from "@/lib/store/cart.store";
 
@@ -90,7 +91,7 @@ export default function ComboPacks() {
               
               {/* Pack Image containing full details */}
               <div className="relative w-full aspect-[1/1.3] bg-gray-50 border-b border-orange-50 overflow-hidden">
-                <Image 
+                <ZoomableImage 
                   src={pack.image} 
                   alt={pack.name} 
                   fill 

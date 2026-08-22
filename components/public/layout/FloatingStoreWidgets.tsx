@@ -1,11 +1,23 @@
+"use client";
+
 import Link from "next/link";
 import { Rocket } from "lucide-react";
 import Image from "next/image";
+import BottomCartPopup from "@/components/public/cart/BottomCartPopup";
 import WhatsAppIcon from "@/components/public/ui/WhatsAppIcon";
+import { usePathname } from "next/navigation";
 
 export default function FloatingStoreWidgets() {
+  const pathname = usePathname();
+
+  // Hide widgets on the checkout page to keep it clean and focused
+  if (pathname === "/checkout") {
+    return null;
+  }
+
   return (
     <>
+      <BottomCartPopup />
       {/* WhatsApp Floating Button */}
       <a
         href="https://wa.me/919042849344"

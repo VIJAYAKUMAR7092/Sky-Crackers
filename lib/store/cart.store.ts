@@ -18,6 +18,9 @@ export interface CartItem {
 
 interface CartStore {
   items: CartItem[];
+  lastAddedItem: CartProduct | null;
+  isPopupOpen: boolean;
+  hidePopup: () => void;
   addItem: (product: CartProduct, quantity?: number) => void;
   removeItem: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
@@ -30,6 +33,9 @@ export const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
       items: [],
+      lastAddedItem: null,
+      isPopupOpen: false,
+      hidePopup: () => set({ isPopupOpen: false }),
       
       addItem: (product: CartProduct, quantity = 1) => {
         set((state) => {
@@ -41,12 +47,16 @@ export const useCartStore = create<CartStore>()(
                 item.product.id === product.id 
                   ? { ...item, quantity: item.quantity + quantity }
                   : item
-              )
+              ),
+              lastAddedItem: product,
+              isPopupOpen: true
             };
           }
           
           return {
-            items: [...state.items, { product, quantity }]
+            items: [...state.items, { product, quantity }],
+            lastAddedItem: product,
+            isPopupOpen: true
           };
         });
       },

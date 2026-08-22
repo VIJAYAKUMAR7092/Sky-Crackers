@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import ZoomableImage from "@/components/public/ui/ZoomableImage";
 import Link from "next/link";
 import { ShoppingCart, Plus, Minus, Check } from "lucide-react";
 import { useCartStore } from "@/lib/store/cart.store";
@@ -60,7 +61,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const packInfo = product.packInfo || "1 Box";
 
   return (
-    <div className="group relative h-[520px] bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 rounded-[20px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.4)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_15px_40px_rgba(212,175,55,0.15)] flex flex-col">
+    <div className="group relative h-full min-h-[380px] md:min-h-[460px] bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 rounded-[20px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.4)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_15px_40px_rgba(212,175,55,0.15)] flex flex-col">
       
       {/* Badges Container */}
       <div className="absolute top-3 left-3 z-20 flex flex-col gap-2">
@@ -85,7 +86,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
       {/* Image Container */}
       <Link href={`/product/${product.slug}`} className="relative h-[55%] w-full overflow-hidden flex items-center justify-center bg-white/5 p-8">
-        <Image 
+        <ZoomableImage 
           src={product.images?.[0]?.url || "/placeholder.png"}
           alt={product.name}
           fill
@@ -133,7 +134,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           {/* Action Row */}
           <div className="flex items-center gap-2 w-full pt-2 border-t border-white/5">
             {/* Quantity Selector */}
-            <div className="flex items-center bg-zinc-900 border border-zinc-800 rounded-lg h-10 w-[100px] overflow-hidden">
+            <div className="flex items-center bg-zinc-900 border border-zinc-800 rounded-lg h-10 w-[80px] sm:w-[100px] overflow-hidden">
               <button 
                 onClick={handleDecrement}
                 disabled={isOutOfStock}
