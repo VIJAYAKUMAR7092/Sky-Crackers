@@ -3,9 +3,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { MapPin, Phone, Mail, ArrowRight, PlayCircle, MessageCircle } from "lucide-react";
 
-export default function Footer() {
+export default function Footer({ settings }: { settings?: any }) {
   return (
-    <footer className="bg-green-900 text-green-100 pt-16 pb-8 border-t-4 border-secondary relative overflow-hidden">
+    <footer className="bg-green-900 text-green-100 pt-16 pb-8 relative overflow-hidden">
       
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-12">
@@ -13,12 +13,12 @@ export default function Footer() {
           {/* Brand Info (Larger Column) */}
           <div className="lg:col-span-4 space-y-5">
             <Link href="/" className="inline-block group mb-4">
-              <div className="relative h-12 w-40 transition-transform duration-300">
+              <div className="relative h-16 w-56 md:h-20 md:w-64 transition-transform duration-300">
                 <Image 
-                  src="/logo-official.png" 
-                  alt="Sky Crackers Logo" 
+                  src={settings?.logoUrl || "/images/sky-crackers-logo.png"} 
+                  alt={settings?.siteName || "Sky Crackers Logo"} 
                   fill 
-                  className="object-contain object-left brightness-0 invert" 
+                  className="object-contain object-left" 
                 />
               </div>
             </Link>
@@ -28,10 +28,10 @@ export default function Footer() {
             </p>
             
             <div className="flex gap-4 pt-2">
-              <a href="https://wa.me/919786683878" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-full hover:bg-green-600 transition-colors">
+              <a href={`https://wa.me/${settings?.whatsapp ? settings.whatsapp.replace(/[^0-9]/g, "") : "919042849344"}?text=Hello%20Sky%20Crackers`} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-full hover:bg-green-600 transition-colors">
                 <MessageCircle className="h-5 w-5 text-white" />
               </a>
-              <a href="https://youtube.com/@skycrackersofficial" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-full hover:bg-red-600 transition-colors">
+              <a href={settings?.youtube || "https://youtube.com/@skycrackersofficial?si=Fh5UAVw9lqOjOpXN"} target="_blank" rel="noopener noreferrer" className="p-3 bg-white/10 rounded-full hover:bg-red-600 transition-colors">
                 <PlayCircle className="h-5 w-5 text-white" />
               </a>
             </div>
@@ -44,11 +44,13 @@ export default function Footer() {
               {[
                 { name: 'Home', href: '/' },
                 { name: 'Shop', href: '/shop' },
-                { name: 'About Us', href: '/#about' },
-                { name: 'Contact Us', href: '/#contact' }
+                { name: 'About Us', href: '/pages/about-us' },
+                { name: 'Contact Us', href: '/pages/contact' },
+                { name: 'Delivery Information', href: '/pages/delivery-information' },
+                { name: 'Privacy Policy', href: '/pages/privacy-policy' }
               ].map((item, i) => (
                 <li key={i}>
-                  <Link href={item.href} className="text-sm font-medium text-green-100 hover:text-secondary transition-colors duration-200 flex items-center group">
+                  <Link href={item.href} className="text-sm font-medium text-green-100 hover:text-white transition-colors duration-200 flex items-center group">
                     <span className="group-hover:translate-x-1 transition-transform duration-200">{item.name}</span>
                   </Link>
                 </li>
@@ -68,7 +70,7 @@ export default function Footer() {
                 { name: 'Kids Collection', slug: 'kids-collection' }
               ].map((cat, i) => (
                 <li key={i}>
-                  <Link href={`/shop?category=${cat.slug}`} className="text-sm font-medium text-green-100 hover:text-secondary transition-colors duration-200 flex items-center group">
+                  <Link href={`/shop?category=${cat.slug}`} className="text-sm font-medium text-green-100 hover:text-white transition-colors duration-200 flex items-center group">
                     <span className="group-hover:translate-x-1 transition-transform duration-200">{cat.name}</span>
                   </Link>
                 </li>
@@ -81,16 +83,26 @@ export default function Footer() {
             <h3 className="text-white font-extrabold mb-6 uppercase text-sm border-b border-white/20 pb-2">Contact Us</h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-4">
-                <MapPin className="h-5 w-5 text-secondary shrink-0 mt-1" />
-                <span className="text-sm text-green-100 leading-relaxed font-medium">2/174D, Sattur Road,<br/>Meenampatti, Sivakasi,<br/>Tamil Nadu - 626189</span>
+                <MapPin className="h-5 w-5 text-yellow-400 shrink-0 mt-1" />
+                <span className="text-sm text-green-100 leading-relaxed font-medium">
+                  {settings?.address ? (
+                    <span dangerouslySetInnerHTML={{ __html: settings.address.replace(/\n/g, "<br/>") }} />
+                  ) : (
+                    <>2/174D, Sattur Road,<br/>Meenampatti. Sivakasi,<br/>Tamil Nadu - 626189</>
+                  )}
+                </span>
               </li>
               <li className="flex items-center gap-4">
-                <MessageCircle className="h-5 w-5 text-secondary shrink-0" />
-                <a href="https://wa.me/919786683878" className="text-sm font-bold text-white hover:text-secondary transition-colors duration-200">+91 9786683878</a>
+                <MessageCircle className="h-5 w-5 text-yellow-400 shrink-0" />
+                <a href={`https://wa.me/${settings?.whatsapp ? settings.whatsapp.replace(/[^0-9]/g, "") : "919042849344"}`} className="text-sm font-bold text-white hover:text-yellow-400 transition-colors duration-200">
+                  {settings?.whatsapp || "+91 9042849344"}
+                </a>
               </li>
               <li className="flex items-center gap-4">
-                <Phone className="h-5 w-5 text-secondary shrink-0" />
-                <a href="tel:+919786683878" className="text-sm font-bold text-white hover:text-secondary transition-colors duration-200">+91 9786683878</a>
+                <Phone className="h-5 w-5 text-yellow-400 shrink-0" />
+                <a href={`tel:${settings?.primaryPhone || "+916383511818"}`} className="text-sm font-bold text-white hover:text-yellow-400 transition-colors duration-200">
+                  {settings?.primaryPhone || "+91 6383511818"}
+                </a>
               </li>
             </ul>
           </div>
@@ -98,7 +110,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="border-t border-white/20 pt-8 mt-8 text-center">
-          <p className="text-sm text-green-200 font-medium">
+          <p className="text-sm text-green-100/60 font-medium">
             &copy; {new Date().getFullYear()} Sky Crackers. All rights reserved. Designed for joyful celebrations.
           </p>
         </div>

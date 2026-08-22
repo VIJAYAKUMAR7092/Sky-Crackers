@@ -22,6 +22,7 @@ export default function CheckoutPage() {
     email: "",
     addressLine1: "",
     city: "",
+    state: "Tamil Nadu",
     pincode: "",
     notes: ""
   });
@@ -39,7 +40,7 @@ export default function CheckoutPage() {
   const subtotal = getSubtotal();
   const totalQty = items.reduce((acc, item) => acc + item.quantity, 0);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
@@ -65,7 +66,7 @@ export default function CheckoutPage() {
           addressLine1: formData.addressLine1,
           city: formData.city,
           district: formData.city,
-          state: "Tamil Nadu",
+          state: formData.state,
           pincode: formData.pincode,
         },
         items: items.map(item => ({
@@ -184,15 +185,21 @@ export default function CheckoutPage() {
 
                   <div className="space-y-1">
                     <label className="text-xs font-bold text-primary tracking-wide uppercase">Delivery State *</label>
-                    <div className="flex items-center justify-between border border-green-500 bg-green-50 rounded-lg p-3">
-                      <div className="flex items-start gap-3">
-                        <MapPin className="w-5 h-5 text-primary mt-0.5" />
-                        <div>
-                          <h4 className="text-sm font-black text-gray-900 uppercase">TAMIL NADU</h4>
-                          <p className="text-xs font-medium text-gray-500">Min Order: <span className="font-bold text-gray-900">Rs. 3,000.00</span></p>
-                        </div>
-                      </div>
-                    </div>
+                    <select
+                      name="state"
+                      value={formData.state}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full border border-pink-200 rounded-lg px-3 py-2.5 text-sm text-gray-900 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all bg-white"
+                    >
+                      <option value="Tamil Nadu">Tamil Nadu</option>
+                      <option value="Puducherry">Puducherry</option>
+                      <option value="Karnataka">Karnataka</option>
+                      <option value="Andhra Pradesh">Andhra Pradesh</option>
+                      <option value="Telangana">Telangana</option>
+                      <option value="Maharashtra">Maharashtra</option>
+                      <option value="Others">Others</option>
+                    </select>
                   </div>
 
                   <div className="space-y-1">
@@ -233,7 +240,7 @@ export default function CheckoutPage() {
                   <div className="col-span-2">
                     <p className="text-gray-500 text-xs font-bold uppercase tracking-wide">Delivery Address</p>
                     <p className="font-medium text-gray-900">{formData.addressLine1}</p>
-                    <p className="font-bold text-primary mt-1">Tamil Nadu</p>
+                    <p className="font-bold text-primary mt-1">{formData.state}</p>
                   </div>
                   {formData.notes && (
                     <div className="col-span-2">

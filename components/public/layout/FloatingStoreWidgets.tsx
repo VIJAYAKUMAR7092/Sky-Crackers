@@ -24,11 +24,11 @@ export default function FloatingStoreWidgets() {
   return (
     <>
       <a 
-        href="https://wa.me/919786683878?text=Hello%20Sky%20Crackers,%20I%20would%20like%20to%20place%20an%20order"
+        href="https://wa.me/919042849344?text=Hello%20Sky%20Crackers,%20I%20would%20like%20to%20place%20an%20order"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-[100px] left-4 md:bottom-8 md:left-8 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:scale-110 hover:shadow-xl transition-all duration-300 animate-bounce"
-        aria-label="Chat on WhatsApp"
+        aria-label="Contact on WhatsApp"
       >
         <MessageCircle className="w-8 h-8" />
       </a>

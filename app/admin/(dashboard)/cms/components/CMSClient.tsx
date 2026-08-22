@@ -1,29 +1,72 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Label } from '@/components/ui/Label';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
-import { useRouter } from 'next/navigation';
+import { ImageUploader } from '@/components/ui/ImageUploader';
+import { RichTextEditor } from '@/components/admin/ui/RichTextEditor';
 
 interface CMSClientProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  initialData: any;
+  initialData?: any;
 }
 
 export default function CMSClient({ initialData }: CMSClientProps) {
-  const router = useRouter();
-  const [activeTab, setActiveTab] = useState('hero');
+  const [activeTab, setActiveTab] = useState('website');
   const [viewState, setViewState] = useState<'list' | 'edit'>('list');
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [editItem, setEditItem] = useState<any>(null);
-  const [deleteId, setDeleteId] = useState<{ type: string, id: string } | null>(null);
+  const [deleteItem, setDeleteItem] = useState<{ id: string } | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const startEdit = (item: any = null, defaultType: string = '') => {
-    setEditItem(item || { type: defaultType, content: {} });
+  const [data, setData] = useState<{
+    websiteSettings: any;
+    heroBanners: any[];
+    videoContent: any[];
+    staticPages: any[];
+    seoSettings: any[];
+  }>({
+    websiteSettings: null,
+    heroBanners: [],
+    videoContent: [],
+    staticPages: [],
+    seoSettings: [],
+  });
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  const fetchData = async () => {
+    setIsLoading(true);
+    try {
+      const [websiteRes, heroRes, videoRes, staticRes, seoRes] = await Promise.all([
+        fetch('/api/admin/cms/website-settings').then(r => r.json()),
+        fetch('/api/admin/cms/hero-banners').then(r => r.json()),
+        fetch('/api/admin/cms/video-content').then(r => r.json()),
+        fetch('/api/admin/cms/static-pages').then(r => r.json()),
+        fetch('/api/admin/cms/seo-settings').then(r => r.json()),
+      ]);
+
+      setData({
+        websiteSettings: websiteRes.data || {},
+        heroBanners: heroRes.data || [],
+        videoContent: videoRes.data || [],
+        staticPages: staticRes.data || [],
+        seoSettings: seoRes.data || [],
+      });
+    } catch (error) {
+      console.error('Failed to fetch CMS data', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const startEdit = (item: any = null) => {
+    setEditItem(item || {});
     setViewState('edit');
   };
 
@@ -31,41 +74,36 @@ export default function CMSClient({ initialData }: CMSClientProps) {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const formData = new FormData(e.currentTarget);
-      const payload = Object.fromEntries(formData.entries());
-      
-      const isActive = payload.active === 'on';
-      const displayOrder = parseInt(payload.displayOrder as string) || 0;
-      
       let url = '';
-      let method = 'PATCH';
+      let method = 'PUT';
+      
+      const payload: any = { ...editItem };
 
-      const type = editItem?.type || activeTab.toUpperCase() + '_CONFIG';
-
-      if (['HERO_BANNER', 'PROMO_BANNER'].includes(type) || type.startsWith('SECTION_')) {
-        if (editItem?.id) {
-          url = `/api/admin/homepage/collection/${type}/${editItem.id}`;
-        } else {
-          url = `/api/admin/homepage/collection/${type}`;
-          method = 'POST';
-        }
-      } else {
-        url = `/api/admin/homepage/singleton/${type}`;
+      if (activeTab === 'website') {
+        url = '/api/admin/cms/website-settings';
+      } else if (activeTab === 'hero') {
+        url = editItem.id ? `/api/admin/cms/hero-banners/${editItem.id}` : '/api/admin/cms/hero-banners';
+        method = editItem.id ? 'PUT' : 'POST';
+      } else if (activeTab === 'video') {
+        url = editItem.id ? `/api/admin/cms/video-content/${editItem.id}` : '/api/admin/cms/video-content';
+        method = editItem.id ? 'PUT' : 'POST';
+      } else if (activeTab === 'pages') {
+        url = editItem.id ? `/api/admin/cms/static-pages/${editItem.id}` : '/api/admin/cms/static-pages';
+        method = editItem.id ? 'PUT' : 'POST';
+      } else if (activeTab === 'seo') {
+        url = '/api/admin/cms/seo-settings';
+        method = 'PUT';
       }
 
       const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          title: payload.title || payload.homepageTitle || editItem?.title || type, 
-          content: payload, 
-          active: isActive, 
-          displayOrder 
-        })
+        body: JSON.stringify(payload)
       });
 
       if (!res.ok) throw new Error('Failed to save');
-      router.refresh();
+      
+      await fetchData();
       setViewState('list');
     } catch (err: any) {
       alert(err.message || 'An error occurred');
@@ -75,15 +113,21 @@ export default function CMSClient({ initialData }: CMSClientProps) {
   };
 
   const handleDelete = async () => {
-    if (!deleteId) return;
+    if (!deleteItem) return;
     setIsSubmitting(true);
     try {
-      const res = await fetch(`/api/admin/homepage/collection/${deleteId.type}/${deleteId.id}`, {
-        method: 'DELETE'
-      });
-      if (!res.ok) throw new Error('Failed to delete');
-      router.refresh();
-      setDeleteId(null);
+      let url = '';
+      if (activeTab === 'hero') url = `/api/admin/cms/hero-banners/${deleteItem.id}`;
+      else if (activeTab === 'video') url = `/api/admin/cms/video-content/${deleteItem.id}`;
+      else if (activeTab === 'pages') url = `/api/admin/cms/static-pages/${deleteItem.id}`;
+      else if (activeTab === 'seo') url = `/api/admin/cms/seo-settings/${deleteItem.id}`;
+
+      if (url) {
+        const res = await fetch(url, { method: 'DELETE' });
+        if (!res.ok) throw new Error('Failed to delete');
+        await fetchData();
+      }
+      setDeleteItem(null);
     } catch (err: any) {
       alert(err.message || 'An error occurred');
     } finally {
@@ -92,124 +136,152 @@ export default function CMSClient({ initialData }: CMSClientProps) {
   };
 
   const renderFormFields = () => {
-    const content = editItem?.content || {};
-    
-    if (activeTab === 'hero') return (
-      <>
+    if (activeTab === 'website') return (
+      <div className="space-y-4">
         <div className="space-y-2">
-          <Label>Main Title</Label>
-          <Input name="title" defaultValue={content.title} required />
+          <Label>Site Name</Label>
+          <Input value={editItem.siteName || ''} onChange={e => setEditItem({ ...editItem, siteName: e.target.value })} />
+        </div>
+        <div className="space-y-2">
+          <Label>Logo Image</Label>
+          <ImageUploader 
+            maxImages={1}
+            images={editItem.logoUrl ? [{ url: editItem.logoUrl, isPrimary: true, displayOrder: 0 }] : []}
+            onChange={(imgs) => setEditItem({ ...editItem, logoUrl: imgs[0]?.url || '' })} 
+          />
+        </div>
+        <div className="space-y-2">
+          <Label>Primary Phone</Label>
+          <Input value={editItem.primaryPhone || ''} onChange={e => setEditItem({ ...editItem, primaryPhone: e.target.value })} />
+        </div>
+        <div className="space-y-2">
+          <Label>WhatsApp</Label>
+          <Input value={editItem.whatsapp || ''} onChange={e => setEditItem({ ...editItem, whatsapp: e.target.value })} />
+        </div>
+        <div className="space-y-2">
+          <Label>Email</Label>
+          <Input type="email" value={editItem.email || ''} onChange={e => setEditItem({ ...editItem, email: e.target.value })} />
+        </div>
+        <div className="space-y-2">
+          <Label>Address</Label>
+          <Input value={editItem.address || ''} onChange={e => setEditItem({ ...editItem, address: e.target.value })} />
+        </div>
+        <div className="space-y-2">
+          <Label>Footer Text</Label>
+          <Input value={editItem.footerText || ''} onChange={e => setEditItem({ ...editItem, footerText: e.target.value })} />
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-2"><Label>Facebook</Label><Input value={editItem.facebook || ''} onChange={e => setEditItem({ ...editItem, facebook: e.target.value })} /></div>
+          <div className="space-y-2"><Label>Instagram</Label><Input value={editItem.instagram || ''} onChange={e => setEditItem({ ...editItem, instagram: e.target.value })} /></div>
+          <div className="space-y-2"><Label>YouTube</Label><Input value={editItem.youtube || ''} onChange={e => setEditItem({ ...editItem, youtube: e.target.value })} /></div>
+          <div className="space-y-2"><Label>Twitter</Label><Input value={editItem.twitter || ''} onChange={e => setEditItem({ ...editItem, twitter: e.target.value })} /></div>
+        </div>
+      </div>
+    );
+
+    if (activeTab === 'hero') return (
+      <div className="space-y-4">
+        <div className="space-y-2">
+          <Label>Title</Label>
+          <Input value={editItem.title || ''} onChange={e => setEditItem({ ...editItem, title: e.target.value })} />
         </div>
         <div className="space-y-2">
           <Label>Subtitle</Label>
-          <Input name="subtitle" defaultValue={content.subtitle} />
+          <Input value={editItem.subtitle || ''} onChange={e => setEditItem({ ...editItem, subtitle: e.target.value })} />
         </div>
         <div className="space-y-2">
-          <Label>Description</Label>
-          <Input name="description" defaultValue={content.description} />
+          <Label>Image</Label>
+          <ImageUploader 
+            maxImages={1}
+            images={editItem.image ? [{ url: editItem.image, isPrimary: true, displayOrder: 0 }] : []}
+            onChange={(imgs) => setEditItem({ ...editItem, image: imgs[0]?.url || '' })} 
+          />
         </div>
         <div className="space-y-2">
           <Label>Button Text</Label>
-          <Input name="buttonText" defaultValue={content.buttonText} />
+          <Input value={editItem.buttonText || ''} onChange={e => setEditItem({ ...editItem, buttonText: e.target.value })} />
         </div>
         <div className="space-y-2">
           <Label>Button Link</Label>
-          <Input name="buttonLink" defaultValue={content.buttonLink} />
+          <Input value={editItem.buttonLink || ''} onChange={e => setEditItem({ ...editItem, buttonLink: e.target.value })} />
         </div>
-        <div className="space-y-2">
-          <Label>Desktop Image URL</Label>
-          <Input name="desktopImage" defaultValue={content.desktopImage} />
-        </div>
-        <div className="space-y-2">
-          <Label>Mobile Image URL</Label>
-          <Input name="mobileImage" defaultValue={content.mobileImage} />
-        </div>
-      </>
+      </div>
     );
 
-    if (activeTab === 'promo') return (
-      <>
+    if (activeTab === 'video') return (
+      <div className="space-y-4">
         <div className="space-y-2">
-          <Label>Title / Identifier</Label>
-          <Input name="title" defaultValue={content.title} required />
+          <Label>Title</Label>
+          <Input value={editItem.title || ''} onChange={e => setEditItem({ ...editItem, title: e.target.value })} />
         </div>
         <div className="space-y-2">
-          <Label>Image URL</Label>
-          <Input name="image" defaultValue={content.image} required />
+          <Label>YouTube URL</Label>
+          <Input required value={editItem.youtubeUrl || ''} onChange={e => setEditItem({ ...editItem, youtubeUrl: e.target.value })} />
         </div>
         <div className="space-y-2">
-          <Label>Link URL</Label>
-          <Input name="link" defaultValue={content.link} />
+          <Label>Thumbnail Image</Label>
+          <ImageUploader 
+            maxImages={1}
+            images={editItem.thumbnail ? [{ url: editItem.thumbnail, isPrimary: true, displayOrder: 0 }] : []}
+            onChange={(imgs) => setEditItem({ ...editItem, thumbnail: imgs[0]?.url || '' })} 
+          />
         </div>
-        <div className="space-y-2">
-          <Label>Position</Label>
-          <Input name="position" defaultValue={content.position || 'TOP'} />
-        </div>
-      </>
+      </div>
     );
 
-    if (activeTab === 'sections') return (
-      <>
+    if (activeTab === 'pages') return (
+      <div className="space-y-4">
         <div className="space-y-2">
-          <Label>Section Heading</Label>
-          <Input name="heading" defaultValue={content.heading} />
+          <Label>Title</Label>
+          <Input required value={editItem.title || ''} onChange={e => setEditItem({ ...editItem, title: e.target.value })} />
         </div>
         <div className="space-y-2">
-          <Label>Sub Heading</Label>
-          <Input name="subHeading" defaultValue={content.subHeading} />
+          <Label>Slug (e.g., about-us)</Label>
+          <Input required value={editItem.slug || ''} onChange={e => setEditItem({ ...editItem, slug: e.target.value })} />
         </div>
-      </>
+        <div className="space-y-2">
+          <Label>Content</Label>
+          <RichTextEditor content={editItem.content || ''} onChange={val => setEditItem({ ...editItem, content: val })} />
+        </div>
+      </div>
     );
 
     if (activeTab === 'seo') return (
-      <>
+      <div className="space-y-4">
         <div className="space-y-2">
-          <Label>Homepage Title</Label>
-          <Input name="homepageTitle" defaultValue={content.homepageTitle} />
+          <Label>Path (e.g., / or /about-us)</Label>
+          <Input required value={editItem.path || ''} onChange={e => setEditItem({ ...editItem, path: e.target.value })} />
+        </div>
+        <div className="space-y-2">
+          <Label>Title</Label>
+          <Input value={editItem.title || ''} onChange={e => setEditItem({ ...editItem, title: e.target.value })} />
         </div>
         <div className="space-y-2">
           <Label>Meta Description</Label>
-          <Input name="metaDescription" defaultValue={content.metaDescription} />
+          <Input value={editItem.description || ''} onChange={e => setEditItem({ ...editItem, description: e.target.value })} />
         </div>
         <div className="space-y-2">
           <Label>Keywords</Label>
-          <Input name="keywords" defaultValue={content.keywords} />
+          <Input value={editItem.keywords || ''} onChange={e => setEditItem({ ...editItem, keywords: e.target.value })} />
         </div>
         <div className="space-y-2">
           <Label>OG Image URL</Label>
-          <Input name="ogImage" defaultValue={content.ogImage} />
+          <ImageUploader 
+            maxImages={1}
+            images={editItem.ogImage ? [{ url: editItem.ogImage, isPrimary: true, displayOrder: 0 }] : []}
+            onChange={(imgs) => setEditItem({ ...editItem, ogImage: imgs[0]?.url || '' })} 
+          />
         </div>
-        <div className="space-y-2">
-          <Label>Canonical URL</Label>
-          <Input name="canonicalUrl" defaultValue={content.canonicalUrl} />
-        </div>
-      </>
-    );
-
-    if (activeTab === 'settings') return (
-      <>
-        <div className="space-y-2">
-          <Label>Announcement Text</Label>
-          <Input name="announcementText" defaultValue={content.announcementText} />
-        </div>
-        <div className="space-y-2">
-          <Label>Marquee Text</Label>
-          <Input name="marqueeText" defaultValue={content.marqueeText} />
-        </div>
-        <div className="space-y-2">
-          <Label>Popup Banner Image URL</Label>
-          <Input name="popupBannerImage" defaultValue={content.popupBannerImage} />
-        </div>
-      </>
+      </div>
     );
   };
 
   const tabs = [
+    { id: 'website', label: 'Website Settings' },
     { id: 'hero', label: 'Hero Banners' },
-    { id: 'promo', label: 'Promo Banners' },
-    { id: 'sections', label: 'Sections' },
-    { id: 'seo', label: 'SEO' },
-    { id: 'settings', label: 'Settings' },
+    { id: 'video', label: 'Video Content' },
+    { id: 'pages', label: 'Static Pages' },
+    { id: 'seo', label: 'SEO Settings' },
   ];
 
   if (viewState === 'edit') {
@@ -219,20 +291,22 @@ export default function CMSClient({ initialData }: CMSClientProps) {
           <CardTitle>Edit {tabs.find(t => t.id === activeTab)?.label}</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSave} className="space-y-4 max-w-xl">
+          <form onSubmit={handleSave} className="space-y-4 max-w-2xl">
             {renderFormFields()}
             
-            {activeTab !== 'seo' && activeTab !== 'settings' && (
-              <div className="space-y-2">
+            {activeTab !== 'website' && activeTab !== 'seo' && (
+              <div className="space-y-2 pt-2">
                 <Label>Display Order</Label>
-                <Input name="displayOrder" type="number" defaultValue={editItem?.displayOrder || 0} />
+                <Input type="number" value={editItem.displayOrder || 0} onChange={e => setEditItem({ ...editItem, displayOrder: parseInt(e.target.value) || 0 })} />
               </div>
             )}
 
-            <div className="flex items-center space-x-2 pt-2">
-              <input type="checkbox" id="active" name="active" defaultChecked={editItem?.active !== false} className="w-4 h-4" />
-              <Label htmlFor="active">Active / Enabled</Label>
-            </div>
+            {activeTab !== 'website' && activeTab !== 'seo' && (
+              <div className="flex items-center space-x-2 pt-2">
+                <input type="checkbox" id="active" checked={editItem.active !== false} onChange={e => setEditItem({ ...editItem, active: e.target.checked })} className="w-4 h-4" />
+                <Label htmlFor="active">Active / Enabled</Label>
+              </div>
+            )}
 
             <div className="flex space-x-2 pt-4">
               <Button type="submit" disabled={isSubmitting}>
@@ -267,116 +341,144 @@ export default function CMSClient({ initialData }: CMSClientProps) {
       </div>
 
       <div className="grid grid-cols-1 gap-6">
-        {activeTab === 'hero' && (
-          <Card className="border-border/60 shadow-lg bg-card/50 backdrop-blur-sm fade-in-up">
-            <CardHeader>
-              <CardTitle className="text-foreground">Hero Banners</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground mb-4">Manage the main hero sliders.</p>
-              {initialData.heroBanners.length === 0 ? (
-                <div className="text-sm text-muted-foreground mb-4 bg-muted/50 p-4 rounded-lg">No banners added yet.</div>
-              ) : (
-                <ul className="space-y-4 mb-4">
-                  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                  {initialData.heroBanners.map((banner: any) => (
-                    <li key={banner.id} className="p-4 border border-border rounded-xl flex justify-between items-center bg-card hover:bg-secondary/30 transition-colors">
-                      <div>
-                        <h4 className="font-bold text-foreground">{banner.content?.title || 'Untitled'}</h4>
-                        <p className="text-xs text-muted-foreground mt-1">Order: <span className="font-medium text-foreground">{banner.displayOrder}</span> | {banner.active ? <span className="text-green-600 dark:text-green-500 font-medium">Active</span> : <span className="text-muted-foreground font-medium">Disabled</span>}</p>
-                      </div>
-                      <div className="space-x-2 shrink-0">
-                        <Button variant="outline" size="sm" onClick={() => startEdit(banner)}>Edit</Button>
-                        <Button variant="destructive" size="sm" onClick={() => setDeleteId({ type: banner.type, id: banner.id })}>Delete</Button>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              <Button onClick={() => startEdit(null, 'HERO_BANNER')}>Add Hero Banner</Button>
-            </CardContent>
-          </Card>
-        )}
+        {isLoading ? (
+          <div className="p-8 text-center text-muted-foreground">Loading...</div>
+        ) : (
+          <>
+            {activeTab === 'website' && (
+              <Card className="border-border/60 shadow-lg bg-card/50 backdrop-blur-sm fade-in-up">
+                <CardHeader>
+                  <CardTitle className="text-foreground">Website Settings</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground mb-4">Manage global website settings like logo, contact info, etc.</p>
+                  <Button onClick={() => startEdit(data.websiteSettings)}>Edit Settings</Button>
+                </CardContent>
+              </Card>
+            )}
 
-        {activeTab === 'promo' && (
-          <Card className="border-border/60 shadow-lg bg-card/50 backdrop-blur-sm fade-in-up">
-            <CardHeader>
-              <CardTitle className="text-foreground">Promotional Banners</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground mb-4">Manage secondary promotional banners.</p>
-              {initialData.promoBanners.length === 0 ? (
-                <div className="text-sm text-muted-foreground mb-4 bg-muted/50 p-4 rounded-lg">No banners added yet.</div>
-              ) : (
-                <ul className="space-y-4 mb-4">
-                  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                  {initialData.promoBanners.map((banner: any) => (
-                    <li key={banner.id} className="p-4 border border-border rounded-xl flex justify-between items-center bg-card hover:bg-secondary/30 transition-colors">
-                      <div>
-                        <h4 className="font-bold text-foreground">{banner.content?.title || 'Untitled'}</h4>
-                        <p className="text-xs text-muted-foreground mt-1">Order: <span className="font-medium text-foreground">{banner.displayOrder}</span> | {banner.active ? <span className="text-green-600 dark:text-green-500 font-medium">Active</span> : <span className="text-muted-foreground font-medium">Disabled</span>}</p>
-                      </div>
-                      <div className="space-x-2 shrink-0">
-                        <Button variant="outline" size="sm" onClick={() => startEdit(banner)}>Edit</Button>
-                        <Button variant="destructive" size="sm" onClick={() => setDeleteId({ type: banner.type, id: banner.id })}>Delete</Button>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              <Button onClick={() => startEdit(null, 'PROMO_BANNER')}>Add Promo Banner</Button>
-            </CardContent>
-          </Card>
-        )}
+            {activeTab === 'hero' && (
+              <Card className="border-border/60 shadow-lg bg-card/50 backdrop-blur-sm fade-in-up">
+                <CardHeader>
+                  <CardTitle className="text-foreground">Hero Banners</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {data.heroBanners.length === 0 ? (
+                    <div className="text-sm text-muted-foreground mb-4 bg-muted/50 p-4 rounded-lg">No banners added yet.</div>
+                  ) : (
+                    <ul className="space-y-4 mb-4">
+                      {data.heroBanners.map((banner: any) => (
+                        <li key={banner.id} className="p-4 border border-border rounded-xl flex justify-between items-center bg-card">
+                          <div>
+                            <h4 className="font-bold text-foreground">{banner.title || 'Untitled'}</h4>
+                            <p className="text-xs text-muted-foreground mt-1">Order: {banner.displayOrder} | {banner.active ? 'Active' : 'Disabled'}</p>
+                          </div>
+                          <div className="space-x-2 shrink-0">
+                            <Button variant="outline" size="sm" onClick={() => startEdit(banner)}>Edit</Button>
+                            <Button variant="destructive" size="sm" onClick={() => setDeleteItem(banner)}>Delete</Button>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <Button onClick={() => startEdit()}>Add Hero Banner</Button>
+                </CardContent>
+              </Card>
+            )}
 
-        {activeTab === 'sections' && (
-          <Card className="border-border/60 shadow-lg bg-card/50 backdrop-blur-sm fade-in-up">
-            <CardHeader>
-              <CardTitle className="text-foreground">Homepage Sections Config</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-              {initialData.sections.map((section: any) => (
-                <div key={section.id} className="p-4 border border-border rounded-xl flex justify-between items-center bg-card hover:bg-secondary/30 transition-colors">
-                  <div>
-                    <h4 className="font-bold text-foreground">{section.title}</h4>
-                    <p className="text-xs text-muted-foreground mt-1">Order: <span className="font-medium text-foreground">{section.displayOrder}</span> | {section.active ? <span className="text-green-600 dark:text-green-500 font-medium">Active</span> : <span className="text-muted-foreground font-medium">Disabled</span>}</p>
-                  </div>
-                  <Button variant="outline" size="sm" onClick={() => startEdit(section)}>Edit</Button>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
-        )}
+            {activeTab === 'video' && (
+              <Card className="border-border/60 shadow-lg bg-card/50 backdrop-blur-sm fade-in-up">
+                <CardHeader>
+                  <CardTitle className="text-foreground">Video Content</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {data.videoContent.length === 0 ? (
+                    <div className="text-sm text-muted-foreground mb-4 bg-muted/50 p-4 rounded-lg">No videos added yet.</div>
+                  ) : (
+                    <ul className="space-y-4 mb-4">
+                      {data.videoContent.map((video: any) => (
+                        <li key={video.id} className="p-4 border border-border rounded-xl flex justify-between items-center bg-card">
+                          <div>
+                            <h4 className="font-bold text-foreground">{video.title || 'Untitled'}</h4>
+                            <p className="text-xs text-muted-foreground mt-1">Order: {video.displayOrder} | {video.active ? 'Active' : 'Disabled'}</p>
+                          </div>
+                          <div className="space-x-2 shrink-0">
+                            <Button variant="outline" size="sm" onClick={() => startEdit(video)}>Edit</Button>
+                            <Button variant="destructive" size="sm" onClick={() => setDeleteItem(video)}>Delete</Button>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <Button onClick={() => startEdit()}>Add Video Content</Button>
+                </CardContent>
+              </Card>
+            )}
 
-        {activeTab === 'seo' && (
-          <Card className="border-border/60 shadow-lg bg-card/50 backdrop-blur-sm fade-in-up">
-            <CardHeader>
-              <CardTitle className="text-foreground">SEO Settings</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground mb-4">Configure homepage Meta tags.</p>
-              <Button onClick={() => startEdit(initialData.seo, 'SEO_CONFIG')}>Edit SEO</Button>
-            </CardContent>
-          </Card>
-        )}
+            {activeTab === 'pages' && (
+              <Card className="border-border/60 shadow-lg bg-card/50 backdrop-blur-sm fade-in-up">
+                <CardHeader>
+                  <CardTitle className="text-foreground">Static Pages</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {data.staticPages.length === 0 ? (
+                    <div className="text-sm text-muted-foreground mb-4 bg-muted/50 p-4 rounded-lg">No static pages added yet.</div>
+                  ) : (
+                    <ul className="space-y-4 mb-4">
+                      {data.staticPages.map((page: any) => (
+                        <li key={page.id} className="p-4 border border-border rounded-xl flex justify-between items-center bg-card">
+                          <div>
+                            <h4 className="font-bold text-foreground">{page.title}</h4>
+                            <p className="text-xs text-muted-foreground mt-1">Slug: {page.slug} | {page.active ? 'Active' : 'Disabled'}</p>
+                          </div>
+                          <div className="space-x-2 shrink-0">
+                            <Button variant="outline" size="sm" onClick={() => startEdit(page)}>Edit</Button>
+                            <Button variant="destructive" size="sm" onClick={() => setDeleteItem(page)}>Delete</Button>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <Button onClick={() => startEdit()}>Add Static Page</Button>
+                </CardContent>
+              </Card>
+            )}
 
-        {activeTab === 'settings' && (
-          <Card className="border-border/60 shadow-lg bg-card/50 backdrop-blur-sm fade-in-up">
-            <CardHeader>
-              <CardTitle className="text-foreground">Homepage Settings</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground mb-4">Announcement bar, popup banner, marquee.</p>
-              <Button onClick={() => startEdit(initialData.settings, 'SETTINGS_CONFIG')}>Edit Settings</Button>
-            </CardContent>
-          </Card>
+            {activeTab === 'seo' && (
+              <Card className="border-border/60 shadow-lg bg-card/50 backdrop-blur-sm fade-in-up">
+                <CardHeader>
+                  <CardTitle className="text-foreground">SEO Settings</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {data.seoSettings.length === 0 ? (
+                    <div className="text-sm text-muted-foreground mb-4 bg-muted/50 p-4 rounded-lg">No SEO settings added yet.</div>
+                  ) : (
+                    <ul className="space-y-4 mb-4">
+                      {data.seoSettings.map((seo: any) => (
+                        <li key={seo.id} className="p-4 border border-border rounded-xl flex justify-between items-center bg-card">
+                          <div>
+                            <h4 className="font-bold text-foreground">Path: {seo.path}</h4>
+                            <p className="text-xs text-muted-foreground mt-1">{seo.title || 'No Title'}</p>
+                          </div>
+                          <div className="space-x-2 shrink-0">
+                            <Button variant="outline" size="sm" onClick={() => startEdit(seo)}>Edit</Button>
+                            <Button variant="destructive" size="sm" onClick={() => setDeleteItem(seo)}>Delete</Button>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <Button onClick={() => startEdit()}>Add SEO Settings</Button>
+                </CardContent>
+              </Card>
+            )}
+          </>
         )}
       </div>
 
       <ConfirmDialog
-        isOpen={!!deleteId}
-        onClose={() => setDeleteId(null)}
+        isOpen={!!deleteItem}
+        onClose={() => setDeleteItem(null)}
         onConfirm={handleDelete}
         title="Delete Item"
         description="Are you sure you want to delete this item? This action cannot be undone."

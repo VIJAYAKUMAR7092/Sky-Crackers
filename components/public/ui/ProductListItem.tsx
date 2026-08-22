@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
@@ -21,17 +21,12 @@ export default function ProductListItem({ product, index }: ProductListItemProps
   const inCartQty = cartItem ? cartItem.quantity : 0;
   
   const [mounted, setMounted] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isZoomed, setIsZoomed] = useState(false);
   
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    setMousePos({ x: e.clientX, y: e.clientY });
-  };
 
   const handleIncrement = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -77,9 +72,7 @@ export default function ProductListItem({ product, index }: ProductListItemProps
           <div className="flex items-center gap-4">
             <div 
               className="w-16 h-16 md:w-14 md:h-14 relative rounded-md overflow-hidden border border-gray-200 bg-white cursor-pointer shrink-0"
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-              onMouseMove={handleMouseMove}
+              onClick={() => setIsZoomed(true)}
             >
               <Image 
                 src={imgUrl}
@@ -189,25 +182,35 @@ export default function ProductListItem({ product, index }: ProductListItemProps
         </td>
       </tr>
 
-      {/* Hover Image Portal (Desktop only) */}
-      {mounted && isHovered && createPortal(
+            {/* Zoom Image Portal */}
+      {mounted && isZoomed && createPortal(
         <div 
-          className="fixed z-[100] pointer-events-none w-72 h-72 hidden md:flex bg-white/95 backdrop-blur-xl border border-gray-200 rounded-2xl shadow-2xl overflow-hidden items-center justify-center animate-in fade-in zoom-in duration-200"
-          style={{ 
-            left: mousePos.x + 20, 
-            top: mousePos.y - 144 // Center vertically relative to mouse (288/2)
-          }}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm animate-in fade-in duration-200"
+          onClick={() => setIsZoomed(false)}
         >
-          <div className="absolute inset-0 bg-gradient-to-tr from-gray-50 to-transparent z-0" />
-          <Image 
-            src={imgUrl}
-            alt={product.name}
-            fill
-            className="object-contain p-4 drop-shadow-lg z-10"
-          />
+          <div className="relative w-[90vw] h-[90vh] md:w-[60vw] md:h-[80vh] bg-white rounded-3xl overflow-hidden shadow-2xl p-4 flex flex-col" onClick={(e) => e.stopPropagation()}>
+            <button 
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-gray-100 hover:bg-red-100 text-gray-600 hover:text-red-600 rounded-full flex items-center justify-center transition-colors"
+              onClick={() => setIsZoomed(false)}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div className="flex-1 relative">
+              <Image 
+                src={imgUrl}
+                alt={product.name}
+                fill
+                className="object-contain p-4"
+              />
+            </div>
+            <div className="text-center p-4 border-t border-gray-100">
+              <h3 className="text-xl font-bold text-gray-900">{product.name}</h3>
+            </div>
+          </div>
         </div>,
         document.body
       )}
     </>
   );
 }
+

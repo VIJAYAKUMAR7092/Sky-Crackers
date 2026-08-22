@@ -18,7 +18,8 @@ export default async function ShopPage({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const resolvedSearchParams = await searchParams;
-  const categoryId = typeof resolvedSearchParams.category === 'string' ? resolvedSearchParams.category : undefined;
+  const categoryIdParam = typeof resolvedSearchParams.category === 'string' ? resolvedSearchParams.category : undefined;
+  const categoryId = categoryIdParam === 'all' ? undefined : categoryIdParam;
   const search = typeof resolvedSearchParams.search === 'string' ? resolvedSearchParams.search : undefined;
 
   // We fetch a high limit for wholesale view so we can show all products grouped
@@ -139,9 +140,8 @@ export default async function ShopPage({
 
             {/* WHOLESALE TABLE VIEW */}
             {products.length > 0 ? (
-              <ScrollReveal animation="fade-up">
-                <div className="bg-white border border-primary/20 rounded-xl overflow-hidden shadow-sm">
-                  <div className="overflow-x-auto custom-scrollbar md:pb-2">
+              <div className="bg-white border border-primary/20 rounded-xl overflow-hidden shadow-sm">
+                <div className="overflow-x-auto custom-scrollbar md:pb-2">
                     <table className="w-full text-left border-collapse md:min-w-[800px]">
                       {/* Unified Table Header matched to screenshot */}
                       <thead className="hidden md:table-header-group">
@@ -182,8 +182,7 @@ export default async function ShopPage({
                     </table>
                   </div>
                 </div>
-              </ScrollReveal>
-            ) : (
+              ) : (
               <ScrollReveal animation="fade-up">
                 <div className="text-center py-32 bg-white rounded-3xl border border-dashed border-gray-300 shadow-sm">
                   <div className="bg-gray-50 h-24 w-24 rounded-full flex items-center justify-center mx-auto mb-8 border border-gray-200">

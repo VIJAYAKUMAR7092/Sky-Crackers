@@ -296,11 +296,11 @@ model DeliveryZone {
   freeDeliveryThreshold Decimal? @db.Decimal(10, 2)
   estimatedTime         String?
   notes                 String?
-  
-  courier               String   @default("TRANSPORT")
-  priority              Int      @default(2) // 1=High, 2=Medium, 3=Low
-  deliverable           Boolean  @default(true)
-  active                Boolean  @default(true)
+
+  courier     String  @default("TRANSPORT")
+  priority    Int     @default(2) // 1=High, 2=Medium, 3=Low
+  deliverable Boolean @default(true)
+  active      Boolean @default(true)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -339,13 +339,14 @@ model Review {
   customerId String?
   customer   Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
 
-  productId String
-  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String?
+  product   Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
 
-  rating     Int
-  reviewText String? @db.Text
-  isApproved Boolean @default(false)
-  isFeatured Boolean @default(false)
+  rating        Int
+  reviewText    String? @db.Text
+  isApproved    Boolean @default(false)
+  isFeatured    Boolean @default(false)
+  isTestimonial Boolean @default(false)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -391,4 +392,74 @@ model Notification {
 
   @@index([recipientId])
   @@index([orderId])
+}
+
+// -------------------------------------
+// Phase 9 CMS Extensions
+// -------------------------------------
+model WebsiteSettings {
+  id           String  @id @default("global")
+  siteName     String  @default("Sky Crackers")
+  logoUrl      String?
+  primaryPhone String?
+  whatsapp     String?
+  email        String?
+  address      String? @db.Text
+  facebook     String?
+  instagram    String?
+  youtube      String?
+  twitter      String?
+  footerText   String? @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model HeroBanner {
+  id           String  @id @default(cuid())
+  image        String
+  title        String?
+  subtitle     String?
+  buttonText   String?
+  buttonLink   String?
+  displayOrder Int     @default(0)
+  active       Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VideoContent {
+  id           String  @id @default(cuid())
+  youtubeUrl   String
+  title        String?
+  thumbnail    String?
+  displayOrder Int     @default(0)
+  active       Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model StaticPage {
+  id      String  @id @default(cuid())
+  slug    String  @unique
+  title   String
+  content String  @db.Text
+  active  Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SEOSettings {
+  id          String  @id @default(cuid())
+  path        String  @unique @default("/")
+  title       String?
+  description String? @db.Text
+  keywords    String? @db.Text
+  ogImage     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

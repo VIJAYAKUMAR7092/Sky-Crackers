@@ -1,0 +1,27 @@
+﻿export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const resolvedParams = await params;
+  const product = await getProductBySlug(resolvedParams.slug);
+  if (!product) return { title: "Product Not Found" };
+
+  return {
+    title: \\ | Sky Crackers Premium\,
+    description: product.shortDescription || product.description?.substring(0, 160) || "Premium Sivakasi fireworks delivered across Tamil Nadu.",
+    openGraph: {
+      title: product.name,
+      description: product.shortDescription || "",
+      images: product.images?.length ? [{ url: product.images[0].url }] : [],
+    }
+  };
+}
+
+export default async function ProductDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const resolvedParams = await params;
+  const product = await getProductBySlug(resolvedParams.slug);
+
+  if (!product) {
+    notFound();
+  }

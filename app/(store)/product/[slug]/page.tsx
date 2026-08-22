@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { getProductBySlug, getProducts } from "@/lib/services/public/product.service";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -10,8 +10,9 @@ import ProductTabs from "@/components/public/product/ProductTabs";
 import ProductReviews from "@/components/public/product/ProductReviews";
 import { Metadata } from "next";
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const product = await getProductBySlug(params.slug);
+﻿export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const resolvedParams = await params;
+  const product = await getProductBySlug(resolvedParams.slug);
   if (!product) return { title: "Product Not Found" };
 
   return {
@@ -28,13 +29,15 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 export default async function ProductDetailPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const product = await getProductBySlug(params.slug);
+  const resolvedParams = await params;
+  const product = await getProductBySlug(resolvedParams.slug);
 
   if (!product) {
     notFound();
   }
+
 
   const { products: relatedProducts } = await getProducts({ 
     categoryId: product.categoryId || undefined,

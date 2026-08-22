@@ -1,0 +1,70 @@
+﻿
+// -------------------------------------
+// Phase 9 CMS Extensions
+// -------------------------------------
+model WebsiteSettings {
+  id           String  @id @default("global")
+  siteName     String  @default("Sky Crackers")
+  logoUrl      String?
+  primaryPhone String?
+  whatsapp     String?
+  email        String?
+  address      String? @db.Text
+  facebook     String?
+  instagram    String?
+  youtube      String?
+  twitter      String?
+  footerText   String? @db.Text
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model HeroBanner {
+  id           String  @id @default(cuid())
+  image        String
+  title        String?
+  subtitle     String?
+  buttonText   String?
+  buttonLink   String?
+  displayOrder Int     @default(0)
+  active       Boolean @default(true)
+  
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model VideoContent {
+  id           String  @id @default(cuid())
+  youtubeUrl   String
+  title        String?
+  thumbnail    String?
+  displayOrder Int     @default(0)
+  active       Boolean @default(true)
+  
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model StaticPage {
+  id           String  @id @default(cuid())
+  slug         String  @unique
+  title        String
+  content      String  @db.Text
+  active       Boolean @default(true)
+  
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model SEOSettings {
+  id           String  @id @default(cuid())
+  path         String  @unique @default("/") 
+  title        String?
+  description  String? @db.Text
+  keywords     String? @db.Text
+  ogImage      String?
+  
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}

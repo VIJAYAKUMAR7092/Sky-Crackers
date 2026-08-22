@@ -1,0 +1,26 @@
+﻿import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight, Sparkles, ShieldCheck, Truck, Clock, PhoneCall, MapPin, MessageCircle, PlayCircle, Star, Quote, Package } from "lucide-react";
+import FeaturedProductCard from "@/components/public/home/FeaturedProductCard";
+import HeroSlider from "@/components/public/home/HeroSlider";
+import ScrollReveal from "@/components/public/ui/ScrollReveal";
+import { getFeaturedProducts, getBestSellingProducts, getAllCategories } from "@/lib/services/public/product.service";
+import { getHeroBanners, getVideoContent, getTestimonials } from "@/lib/services/cms/cms.service";
+import { HOMEPAGE_IMAGES } from "@/lib/constants/homepage-images";
+import { CATEGORY_IMAGES } from "@/lib/constants/category-images";
+
+export const metadata = {
+  title: "Sky Crackers | Buy Crackers Online Sivakasi",
+  description: "Celebrate every moment with premium quality fireworks from Sivakasi. Shop our festive collection today.",
+};
+
+export default async function HomePage() {
+  const [featuredProducts, bestSellers, dbCategories, heroBanners, videos, testimonials] = await Promise.all([
+    getFeaturedProducts(),
+    getBestSellingProducts(),
+    getAllCategories(),
+    getHeroBanners(true),
+    getVideoContent(true),
+    getTestimonials(true)
+  ]);
