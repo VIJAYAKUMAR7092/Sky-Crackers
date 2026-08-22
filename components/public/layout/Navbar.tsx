@@ -16,9 +16,19 @@ export default function Navbar({ settings }: { settings?: any }) {
   const pathname = usePathname();
   
   const cartItemsCount = useCartStore((state) => state.getTotalItems());
+  const [bannerIndex, setBannerIndex] = useState(0);
+  const bannerMessages = [
+    "Welcome to Sky Crackers Up to 90%",
+    "Minimum Tamilnadu Order Rs 3,000",
+    "Minimum Other State Orders 5,000"
+  ];
 
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 0);
+    const bannerTimer = setInterval(() => {
+      setBannerIndex((prev) => (prev + 1) % bannerMessages.length);
+    }, 3000);
+    
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
@@ -26,8 +36,9 @@ export default function Navbar({ settings }: { settings?: any }) {
     return () => {
       window.removeEventListener("scroll", handleScroll);
       clearTimeout(t);
+      clearInterval(bannerTimer);
     };
-  }, []);
+  }, [bannerMessages.length]);
 
   const navLinks = [
     { name: "Home", href: "/" },
@@ -39,13 +50,26 @@ export default function Navbar({ settings }: { settings?: any }) {
   return (
     <>
       {/* Top Banner */}
-      <div className="bg-[#2e7d32] text-white text-[10px] md:text-xs font-bold py-2 md:py-2.5">
-        <div className="container mx-auto px-2 flex items-center justify-center gap-1.5 md:gap-2">
-          <svg className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-300 fill-current" viewBox="0 0 24 24">
+      <div className="bg-[#2e7d32] text-white text-[10px] md:text-xs font-bold py-2 md:py-2.5 overflow-hidden">
+        <div className="w-full mx-auto px-2 flex items-center justify-center gap-1.5 md:gap-2 max-w-7xl">
+          <svg className="w-3.5 h-3.5 md:w-4 md:h-4 text-orange-300 fill-current shrink-0" viewBox="0 0 24 24">
             <path d="M19.333 7.828a2.593 2.593 0 0 1-1.688.625h-1.428V4.896a2.6 2.6 0 0 1 1.688.625A2.585 2.585 0 0 1 20 7.35a2.585 2.585 0 0 1-.667 1.833V7.828zm-5.428-3.14a8.47 8.47 0 0 0-4.095 1.054A8.536 8.536 0 0 0 7.57 7.57c-.742.666-1.748 1.054-2.856 1.054a1.328 1.328 0 0 1-1.334-1.325c0-.73.59-1.325 1.334-1.325h1.168a.715.715 0 0 0 .713-.711.715.715 0 0 0-.713-.711H4.714C3.217 4.552 2 5.766 2 7.26c0 1.494 1.217 2.708 2.714 2.708h2.856c1.108 0 2.114.388 2.856 1.053A8.535 8.535 0 0 0 12.8 12.92a8.47 8.47 0 0 0 4.095 1.054h.476v5.333c0 .393-.32.711-.714.711h-1.428a.715.715 0 0 0-.714.71.715.715 0 0 0 .714.711h1.428c1.18 0 2.143-.96 2.143-2.133v-5.333h.476a3.99 3.99 0 0 0 2.62-1.025A4.015 4.015 0 0 0 22 10.04a4.015 4.015 0 0 0-1.095-2.805A3.99 3.99 0 0 0 18.286 6.21h-.476V4.688zm.476 11.2h-.476v-4h.476v4z" />
           </svg>
-          <div className="text-center tracking-wide md:tracking-widest uppercase">
-             {settings?.announcement || "WELCOME TO SKY CRACKERS - 80% DISCOUNT ON ALL CRACKERS"}
+          <div className="relative h-[18px] w-full max-w-[280px] sm:max-w-md md:max-w-lg lg:max-w-xl overflow-hidden flex items-center justify-center">
+            {bannerMessages.map((msg, idx) => (
+              <div 
+                key={idx}
+                className={`absolute w-full text-center tracking-wide md:tracking-widest uppercase transition-all duration-700 ease-in-out ${
+                  idx === bannerIndex 
+                    ? 'translate-y-0 opacity-100' 
+                    : (idx === bannerIndex - 1 || (bannerIndex === 0 && idx === bannerMessages.length - 1))
+                      ? 'translate-y-full opacity-0'
+                      : '-translate-y-full opacity-0'
+                }`}
+              >
+                {msg}
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -55,7 +79,7 @@ export default function Navbar({ settings }: { settings?: any }) {
           isScrolled ? "shadow-md py-2" : "py-4 border-b border-gray-100"
         }`}
       >
-        <div className="container mx-auto px-4 md:px-8">
+        <div className="w-full mx-auto px-1 sm:px-4 md:px-8 max-w-7xl">
           <div className="flex items-center justify-between">
             
             {/* Logo */}

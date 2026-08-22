@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { Star, ThumbsUp } from "lucide-react";
 
 export default function ProductReviews() {
@@ -77,7 +77,7 @@ export default function ProductReviews() {
                 <div className="flex flex-col">
                   <span className="text-xs font-bold text-white">{review.name}</span>
                   {review.verified && (
-                    <span className="text-[10px] text-green-500 font-medium">Verified Buyer</span>
+                    <span className="text-[10px] text-orange-500 font-medium">Verified Buyer</span>
                   )}
                 </div>
               </div>

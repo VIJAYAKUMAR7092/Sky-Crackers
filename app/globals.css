@@ -13,7 +13,7 @@
   --popover: #FFFFFF;
   --popover-foreground: #1A1D23;
   
-  --primary: #1F7B2A; /* Festive Green */
+  --primary: #FF4500; /* Festive Green */
   --primary-foreground: #FFFFFF;
   
   --secondary: #FDE047; /* Festive Yellow */
@@ -30,7 +30,7 @@
   
   --border: #E5E7EB;
   --input: #E5E7EB;
-  --ring: #1F7B2A;
+  --ring: #FF4500;
   
   --radius: 0.75rem; /* More rounded for friendly festive look */
 }
@@ -43,7 +43,7 @@
   --card-foreground: #F9FAFB;
   --popover: #13161C;
   --popover-foreground: #F9FAFB;
-  --primary: #1F7B2A;
+  --primary: #FF4500;
   --primary-foreground: #FFFFFF;
   --secondary: #1F242F;
   --secondary-foreground: #E5E7EB;
@@ -55,7 +55,7 @@
   --destructive-foreground: #F87171;
   --border: #262B36;
   --input: #262B36;
-  --ring: #1F7B2A;
+  --ring: #FF4500;
 }
 
 @theme inline {

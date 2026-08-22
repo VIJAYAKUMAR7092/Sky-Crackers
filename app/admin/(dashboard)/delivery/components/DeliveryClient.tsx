@@ -138,7 +138,7 @@ export function DeliveryClient({ initialData, searchParams }: DeliveryClientProp
         <div className="text-sm">
           <div className="font-medium">,1{Number(item.deliveryCharge).toFixed(2)}</div>
           {item.freeDeliveryThreshold !== null && (
-            <div className="text-xs text-green-600 dark:text-green-400">
+            <div className="text-xs text-orange-600 dark:text-orange-400">
               Free &gt; ,1{Number(item.freeDeliveryThreshold).toFixed(2)}
             </div>
           )}

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import Image from "next/image";
@@ -116,12 +116,12 @@ export default function ProductCard({ product }: ProductCardProps) {
             <div className="flex flex-col">
               {hasDiscount && (
                 <span className="text-[11px] text-zinc-500 line-through font-medium mb-0.5">
-                  ₹{Number(product.mrp).toFixed(2)}
+                  ?{Number(product.mrp).toFixed(2)}
                 </span>
               )}
               <div className="flex items-baseline gap-1.5">
                 <span className="text-xl font-black text-white">
-                  ₹{Number(product.sellingPrice).toFixed(2)}
+                  ?{Number(product.sellingPrice).toFixed(2)}
                 </span>
                 <span className="text-[10px] text-zinc-400 font-medium bg-zinc-900 px-1.5 py-0.5 rounded">
                   {packInfo}
@@ -159,7 +159,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               disabled={isOutOfStock}
               className={`flex-1 h-10 rounded-lg font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all duration-300 shadow-lg ${
                 isAdded 
-                  ? "bg-green-500 text-white shadow-green-500/20" 
+                  ? "bg-orange-500 text-white shadow-orange-500/20" 
                   : "bg-gradient-to-r from-primary to-amber-500 text-black hover:brightness-110 shadow-primary/20"
               } disabled:opacity-50 disabled:cursor-not-allowed`}
             >

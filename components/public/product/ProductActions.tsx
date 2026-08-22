@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ShoppingCart, Phone, Zap, Check, Plus, Minus } from "lucide-react";
+import WhatsAppIcon from "@/components/public/ui/WhatsAppIcon";
 import { useCartStore } from "@/lib/store/cart.store";
 import { cn } from "@/components/ui/utils";
 
@@ -88,7 +89,7 @@ export default function ProductActions({ product }: ProductActionsProps) {
               isOutOfStock 
                 ? "bg-zinc-800 text-zinc-500 border-zinc-700 cursor-not-allowed"
                 : added
-                  ? "bg-green-500 text-white border-green-500"
+                  ? "bg-orange-500 text-white border-orange-500"
                   : "bg-white/10 text-white border-white/20 hover:bg-white/20 hover:border-white/30"
             )}
           >
@@ -114,7 +115,7 @@ export default function ProductActions({ product }: ProductActionsProps) {
           onClick={handleWhatsApp}
           className="flex items-center justify-center gap-2 w-full py-4 rounded-full font-bold text-sm transition-all duration-300 bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white border border-[#25D366]/30 shadow-lg"
         >
-          <Phone className="h-5 w-5" /> Enquire on WhatsApp
+          <WhatsAppIcon className="h-5 w-5" /> Enquire on WhatsApp
         </button>
       </div>
 

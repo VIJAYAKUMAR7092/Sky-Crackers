@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import Link from "next/link";
 import { getOrderById } from "@/lib/services/orders/order.service";
 import { CheckCircle2, Package, Truck, Download, ArrowRight, ShoppingCart } from "lucide-react";
@@ -20,8 +20,8 @@ export default async function OrderSuccessPage({ params }: { params: Promise<{ o
     <div className="bg-pink-50/30 min-h-screen pt-12 pb-24 relative selection:bg-primary/20">
       <div className="container mx-auto px-4 relative z-10 flex flex-col items-center max-w-3xl text-center">
         
-        <div className="w-24 h-24 bg-green-100 border border-green-200 rounded-full flex items-center justify-center mb-8 shadow-xl shadow-green-500/20 animate-bounce">
-          <CheckCircle2 className="h-12 w-12 text-green-600" />
+        <div className="w-24 h-24 bg-orange-100 border border-orange-200 rounded-full flex items-center justify-center mb-8 shadow-xl shadow-orange-500/20 animate-bounce">
+          <CheckCircle2 className="h-12 w-12 text-orange-600" />
         </div>
         
         <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight">Order Successful!</h1>
@@ -36,9 +36,9 @@ export default async function OrderSuccessPage({ params }: { params: Promise<{ o
               <p className="text-2xl font-black text-primary font-mono">{order.id.slice(-8).toUpperCase()}</p>
             </div>
             <div className="flex gap-4">
-              <div className="bg-green-50 px-5 py-2.5 rounded-xl border border-green-100 text-center">
+              <div className="bg-orange-50 px-5 py-2.5 rounded-xl border border-orange-100 text-center">
                 <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Status</p>
-                <p className="text-sm font-black text-green-600 uppercase tracking-wide">{order.status}</p>
+                <p className="text-sm font-black text-orange-600 uppercase tracking-wide">{order.status}</p>
               </div>
               <div className="bg-pink-50 px-5 py-2.5 rounded-xl border border-pink-100 text-center">
                 <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Total</p>
@@ -74,7 +74,7 @@ export default async function OrderSuccessPage({ params }: { params: Promise<{ o
                 </div>
                 <div className="flex justify-between text-sm font-bold text-gray-600 pb-3 border-b border-gray-200 border-dashed">
                   <span>Shipping</span>
-                  <span className="text-green-600">Free</span>
+                  <span className="text-orange-600">Free</span>
                 </div>
                 <div className="flex justify-between items-end pt-1">
                   <span className="text-base font-black text-gray-900">Total</span>
@@ -88,7 +88,7 @@ export default async function OrderSuccessPage({ params }: { params: Promise<{ o
             <button className="flex items-center justify-center gap-2 bg-pink-50 hover:bg-pink-100 border border-pink-200 text-primary px-6 py-3 rounded-xl font-bold transition-all">
               <Download className="w-4 h-4" /> Download Invoice
             </button>
-            <Link href="/shop" className="flex items-center justify-center gap-2 bg-primary hover:bg-green-700 text-white px-8 py-3 rounded-xl font-bold transition-all shadow-lg shadow-green-500/30">
+            <Link href="/shop" className="flex items-center justify-center gap-2 bg-primary hover:bg-orange-700 text-white px-8 py-3 rounded-xl font-bold transition-all shadow-lg shadow-orange-500/30">
               <ShoppingCart className="w-4 h-4" /> Continue Shopping
             </Link>
           </div>

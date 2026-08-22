@@ -64,8 +64,8 @@ export default function HeroSlider({ banners }: { banners: any[] }) {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
-            <Link href={banners[currentIndex]?.buttonLink || "/shop"} className="w-[85%] sm:w-auto px-6 py-3.5 md:px-8 md:py-4 bg-primary text-white text-base md:text-lg font-bold rounded-full hover:bg-green-700 hover:shadow-xl hover:shadow-primary/30 transition-all hover:-translate-y-1 flex items-center justify-center">
-              {banners[currentIndex]?.buttonText || "Shop Now - 80% Off"}
+            <Link href={banners[currentIndex]?.buttonLink || "/shop"} className="w-[85%] sm:w-auto px-6 py-3.5 md:px-8 md:py-4 bg-primary text-white text-base md:text-lg font-bold rounded-full hover:bg-orange-700 hover:shadow-xl hover:shadow-primary/30 transition-all hover:-translate-y-1 flex items-center justify-center">
+              {banners[currentIndex]?.buttonText || "Shop Now - 90% Off"}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </div>

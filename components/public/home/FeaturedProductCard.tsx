@@ -77,7 +77,7 @@ export default function FeaturedProductCard({ product }: FeaturedProductCardProp
       
       {/* In Cart Badge */}
       {inCartQty > 0 && (
-        <div className="absolute top-3 right-3 z-20 bg-green-500 text-white text-[11px] font-bold px-2 py-1 rounded shadow-sm flex items-center gap-1">
+        <div className="absolute top-3 right-3 z-20 bg-orange-500 text-white text-[11px] font-bold px-2 py-1 rounded shadow-sm flex items-center gap-1">
           <Check className="w-3 h-3" /> In Cart ({inCartQty})
         </div>
       )}
@@ -154,8 +154,8 @@ export default function FeaturedProductCard({ product }: FeaturedProductCardProp
               disabled={isOutOfStock}
               className={`flex-1 h-10 rounded font-bold text-[12px] uppercase tracking-wide flex items-center justify-center gap-1.5 transition-all duration-200 ${
                 isAdded 
-                  ? "bg-green-500 text-white" 
-                  : "bg-primary text-primary-foreground hover:bg-green-800"
+                  ? "bg-orange-500 text-white" 
+                  : "bg-primary text-primary-foreground hover:bg-orange-800"
               } disabled:opacity-50 disabled:cursor-not-allowed`}
             >
               {isAdded ? (

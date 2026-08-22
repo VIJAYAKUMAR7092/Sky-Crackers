@@ -4,6 +4,9 @@ import Image from "next/image";
 import { ArrowRight, Sparkles, ShieldCheck, Truck, Clock, PhoneCall, MapPin, MessageCircle, PlayCircle, Star, Quote, Package } from "lucide-react";
 import FeaturedProductCard from "@/components/public/home/FeaturedProductCard";
 import HeroSlider from "@/components/public/home/HeroSlider";
+import BrandMarquee from "@/components/public/home/BrandMarquee";
+import ComboPacks from "@/components/public/home/ComboPacks";
+import TestimonialMarquee from "@/components/public/home/TestimonialMarquee";
 import ScrollReveal from "@/components/public/ui/ScrollReveal";
 import { getFeaturedProducts, getBestSellingProducts, getAllCategories } from "@/lib/services/public/product.service";
 import { getHeroBanners, getVideoContent, getTestimonials, getSEOSettings } from "@/lib/services/cms/cms.service";
@@ -104,6 +107,8 @@ export default async function HomePage() {
         <HeroSlider banners={displayBanners} />
       </section>
 
+      <BrandMarquee />
+
         {/* 2. WHY CHOOSE US / FEATURES (Cracker City Style) */}
       <section className="py-12 bg-white relative z-30 -mt-10">
         <div className="container mx-auto px-4 md:px-6">
@@ -119,9 +124,9 @@ export default async function HomePage() {
             
             <ScrollReveal animation="fade-up" delay={200}>
               <div className="group bg-white hover:bg-primary rounded-[2rem] p-8 text-center shadow-[0_10px_40px_rgba(0,0,0,0.06)] border border-gray-100 h-full flex flex-col items-center justify-center hover:-translate-y-2 transition-all duration-300">
-                <Sparkles className="h-10 w-10 text-secondary-foreground group-hover:text-white mb-4 transition-colors" />
+                <Sparkles className="h-10 w-10 text-primary group-hover:text-white mb-4 transition-colors" />
                 <h3 className="text-lg font-extrabold text-gray-900 group-hover:text-white mb-2 uppercase transition-colors">Best Deals</h3>
-                <p className="text-sm text-gray-500 group-hover:text-white/90 font-medium transition-colors">We provide up to 80% discount on all products</p>
+                <p className="text-sm text-gray-500 group-hover:text-white/90 font-medium transition-colors">We provide up to 90% discount on all products</p>
               </div>
             </ScrollReveal>
             
@@ -137,13 +142,15 @@ export default async function HomePage() {
               <div className="group bg-white hover:bg-primary rounded-[2rem] p-8 text-center shadow-[0_10px_40px_rgba(0,0,0,0.06)] border border-gray-100 h-full flex flex-col items-center justify-center hover:-translate-y-2 transition-all duration-300">
                 <Clock className="h-10 w-10 text-primary group-hover:text-white mb-4 transition-colors" />
                 <h3 className="text-lg font-extrabold text-gray-900 group-hover:text-white mb-2 uppercase transition-colors">Working Hours</h3>
-                <p className="text-sm text-gray-500 group-hover:text-white/90 font-medium transition-colors">You can purchase on all days from 6:00 AM to 11:50 PM</p>
+                <p className="text-sm text-gray-500 group-hover:text-white/90 font-medium transition-colors">You can purchase on all days from 8:00 AM to 10:00 PM</p>
               </div>
             </ScrollReveal>
             
           </div>
         </div>
       </section>
+
+      <ComboPacks />
 
       {/* 3. CATEGORIES SECTION */}
       <section className="py-20 bg-gray-50">
@@ -181,51 +188,6 @@ export default async function HomePage() {
               </ScrollReveal>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* 4. EXCLUSIVE DISCOUNT BANNER */}
-      <section className="py-20 bg-white px-4 md:px-6">
-        <div className="container mx-auto">
-          <ScrollReveal animation="scale-up">
-            <div className="relative rounded-[3rem] overflow-hidden bg-[#FEF2F2] flex flex-col md:flex-row items-center justify-between min-h-[400px] shadow-lg border border-red-100 group">
-              <div className="absolute inset-0 z-0">
-                <Image
-                  src={HOMEPAGE_IMAGES.banners.diwali}
-                  alt="Exclusive Offers"
-                  fill
-                  className="object-cover transition-transform duration-[1500ms] group-hover:scale-105 opacity-20 mix-blend-multiply"
-                />
-              </div>
-              
-              <div className="relative z-10 w-full md:w-1/2 p-10 md:p-16">
-                <span className="text-red-600 font-extrabold tracking-wider uppercase text-sm mb-2 block">
-                  Exclusive Offer
-                </span>
-                <h2 className="text-5xl md:text-7xl font-black text-gray-900 mb-2 uppercase leading-none">
-                  80% <span className="text-3xl md:text-5xl">Discount</span>
-                </h2>
-                <h3 className="text-2xl md:text-3xl font-extrabold text-gray-800 mb-6 uppercase">
-                  On All Crackers
-                </h3>
-                <p className="text-gray-600 text-lg mb-8 font-medium leading-relaxed max-w-lg">
-                  In Sivakasi, we are a leading cracker online shopping website. We offer the BEST QUALITY crackers all over India at unbeatable pricing. 
-                </p>
-                <Link href="/shop" className="inline-flex px-8 py-4 bg-primary text-white text-lg font-bold rounded-full hover:bg-green-700 transition-all shadow-lg hover:shadow-primary/30">
-                  Shop Now
-                </Link>
-              </div>
-              
-              <div className="relative z-10 w-full md:w-1/2 h-[300px] md:h-full min-h-[400px]">
-                 <Image
-                    src={CATEGORY_IMAGES.giftBoxes}
-                    alt="Crackers Collection"
-                    fill
-                    className="object-contain p-8 drop-shadow-2xl"
-                  />
-              </div>
-            </div>
-          </ScrollReveal>
         </div>
       </section>
 
@@ -419,75 +381,8 @@ export default async function HomePage() {
       </section>
 
       {/* 7. TESTIMONIALS SECTION */}
-
-      <section className="py-20 bg-gray-50 border-t border-gray-200">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-10">
-            <span className="text-yellow-600 font-bold tracking-[0.2em] uppercase text-xs mb-3 block">TESTIMONIALS</span>
-            <h2 className="text-4xl md:text-5xl font-black mb-4 uppercase leading-none tracking-tighter">
-              <span className="text-[#2e7d32] block md:inline">WHAT OUR </span>
-              <span className="text-[#827717] block md:inline">CUSTOMERS SAY</span>
-            </h2>
-          </div>
-          
-          <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 max-w-6xl mx-auto pb-4 custom-scrollbar md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible md:pb-0">
-            {/* Testimonial 1 */}
-            <ScrollReveal animation="fade-up" delay={100}>
-              <div className="w-[85vw] md:w-auto shrink-0 snap-center bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl hover:border-pink-200 transition-all duration-300">
-                <div className="flex text-yellow-400 mb-6">
-                  {[1,2,3,4,5].map(i => <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>)}
-                </div>
-                <p className="text-gray-600 mb-6 font-medium italic">"Best crackers in Sivakasi. The wholesale price is very low and quality is top notch. Kids enjoyed the Diwali very well."</p>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-green-100 text-green-700 rounded-full flex items-center justify-center font-bold text-lg">M</div>
-                  <div>
-                    <h4 className="font-bold text-gray-900">Muthu Kumar</h4>
-                    <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">Chennai</p>
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-
-            {/* Testimonial 2 */}
-            <ScrollReveal animation="fade-up" delay={200}>
-              <div className="w-[85vw] md:w-auto shrink-0 snap-center bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl hover:border-pink-200 transition-all duration-300 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-20 h-20 bg-pink-50 rounded-bl-full -z-10" />
-                <div className="flex text-yellow-400 mb-6">
-                  {[1,2,3,4,5].map(i => <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>)}
-                </div>
-                <p className="text-gray-600 mb-6 font-medium italic">"I was worried about online ordering but the packing was amazing. All products arrived safely. Definitely recommending to friends!"</p>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-pink-100 text-pink-700 rounded-full flex items-center justify-center font-bold text-lg">S</div>
-                  <div>
-                    <h4 className="font-bold text-gray-900">Sangeetha</h4>
-                    <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">Coimbatore</p>
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-
-            {/* Testimonial 3 */}
-            <ScrollReveal animation="fade-up" delay={300}>
-              <div className="w-[85vw] md:w-auto shrink-0 snap-center bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl hover:border-pink-200 transition-all duration-300">
-                <div className="flex text-yellow-400 mb-6">
-                  {[1,2,3,4,5].map(i => <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>)}
-                </div>
-                <p className="text-gray-600 mb-6 font-medium italic">"Amazing discounts. Almost 80% off on MRP for wholesale buying. They delivered on time without any missing items. Very happy."</p>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center font-bold text-lg">R</div>
-                  <div>
-                    <h4 className="font-bold text-gray-900">Ramesh</h4>
-                    <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">Madurai</p>
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
+      <TestimonialMarquee />
 
     </div>
   );
 }
-
-

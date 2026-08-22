@@ -178,7 +178,7 @@ export default function ReportClient({ initialData, summaryData, currentPreset }
                       <span className="font-bold bg-destructive/10 px-2 py-0.5 rounded-md text-xs uppercase tracking-wide">0 in stock</span>
                     </li>
                   ))}
-                  {initialData.products.outOfStock.length === 0 && <p className="text-green-600 dark:text-green-400 font-medium">All products are well stocked!</p>}
+                  {initialData.products.outOfStock.length === 0 && <p className="text-orange-600 dark:text-orange-400 font-medium">All products are well stocked!</p>}
                 </ul>
               </CardContent>
             </Card>

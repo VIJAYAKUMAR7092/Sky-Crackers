@@ -142,24 +142,21 @@ export default async function ShopPage({
             {products.length > 0 ? (
               <div className="bg-white border border-primary/20 rounded-xl overflow-hidden shadow-sm">
                 <div className="overflow-x-auto custom-scrollbar md:pb-2">
-                    <table className="w-full text-left border-collapse md:min-w-[800px]">
-                      {/* Unified Table Header matched to screenshot */}
-                      <thead className="hidden md:table-header-group">
-                        <tr className="bg-primary text-white text-xs font-bold uppercase tracking-wider">
-                          <th className="px-4 py-3 w-16 text-center">#</th>
-                          <th className="px-4 py-3">Name</th>
-                          <th className="px-4 py-3 w-24 text-center">Pack</th>
-                          <th className="px-4 py-3 w-28 text-center">Price</th>
-                          <th className="px-4 py-3 w-32 text-center">Qty</th>
-                          <th className="px-4 py-3 w-28 text-right">Total</th>
+                    <table className="w-full text-left border-collapse table-fixed">
+                      <thead className="table-header-group">
+                        <tr className="bg-primary text-white text-[10px] sm:text-xs font-bold uppercase tracking-wider">
+                          <th className="px-1 sm:px-2 py-2 sm:py-3 w-auto">Name</th>
+                          <th className="px-1 sm:px-2 py-2 sm:py-3 w-16 sm:w-24 text-center">Price</th>
+                          <th className="px-1 sm:px-2 py-2 sm:py-3 w-20 sm:w-28 text-center">Qty</th>
+                          <th className="px-1 sm:px-2 py-2 sm:py-3 w-14 sm:w-24 text-right">Total</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-gray-200 block md:table-row-group">
+                      <tbody className="divide-y divide-gray-200 table-row-group">
                         {Object.entries(groupedProducts).map(([categoryName, categoryProducts]) => (
                           <React.Fragment key={categoryName}>
                             {/* Centered Category Header Row */}
                             <tr className="bg-white border-b border-gray-200 group/cat">
-                              <td colSpan={6} className="py-3 px-4 text-center">
+                              <td colSpan={4} className="py-3 px-4 text-center">
                                 <div className="inline-flex items-center justify-center gap-3">
                                   <h2 className="text-lg font-bold text-primary">{categoryName}</h2>
                                   <span className="bg-gray-100 text-gray-500 text-xs font-semibold px-2.5 py-0.5 rounded-full border border-gray-200">
@@ -190,7 +187,7 @@ export default async function ShopPage({
                   </div>
                   <h3 className="text-2xl font-extrabold text-gray-900 mb-4 drop-shadow-sm">No products found</h3>
                   <p className="text-gray-500 mb-10 max-w-md mx-auto text-lg font-medium">We couldn't find anything matching your search. Try adjusting the filters or explore our full collection.</p>
-                  <Link href="/shop" className="inline-flex items-center justify-center px-8 py-3 bg-primary text-white font-bold rounded-lg hover:bg-green-700 transition-all shadow-md hover:shadow-lg">
+                  <Link href="/shop" className="inline-flex items-center justify-center px-8 py-3 bg-primary text-white font-bold rounded-lg hover:bg-orange-700 transition-all shadow-md hover:shadow-lg">
                     Clear All Filters
                   </Link>
                 </div>

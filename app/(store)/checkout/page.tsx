@@ -109,19 +109,19 @@ export default function CheckoutPage() {
         {/* Progress Bar */}
         <div className="flex items-center justify-center mb-10 max-w-md mx-auto">
           <div className="flex items-center">
-            <div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-bold">
+            <div className="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold">
               <Check className="w-5 h-5" />
             </div>
-            <span className="ml-2 font-bold text-green-600">Cart</span>
+            <span className="ml-2 font-bold text-orange-600">Cart</span>
           </div>
-          <div className="w-12 h-0.5 bg-green-500 mx-2"></div>
+          <div className="w-12 h-0.5 bg-orange-500 mx-2"></div>
           <div className="flex items-center">
-            <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold ${step === 2 ? 'bg-primary text-white' : 'bg-green-500 text-white'}`}>
+            <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold ${step === 2 ? 'bg-primary text-white' : 'bg-orange-500 text-white'}`}>
               {step === 3 ? <Check className="w-5 h-5" /> : '2'}
             </div>
-            <span className={`ml-2 font-bold ${step === 2 ? 'text-primary' : 'text-green-600'}`}>Details</span>
+            <span className={`ml-2 font-bold ${step === 2 ? 'text-primary' : 'text-orange-600'}`}>Details</span>
           </div>
-          <div className={`w-12 h-0.5 mx-2 ${step === 3 ? 'bg-green-500' : 'bg-pink-200'}`}></div>
+          <div className={`w-12 h-0.5 mx-2 ${step === 3 ? 'bg-orange-500' : 'bg-pink-200'}`}></div>
           <div className={`flex items-center ${step === 2 ? 'opacity-50' : ''}`}>
             <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold ${step === 3 ? 'bg-primary text-white' : 'bg-pink-200 text-primary'}`}>
               3
@@ -279,7 +279,7 @@ export default function CheckoutPage() {
                           )}
                         </div>
                         {item.product.mrp > item.product.price && (
-                           <div className="inline-block bg-green-50 text-green-700 text-[9px] font-bold px-1.5 py-0.5 rounded mb-2 uppercase border border-green-100">
+                           <div className="inline-block bg-orange-50 text-orange-700 text-[9px] font-bold px-1.5 py-0.5 rounded mb-2 uppercase border border-orange-100">
                              {Math.round(((item.product.mrp - item.product.price) / item.product.mrp) * 100)}% OFF
                            </div>
                         )}
@@ -332,7 +332,7 @@ export default function CheckoutPage() {
                   type="button" 
                   onClick={handlePlaceOrder}
                   disabled={loading || subtotal < 3000}
-                  className="w-full bg-green-600 hover:bg-green-700 text-white py-3.5 rounded-xl font-bold text-lg shadow-lg shadow-green-500/30 flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-orange-600 hover:bg-orange-700 text-white py-3.5 rounded-xl font-bold text-lg shadow-lg shadow-orange-500/30 flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Check className="w-5 h-5" />}
                   Confirm & Place Order
