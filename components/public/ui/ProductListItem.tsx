@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
@@ -65,18 +65,18 @@ export default function ProductListItem({ product, index }: ProductListItemProps
 
   return (
     <>
-      <tr className="block md:table-row border-b border-white/5 md:hover:bg-white/5 transition-colors duration-200 group relative p-4 md:p-0">
+      <tr className="block md:table-row border-b border-gray-100 hover:bg-gray-50 transition-colors duration-200">
         
-        {/* S.No - Hidden on mobile, shown on desktop */}
-        <td className="hidden md:table-cell px-4 py-4 whitespace-nowrap text-sm font-medium text-zinc-500">
+        {/* S.No - Centered */}
+        <td className="hidden md:table-cell px-4 py-4 whitespace-nowrap text-sm font-bold text-primary text-center">
           {index}
         </td>
         
-        {/* Mobile top row: Image + Details */}
-        <td className="block md:table-cell px-0 md:px-4 py-2 md:py-4">
-          <div className="flex items-center gap-4 md:block">
+        {/* Mobile top row & Desktop Name + Image */}
+        <td className="block md:table-cell px-4 py-4">
+          <div className="flex items-center gap-4">
             <div 
-              className="w-16 h-16 md:w-12 md:h-12 relative rounded-lg overflow-hidden bg-white/5 border border-white/10 cursor-pointer shrink-0"
+              className="w-16 h-16 md:w-14 md:h-14 relative rounded-md overflow-hidden border border-gray-200 bg-white cursor-pointer shrink-0"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
               onMouseMove={handleMouseMove}
@@ -85,99 +85,105 @@ export default function ProductListItem({ product, index }: ProductListItemProps
                 src={imgUrl}
                 alt={product.name}
                 fill
-                sizes="(max-width: 768px) 64px, 48px"
+                sizes="(max-width: 768px) 64px, 56px"
                 className="object-contain p-1"
               />
             </div>
-            {/* On mobile, name goes next to image */}
-            <div className="md:hidden flex-1">
-              <Link href={`/product/${product.slug}`}>
-                <h4 className="font-bold text-sm text-white line-clamp-2">{product.name}</h4>
+            <div className="flex-1">
+              <Link href={`/product/${product.slug}`} className="hover:text-primary transition-colors">
+                <h4 className="font-bold text-sm text-gray-900 line-clamp-2 leading-snug">{product.name}</h4>
               </Link>
-              <div className="flex gap-2 mt-1">
-                <span className="text-[10px] text-zinc-500 bg-black/50 px-1.5 py-0.5 rounded border border-white/5">
-                  {product.category?.name || "Premium"}
-                </span>
-                {isOutOfStock && (
-                  <span className="text-[10px] text-red-500 font-bold bg-red-500/10 px-1.5 py-0.5 rounded border border-red-500/20">
-                    OUT OF STOCK
-                  </span>
+              {/* Action Icons as in screenshot */}
+              <div className="flex items-center gap-2 mt-2">
+                <button 
+                  className="text-gray-400 hover:text-red-500 transition-colors p-1 border border-gray-200 rounded-md bg-white hover:bg-red-50 shadow-sm"
+                  aria-label="Add to wishlist"
+                >
+                  <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+                </button>
+                <button 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (typeof window !== 'undefined') {
+                      navigator.clipboard.writeText(`${window.location.origin}/product/${product.slug}`);
+                      alert('Product link copied!');
+                    }
+                  }}
+                  className="text-gray-400 hover:text-primary transition-colors p-1 border border-gray-200 rounded-md bg-white hover:bg-gray-50 shadow-sm"
+                  aria-label="Share product"
+                >
+                  <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>
+                </button>
+                
+                {Number(product.mrp) > Number(product.sellingPrice) && (
+                  <div className="flex items-center gap-1.5 ml-1">
+                    <span className="text-xs text-gray-400 line-through font-medium">
+                      ₹{Number(product.mrp).toFixed(2)}
+                    </span>
+                    <span className="text-[10px] bg-red-50 text-red-600 border border-red-100 font-bold px-1.5 py-0.5 rounded">
+                      {Math.round(((Number(product.mrp) - Number(product.sellingPrice)) / Number(product.mrp)) * 100)}% OFF
+                    </span>
+                  </div>
                 )}
               </div>
             </div>
           </div>
         </td>
 
-        {/* Desktop Name */}
-        <td className="hidden md:table-cell px-4 py-4 whitespace-nowrap">
-          <Link href={`/product/${product.slug}`} className="group-hover:text-primary transition-colors">
-            <h4 className="font-bold text-sm text-white line-clamp-1">{product.name}</h4>
-          </Link>
-          <div className="flex gap-2 mt-1">
-             <span className="text-[10px] text-zinc-500 bg-black/50 px-1.5 py-0.5 rounded border border-white/5">
-                {product.category?.name || "Premium"}
-             </span>
-             {isOutOfStock && (
-               <span className="text-[10px] text-red-500 font-bold bg-red-500/10 px-1.5 py-0.5 rounded border border-red-500/20">
-                 OUT OF STOCK
-               </span>
-             )}
-          </div>
-        </td>
-
-        {/* Pack - Mobile row 2 */}
-        <td className="block md:table-cell px-0 md:px-4 py-1 md:py-4 text-sm text-zinc-400">
-          <div className="flex justify-between md:block">
-            <span className="md:hidden text-xs uppercase tracking-wider text-zinc-500">Pack:</span>
-            <span>{packInfo}</span>
-          </div>
-        </td>
-
-        {/* Price */}
-        <td className="block md:table-cell px-0 md:px-4 py-1 md:py-4">
-          <div className="flex justify-between md:flex-col items-center md:items-start">
-            <span className="md:hidden text-xs uppercase tracking-wider text-zinc-500">Price:</span>
-            <div className="flex flex-row md:flex-col items-center md:items-start gap-2 md:gap-0">
-              {Number(product.mrp) > sellingPrice && (
-                <span className="text-[10px] text-zinc-500 line-through">₹{Number(product.mrp).toFixed(2)}</span>
-              )}
-              <span className="text-sm font-bold text-white">₹{sellingPrice.toFixed(2)}</span>
+        {/* Pack */}
+        <td className="block md:table-cell px-4 py-2 md:py-4 text-center">
+          <div className="flex justify-between md:flex-col items-center">
+            <span className="md:hidden text-xs uppercase tracking-wider text-gray-400">Pack:</span>
+            <div className="text-sm font-medium text-gray-900 leading-tight">
+              {packInfo.split(' ').map((word: string, i: number) => (
+                <React.Fragment key={i}>
+                  {word}<br className="hidden md:block" />
+                </React.Fragment>
+              ))}
             </div>
           </div>
         </td>
 
+        {/* Price */}
+        <td className="block md:table-cell px-4 py-2 md:py-4 text-center">
+          <div className="flex justify-between md:flex-col items-center">
+            <span className="md:hidden text-xs uppercase tracking-wider text-gray-400">Price:</span>
+            <span className="text-sm font-bold text-gray-900">₹{sellingPrice.toLocaleString('en-IN', {minimumFractionDigits:2})}</span>
+          </div>
+        </td>
+
         {/* Quantity Selector */}
-        <td className="block md:table-cell px-0 md:px-4 py-3 md:py-4 border-t border-white/5 md:border-t-0 mt-3 md:mt-0">
-          <div className="flex justify-between md:block items-center">
-            <span className="md:hidden text-xs font-bold text-white">Quantity</span>
-            <div className="flex items-center bg-black/50 border border-white/10 rounded-lg h-10 md:h-9 w-[120px] md:w-[110px] overflow-hidden shadow-inner">
+        <td className="block md:table-cell px-4 py-3 md:py-4 text-center">
+          <div className="flex justify-between md:justify-center items-center">
+            <span className="md:hidden text-xs font-bold text-gray-900">Qty:</span>
+            <div className="flex items-center border border-gray-200 rounded-md h-8 w-[90px] overflow-hidden shadow-sm mx-auto">
               <button 
                 onClick={handleDecrement}
                 disabled={isOutOfStock}
-                className="w-10 md:w-8 h-full flex items-center justify-center text-zinc-400 hover:text-primary hover:bg-white/5 disabled:opacity-50 transition-colors"
+                className="w-8 h-full flex items-center justify-center bg-gray-50 text-gray-500 hover:text-primary hover:bg-gray-100 disabled:opacity-50"
               >
-                <Minus className="w-3 h-3 md:w-4 md:h-4" />
+                <Minus className="w-3 h-3" />
               </button>
-              <div className="flex-1 h-full flex items-center justify-center font-bold text-sm text-white border-x border-white/5 bg-black/30">
+              <div className="flex-1 h-full flex items-center justify-center font-semibold text-xs text-gray-900 bg-white">
                 {inCartQty}
               </div>
               <button 
                 onClick={handleIncrement}
                 disabled={isOutOfStock}
-                className="w-10 md:w-8 h-full flex items-center justify-center text-zinc-400 hover:text-primary hover:bg-white/5 disabled:opacity-50 transition-colors"
+                className="w-8 h-full flex items-center justify-center bg-gray-50 text-gray-500 hover:text-primary hover:bg-gray-100 disabled:opacity-50"
               >
-                <Plus className="w-3 h-3 md:w-4 md:h-4" />
+                <Plus className="w-3 h-3" />
               </button>
             </div>
           </div>
         </td>
 
         {/* Row Total */}
-        <td className="block md:table-cell px-0 md:px-4 py-2 md:py-4 text-right bg-white/[0.02] md:bg-transparent rounded-lg md:rounded-none mt-2 md:mt-0 p-2 md:p-0">
+        <td className="block md:table-cell px-4 py-3 md:py-4 text-right bg-gray-50/50 md:bg-transparent rounded-lg md:rounded-none">
           <div className="flex justify-between md:justify-end items-center">
-            <span className="md:hidden text-xs uppercase tracking-wider text-zinc-400 font-bold">Total:</span>
-            <span className={`text-base md:text-sm font-black ${inCartQty > 0 ? 'text-primary' : 'text-zinc-600'}`}>
-              ₹{rowTotal.toFixed(2)}
+            <span className="md:hidden text-xs uppercase tracking-wider text-gray-500 font-bold">Total:</span>
+            <span className={`text-sm font-bold ${inCartQty > 0 ? 'text-gray-900' : 'text-gray-300'}`}>
+              {inCartQty > 0 ? `₹${rowTotal.toLocaleString('en-IN', {minimumFractionDigits:2})}` : '0.00'}
             </span>
           </div>
         </td>
@@ -186,18 +192,18 @@ export default function ProductListItem({ product, index }: ProductListItemProps
       {/* Hover Image Portal (Desktop only) */}
       {mounted && isHovered && createPortal(
         <div 
-          className="fixed z-[100] pointer-events-none w-72 h-72 hidden md:flex bg-[#0a0a0a]/95 backdrop-blur-xl border border-primary/40 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden items-center justify-center animate-in fade-in zoom-in duration-200"
+          className="fixed z-[100] pointer-events-none w-72 h-72 hidden md:flex bg-white/95 backdrop-blur-xl border border-gray-200 rounded-2xl shadow-2xl overflow-hidden items-center justify-center animate-in fade-in zoom-in duration-200"
           style={{ 
             left: mousePos.x + 20, 
             top: mousePos.y - 144 // Center vertically relative to mouse (288/2)
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent z-0" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-gray-50 to-transparent z-0" />
           <Image 
             src={imgUrl}
             alt={product.name}
             fill
-            className="object-contain p-4 drop-shadow-2xl z-10"
+            className="object-contain p-4 drop-shadow-lg z-10"
           />
         </div>,
         document.body

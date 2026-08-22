@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
@@ -16,7 +16,7 @@ export default function HeroSlider() {
   }, []);
 
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden bg-[#050505]">
+    <div className="absolute inset-0 z-0 overflow-hidden bg-black">
       {HERO_IMAGES.map((image, index) => (
         <div
           key={image.id}
@@ -30,34 +30,19 @@ export default function HeroSlider() {
             fill
             priority={index === 0}
             quality={100}
-            className={`object-cover mix-blend-screen transition-transform ease-linear ${
-              index === currentIndex ? "scale-110 duration-[10000ms]" : "scale-100 duration-[0ms]"
+            className={`object-cover transition-transform ease-linear ${
+              index === currentIndex ? "scale-105 duration-[10000ms]" : "scale-100 duration-[0ms]"
             }`}
           />
         </div>
       ))}
 
-      {/* Dark gradient overlay + Soft vignette */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/70 via-[#050505]/30 to-[#050505] z-20 pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-[#050505]/30 to-[#050505]/90 z-20 pointer-events-none" />
-      
-      {/* Gold Glow Ambient */}
-      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[150px] mix-blend-screen z-20 animate-pulse pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[700px] h-[700px] bg-amber-500/15 rounded-full blur-[150px] mix-blend-screen z-20 pointer-events-none" />
-      
-      {/* Elegant floating golden particles (CSS only) */}
-      <div className="absolute inset-0 z-20 opacity-50 mix-blend-screen pointer-events-none" 
-           style={{
-             backgroundImage: "radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.4) 1px, transparent 2px), radial-gradient(circle at 80% 40%, rgba(212, 175, 55, 0.4) 1px, transparent 2px), radial-gradient(circle at 40% 80%, rgba(212, 175, 55, 0.4) 1px, transparent 2px), radial-gradient(circle at 70% 90%, rgba(212, 175, 55, 0.4) 1px, transparent 2px)",
-             backgroundSize: "120px 120px",
-             animation: "pulse 6s ease-in-out infinite"
-           }}
-      />
+      {/* Simple Dark Overlay for Text Legibility */}
+      <div className="absolute inset-0 bg-black/40 z-20 pointer-events-none" />
       
       {/* Scroll Indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-3 opacity-80 animate-bounce">
-        <span className="text-white/60 text-xs tracking-[0.3em] uppercase font-bold">Scroll</span>
-        <div className="w-[1px] h-12 bg-gradient-to-b from-primary to-transparent" />
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2 opacity-90 animate-bounce">
+        <span className="text-white text-[10px] tracking-widest uppercase font-bold bg-black/20 px-3 py-1 rounded-full backdrop-blur-sm">Scroll</span>
       </div>
     </div>
   );

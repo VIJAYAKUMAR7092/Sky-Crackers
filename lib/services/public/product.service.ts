@@ -52,14 +52,30 @@ export async function getProducts(params?: { categoryId?: string, search?: strin
     const whereClause: any = { active: true };
     
     if (params?.categoryId) {
-      whereClause.categoryId = params.categoryId;
+      // Support both CUID (from sidebar) and slug (from footer)
+      whereClause.OR = [
+        { categoryId: params.categoryId },
+        { category: { slug: params.categoryId } }
+      ];
     }
     
     if (params?.search) {
-      whereClause.OR = [
-        { name: { contains: params.search, mode: 'insensitive' } },
-        { description: { contains: params.search, mode: 'insensitive' } },
-      ];
+      const searchCondition = {
+        OR: [
+          { name: { contains: params.search, mode: 'insensitive' } },
+          { description: { contains: params.search, mode: 'insensitive' } },
+        ]
+      };
+      
+      if (whereClause.OR) {
+        whereClause.AND = [
+          { OR: whereClause.OR },
+          searchCondition
+        ];
+        delete whereClause.OR;
+      } else {
+        whereClause.OR = searchCondition.OR;
+      }
     }
 
     const [products, total] = await Promise.all([
@@ -108,7 +124,12 @@ export async function getAllCategories() {
   try {
     return await prisma.category.findMany({
       where: { active: true },
-      orderBy: { name: 'asc' }
+      orderBy: { displayOrder: 'asc' },
+      include: {
+        _count: {
+          select: { products: { where: { active: true } } }
+        }
+      }
     });
   } catch (error) {
     console.error("Error fetching categories:", error);

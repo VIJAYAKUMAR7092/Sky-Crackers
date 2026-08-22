@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import Image from "next/image";
@@ -56,26 +56,20 @@ export default function FeaturedProductCard({ product }: FeaturedProductCardProp
     : 0;
     
   const isOutOfStock = product.stockStatus === "OUT_OF_STOCK";
-  const isFeatured = product.isFeatured;
   const packInfo = product.packInfo || "1 Box";
 
   return (
-    <div className="group relative h-[520px] bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/10 rounded-[20px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.4)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_15px_40px_rgba(212,175,55,0.15)] flex flex-col">
+    <div className="group relative bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full">
       
       {/* Badges Container */}
       <div className="absolute top-3 left-3 z-20 flex flex-col gap-2">
         {hasDiscount && !isOutOfStock && (
-          <div className="bg-gradient-to-r from-red-600 to-red-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider shadow-lg">
+          <div className="bg-red-600 text-white text-[11px] font-bold px-2 py-1 rounded shadow-sm">
             {discountPercent}% OFF
           </div>
         )}
-        {isFeatured && (
-          <div className="bg-amber-500/90 text-black text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider shadow-lg">
-            Featured
-          </div>
-        )}
         {isOutOfStock && (
-          <div className="bg-zinc-800 text-white text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider shadow-lg">
+          <div className="bg-gray-800 text-white text-[11px] font-bold px-2 py-1 rounded shadow-sm">
             Out of Stock
           </div>
         )}
@@ -83,52 +77,48 @@ export default function FeaturedProductCard({ product }: FeaturedProductCardProp
       
       {/* In Cart Badge */}
       {inCartQty > 0 && (
-        <div className="absolute top-3 right-3 z-20 bg-primary/90 text-black text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider shadow-lg flex items-center gap-1">
+        <div className="absolute top-3 right-3 z-20 bg-green-500 text-white text-[11px] font-bold px-2 py-1 rounded shadow-sm flex items-center gap-1">
           <Check className="w-3 h-3" /> In Cart ({inCartQty})
         </div>
       )}
 
       {/* Image Container */}
-      <Link href={`/product/${product.slug}`} className="relative h-[55%] w-full overflow-hidden flex items-center justify-center bg-white/5 p-8">
+      <Link href={`/product/${product.slug}`} className="relative h-48 sm:h-56 w-full overflow-hidden flex items-center justify-center bg-gray-50 p-6">
         <Image 
           src={product.images?.[0]?.url || "/placeholder.png"}
           alt={product.name}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-          className="object-contain p-8 drop-shadow-2xl group-hover:scale-105 transition-transform duration-500 ease-out z-0"
+          className="object-contain p-4 group-hover:scale-110 transition-transform duration-500 z-0"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-80 z-10 pointer-events-none" />
       </Link>
 
       {/* Content Container */}
-      <div className="relative h-[45%] p-4 flex flex-col z-20 bg-[#0a0a0a] border-t border-white/5">
+      <div className="relative p-4 flex flex-col flex-grow bg-white">
         
         {/* Category & Title */}
         <div className="mb-2">
           <Link href={`/product/${product.slug}`}>
-            <div className="text-primary/80 font-semibold tracking-wider uppercase text-[9px] mb-1">
-              {product.category?.name || "Premium Series"}
-            </div>
-            <h3 className="font-bold text-base text-white group-hover:text-primary transition-colors duration-300 line-clamp-2 leading-snug">
+            <h3 className="font-bold text-gray-800 text-sm md:text-base group-hover:text-primary transition-colors duration-200 line-clamp-2 leading-tight min-h-[40px]">
               {product.name}
             </h3>
           </Link>
         </div>
         
         <div className="mt-auto flex flex-col gap-3">
-          {/* Price & Unit Row */}
-          <div className="flex items-end justify-between">
+          {/* Price Row */}
+          <div className="flex items-center justify-between mt-1">
             <div className="flex flex-col">
               {hasDiscount && (
-                <span className="text-[11px] text-zinc-500 line-through font-medium mb-0.5">
+                <span className="text-[12px] text-gray-400 line-through font-medium">
                   ₹{Number(product.mrp).toFixed(2)}
                 </span>
               )}
-              <div className="flex items-baseline gap-1.5">
-                <span className="text-xl font-black text-white">
+              <div className="flex items-center gap-1.5">
+                <span className="text-lg font-black text-gray-900">
                   ₹{Number(product.sellingPrice).toFixed(2)}
                 </span>
-                <span className="text-[10px] text-zinc-400 font-medium bg-zinc-900 px-1.5 py-0.5 rounded">
+                <span className="text-[10px] text-gray-500 font-medium bg-gray-100 px-1.5 py-0.5 rounded">
                   {packInfo}
                 </span>
               </div>
@@ -136,23 +126,23 @@ export default function FeaturedProductCard({ product }: FeaturedProductCardProp
           </div>
           
           {/* Action Row */}
-          <div className="flex items-center gap-2 w-full pt-2 border-t border-white/5">
+          <div className="flex items-center gap-2 w-full pt-3 border-t border-gray-100">
             {/* Quantity Selector */}
-            <div className="flex items-center bg-zinc-900 border border-zinc-800 rounded-lg h-10 w-[100px] overflow-hidden">
+            <div className="flex items-center bg-gray-50 border border-gray-200 rounded h-10 w-24 overflow-hidden">
               <button 
                 onClick={handleDecrement}
                 disabled={isOutOfStock}
-                className="w-8 h-full flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="w-8 h-full flex items-center justify-center text-gray-500 hover:text-gray-900 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 <Minus className="w-3 h-3" />
               </button>
-              <div className="flex-1 h-full flex items-center justify-center font-bold text-sm text-white">
+              <div className="flex-1 h-full flex items-center justify-center font-bold text-sm text-gray-800">
                 {localQty}
               </div>
               <button 
                 onClick={handleIncrement}
                 disabled={isOutOfStock}
-                className="w-8 h-full flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="w-8 h-full flex items-center justify-center text-gray-500 hover:text-gray-900 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 <Plus className="w-3 h-3" />
               </button>
@@ -162,19 +152,19 @@ export default function FeaturedProductCard({ product }: FeaturedProductCardProp
             <button 
               onClick={handleAddToCart}
               disabled={isOutOfStock}
-              className={`flex-1 h-10 rounded-lg font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all duration-300 shadow-lg ${
+              className={`flex-1 h-10 rounded font-bold text-[12px] uppercase tracking-wide flex items-center justify-center gap-1.5 transition-all duration-200 ${
                 isAdded 
-                  ? "bg-green-500 text-white shadow-green-500/20" 
-                  : "bg-gradient-to-r from-primary to-amber-500 text-black hover:brightness-110 shadow-primary/20"
+                  ? "bg-green-500 text-white" 
+                  : "bg-primary text-primary-foreground hover:bg-green-800"
               } disabled:opacity-50 disabled:cursor-not-allowed`}
             >
               {isAdded ? (
                 <>
-                  <Check className="w-3.5 h-3.5" /> Added
+                  <Check className="w-4 h-4" /> Added
                 </>
               ) : (
                 <>
-                  <ShoppingCart className="w-3.5 h-3.5" /> Add
+                  <ShoppingCart className="w-4 h-4" /> Add
                 </>
               )}
             </button>
@@ -185,3 +175,4 @@ export default function FeaturedProductCard({ product }: FeaturedProductCardProp
     </div>
   );
 }
+

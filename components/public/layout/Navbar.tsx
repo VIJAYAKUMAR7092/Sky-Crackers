@@ -1,11 +1,10 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { ShoppingCart, Menu, X, Sun, Moon, Search } from "lucide-react";
-import { useTheme } from "next-themes";
+import { ShoppingCart, Menu, X, PhoneCall, MessageCircle } from "lucide-react";
 import { useCartStore } from "@/lib/store/cart.store";
 import CartDrawer from "../cart/CartDrawer";
 
@@ -13,7 +12,6 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   
@@ -38,24 +36,36 @@ export default function Navbar() {
     { name: "Contact", href: "/#contact" },
   ];
 
-  const isHomepage = pathname === "/";
-  const textColor = isScrolled || !isHomepage ? "text-zinc-900 dark:text-white" : "text-white";
-  const iconColor = isScrolled || !isHomepage ? "text-zinc-700 dark:text-zinc-300 hover:text-primary" : "text-white/90 hover:text-white";
-  
   return (
     <>
+      {/* Top Banner */}
+      <div className="bg-green-900 text-white text-[11px] md:text-xs font-medium py-2">
+        <div className="container mx-auto px-4 md:px-8 flex flex-col sm:flex-row items-center justify-between gap-2">
+          <div className="flex items-center gap-4">
+            <a href="tel:+919786683878" className="flex items-center gap-1.5 hover:text-secondary transition-colors">
+              <PhoneCall className="h-3.5 w-3.5" /> +91 9786683878
+            </a>
+            <a href="https://wa.me/919786683878?text=Hello%20Sky%20Crackers,%20I%20would%20like%20to%20place%20an%20order" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-green-400 transition-colors">
+              <MessageCircle className="h-3.5 w-3.5" /> WhatsApp
+            </a>
+          </div>
+          <div className="text-center">
+             Welcome to Sky Crackers Sivakasi ! 2026 Diwali Sale starts from August !!
+          </div>
+        </div>
+      </div>
+
       <header
-        className={`fixed top-0 w-full z-50 transition-all duration-500 ease-in-out ${
-          isScrolled || !isHomepage
-            ? "bg-white/70 dark:bg-[#050505]/70 backdrop-blur-2xl border-b border-zinc-200/50 dark:border-white/5 py-4 shadow-sm"
-            : "bg-gradient-to-b from-black/80 to-transparent border-b border-transparent py-6"
+        className={`sticky top-0 w-full z-50 transition-all duration-300 ease-in-out bg-white ${
+          isScrolled ? "shadow-md py-2" : "py-4 border-b border-gray-100"
         }`}
       >
         <div className="container mx-auto px-4 md:px-8">
           <div className="flex items-center justify-between">
-                        {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative h-8 w-32 md:h-10 md:w-40 group-hover:scale-105 transition-transform duration-300 drop-shadow-xl">
+            
+            {/* Logo */}
+            <Link href="/" className="flex items-center group shrink-0">
+              <div className="relative h-12 w-40 md:h-14 md:w-48 transition-transform duration-300">
                 <Image 
                   src="/logo-official.png" 
                   alt="Sky Crackers Logo" 
@@ -67,44 +77,49 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-10">
+            <nav className="hidden lg:flex items-center gap-8 mx-6">
               {navLinks.map((link) => {
-                const isActive = pathname === link.href;
+                const isActive = pathname === link.href || (pathname.startsWith('/shop') && link.href === '/shop');
                 return (
                   <Link
                     key={link.name}
                     href={link.href}
-                    className={`relative group text-xs font-bold uppercase tracking-widest transition-colors duration-300 ${
+                    className={`relative text-sm font-bold transition-colors duration-200 flex items-center ${
                       isActive 
-                        ? "text-primary" 
-                        : `${textColor} opacity-80 hover:opacity-100`
+                        ? "text-primary border-b-2 border-primary pb-1" 
+                        : "text-gray-800 hover:text-primary pb-1"
                     }`}
                   >
                     {link.name}
-                    <span className={`absolute -bottom-2 left-0 h-[2px] bg-primary transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
                   </Link>
                 );
               })}
             </nav>
 
-            {/* Actions */}
-            <div className="flex items-center gap-2 sm:gap-4">
-              {mounted && (
-                <button
-                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                  className={`p-2.5 rounded-full transition-all duration-300 hover:bg-white/10 ${iconColor} ${!isScrolled && isHomepage ? "drop-shadow-lg" : ""}`}
-                >
-                  {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-                </button>
-              )}
+            {/* Right Actions */}
+            <div className="flex items-center gap-3 md:gap-4 shrink-0">
+              
+              {/* Phone Pill - like screenshot */}
+              <a href="tel:+919786683878" className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full border border-gray-200 text-sm font-bold text-gray-800 hover:border-primary transition-colors">
+                <PhoneCall className="h-4 w-4 text-red-500"/>
+                +91 9786683878
+              </a>
 
+              {/* Quick Order Button */}
+              <Link href="/shop" className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-red-500 hover:bg-red-600 text-white text-sm font-bold transition-colors shadow-sm">
+                <ShoppingCart className="h-4 w-4" />
+                Quick Order
+              </Link>
+
+              {/* Cart Toggle */}
               <button 
                 onClick={() => setCartOpen(true)}
-                className={`relative p-2.5 rounded-full transition-all duration-300 hover:bg-white/10 group ${iconColor} ${!isScrolled && isHomepage ? "drop-shadow-lg" : ""}`}
+                className="relative p-2 text-gray-800 hover:text-primary transition-colors group"
+                aria-label="Open Cart"
               >
-                <ShoppingCart className="h-5 w-5 group-hover:scale-110 transition-transform" />
+                <ShoppingCart className="h-6 w-6 group-hover:scale-110 transition-transform" />
                 {mounted && cartItemsCount > 0 && (
-                  <span className="absolute top-1 right-1 h-5 w-5 rounded-full bg-primary border-2 border-transparent text-[10px] font-extrabold text-black flex items-center justify-center translate-x-1/2 -translate-y-1/2 shadow-[0_0_10px_rgba(212,175,55,0.8)] animate-in zoom-in">
+                  <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary text-[10px] font-bold text-white flex items-center justify-center shadow-sm">
                     {cartItemsCount}
                   </span>
                 )}
@@ -112,30 +127,39 @@ export default function Navbar() {
 
               {/* Mobile Menu Toggle */}
               <button
-                className={`md:hidden p-2.5 rounded-full transition-all duration-300 hover:bg-white/10 ${iconColor}`}
+                className="lg:hidden p-2 text-gray-800 hover:text-primary transition-colors"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label="Toggle Menu"
               >
-                {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                {mobileMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
               </button>
             </div>
           </div>
         </div>
 
-        {/* Smooth Mobile Menu */}
-        <div className={`md:hidden absolute top-full left-0 w-full bg-white dark:bg-[#050505] border-b border-zinc-200 dark:border-white/5 shadow-2xl transition-all duration-500 ease-in-out overflow-hidden ${mobileMenuOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'}`}>
-          <div className="flex flex-col p-6 gap-6">
+        {/* Mobile Menu */}
+        <div className={`lg:hidden absolute top-full left-0 w-full bg-white border-b border-gray-100 shadow-xl transition-all duration-300 ease-in-out overflow-hidden ${mobileMenuOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'}`}>
+          <div className="flex flex-col p-4 gap-2">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className={`text-sm font-bold uppercase tracking-widest transition-colors duration-300 ${
-                  pathname === link.href ? "text-primary pl-2 border-l-4 border-primary" : "text-zinc-600 dark:text-zinc-400 hover:text-primary hover:pl-2"
+                className={`text-sm font-bold uppercase transition-colors duration-200 py-3 border-b border-gray-50 ${
+                  pathname === link.href ? "text-primary" : "text-gray-700"
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.name}
               </Link>
             ))}
+            <div className="pt-4 flex flex-col gap-3">
+              <a href="tel:+919786683878" className="flex items-center justify-center gap-2 py-2 rounded-lg bg-gray-50 text-gray-800 font-bold text-sm">
+                <PhoneCall className="h-4 w-4 text-red-500"/> Call +91 9786683878
+              </a>
+              <Link href="/shop" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-center gap-2 py-2 rounded-lg bg-red-500 text-white font-bold text-sm">
+                <ShoppingCart className="h-4 w-4" /> Quick Order
+              </Link>
+            </div>
           </div>
         </div>
       </header>

@@ -3,8 +3,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  /* LIGHT MODE - Warm Premium Whites & Enterprise SaaS */
-  --background: #FCFCFD;
+  /* LIGHT MODE - Festive Crackers Theme */
+  --background: #FFFFFF;
   --foreground: #1A1D23;
   
   --card: #FFFFFF;
@@ -13,57 +13,49 @@
   --popover: #FFFFFF;
   --popover-foreground: #1A1D23;
   
-  --primary: #C5A059; /* Elegant Gold */
+  --primary: #1F7B2A; /* Festive Green */
   --primary-foreground: #FFFFFF;
   
-  --secondary: #F8F9FA;
-  --secondary-foreground: #374151;
+  --secondary: #FDE047; /* Festive Yellow */
+  --secondary-foreground: #B45309; /* Amber/Orange text */
   
   --muted: #F3F4F6;
   --muted-foreground: #6B7280;
   
-  --accent: #FDFBF7; /* Very light gold tint */
-  --accent-foreground: #C5A059;
+  --accent: #FEF2F2; /* Light Red tint */
+  --accent-foreground: #DC2626; /* Red text */
   
   --destructive: #EF4444;
   --destructive-foreground: #FFFFFF;
   
   --border: #E5E7EB;
   --input: #E5E7EB;
-  --ring: #C5A059;
+  --ring: #1F7B2A;
   
-  --radius: 0.5rem;
+  --radius: 0.75rem; /* More rounded for friendly festive look */
 }
 
+/* We will disable dark mode for the public store, but keep variables just in case admin uses it */
 .dark {
-  /* DARK MODE - Matte Charcoal & Luxury Gold */
-  --background: #0B0D12; /* Deep matte charcoal */
+  --background: #0B0D12;
   --foreground: #F9FAFB;
-  
   --card: #13161C;
   --card-foreground: #F9FAFB;
-  
   --popover: #13161C;
   --popover-foreground: #F9FAFB;
-  
-  --primary: #D4AF37; /* Bright Luxury Gold */
-  --primary-foreground: #000000;
-  
+  --primary: #1F7B2A;
+  --primary-foreground: #FFFFFF;
   --secondary: #1F242F;
   --secondary-foreground: #E5E7EB;
-  
   --muted: #1F242F;
   --muted-foreground: #9CA3AF;
-  
-  --accent: #2A2416; /* Dark gold tint */
+  --accent: #2A2416;
   --accent-foreground: #D4AF37;
-  
   --destructive: #991B1B;
   --destructive-foreground: #F87171;
-  
   --border: #262B36;
   --input: #262B36;
-  --ring: #D4AF37;
+  --ring: #1F7B2A;
 }
 
 @theme inline {
@@ -99,7 +91,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom Scrollbar for Premium Feel */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -112,22 +104,16 @@ body {
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--muted-foreground);
+  background: var(--primary);
 }
 
-/* Premium Animations & Effects */
+/* Simple animations instead of heavy glow effects */
 @layer utilities {
   .glass-panel {
-    @apply bg-card/70 backdrop-blur-xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)];
+    @apply bg-white border border-gray-100 shadow-[0_4px_20px_rgb(0,0,0,0.05)];
   }
   .hover-lift {
-    @apply transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg;
-  }
-  .glow-effect {
-    @apply relative before:absolute before:inset-0 before:bg-primary/20 before:blur-xl before:-z-10 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500;
-  }
-  .fade-in-up {
-    animation: fadeInUp 0.5s ease-out forwards;
+    @apply transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/5;
   }
 }
 
