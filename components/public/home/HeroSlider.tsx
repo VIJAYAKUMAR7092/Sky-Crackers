@@ -44,14 +44,14 @@ export default function HeroSlider({ banners }: { banners: any[] }) {
       
       <div className="absolute inset-0 bg-black/30 z-10" />
       
-      <div className="container relative z-20 mx-auto px-4 text-center mt-6 pb-16">
+      <div className="container relative z-20 mx-auto px-2 sm:px-4 text-center mt-4 sm:mt-6 pb-8 sm:pb-16 w-full max-w-full overflow-hidden">
         <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/90 text-primary text-xs md:text-sm font-extrabold uppercase mb-6 shadow-lg animate-in fade-in slide-in-from-bottom-4 duration-700">
           <Sparkles className="h-4 w-4 text-secondary-foreground" />
           100% Sivakasi Fireworks
         </div>
         
         <div className="animate-in zoom-in-95 fade-in duration-700">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight mb-6 drop-shadow-xl leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl px-2 font-extrabold text-white tracking-tight mb-6 drop-shadow-xl leading-tight">
             {banners[currentIndex]?.title ? (
                <span dangerouslySetInnerHTML={{ __html: banners[currentIndex].title.replace(/\n/g, "<br/>") }} />
             ) : (
@@ -59,12 +59,12 @@ export default function HeroSlider({ banners }: { banners: any[] }) {
             )}
           </h1>
           
-          <p className="text-lg md:text-2xl text-white/95 font-medium mb-10 max-w-2xl mx-auto drop-shadow-md">
+          <p className="text-sm sm:text-base md:text-xl lg:text-2xl px-4 text-white/95 font-medium mb-10 max-w-2xl mx-auto drop-shadow-md">
             {banners[currentIndex]?.subtitle || "Buy premium quality firecrackers online direct from Sivakasi at wholesale prices."}
           </p>
           
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href={banners[currentIndex]?.buttonLink || "/shop"} className="w-full sm:w-auto px-8 py-4 bg-primary text-white text-lg font-bold rounded-full hover:bg-green-700 hover:shadow-xl hover:shadow-primary/30 transition-all hover:-translate-y-1 flex items-center justify-center">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
+            <Link href={banners[currentIndex]?.buttonLink || "/shop"} className="w-[85%] sm:w-auto px-6 py-3.5 md:px-8 md:py-4 bg-primary text-white text-base md:text-lg font-bold rounded-full hover:bg-green-700 hover:shadow-xl hover:shadow-primary/30 transition-all hover:-translate-y-1 flex items-center justify-center">
               {banners[currentIndex]?.buttonText || "Shop Now - 80% Off"}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>

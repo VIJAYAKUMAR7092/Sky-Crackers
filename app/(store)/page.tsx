@@ -97,10 +97,10 @@ export default async function HomePage() {
   ];
 
   return (
-    <div className="flex flex-col w-full bg-white text-gray-900 font-sans">
+    <div className="flex flex-col w-full bg-white text-gray-900 font-sans overflow-x-hidden max-w-[100vw]">
       
       {/* 1. HERO SECTION */}
-      <section className="relative h-[85vh] lg:h-[90vh] flex items-center justify-center overflow-hidden bg-white">
+      <section className="relative w-full h-[60vh] sm:h-[70vh] lg:h-[90vh] flex items-center justify-center overflow-hidden bg-black">
         <HeroSlider banners={displayBanners} />
       </section>
 
