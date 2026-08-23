@@ -74,8 +74,20 @@ export default async function HomePage() {
     }
   ];
 
+
   return (
     <div className="flex flex-col w-full bg-white text-gray-900 font-sans overflow-x-hidden max-w-[100vw]">
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes floatMobile {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-8px); }
+        }
+        @keyframes breatheMobile {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.08); }
+        }
+      `}} />
+
       
       {/* 1. HERO SECTION */}
       <section className="relative w-full overflow-hidden bg-[#050505]">
@@ -91,7 +103,7 @@ export default async function HomePage() {
             
             <ScrollReveal animation="fade-up" delay={100}>
               <div className="group bg-white hover:bg-primary rounded-[2rem] p-8 text-center shadow-[0_10px_40px_rgba(0,0,0,0.06)] border border-gray-100 h-full flex flex-col items-center justify-center hover:-translate-y-2 transition-all duration-300">
-                <Truck className="h-10 w-10 text-primary group-hover:text-white mb-4 transition-colors" />
+                <Truck className="h-10 w-10 text-primary group-hover:text-white mb-4 transition-colors animate-[floatMobile_3s_infinite] md:animate-none" />
                 <h3 className="text-lg font-extrabold text-gray-900 group-hover:text-white mb-2 uppercase transition-colors">Fast Delivery</h3>
                 <p className="text-sm text-gray-500 group-hover:text-white/90 font-medium transition-colors">Your parcel will be delivered 3 to 5 working days</p>
               </div>
@@ -99,7 +111,7 @@ export default async function HomePage() {
             
             <ScrollReveal animation="fade-up" delay={200}>
               <div className="group bg-white hover:bg-primary rounded-[2rem] p-8 text-center shadow-[0_10px_40px_rgba(0,0,0,0.06)] border border-gray-100 h-full flex flex-col items-center justify-center hover:-translate-y-2 transition-all duration-300">
-                <Sparkles className="h-10 w-10 text-primary group-hover:text-white mb-4 transition-colors" />
+                <Sparkles className="h-10 w-10 text-primary group-hover:text-white mb-4 transition-colors animate-[floatMobile_3.5s_infinite] md:animate-none" />
                 <h3 className="text-lg font-extrabold text-gray-900 group-hover:text-white mb-2 uppercase transition-colors">Best Deals</h3>
                 <p className="text-sm text-gray-500 group-hover:text-white/90 font-medium transition-colors">We provide up to 90% discount on all products</p>
               </div>
@@ -107,7 +119,7 @@ export default async function HomePage() {
             
             <ScrollReveal animation="fade-up" delay={300}>
               <div className="group bg-white hover:bg-primary rounded-[2rem] p-8 text-center shadow-[0_10px_40px_rgba(0,0,0,0.06)] border border-gray-100 h-full flex flex-col items-center justify-center hover:-translate-y-2 transition-all duration-300">
-                <Package className="h-10 w-10 text-primary group-hover:text-white mb-4 transition-colors" />
+                <Package className="h-10 w-10 text-primary group-hover:text-white mb-4 transition-colors animate-[floatMobile_4s_infinite] md:animate-none" />
                 <h3 className="text-lg font-extrabold text-gray-900 group-hover:text-white mb-2 uppercase transition-colors">Packaging</h3>
                 <p className="text-sm text-gray-500 group-hover:text-white/90 font-medium transition-colors">Goods will be packed in poly bundle carton box</p>
               </div>
@@ -115,7 +127,7 @@ export default async function HomePage() {
             
             <ScrollReveal animation="fade-up" delay={400}>
               <div className="group bg-white hover:bg-primary rounded-[2rem] p-8 text-center shadow-[0_10px_40px_rgba(0,0,0,0.06)] border border-gray-100 h-full flex flex-col items-center justify-center hover:-translate-y-2 transition-all duration-300">
-                <Clock className="h-10 w-10 text-primary group-hover:text-white mb-4 transition-colors" />
+                <Clock className="h-10 w-10 text-primary group-hover:text-white mb-4 transition-colors animate-[floatMobile_3.2s_infinite] md:animate-none" />
                 <h3 className="text-lg font-extrabold text-gray-900 group-hover:text-white mb-2 uppercase transition-colors">Working Hours</h3>
                 <p className="text-sm text-gray-500 group-hover:text-white/90 font-medium transition-colors">You can purchase on all days from 8:00 AM to 10:00 PM</p>
               </div>
@@ -146,7 +158,7 @@ export default async function HomePage() {
                       src={category.image}
                       alt={category.name}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="object-cover transition-transform duration-500 animate-[breatheMobile_5s_infinite] md:animate-none md:group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80" />
                     

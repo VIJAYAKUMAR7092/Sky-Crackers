@@ -141,7 +141,7 @@ export default function CartPage() {
               </div>
 
               <button
-                onClick={() => router.push('/checkout')}
+                onClick={() => window.location.href = '/checkout'}
                 className="w-full bg-primary text-black font-bold py-4 rounded-full flex items-center justify-center gap-2 hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-[0_0_20px_rgba(212,175,55,0.2)] mb-6"
               >
                 Proceed to Checkout <ArrowRight className="h-5 w-5" />

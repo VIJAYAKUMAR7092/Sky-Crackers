@@ -11,17 +11,11 @@ export default function BottomCartPopup() {
   const pathname = usePathname();
   const [animateTotal, setAnimateTotal] = useState(false);
 
-  // Hide on checkout page or cart page
-  if (pathname === "/checkout" || pathname === "/cart") {
-    return null;
-  }
-
   // Calculate totals
   const cartTotal = items.reduce((total, item) => total + (item.product.price * item.quantity), 0);
   const totalItems = items.reduce((count, item) => count + item.quantity, 0);
 
   // Animate the total when it changes
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     if (cartTotal > 0) {
       setAnimateTotal(true);
@@ -29,6 +23,11 @@ export default function BottomCartPopup() {
       return () => clearTimeout(timer);
     }
   }, [cartTotal]);
+
+  // Hide on checkout page or cart page
+  if (pathname === "/checkout" || pathname === "/cart") {
+    return null;
+  }
 
   if (items.length === 0) return null;
 
@@ -66,21 +65,19 @@ export default function BottomCartPopup() {
             >
               <Trash2 className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
-            <Link 
-              href="/cart"
-              className="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-800 transition-colors"
-              title="View Cart"
-            >
-              <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
-            </Link>
+
           </div>
           
           {/* Right: Checkout Button */}
           <Link 
             href="/checkout"
+            onClick={() => {
+              // Ensure we navigate smoothly
+              window.location.href = '/checkout';
+            }}
             className="bg-[#e11d48] hover:bg-rose-700 text-white px-6 sm:px-10 h-10 sm:h-12 rounded-full font-bold flex items-center justify-center gap-2 transition-all hover:scale-105 active:scale-95 shadow-[0_0_15px_rgba(225,29,72,0.4)]"
           >
-            <span className="hidden sm:inline">Proceed to</span> Checkout <ArrowRight className="w-4 h-4" />
+            <span className="hidden sm:inline">Proceed</span> <ArrowRight className="w-4 h-4" />
           </Link>
           
         </div>

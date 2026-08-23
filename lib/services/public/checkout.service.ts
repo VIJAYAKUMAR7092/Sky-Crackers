@@ -30,6 +30,13 @@ export interface CheckoutInput {
 }
 
 export async function processManualCheckout(data: CheckoutInput) {
+  // Validate that products exist to prevent FK errors from old cart items
+  const productIds = data.items.map(item => item.productId);
+  const existingProducts = await prisma.product.findMany({
+    where: { id: { in: productIds } },
+    select: { id: true }
+  });
+  const validProductIds = existingProducts.map(p => p.id);
   // Try to calculate shipping to validate deliverability
   let subtotal = 0;
   data.items.forEach(item => {
@@ -137,7 +144,7 @@ export async function processManualCheckout(data: CheckoutInput) {
         paymentMethod: "CASH_ON_DELIVERY",
         items: {
           create: data.items.map(item => ({
-            productId: item.productId,
+            productId: validProductIds.includes(item.productId) ? item.productId : null,
             productName: item.productName,
             packInfo: item.packInfo,
             quantity: item.quantity,
