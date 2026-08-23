@@ -101,7 +101,7 @@ export default function ProductActions({ product }: ProductActionsProps) {
             onClick={handleBuyNow}
             disabled={isOutOfStock}
             className={cn(
-              "flex items-center justify-center gap-2 py-4 rounded-full font-bold text-sm transition-all duration-300 shadow-[0_0_20px_rgba(212₹75,55,0.2)]",
+              "flex items-center justify-center gap-2 py-4 rounded-full font-bold text-sm transition-all duration-300 shadow-[0_0_20px_rgba(212,175,55,0.2)]",
               isOutOfStock
                 ? "bg-zinc-800 text-zinc-500 cursor-not-allowed"
                 : "bg-primary text-black hover:bg-primary/90 hover:scale-[1.02]"

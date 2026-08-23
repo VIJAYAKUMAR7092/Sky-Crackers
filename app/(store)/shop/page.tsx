@@ -52,7 +52,7 @@ export default async function ShopPage({
         <div className="flex flex-col lg:flex-row gap-6">
           
           {/* 4. FILTER SIDEBAR */}
-          <aside className="w-full lg:w-72 shrink-0">
+          <aside className="!hidden lg:!block w-72 shrink-0">
             <div className="sticky top-28 bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
               
               {/* SEARCH SECTION */}

@@ -75,7 +75,7 @@ export default async function ProductDetailPage({
           <div className="relative">
             <div className="absolute top-6 left-6 z-20 flex flex-col gap-2">
               {hasDiscount && !isOutOfStock && (
-                <div className="bg-primary/90 text-black text-xs font-bold px-4 py-2 rounded-full uppercase tracking-wider backdrop-blur-md shadow-[0_0_20px_rgba(212₹75,55,0.4)]">
+                <div className="bg-primary/90 text-black text-xs font-bold px-4 py-2 rounded-full uppercase tracking-wider backdrop-blur-md shadow-[0_0_20px_rgba(212,175,55,0.4)]">
                   Save ₹{Number(product.discount).toFixed(0)}
                 </div>
               )}

@@ -26,7 +26,7 @@ export default function ShopClientView({
   totalProductsCount,
 }: ShopClientViewProps) {
   // Try to load initial view mode from localStorage (default to 'list' for wholesale style)
-  const [viewMode, setViewMode] = useState<"list" | "grid">("list");
+  const [viewMode, setViewMode] = useState<"list" | "grid">("grid");
 
   return (
     <div className="flex-1 w-full max-w-full">
@@ -71,7 +71,11 @@ export default function ShopClientView({
       <ScrollReveal animation="fade-up">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
           <p className="text-sm text-gray-500">
-            Showing <strong className="text-gray-900 font-bold">{products.length}</strong> products
+            {!categoryId ? (
+              <>Showing <strong className="text-gray-900 font-bold">all</strong> products</>
+            ) : (
+              <>Showing <strong className="text-gray-900 font-bold">{products.length}</strong> products</>
+            )}
           </p>
           <div className="flex w-full sm:w-auto justify-between sm:justify-end items-center gap-3">
             <select className="text-sm border border-gray-300 rounded-md px-3 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none">

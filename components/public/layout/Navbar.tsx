@@ -50,7 +50,7 @@ export default function Navbar({ settings }: { settings?: any }) {
   return (
     <>
       {/* Top Banner */}
-      <div className="bg-[#2e7d32] text-white text-[10px] md:text-xs font-bold py-2 md:py-2.5 overflow-hidden">
+      <div className="bg-[linear-gradient(90deg,#dc2626_0%,#dc2626_70%,#ea580c_100%)] text-white text-[12px] md:text-sm font-black py-2.5 md:py-3 overflow-hidden shadow-inner">
         <div className="w-full mx-auto px-2 flex items-center justify-center gap-1.5 md:gap-2 max-w-7xl">
           <svg className="w-3.5 h-3.5 md:w-4 md:h-4 text-orange-300 fill-current shrink-0" viewBox="0 0 24 24">
             <path d="M19.333 7.828a2.593 2.593 0 0 1-1.688.625h-1.428V4.896a2.6 2.6 0 0 1 1.688.625A2.585 2.585 0 0 1 20 7.35a2.585 2.585 0 0 1-.667 1.833V7.828zm-5.428-3.14a8.47 8.47 0 0 0-4.095 1.054A8.536 8.536 0 0 0 7.57 7.57c-.742.666-1.748 1.054-2.856 1.054a1.328 1.328 0 0 1-1.334-1.325c0-.73.59-1.325 1.334-1.325h1.168a.715.715 0 0 0 .713-.711.715.715 0 0 0-.713-.711H4.714C3.217 4.552 2 5.766 2 7.26c0 1.494 1.217 2.708 2.714 2.708h2.856c1.108 0 2.114.388 2.856 1.053A8.535 8.535 0 0 0 12.8 12.92a8.47 8.47 0 0 0 4.095 1.054h.476v5.333c0 .393-.32.711-.714.711h-1.428a.715.715 0 0 0-.714.71.715.715 0 0 0 .714.711h1.428c1.18 0 2.143-.96 2.143-2.133v-5.333h.476a3.99 3.99 0 0 0 2.62-1.025A4.015 4.015 0 0 0 22 10.04a4.015 4.015 0 0 0-1.095-2.805A3.99 3.99 0 0 0 18.286 6.21h-.476V4.688zm.476 11.2h-.476v-4h.476v4z" />
@@ -74,9 +74,35 @@ export default function Navbar({ settings }: { settings?: any }) {
         </div>
       </div>
 
-      <header
-        className={`sticky top-0 w-full z-50 transition-all duration-300 ease-in-out bg-white ${
-          isScrolled ? "shadow-md py-2" : "py-4 border-b border-gray-100"
+      {/* Sticky Wrapper for Phone Layer + Main Header */}
+      <div className={`sticky top-0 w-full z-50 transition-all duration-300 ease-in-out flex flex-col ${isScrolled ? "shadow-md" : ""}`}>
+        
+        {/* Contact/Phone Numbers Layer */}
+        <div className="bg-gray-100 border-b border-gray-200 py-1.5 md:py-2 px-2 overflow-x-auto hide-scrollbar">
+          <div className="flex items-center justify-center gap-4 sm:gap-6 md:gap-10 min-w-max mx-auto">
+            <a href="tel:+919042849344" className="flex items-center gap-1.5 sm:gap-2 group text-gray-800 hover:text-[#dc2626] transition-colors">
+              <div className="bg-[#dc2626]/10 p-1 md:p-1.5 rounded-full group-hover:bg-[#dc2626] transition-colors">
+                <PhoneCall className="w-3 h-3 md:w-4 md:h-4 text-[#dc2626] group-hover:text-white animate-[wiggle_2s_infinite]" />
+              </div>
+              <span className="text-[10px] sm:text-xs md:text-sm font-bold tracking-wide">+91 90428 49344</span>
+            </a>
+            <a href="tel:+916383511818" className="flex items-center gap-1.5 sm:gap-2 group text-gray-800 hover:text-[#dc2626] transition-colors">
+              <div className="bg-[#dc2626]/10 p-1 md:p-1.5 rounded-full group-hover:bg-[#dc2626] transition-colors">
+                <PhoneCall className="w-3 h-3 md:w-4 md:h-4 text-[#dc2626] group-hover:text-white animate-[wiggle_2s_infinite]" />
+              </div>
+              <span className="text-[10px] sm:text-xs md:text-sm font-bold tracking-wide">+91 63835 11818</span>
+            </a>
+            <a href="tel:+919344745092" className="flex items-center gap-1.5 sm:gap-2 group text-gray-800 hover:text-[#dc2626] transition-colors">
+              <div className="bg-[#dc2626]/10 p-1 md:p-1.5 rounded-full group-hover:bg-[#dc2626] transition-colors">
+                <PhoneCall className="w-3 h-3 md:w-4 md:h-4 text-[#dc2626] group-hover:text-white animate-[wiggle_2s_infinite]" />
+              </div>
+              <span className="text-[10px] sm:text-xs md:text-sm font-bold tracking-wide">+91 93447 45092</span>
+            </a>
+          </div>
+        </div>
+
+      <header className={`w-full bg-white transition-all duration-300 ease-in-out ${
+          isScrolled ? "shadow-md py-1" : "py-1.5 border-b border-gray-100"
         }`}
       >
         <div className="w-full mx-auto px-1 sm:px-4 md:px-8 max-w-7xl">
@@ -84,9 +110,9 @@ export default function Navbar({ settings }: { settings?: any }) {
             
             {/* Logo */}
             <Link href="/" className="flex items-center group shrink-0">
-              <div className="relative h-12 w-40 md:h-14 md:w-48 transition-transform duration-300">
+              <div className="relative h-9 w-40 md:h-12 md:w-56 transition-transform duration-300">
                 <Image 
-                  src={settings?.logoUrl || "/images/sky-crackers-logo.png"} 
+                  src="/images/sky-crackers-logo.png" 
                   alt={settings?.siteName || "Sky Crackers Logo"} 
                   fill 
                   className="object-contain" 
@@ -118,11 +144,7 @@ export default function Navbar({ settings }: { settings?: any }) {
             {/* Right Actions */}
             <div className="flex items-center gap-3 md:gap-4 shrink-0">
               
-              {/* Phone Pill - like screenshot */}
-              <a href={`tel:${settings?.primaryPhone || "+919042849344"}`} className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full border border-gray-200 text-sm font-bold text-gray-800 hover:border-primary transition-colors">
-                <PhoneCall className="h-4 w-4 text-red-500"/>
-                {settings?.primaryPhone || "+91 9042849344"}
-              </a>
+              
 
               {/* Quick Order Button */}
               <Link href="/shop" className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-red-500 hover:bg-red-600 text-white text-sm font-bold transition-colors shadow-sm">
@@ -172,8 +194,8 @@ export default function Navbar({ settings }: { settings?: any }) {
               </Link>
             ))}
             <div className="pt-4 flex flex-col gap-3">
-              <a href={`tel:${settings?.primaryPhone || "+919786683878"}`} className="flex items-center justify-center gap-2 py-2 rounded-lg bg-gray-50 text-gray-800 font-bold text-sm">
-                <PhoneCall className="h-4 w-4 text-red-500"/> Call {settings?.primaryPhone || "+91 9786683878"}
+              <a href={`tel:${settings?.primaryPhone || "+916383511818"}`} className="flex items-center justify-center gap-2 py-2 rounded-lg bg-gray-50 text-gray-800 font-bold text-sm">
+                <PhoneCall className="h-4 w-4 text-red-500"/> Call {settings?.primaryPhone || "+91 6383511818"}
               </a>
               <Link href="/shop" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-center gap-2 py-2 rounded-lg bg-red-500 text-white font-bold text-sm">
                 <ShoppingCart className="h-4 w-4" /> Quick Order
@@ -182,7 +204,7 @@ export default function Navbar({ settings }: { settings?: any }) {
           </div>
         </div>
       </header>
-      
+      </div>
       <CartDrawer isOpen={cartOpen} onClose={() => setCartOpen(false)} />
     </>
   );

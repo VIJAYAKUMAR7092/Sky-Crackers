@@ -13,11 +13,11 @@
   --popover: #FFFFFF;
   --popover-foreground: #1A1D23;
   
-  --primary: #FF4500; /* Festive Green */
+  --primary: #DF260C; /* Festive Green */
   --primary-foreground: #FFFFFF;
   
   --secondary: #FDE047; /* Festive Yellow */
-  --secondary-foreground: #B45309; /* Amber/Orange text */
+  --secondary-foreground: #DC2626; /* Amber/Orange text */
   
   --muted: #F3F4F6;
   --muted-foreground: #6B7280;
@@ -43,7 +43,7 @@
   --card-foreground: #F9FAFB;
   --popover: #13161C;
   --popover-foreground: #F9FAFB;
-  --primary: #FF4500;
+  --primary: #DF260C;
   --primary-foreground: #FFFFFF;
   --secondary: #1F242F;
   --secondary-foreground: #E5E7EB;

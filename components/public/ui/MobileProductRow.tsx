@@ -71,11 +71,11 @@ export default function MobileProductRow({ product }: MobileProductRowProps) {
         {/* PRICE (w-14) */}
         <div className="w-[52px] shrink-0 flex flex-col items-center justify-center text-center">
           <span className="font-extrabold text-[11px] text-gray-900 leading-none">
-            {Number(product.sellingPrice).toFixed(2)}
+            ₹{Number(product.sellingPrice).toFixed(2)}
           </span>
           {Number(product.mrp) > Number(product.sellingPrice) && (
             <span className="text-[8px] text-red-500 line-through mt-0.5 font-medium">
-              {Number(product.mrp).toFixed(2)}
+              ₹{Number(product.mrp).toFixed(2)}
             </span>
           )}
         </div>

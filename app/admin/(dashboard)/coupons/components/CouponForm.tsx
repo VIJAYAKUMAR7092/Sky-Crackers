@@ -152,7 +152,7 @@ export function CouponForm({ initialData }: CouponFormProps) {
             className="w-full border rounded-lg px-3 py-2 border-input bg-card"
           >
             <option value="PERCENTAGE">Percentage (%)</option>
-            <option value="FIXED">Fixed Amount (,1)</option>
+            <option value="FIXED">Fixed Amount (₹)</option>
           </select>
         </div>
 

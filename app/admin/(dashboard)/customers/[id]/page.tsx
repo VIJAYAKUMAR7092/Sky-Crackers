@@ -48,11 +48,11 @@ export default async function CustomerDetailsPage({
         </div>
         <div className="bg-card border rounded-xl p-4 shadow-sm">
           <div className="text-muted-foreground text-sm mb-1">Total Spending</div>
-          <div className="text-2xl font-bold">`,1{Number(customer.totalSpending).toFixed(2)}</div>
+          <div className="text-2xl font-bold">`₹{Number(customer.totalSpending).toFixed(2)}</div>
         </div>
         <div className="bg-card border rounded-xl p-4 shadow-sm">
           <div className="text-muted-foreground text-sm mb-1">Avg Order Value</div>
-          <div className="text-2xl font-bold">`,1{Number(customer.averageOrderValue).toFixed(2)}</div>
+          <div className="text-2xl font-bold">`₹{Number(customer.averageOrderValue).toFixed(2)}</div>
         </div>
         <div className="bg-card border rounded-xl p-4 shadow-sm">
           <div className="text-muted-foreground text-sm mb-1">Last Order Date</div>
@@ -150,7 +150,7 @@ export default async function CustomerDetailsPage({
                             {order.paymentStatus}
                           </Badge>
                         </td>
-                        <td className="px-4 py-3 text-right font-medium">`,1{Number(order.finalTotal).toFixed(2)}</td>
+                        <td className="px-4 py-3 text-right font-medium">`₹{Number(order.finalTotal).toFixed(2)}</td>
                       </tr>
                     ))}
                   </tbody>

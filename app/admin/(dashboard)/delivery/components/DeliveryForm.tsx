@@ -151,7 +151,7 @@ export function DeliveryForm({ initialData }: DeliveryFormProps) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Delivery Charge (,1) *</label>
+          <label className="block text-sm font-medium mb-1">Delivery Charge (₹) *</label>
           <input
             type="number"
             name="deliveryCharge"
@@ -165,7 +165,7 @@ export function DeliveryForm({ initialData }: DeliveryFormProps) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Free Delivery Above (,1)</label>
+          <label className="block text-sm font-medium mb-1">Free Delivery Above (₹)</label>
           <input
             type="number"
             name="freeDeliveryThreshold"

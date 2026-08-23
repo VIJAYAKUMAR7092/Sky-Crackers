@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Sparkles, ArrowRight } from "lucide-react";
+import { ArrowRight, Zap } from "lucide-react";
 
 export default function HeroSlider({ banners }: { banners: any[] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -18,59 +18,68 @@ export default function HeroSlider({ banners }: { banners: any[] }) {
 
   if (!banners || banners.length === 0) return null;
 
+  // Dynamic animations for each slide WITHOUT scaling (to prevent edge cropping)
+  const getAnimationClasses = (index: number, isActive: boolean) => {
+    const type = index % 4;
+    
+    // Base active state (no scale)
+    if (isActive) {
+      return "opacity-100 z-10 translate-x-0 translate-y-0 blur-0 rotate-0";
+    }
+    
+    // Out/Inactive states (subtle slides to avoid cropping)
+    if (type === 0) return "opacity-0 z-0 -translate-x-12"; // Slide left
+    if (type === 1) return "opacity-0 z-0 translate-x-12"; // Slide right
+    if (type === 2) return "opacity-0 z-0 translate-y-12"; // Slide down
+    if (type === 3) return "opacity-0 z-0 -translate-y-12"; // Slide up
+    
+    return "opacity-0 z-0";
+  };
+
   return (
-    <>
-      <div className="absolute inset-0 z-0 overflow-hidden bg-black">
-        {banners.map((banner, index) => (
-          <div
-            key={banner.id}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
-            }`}
-          >
-            <Image
-              src={banner.image}
-              alt={banner.title || "Hero"}
-              fill
-              priority={index === 0}
-              quality={100}
-              className={`object-cover transition-transform ease-linear ${
-                index === currentIndex ? "scale-105 duration-[10000ms]" : "scale-100 duration-[0ms]"
-              }`}
-            />
-          </div>
-        ))}
+    <div className="relative w-full overflow-hidden bg-white">
+      {/* Container - Increased height slightly to prevent vertical cropping on desktop */}
+      {/* Mobile remains 220px/300px as requested */}
+      <div className="relative w-full h-[220px] sm:h-[300px] md:h-[400px] lg:h-[500px] xl:h-[550px] overflow-hidden">
+        {banners.map((banner, index) => {
+          const isActive = index === currentIndex;
+          return (
+            <div
+              key={banner.id || index}
+              className={`absolute inset-0 transition-all duration-1000 ease-in-out ${getAnimationClasses(index, isActive)}`}
+            >
+              {/* object-cover ensures the image fills the width completely without black bars */}
+              <Image
+                src={banner.image}
+                alt={banner.title || "Sky Crackers Festival Banner"}
+                fill
+                priority={index === 0}
+                quality={100}
+                className="object-cover w-full h-full"
+              />
+            </div>
+          );
+        })}
       </div>
+
+      {/* SHOP NOW Animated Button - Kept very small */}
+      <Link 
+        href="/shop" 
+        className="absolute bottom-4 sm:bottom-6 lg:bottom-8 left-1/2 -translate-x-1/2 z-30 group flex items-center justify-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-6 sm:py-2.5 bg-[linear-gradient(45deg,#ff0000,#ff7300,#fffb00,#48ff00,#00ffd5,#002bff,#7a00ff,#ff00c8,#ff0000)] bg-[length:400%] hover:bg-right hover:scale-105 text-white rounded-full font-black text-[9px] sm:text-xs tracking-widest uppercase transition-all duration-500 shadow-[0_0_20px_rgba(255,215,0,0.6)] hover:shadow-[0_0_35px_rgba(255,215,0,0.9)] border-2 border-white/50 active:scale-95 animate-[bgSpin_4s_linear_infinite]"
+      >
+        <Zap className="w-3 h-3 sm:w-4 sm:h-4 animate-bounce text-yellow-200 fill-yellow-200" />
+        <span className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Shop Now</span>
+        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-2 transition-transform duration-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" />
+      </Link>
       
-      <div className="absolute inset-0 bg-black/30 z-10" />
-      
-      <div className="container relative z-20 mx-auto px-2 sm:px-4 text-center mt-4 sm:mt-6 pb-8 sm:pb-16 w-full max-w-full overflow-hidden">
-        <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/90 text-primary text-xs md:text-sm font-extrabold uppercase mb-6 shadow-lg animate-in fade-in slide-in-from-bottom-4 duration-700">
-          <Sparkles className="h-4 w-4 text-secondary-foreground" />
-          100% Sivakasi Fireworks
-        </div>
-        
-        <div className="animate-in zoom-in-95 fade-in duration-700">
-          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl px-2 font-extrabold text-white tracking-tight mb-6 drop-shadow-xl leading-tight">
-            {banners[currentIndex]?.title ? (
-               <span dangerouslySetInnerHTML={{ __html: banners[currentIndex].title.replace(/\n/g, "<br/>") }} />
-            ) : (
-              <>Celebrate Every Festival<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-500 to-yellow-600 drop-shadow-lg inline-block animate-pulse">With Sky Crackers</span></>
-            )}
-          </h1>
-          
-          <p className="text-sm sm:text-base md:text-xl lg:text-2xl px-4 text-white/95 font-medium mb-10 max-w-2xl mx-auto drop-shadow-md">
-            {banners[currentIndex]?.subtitle || "Buy premium quality firecrackers online direct from Sivakasi at wholesale prices."}
-          </p>
-          
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
-            <Link href={banners[currentIndex]?.buttonLink || "/shop"} className="w-[85%] sm:w-auto px-6 py-3.5 md:px-8 md:py-4 bg-primary text-white text-base md:text-lg font-bold rounded-full hover:bg-orange-700 hover:shadow-xl hover:shadow-primary/30 transition-all hover:-translate-y-1 flex items-center justify-center">
-              {banners[currentIndex]?.buttonText || "Shop Now - 90% Off"}
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </div>
-        </div>
-      </div>
-    </>
+      {/* Keyframes for button background spin */}
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes bgSpin {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+      `}} />
+    </div>
   );
 }
