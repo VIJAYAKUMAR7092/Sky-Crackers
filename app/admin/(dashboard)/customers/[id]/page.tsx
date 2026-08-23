@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import React from 'react';
 import { PageHeader } from '@/components/admin/layout/PageHeader';
 import { requireAdmin } from '@/lib/auth/server-auth';
@@ -27,7 +28,7 @@ export default async function CustomerDetailsPage({
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-border pb-5">
         <PageHeader
           title={customer.fullName}
-          description={`Customer since ${new Date(customer.createdAt).toLocaleDateString()}`}
+          description={`Customer since ${format(new Date(customer.createdAt), 'dd/MM/yyyy')}`}
           breadcrumbs={[
             { label: 'Admin', href: '/admin' },
             { label: 'Customers', href: '/admin/customers' },
@@ -57,7 +58,7 @@ export default async function CustomerDetailsPage({
         <div className="bg-card border rounded-xl p-4 shadow-sm">
           <div className="text-muted-foreground text-sm mb-1">Last Order Date</div>
           <div className="text-lg font-bold mt-1">
-            {customer.lastOrderDate ? new Date(customer.lastOrderDate).toLocaleDateString() : 'Never'}
+            {customer.lastOrderDate ? format(new Date(customer.lastOrderDate), 'dd/MM/yyyy') : 'Never'}
           </div>
         </div>
       </div>
@@ -139,7 +140,7 @@ export default async function CustomerDetailsPage({
                             {order.orderReference}
                           </Link>
                         </td>
-                        <td className="px-4 py-3">{new Date(order.createdAt).toLocaleDateString()}</td>
+                        <td className="px-4 py-3">{format(new Date(order.createdAt), 'dd/MM/yyyy')}</td>
                         <td className="px-4 py-3">
                           <Badge variant={order.status === 'DELIVERED' ? 'success' : order.status === 'CANCELLED' ? 'destructive' : 'default'}>
                             {order.status}

@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { useRouter } from 'next/navigation';
+import OrderFlowchart from './OrderFlowchart';
+
 
 interface ReportClientProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -95,6 +97,7 @@ export default function ReportClient({ initialData, summaryData, currentPreset }
       <div className="grid grid-cols-1 gap-6">
         {activeTab === 'overview' && (
           <>
+            <OrderFlowchart />
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               <Card className="border-border/60 shadow-lg bg-card/50 backdrop-blur-sm hover-lift fade-in-up">
                 <CardHeader className="pb-2"><CardTitle className="text-sm text-muted-foreground font-semibold">Sales Today</CardTitle></CardHeader>
@@ -159,7 +162,7 @@ export default function ReportClient({ initialData, summaryData, currentPreset }
               <CardContent>
                 <ul className="space-y-3">
                   {initialData.products.bestSelling.map((p: { productId: string, productName: string, _sum: { quantity: number } }, i: number) => (
-                    <li key={p.productId} className="flex justify-between border-b border-border pb-3 last:border-0 last:pb-0">
+                    <li key={p.productId || `best-selling-${i}`} className="flex justify-between border-b border-border pb-3 last:border-0 last:pb-0">
                       <span className="text-foreground font-medium">{i+1}. {p.productName}</span>
                       <span className="font-semibold text-primary bg-primary/10 px-2 py-0.5 rounded-md text-sm">{p._sum.quantity} units</span>
                     </li>

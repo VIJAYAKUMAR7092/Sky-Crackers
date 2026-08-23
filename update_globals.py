@@ -1,12 +1,18 @@
 import os
 
-with open('app/globals.css', 'r', encoding='utf-8') as f:
+file_path = 'app/globals.css'
+with open(file_path, 'r', encoding='utf-8') as f:
     content = f.read()
 
-# Change --primary
-content = content.replace('--primary: #FF4500;', '--primary: #DF260C;')
-# Change --secondary-foreground (which was amber/orange text)
-content = content.replace('--secondary-foreground: #B45309;', '--secondary-foreground: #DC2626;')
+new_keyframes = """
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(10px); filter: blur(4px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0px); }
+}
+"""
 
-with open('app/globals.css', 'w', encoding='utf-8') as f:
+if "@keyframes pageFadeIn" not in content:
+    content += new_keyframes
+
+with open(file_path, 'w', encoding='utf-8') as f:
     f.write(content)

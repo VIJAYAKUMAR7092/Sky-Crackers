@@ -2,7 +2,7 @@ import { NextRequest } from 'next/server';
 import { requireAdmin } from '@/lib/auth/server-auth';
 import { successResponse } from '@/lib/utils/api-response';
 import { withErrorHandler } from '@/lib/utils/error-handler';
-import { getOrderById, updateOrderStatus } from '@/lib/services/orders/order.service';
+import { getOrderById, updateOrderStatus, deleteOrder } from '@/lib/services/orders/order.service';
 
 export async function GET(
   request: NextRequest,
@@ -28,5 +28,19 @@ export async function PATCH(
     const body = await request.json();
     const order = await updateOrderStatus(resolvedParams.id, body);
     return successResponse(order);
+  });
+};
+
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const resolvedParams = await params;
+  
+  return withErrorHandler(async () => {
+    await requireAdmin();
+    const result = await deleteOrder(resolvedParams.id);
+    return successResponse(result);
   });
 };

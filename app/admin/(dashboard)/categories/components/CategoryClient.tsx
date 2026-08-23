@@ -10,6 +10,8 @@ import { Button } from '@/components/ui/Button';
 import { Edit, Trash2, ImageIcon } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { SortCategoriesModal } from './SortCategoriesModal';
+import { ArrowUpDown } from 'lucide-react';
 
 interface CategoryClientProps {
   initialData: Record<string, unknown>[];
@@ -21,6 +23,7 @@ export function CategoryClient({ initialData, searchParams }: CategoryClientProp
   const router = useRouter();
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isSortModalOpen, setIsSortModalOpen] = useState(false);
 
   const statusFilters = [
     { label: 'All', value: 'all' },
@@ -125,18 +128,24 @@ export function CategoryClient({ initialData, searchParams }: CategoryClientProp
 
   return (
     <div className="space-y-6">
-      <FilterBar
-        searchPlaceholder="Search categories..."
-        onSearch={(val: string) => handleFilterChange('search', val)}
-        filters={[
-          {
-            name: 'Status',
-            options: statusFilters,
-            value: searchParams.active || 'all',
-            onChange: (val: string) => handleFilterChange('active', val),
-          },
-        ]}
-      />
+      <div className="flex justify-between items-center">
+        <FilterBar
+          searchPlaceholder="Search categories..."
+          onSearch={(val: string) => handleFilterChange('search', val)}
+          filters={[
+            {
+              name: 'Status',
+              options: statusFilters,
+              value: searchParams.active || 'all',
+              onChange: (val: string) => handleFilterChange('active', val),
+            },
+          ]}
+        />
+        <Button onClick={() => setIsSortModalOpen(true)} variant="outline" className="ml-4 flex items-center gap-2">
+          <ArrowUpDown className="w-4 h-4" />
+          Reorder
+        </Button>
+      </div>
 
       <div className="bg-card border rounded-xl overflow-hidden shadow-sm">
         <DataTable columns={columns} data={initialData} keyExtractor={(item: any) => item.id as string} />
@@ -151,6 +160,12 @@ export function CategoryClient({ initialData, searchParams }: CategoryClientProp
         onConfirm={handleDelete}
         onClose={() => setDeleteId(null)}
         isLoading={isDeleting}
+      />
+
+      <SortCategoriesModal 
+        isOpen={isSortModalOpen} 
+        onClose={() => setIsSortModalOpen(false)} 
+        onSaved={() => router.refresh()} 
       />
     </div>
   );

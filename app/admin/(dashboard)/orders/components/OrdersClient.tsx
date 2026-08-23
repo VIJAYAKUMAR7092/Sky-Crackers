@@ -6,8 +6,12 @@ import { DataTable, ColumnDef } from '@/components/ui/DataTable';
 import { FilterBar } from '@/components/ui/FilterBar';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
-import { Eye } from 'lucide-react';
+import { Eye, Trash2 } from 'lucide-react';
+import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
+import { useState } from 'react';
+
 import Link from 'next/link';
+import { format } from 'date-fns';
 
 interface OrdersClientProps {
   initialData: Record<string, unknown>[];
@@ -17,6 +21,28 @@ interface OrdersClientProps {
 
 export function OrdersClient({ initialData, searchParams }: OrdersClientProps) {
   const router = useRouter();
+  const [orderToDelete, setOrderToDelete] = useState<string | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const handleDelete = async () => {
+    if (!orderToDelete) return;
+    setIsDeleting(true);
+    try {
+      const res = await fetch(`/api/admin/orders/${orderToDelete}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to delete order");
+      alert("Order deleted successfully");
+      router.refresh();
+    } catch (err: any) {
+      alert(err.message);
+    } finally {
+      setIsDeleting(false);
+      setOrderToDelete(null);
+    }
+  };
+
 
   const statusFilters = [
     { label: 'All', value: 'all' },
@@ -48,7 +74,7 @@ export function OrdersClient({ initialData, searchParams }: OrdersClientProps) {
     {
       header: 'Date',
       accessorKey: 'createdAt',
-      cell: (order: any) => new Date(order.createdAt).toLocaleDateString(),
+      cell: (order: any) => format(new Date(order.createdAt), 'dd/MM/yyyy'),
     },
     {
       header: 'Customer',
@@ -140,6 +166,15 @@ export function OrdersClient({ initialData, searchParams }: OrdersClientProps) {
       <div className="bg-card border rounded-xl overflow-hidden shadow-sm">
         <DataTable columns={columns} data={initialData} keyExtractor={(item: any) => item.id as string} />
       </div>
+      <ConfirmDialog
+        isOpen={!!orderToDelete}
+        onClose={() => setOrderToDelete(null)}
+        onConfirm={handleDelete}
+        title="Delete Order"
+        description="Are you sure you want to delete this order? This action cannot be undone."
+        confirmText={isDeleting ? "Deleting..." : "Delete"}
+        variant="danger"
+      />
     </div>
   );
 }

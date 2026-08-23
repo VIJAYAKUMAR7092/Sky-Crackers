@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import React from 'react';
 import { PageHeader } from '@/components/admin/layout/PageHeader';
 import { requireAdmin } from '@/lib/auth/server-auth';
@@ -29,7 +30,7 @@ export default async function OrderDetailsPage({
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-border pb-5">
         <PageHeader
           title={`Order ${order.orderReference}`}
-          description={`Placed on ${new Date(order.createdAt).toLocaleDateString()} at ${new Date(order.createdAt).toLocaleTimeString()}`}
+          description={`Placed on ${format(new Date(order.createdAt), 'dd/MM/yyyy')} at ${new Date(order.createdAt).toLocaleTimeString()}`}
           breadcrumbs={[
             { label: 'Admin', href: '/admin' },
             { label: 'Orders', href: '/admin/orders' },

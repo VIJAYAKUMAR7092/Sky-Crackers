@@ -4,6 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "../../../components/ui
 import { getDashboardStats, getRecentOrders, getInventoryAlerts } from "../../../lib/services/dashboard/dashboard.service"
 import { IndianRupee, Package, ShoppingCart, Users, AlertCircle, Clock, TrendingUp, Ticket, Truck, MapPin, Briefcase, BarChart, FolderTree, ArrowRight, Activity, Bell } from "lucide-react"
 import Link from "next/link"
+import SalesOverviewChart from '../../../components/admin/dashboard/SalesOverviewChart';
+
 
 export const metadata = {
   title: "Dashboard | Sky Crackers Admin",
@@ -110,15 +112,9 @@ export default async function AdminDashboardPage() {
               Sales Overview
             </CardTitle>
           </CardHeader>
-          <CardContent className="flex-1">
-            <div className="h-full min-h-[300px] w-full flex flex-col items-center justify-center border border-dashed border-border/60 rounded-2xl bg-gradient-to-br from-secondary/5 to-secondary/10 hover:from-secondary/10 hover:to-secondary/20 transition-all duration-500">
-              <div className="p-4 bg-background/50 rounded-full mb-4 shadow-sm border border-border/50">
-                <BarChart className="h-8 w-8 text-primary/60" />
-              </div>
-              <span className="text-sm font-semibold text-foreground">Premium Chart Area</span>
-              <span className="text-xs text-muted-foreground mt-1">Data visualization component will mount here</span>
-            </div>
-          </CardContent>
+          <CardContent className="flex-1 overflow-hidden p-4 sm:p-6">
+              <SalesOverviewChart />
+            </CardContent>
         </Card>
 
         {/* Quick Actions */}

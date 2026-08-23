@@ -1,4 +1,5 @@
 'use client';
+import { format } from 'date-fns';
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
@@ -51,7 +52,7 @@ export function CustomersClient({ initialData, searchParams }: CustomersClientPr
       cell: (item: any) => (
         <div>
           <div className="font-medium text-foreground">{item.fullName}</div>
-          <div className="text-xs text-muted-foreground">Joined {new Date(item.createdAt).toLocaleDateString()}</div>
+          <div className="text-xs text-muted-foreground">Joined {format(new Date(item.createdAt), 'dd/MM/yyyy')}</div>
         </div>
       ),
     },

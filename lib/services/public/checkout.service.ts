@@ -40,7 +40,9 @@ export async function processManualCheckout(data: CheckoutInput) {
   // Try to calculate shipping to validate deliverability
   let subtotal = 0;
   data.items.forEach(item => {
-    subtotal += item.price * item.quantity;
+    const price = Number(item.price) || 0;
+    const quantity = Number(item.quantity) || 0;
+    subtotal += price * quantity;
   });
 
   let deliveryCharge = 300; // default safe fallback
@@ -72,6 +74,8 @@ export async function processManualCheckout(data: CheckoutInput) {
           } else {
             discountAmount = Number(coupon.discountValue);
           }
+          // Ensure discount amount is not negative and doesn't exceed subtotal
+          discountAmount = Math.max(0, Math.min(discountAmount, subtotal));
           couponId = coupon.id;
           
           if (coupon.usageLimit && coupon.usedCount >= coupon.usageLimit) {
@@ -87,7 +91,7 @@ export async function processManualCheckout(data: CheckoutInput) {
       }
     }
 
-    const finalTotal = subtotal - discountAmount + deliveryCharge;
+    const finalTotal = Math.max(0, subtotal - discountAmount + deliveryCharge);
 
     // 3. Upsert Customer
     const customer = await tx.customer.upsert({
@@ -143,16 +147,24 @@ export async function processManualCheckout(data: CheckoutInput) {
         paymentStatus: "PENDING",
         paymentMethod: "CASH_ON_DELIVERY",
         items: {
-          create: data.items.map(item => ({
-            productId: validProductIds.includes(item.productId) ? item.productId : null,
-            productName: item.productName,
-            packInfo: item.packInfo,
-            quantity: item.quantity,
-            unitPrice: item.price,
-            mrp: item.mrp,
-            discountAmount: (item.mrp - item.price) * item.quantity,
-            totalAmount: item.price * item.quantity
-          }))
+          create: data.items.map(item => {
+            const quantity = Math.max(1, Number(item.quantity) || 1);
+            const unitPrice = Math.max(0, Number(item.price) || 0);
+            const mrp = Math.max(0, Number(item.mrp) || 0);
+            const discountAmount = Math.max(0, (mrp - unitPrice) * quantity);
+            const totalAmount = Math.max(0, unitPrice * quantity);
+            
+            return {
+              productId: validProductIds.includes(item.productId) ? item.productId : null,
+              productName: item.productName || 'Unknown Product',
+              packInfo: item.packInfo,
+              quantity,
+              unitPrice,
+              mrp,
+              discountAmount,
+              totalAmount
+            };
+          })
         }
       },
       include: {

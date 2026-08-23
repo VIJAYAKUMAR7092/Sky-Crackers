@@ -1,4 +1,5 @@
 'use client';
+import { format } from 'date-fns';
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -115,7 +116,7 @@ export function CouponsClient({ initialData, searchParams }: CouponsClientProps)
         const isExpired = new Date(item.expiryDate) < new Date();
         return (
           <span className={`text-sm ${isExpired ? 'text-red-500 font-medium' : 'text-slate-600'}`}>
-            {new Date(item.expiryDate).toLocaleDateString()}
+            {format(new Date(item.expiryDate), 'dd/MM/yyyy')}
           </span>
         );
       },

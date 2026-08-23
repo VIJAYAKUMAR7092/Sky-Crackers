@@ -11,12 +11,13 @@ export const metadata: Metadata = {
   title: 'Edit Category | Sky Crackers Admin',
 };
 
-export default async function EditCategoryPage({ params }: { params: { id: string } }) {
+export default async function EditCategoryPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params;
   await requireAdmin();
 
   let category;
   try {
-    category = await getCategoryById(params.id);
+    category = await getCategoryById(resolvedParams.id);
   } catch (error) {
     notFound();
   }

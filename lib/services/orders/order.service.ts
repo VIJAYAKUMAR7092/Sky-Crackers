@@ -9,7 +9,7 @@ export async function getAdminOrders(queryParams: unknown) {
   const { search, status, paymentStatus, page, limit, sortBy, sortOrder } = filters;
 
   const skip = (page - 1) * limit;
-  const where: Prisma.OrderWhereInput = {};
+  const where: Prisma.OrderWhereInput = { isDeleted: false };
 
   if (search) {
     where.OR = [
@@ -98,4 +98,22 @@ export async function updateOrderStatus(id: string, data: unknown) {
   });
 
   return serializeDecimals(updatedOrder);
+}
+
+
+export async function deleteOrder(id: string) {
+  const order = await prisma.order.findUnique({
+    where: { id },
+  });
+
+  if (!order) {
+    throw new AppError('Order not found', 'NOT_FOUND', 404);
+  }
+
+  await prisma.order.update({
+    where: { id },
+    data: { isDeleted: true },
+  });
+
+  return { success: true, message: 'Order deleted successfully' };
 }

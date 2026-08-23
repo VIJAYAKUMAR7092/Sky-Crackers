@@ -226,6 +226,7 @@ model Order {
   paymentStatus PaymentStatus @default(PENDING)
   paymentMethod String?
 
+  isDeleted Boolean @default(false)
   notes String? @db.Text
 
   createdAt DateTime @default(now())
