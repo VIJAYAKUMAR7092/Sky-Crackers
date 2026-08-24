@@ -117,30 +117,37 @@ export default async function HomePage() {
       {/* 1. HERO SECTION */}
       <section className="relative w-full overflow-hidden bg-[#050505]">
         <HeroSlider banners={displayBanners} />
-      </section>
-
-
-            {/* 2. PREMIUM SHOP NOW CTA */}
+      </section>            {/* 2. PREMIUM SHOP NOW CTA */}
       <section className="w-full py-8 sm:py-12 flex justify-center items-center bg-white relative z-10">
-        <div className="animate-[floatMobile_4s_ease-in-out_infinite]">
+        <div className="animate-[luxuryFloat_6s_ease-in-out_infinite]">
           <Link 
             href="/shop"
-            className="group relative inline-flex items-center justify-center gap-2 px-6 py-2.5 sm:px-8 sm:py-3 bg-gradient-to-r from-[#dca42b] via-[#fce074] to-[#dca42b] rounded-full font-bold text-[11px] sm:text-xs text-gray-900 shadow-[0_0_15px_rgba(220,164,43,0.4)] hover:shadow-[0_8px_25px_rgba(220,164,43,0.7)] transition-all duration-500 hover:-translate-y-1 hover:scale-105 active:scale-95 border border-[#fef1a7] overflow-hidden"
+            className="group relative inline-flex items-center justify-center gap-2 px-6 py-2.5 sm:px-8 sm:py-3 bg-gradient-to-r from-[#dca42b] via-[#fce074] to-[#dca42b] rounded-full font-bold text-[11px] sm:text-xs text-gray-900 shadow-[0_4px_15px_rgba(220,164,43,0.3)] hover:shadow-[0_8px_25px_rgba(220,164,43,0.5)] transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] border border-[#fef1a7] overflow-hidden"
           >
-            {/* Soft continuous glow ring */}
-            <span className="absolute inset-0 rounded-full ring-[1.5px] ring-[#fce074]/60 animate-ping opacity-40"></span>
+            {/* Gentle Red Glow */}
+            <span className="absolute inset-0 rounded-full shadow-[0_0_15px_rgba(225,29,72,0.6)] animate-[luxuryGlow_4s_ease-in-out_infinite] pointer-events-none"></span>
             
-            {/* Shimmer Effect */}
-            <span className="absolute inset-0 -translate-x-[150%] animate-[shimmer_1.5s_infinite_linear] bg-gradient-to-r from-transparent via-white/60 to-transparent skew-x-12 z-0"></span>
+            {/* Shine Sweep */}
+            <span className="absolute inset-0 -translate-x-[200%] animate-[luxuryShine_5s_infinite_linear] bg-gradient-to-r from-transparent via-white/70 to-transparent skew-x-12 z-0 pointer-events-none w-1/2"></span>
 
             <span className="tracking-[0.18em] uppercase relative z-10 drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">Shop Now</span>
-            <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1.5 transition-transform duration-300 relative z-10" />
+            <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform duration-300 relative z-10" />
           </Link>
         </div>
         <style dangerouslySetInnerHTML={{__html: `
-          @keyframes shimmer {
-            0% { transform: translateX(-150%) skewX(12deg); }
-            100% { transform: translateX(150%) skewX(12deg); }
+          @keyframes luxuryFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+          }
+          @keyframes luxuryGlow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+          }
+          @keyframes luxuryShine {
+            0% { transform: translateX(-200%) skewX(25deg); opacity: 0; }
+            5%, 15% { opacity: 1; }
+            20% { transform: translateX(200%) skewX(25deg); opacity: 0; }
+            100% { transform: translateX(200%) skewX(25deg); opacity: 0; }
           }
         `}} />
       </section>
@@ -404,7 +411,7 @@ export default async function HomePage() {
                 </div>
                 <h3 className="relative z-10 text-xl font-black text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">Call Us</h3>
                 <p className="relative z-10 text-gray-500 mb-4 font-medium">We're available 24/7 for your queries.</p>
-                <a href={`tel:${websiteSettings?.primaryPhone || "+916383511818"}`} className="relative z-10 text-lg font-bold text-primary mt-auto group-hover:tracking-wider transition-all">{websiteSettings?.primaryPhone || "+91 63835 11818"}</a>
+                <a href={`tel:${websiteSettings?.primaryPhone || "+919042849344"}`} className="relative z-10 text-lg font-bold text-primary mt-auto group-hover:tracking-wider transition-all">{websiteSettings?.primaryPhone || "+91 90428 49344"}</a>
               </div>
             </ScrollReveal>
 
@@ -435,13 +442,13 @@ export default async function HomePage() {
           {/* MOBILE CONTACT VIEW */}
           <div className="grid md:hidden grid-cols-2 gap-4 max-w-md mx-auto">
             <ScrollReveal animation="scale-up" delay={100}>
-              <a href="tel:+916383511818" className="group bg-gradient-to-b from-white to-blue-50/50 rounded-2xl p-4 text-center shadow-[0_8px_20px_-5px_rgba(59,130,246,0.4)] border border-blue-200 active:scale-95 transition-all duration-300 flex flex-col items-center justify-center aspect-square h-full relative overflow-hidden">
+              <a href="tel:+919042849344" className="group bg-gradient-to-b from-white to-blue-50/50 rounded-2xl p-4 text-center shadow-[0_8px_20px_-5px_rgba(59,130,246,0.4)] border border-blue-200 active:scale-95 transition-all duration-300 flex flex-col items-center justify-center aspect-square h-full relative overflow-hidden">
                 <div className="absolute inset-0 bg-blue-500 opacity-0 group-active:opacity-10 transition-opacity"></div>
                 <div className="h-16 w-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(59,130,246,0.3)]">
                   <PhoneCall className="h-8 w-8 animate-[wiggle_2s_infinite]" />
                 </div>
                 <h3 className="text-base font-black text-gray-900 mb-1">Call Now</h3>
-                <span className="text-[12px] font-bold text-blue-600 tracking-wide">+91 6383511818</span>
+                <span className="text-[12px] font-bold text-blue-600 tracking-wide">+91 9042849344</span>
               </a>
             </ScrollReveal>
 

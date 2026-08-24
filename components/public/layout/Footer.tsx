@@ -110,8 +110,8 @@ export default function Footer({ settings }: { settings?: any }) {
                 </li>
                 <li className="flex items-center gap-2 md:gap-3">
                   <Phone className="h-3 w-3 md:h-4 md:w-4 text-yellow-400 shrink-0" />
-                  <a href={`tel:${settings?.primaryPhone || "+916383511818"}`} className="text-[11px] md:text-sm font-bold text-white hover:text-yellow-400 transition-colors duration-200 break-all">
-                    {settings?.primaryPhone || "+91 6383511818"}
+                  <a href={`tel:${settings?.primaryPhone || "+919042849344"}`} className="text-[11px] md:text-sm font-bold text-white hover:text-yellow-400 transition-colors duration-200 break-all">
+                    {settings?.primaryPhone || "+91 9042849344"}
                   </a>
                 </li>
                 <li className="flex items-center gap-2 md:gap-3">

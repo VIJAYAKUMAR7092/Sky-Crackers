@@ -88,11 +88,11 @@ export default function Navbar({ settings }: { settings?: any }) {
               </div>
               <span className="text-[10px] sm:text-xs md:text-sm font-bold tracking-wide">+91 90428 49344</span>
             </a>
-            <a href="tel:+916383511818" className="flex items-center gap-1.5 sm:gap-2 group text-gray-800 hover:text-[#dc2626] transition-colors">
+            <a href="tel:+919042849344" className="flex items-center gap-1.5 sm:gap-2 group text-gray-800 hover:text-[#dc2626] transition-colors">
               <div className="bg-[#dc2626]/10 p-1 md:p-1.5 rounded-full group-hover:bg-[#dc2626] transition-colors">
                 <PhoneCall className="w-3 h-3 md:w-4 md:h-4 text-[#dc2626] group-hover:text-white animate-[wiggle_2s_infinite]" />
               </div>
-              <span className="text-[10px] sm:text-xs md:text-sm font-bold tracking-wide">+91 63835 11818</span>
+              <span className="text-[10px] sm:text-xs md:text-sm font-bold tracking-wide">+91 90428 49344</span>
             </a>
             <a href="tel:+919344745092" className="flex items-center gap-1.5 sm:gap-2 group text-gray-800 hover:text-[#dc2626] transition-colors">
               <div className="bg-[#dc2626]/10 p-1 md:p-1.5 rounded-full group-hover:bg-[#dc2626] transition-colors">
@@ -185,7 +185,7 @@ export default function Navbar({ settings }: { settings?: any }) {
         </div>
 
         {/* Mobile Menu */}
-        <div className={`lg:hidden absolute top-full left-0 w-full bg-white border-b border-gray-100 shadow-xl transition-all duration-300 ease-in-out overflow-hidden ${mobileMenuOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'}`}>
+        <div className={`lg:hidden absolute top-full left-0 w-full bg-white border-b border-gray-100 shadow-xl transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-[calc(100vh-80px)] overflow-y-auto opacity-100' : 'max-h-0 overflow-hidden opacity-0'}`}>
           <div className="flex flex-col p-4 gap-2">
             {navLinks.map((link) => (
               <Link
@@ -200,8 +200,8 @@ export default function Navbar({ settings }: { settings?: any }) {
               </Link>
             ))}
             <div className="pt-4 flex flex-col gap-3">
-              <a href={`tel:${settings?.primaryPhone || "+916383511818"}`} className="flex items-center justify-center gap-2 py-2 rounded-lg bg-gray-50 text-gray-800 font-bold text-sm">
-                <PhoneCall className="h-4 w-4 text-red-500"/> Call {settings?.primaryPhone || "+91 6383511818"}
+              <a href={`tel:${settings?.primaryPhone || "+919042849344"}`} className="flex items-center justify-center gap-2 py-2 rounded-lg bg-gray-50 text-gray-800 font-bold text-sm">
+                <PhoneCall className="h-4 w-4 text-red-500"/> Call {settings?.primaryPhone || "+91 9042849344"}
               </a>
               <Link href="/shop" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-center gap-2 py-2 rounded-lg bg-red-500 text-white font-bold text-sm">
                 <ShoppingCart className="h-4 w-4" /> Quick Order
