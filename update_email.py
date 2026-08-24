@@ -1,32 +1,13 @@
-import nodemailer from 'nodemailer';
+import os
 
-// Helper to get transporter safely at runtime
-const getTransporter = () => {
-  const host = process.env.EMAIL_HOST || 'smtp.gmail.com';
-  const port = parseInt(process.env.EMAIL_PORT || '587', 10);
-  const secure = port === 465;
-  const user = process.env.EMAIL_USER || '';
-  const pass = process.env.EMAIL_PASS || '';
+file_path = 'lib/services/email/email.service.ts'
+with open(file_path, 'r', encoding='utf-8') as f:
+    content = f.read()
 
-  const transporter = nodemailer.createTransport({
-    host,
-    port,
-    secure,
-    auth: {
-      user,
-      pass,
-    },
-    tls: {
-      // Bypass local antivirus/VPN SSL interception for development
-      rejectUnauthorized: false,
-    }
-  });
+parts = content.split('  async sendNewOrderNotification(order: any) {')
+prefix = parts[0]
 
-  return transporter;
-};
-
-export const emailService = {
-  async sendNewOrderNotification(order: any) {
+new_function = """  async sendNewOrderNotification(order: any) {
     try {
       const transporter = getTransporter();
 
@@ -167,8 +148,7 @@ export const emailService = {
       `;
 
       const info = await transporter.sendMail({
-        from: `"Sky Crackers" <orders@skycrackers.com>`, // Custom domain prevents Gmail from showing "me" if allowed by SMTP
-        replyTo: process.env.EMAIL_USER,
+        from: `"Sky Crackers" <${process.env.EMAIL_USER}>`,
         to: adminEmail,
         subject: `🧨 New Order Received | Sky Crackers | Order #${order.orderReference}`,
         html,
@@ -182,3 +162,9 @@ export const emailService = {
     }
   }
 };
+"""
+
+with open(file_path, 'w', encoding='utf-8') as f:
+    f.write(prefix + new_function)
+    
+print("Updated email template successfully via split.")
