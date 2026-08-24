@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function HeroSlider({ banners }: { banners: any[] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -37,16 +38,18 @@ export default function HeroSlider({ banners }: { banners: any[] }) {
                 scales perfectly to the screen width without ANY cropping 
                 or white borders!
               */}
-              <Image
-                src={banner.image}
-                alt={banner.title || "Sky Crackers Festival Banner"}
-                width={1920}
-                height={800} // Approximate natural height, h-auto will correct it
-                sizes="100vw"
-                priority={index === 0}
-                quality={100}
-                className="w-full h-auto object-contain drop-shadow-xl md:drop-shadow-none"
-              />
+              <Link href="/shop" className="block w-full cursor-pointer">
+                <Image
+                  src={banner.image}
+                  alt={banner.title || "Sky Crackers Festival Banner"}
+                  width={1920}
+                  height={800} // Approximate natural height, h-auto will correct it
+                  sizes="100vw"
+                  priority={index === 0}
+                  quality={100}
+                  className="w-full h-auto object-contain drop-shadow-xl md:drop-shadow-none"
+                />
+              </Link>
             </div>
           );
         })}

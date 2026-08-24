@@ -29,12 +29,17 @@ export default function Navbar({ settings }: { settings?: any }) {
       setBannerIndex((prev) => (prev + 1) % bannerMessages.length);
     }, 3000);
     
+    
+    const handleOpenCart = () => setCartOpen(true);
+    window.addEventListener('open-cart-drawer', handleOpenCart);
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('open-cart-drawer', handleOpenCart);
       clearTimeout(t);
       clearInterval(bannerTimer);
     };
@@ -43,10 +48,10 @@ export default function Navbar({ settings }: { settings?: any }) {
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Shop", href: "/shop" },
-    { name: "About Us", href: "/#about" },
-    { name: "Contact", href: "/#contact" },
     { name: "Order Tracking", href: "/track-order" },
     { name: "Payments", href: "/payments" },
+    { name: "About Us", href: "/#about" },
+    { name: "Contact", href: "/#contact" },
   ];
 
   return (
@@ -80,30 +85,67 @@ export default function Navbar({ settings }: { settings?: any }) {
       <div className={`sticky top-0 w-full z-50 transition-all duration-300 ease-in-out flex flex-col ${isScrolled ? "shadow-md" : ""}`}>
         
         {/* Contact/Phone Numbers Layer */}
-        <div className="bg-gray-100 border-b border-gray-200 py-1.5 md:py-2 px-2 overflow-x-auto hide-scrollbar">
-          <div className="flex items-center justify-center gap-4 sm:gap-6 md:gap-10 min-w-max mx-auto">
-            <a href="tel:+919042849344" className="flex items-center gap-1.5 sm:gap-2 group text-gray-800 hover:text-[#dc2626] transition-colors">
-              <div className="bg-[#dc2626]/10 p-1 md:p-1.5 rounded-full group-hover:bg-[#dc2626] transition-colors">
-                <PhoneCall className="w-3 h-3 md:w-4 md:h-4 text-[#dc2626] group-hover:text-white animate-[wiggle_2s_infinite]" />
-              </div>
-              <span className="text-[10px] sm:text-xs md:text-sm font-bold tracking-wide">+91 90428 49344</span>
-            </a>
-            <a href="tel:+919042849344" className="flex items-center gap-1.5 sm:gap-2 group text-gray-800 hover:text-[#dc2626] transition-colors">
-              <div className="bg-[#dc2626]/10 p-1 md:p-1.5 rounded-full group-hover:bg-[#dc2626] transition-colors">
-                <PhoneCall className="w-3 h-3 md:w-4 md:h-4 text-[#dc2626] group-hover:text-white animate-[wiggle_2s_infinite]" />
-              </div>
-              <span className="text-[10px] sm:text-xs md:text-sm font-bold tracking-wide">+91 90428 49344</span>
-            </a>
-            <a href="tel:+919344745092" className="flex items-center gap-1.5 sm:gap-2 group text-gray-800 hover:text-[#dc2626] transition-colors">
-              <div className="bg-[#dc2626]/10 p-1 md:p-1.5 rounded-full group-hover:bg-[#dc2626] transition-colors">
-                <PhoneCall className="w-3 h-3 md:w-4 md:h-4 text-[#dc2626] group-hover:text-white animate-[wiggle_2s_infinite]" />
-              </div>
-              <span className="text-[10px] sm:text-xs md:text-sm font-bold tracking-wide">+91 93447 45092</span>
-            </a>
+          
+          {/* Desktop View (Static) */}
+          <div className="hidden md:block bg-gray-100 border-b border-gray-200 py-2">
+            <div className="flex items-center justify-center gap-10 max-w-7xl mx-auto">
+              <a href="tel:+919042849344" className="flex items-center gap-2 group text-gray-800 hover:text-[#dc2626] transition-colors">
+                <div className="bg-[#dc2626]/10 p-1.5 rounded-full group-hover:bg-[#dc2626] transition-colors">
+                  <PhoneCall className="w-4 h-4 text-[#dc2626] group-hover:text-white animate-[wiggle_2s_infinite]" />
+                </div>
+                <span className="text-sm font-bold tracking-wide">+91 90428 49344</span>
+              </a>
+              <a href="tel:+916383828284" className="flex items-center gap-2 group text-gray-800 hover:text-[#dc2626] transition-colors">
+                <div className="bg-[#dc2626]/10 p-1.5 rounded-full group-hover:bg-[#dc2626] transition-colors">
+                  <PhoneCall className="w-4 h-4 text-[#dc2626] group-hover:text-white animate-[wiggle_2s_infinite]" />
+                </div>
+                <span className="text-sm font-bold tracking-wide">+91 63838 28284</span>
+              </a>
+              <a href="tel:+919344745092" className="flex items-center gap-2 group text-gray-800 hover:text-[#dc2626] transition-colors">
+                <div className="bg-[#dc2626]/10 p-1.5 rounded-full group-hover:bg-[#dc2626] transition-colors">
+                  <PhoneCall className="w-4 h-4 text-[#dc2626] group-hover:text-white animate-[wiggle_2s_infinite]" />
+                </div>
+                <span className="text-sm font-bold tracking-wide">+91 93447 45092</span>
+              </a>
+            </div>
           </div>
-        </div>
 
-      <header className={`w-full bg-white transition-all duration-300 ease-in-out ${
+          {/* Mobile View (Marquee) */}
+          <div className="md:hidden bg-gray-100 border-b border-gray-200 py-1.5 overflow-hidden w-full relative">
+            <div className="flex w-max animate-[marquee_25s_linear_infinite] hover:[animation-play-state:paused] active:[animation-play-state:paused]">
+              {/* Duplicate the items to create a seamless infinite marquee */}
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className="flex items-center gap-6 px-3">
+                  <a href="tel:+919042849344" className="flex items-center gap-1.5 group text-gray-800 hover:text-[#dc2626] transition-colors">
+                    <div className="bg-[#dc2626]/10 p-1 rounded-full group-hover:bg-[#dc2626] transition-colors">
+                      <PhoneCall className="w-3 h-3 text-[#dc2626] group-hover:text-white animate-[wiggle_2s_infinite]" />
+                    </div>
+                    <span className="text-[10px] sm:text-xs font-bold tracking-wide">+91 90428 49344</span>
+                  </a>
+                  <a href="tel:+916383828284" className="flex items-center gap-1.5 group text-gray-800 hover:text-[#dc2626] transition-colors">
+                    <div className="bg-[#dc2626]/10 p-1 rounded-full group-hover:bg-[#dc2626] transition-colors">
+                      <PhoneCall className="w-3 h-3 text-[#dc2626] group-hover:text-white animate-[wiggle_2s_infinite]" />
+                    </div>
+                    <span className="text-[10px] sm:text-xs font-bold tracking-wide">+91 63838 28284</span>
+                  </a>
+                  <a href="tel:+919344745092" className="flex items-center gap-1.5 group text-gray-800 hover:text-[#dc2626] transition-colors">
+                    <div className="bg-[#dc2626]/10 p-1 rounded-full group-hover:bg-[#dc2626] transition-colors">
+                      <PhoneCall className="w-3 h-3 text-[#dc2626] group-hover:text-white animate-[wiggle_2s_infinite]" />
+                    </div>
+                    <span className="text-[10px] sm:text-xs font-bold tracking-wide">+91 93447 45092</span>
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+          <style dangerouslySetInnerHTML={{__html: `
+            @keyframes marquee {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+          `}} />
+  
+        <header className={`w-full bg-white transition-all duration-300 ease-in-out ${
           isScrolled ? "shadow-md py-1" : "py-1.5 border-b border-gray-100"
         }`}
       >
@@ -144,13 +186,24 @@ export default function Navbar({ settings }: { settings?: any }) {
             </nav>
 
             {/* Right Actions */}
-            <div className="flex items-center gap-3 md:gap-4 shrink-0">
-              
-              
+              <div className="flex items-center gap-3 md:gap-4 shrink-0">
+                
+                {/* Mobile Order Tracking Icon */}
+                <Link 
+                  href="/track-order" 
+                  className="lg:hidden p-2 flex items-center justify-center transition-transform hover:scale-110"
+                  aria-label="Track Order"
+                >
+                  <Image 
+                    src="/track-icon.png" 
+                    alt="Track Order" 
+                    width={22} 
+                    height={22} 
+                    className="object-contain filter grayscale brightness-0 opacity-80" 
+                  />
+                </Link>
 
-              
-
-              {/* Quick Order Button */}
+                {/* Quick Order Button */}
               <Link href="/shop" className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-red-500 hover:bg-red-600 text-white text-sm font-bold transition-colors shadow-sm">
                 <ShoppingCart className="h-4 w-4" />
                 Quick Order

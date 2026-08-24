@@ -1,17 +1,16 @@
-import os
+import re
+
 file_path = 'app/(store)/page.tsx'
 with open(file_path, 'r', encoding='utf-8') as f:
     content = f.read()
 
-content = content.replace('featuredProducts.map((product, index) =>', 'featuredProducts.map((product: any, index: number) =>')
-content = content.replace('bestSellers.map((product, index) =>', 'bestSellers.map((product: any, index: number) =>')
-content = content.replace('HOMEPAGE_IMAGES.videoBg', 'HOMEPAGE_IMAGES.hero.background')
-content = content.replace('HOMEPAGE_IMAGES.videoPlaceholder', 'HOMEPAGE_IMAGES.youtube')
-content = content.replace('HOMEPAGE_IMAGES.footerCtaBg', 'HOMEPAGE_IMAGES.hero.background')
-content = content.replace('video.thumbnailUrl ||', '(video as any).thumbnail ||')
-content = content.replace('whatsappNumber', 'whatsapp')
-content = content.replace('{video.description', '{(video as any).description')
+# fix double import
+content = content.replace('import Image from "next/image";\n\nimport Image from "next/image";', 'import Image from "next/image";')
+content = content.replace('import Image from "next/image";\nimport Image from "next/image";', 'import Image from "next/image";')
+
+# fix z-index
+content = content.replace('className="absolute left-0 top-0 bottom-0 w-[40%] flex items-center justify-start', 'className="absolute z-20 left-0 top-0 bottom-0 w-[40%] flex items-center justify-start')
+content = content.replace('className="absolute right-0 top-0 bottom-0 w-[40%] flex items-center justify-end', 'className="absolute z-20 right-0 top-0 bottom-0 w-[40%] flex items-center justify-end')
 
 with open(file_path, 'w', encoding='utf-8') as f:
     f.write(content)
-print('Fixed page.tsx')

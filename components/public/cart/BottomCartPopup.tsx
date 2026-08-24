@@ -72,13 +72,15 @@ export default function BottomCartPopup() {
           <div className="flex items-center gap-2">
             
             {/* Mobile Only: Cart Button */}
-            <Link
-              href="/cart"
-              className="sm:hidden flex items-center justify-center w-10 h-10 bg-gray-800 border border-gray-700 text-gray-200 rounded-full hover:bg-gray-700 transition-all shadow-sm"
-              title="View Cart"
-            >
-              <ShoppingCart className="w-4 h-4" />
-            </Link>
+            <button
+                onClick={() => {
+                  window.dispatchEvent(new CustomEvent('open-cart-drawer'));
+                }}
+                className="sm:hidden flex items-center justify-center w-10 h-10 bg-gray-800 border border-gray-700 text-gray-200 rounded-full hover:bg-gray-700 transition-all shadow-sm"
+                title="View Cart"
+              >
+                <ShoppingCart className="w-4 h-4" />
+              </button>
 
             {/* Right: Checkout Button */}
             <Link 
