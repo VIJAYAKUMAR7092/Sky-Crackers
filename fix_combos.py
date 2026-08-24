@@ -1,11 +1,32 @@
-﻿import re
-
-with open('components/public/home/ComboPacks.tsx', 'r', encoding='utf-8') as f:
+import os
+file_path = 'app/(store)/page.tsx'
+with open(file_path, 'r', encoding='utf-8') as f:
     content = f.read()
 
-content = content.replace('import Image from "next/image";', 'import Image from "next/image";\nimport ZoomableImage from "@/components/public/ui/ZoomableImage";')
+# Add import
+if 'import prisma' not in content:
+    content = content.replace('import React from "react";', 'import React from "react";\nimport prisma from "@/lib/db/prisma";')
 
-content = re.sub(r'<Image \s*src=\{pack\.image\}', r'<ZoomableImage \n                  src={pack.image}', content)
+# Add query
+if 'const combos = await prisma.product' not in content:
+    query = """  const combos = await prisma.product.findMany({
+    where: { isCombo: true },
+    orderBy: { comboOrder: 'asc' },
+    include: { images: true, category: true }
+  });
 
-with open('components/public/home/ComboPacks.tsx', 'w', encoding='utf-8') as f:
+  const comboProducts = combos.map(combo => ({
+    ...combo,
+    mrp: Number(combo.mrp).toString(),
+    sellingPrice: Number(combo.sellingPrice).toString(),
+    discount: combo.discount ? Number(combo.discount).toString() : null
+  }));
+"""
+    content = content.replace('const [featuredProducts', query + '\n  const [featuredProducts')
+
+# Update component
+content = content.replace('<ComboPacks />', '<ComboPacks combos={comboProducts} />')
+
+with open(file_path, 'w', encoding='utf-8') as f:
     f.write(content)
+print('Fixed page.tsx combos')

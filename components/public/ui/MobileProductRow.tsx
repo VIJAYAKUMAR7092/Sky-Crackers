@@ -22,11 +22,8 @@ export default function MobileProductRow({ product }: MobileProductRowProps) {
 
   const [isZoomed, setIsZoomed] = useState(false);
   
-  const handleQtyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = parseInt(e.target.value) || 0;
-    if (val === 0) {
-      removeItem(product.id);
-    } else if (inCartQty === 0 && val > 0) {
+  const handleIncrease = () => {
+    if (inCartQty === 0) {
       addItem({
         id: product.id,
         name: product.name,
@@ -35,9 +32,17 @@ export default function MobileProductRow({ product }: MobileProductRowProps) {
         mrp: Number(product.mrp),
         imageUrl: product.images?.[0]?.url || "/placeholder.png",
         packInfo: product.packInfo || "1 Box"
-      }, val);
-    } else if (val > 0) {
-      updateQuantity(product.id, val);
+      }, 1);
+    } else {
+      updateQuantity(product.id, inCartQty + 1);
+    }
+  };
+
+  const handleDecrease = () => {
+    if (inCartQty <= 1) {
+      if (inCartQty === 1) removeItem(product.id);
+    } else {
+      updateQuantity(product.id, inCartQty - 1);
     }
   };
 
@@ -45,19 +50,19 @@ export default function MobileProductRow({ product }: MobileProductRowProps) {
 
   return (
     <>
-      <div className="flex items-center py-2 px-1 border-b border-primary/20 bg-white min-h-[60px]">
+      <div className="flex items-center py-3 px-2 border-b border-primary/20 bg-white min-h-[70px] gap-1">
         
         {/* IMAGE & NAME (Flex-1) */}
         <div className="flex flex-1 items-center gap-2 overflow-hidden pr-1">
           <div 
-            className="w-[42px] h-[42px] shrink-0 bg-gray-50 border border-gray-200 rounded flex items-center justify-center p-0.5 cursor-pointer relative"
+            className="w-[48px] h-[48px] shrink-0 bg-gray-50 border border-gray-200 rounded flex items-center justify-center p-0.5 cursor-pointer relative"
             onClick={() => setIsZoomed(true)}
           >
             <Image 
               src={imgUrl}
               alt={product.name}
               fill
-              sizes="42px"
+              sizes="48px"
               className="object-contain p-0.5"
             />
           </div>
@@ -69,7 +74,7 @@ export default function MobileProductRow({ product }: MobileProductRowProps) {
         </div>
 
         {/* PRICE (w-14) */}
-        <div className="w-[52px] shrink-0 flex flex-col items-center justify-center text-center">
+        <div className="w-[56px] shrink-0 flex flex-col items-center justify-center text-center">
           <span className="font-extrabold text-[11px] text-gray-900 leading-none">
             ₹{Number(product.sellingPrice).toFixed(2)}
           </span>
@@ -81,24 +86,33 @@ export default function MobileProductRow({ product }: MobileProductRowProps) {
         </div>
 
         {/* QTY BOX (w-12) */}
-        <div className="w-[44px] shrink-0 flex items-center justify-center px-1">
+        <div className="w-[66px] shrink-0 flex items-center justify-center px-0.5">
           {product.stockStatus === "OUT_OF_STOCK" ? (
-            <span className="text-[8px] font-bold text-red-500 bg-red-50 px-1 py-0.5 rounded">OUT</span>
+            <span className="text-[9px] font-bold text-red-500 bg-red-50 px-1.5 py-1 rounded">OUT</span>
           ) : (
-            <input 
-              type="number" 
-              min="0"
-              value={inCartQty || ""}
-              onChange={handleQtyChange}
-              className="w-full h-7 border border-primary text-center text-[12px] font-bold text-primary rounded outline-none focus:ring-1 focus:ring-primary bg-transparent"
-              placeholder=""
-            />
+            <div className="flex items-center justify-between border border-primary/40 rounded-md overflow-hidden bg-white w-full h-[28px]">
+              <button 
+                onClick={handleDecrease}
+                className="w-5 h-full flex items-center justify-center text-primary font-bold text-sm bg-red-50/50 hover:bg-red-50 active:bg-red-100"
+              >
+                -
+              </button>
+              <span className="flex-1 flex items-center justify-center text-[12px] font-bold text-gray-900 border-x border-primary/20 bg-white">
+                {inCartQty || 0}
+              </span>
+              <button 
+                onClick={handleIncrease}
+                className="w-5 h-full flex items-center justify-center text-primary font-bold text-sm bg-red-50/50 hover:bg-red-50 active:bg-red-100"
+              >
+                +
+              </button>
+            </div>
           )}
         </div>
 
         {/* TOTAL (w-14) */}
-        <div className="w-[52px] shrink-0 text-right pr-1">
-          <span className="font-bold text-[10px] text-gray-500">
+        <div className="w-[56px] shrink-0 text-right pr-1">
+          <span className="font-bold text-[11px] text-gray-600">
             {rowTotal > 0 ? rowTotal.toFixed(2) : "0.00"}
           </span>
         </div>

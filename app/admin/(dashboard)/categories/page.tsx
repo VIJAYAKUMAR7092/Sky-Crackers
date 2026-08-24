@@ -27,7 +27,7 @@ export default async function CategoriesPage({
     search: typeof resolvedParams.search === 'string' ? resolvedParams.search : undefined,
     active: typeof resolvedParams.active === 'string' ? resolvedParams.active : undefined,
     page: typeof resolvedParams.page === 'string' ? Number(resolvedParams.page) : 1,
-    limit: typeof resolvedParams.limit === 'string' ? Number(resolvedParams.limit) : 10,
+    limit: typeof resolvedParams.limit === 'string' ? Number(resolvedParams.limit) : 100,
   };
 
   const { data, meta } = await getAdminCategories(safeParams);

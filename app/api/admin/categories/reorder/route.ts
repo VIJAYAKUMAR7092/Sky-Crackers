@@ -16,15 +16,19 @@ export async function PUT(request: NextRequest) {
       return errorResponse('Invalid payload, expected array of {id, displayOrder}', 'BAD_REQUEST', 400);
     }
 
-    // Update in transaction
-    await prisma.$transaction(
-      body.map((item: { id: string; displayOrder: number }) => 
-        prisma.category.update({
+    // Execute sequentially inside a transaction with a higher timeout 
+    // to avoid connection pool exhaustion and 5000ms timeout issues
+    await prisma.$transaction(async (tx) => {
+      for (const item of body) {
+        await tx.category.update({
           where: { id: item.id },
           data: { displayOrder: item.displayOrder }
-        })
-      )
-    );
+        });
+      }
+    }, {
+      maxWait: 5000,
+      timeout: 20000,
+    });
 
     revalidatePath('/', 'layout');
     

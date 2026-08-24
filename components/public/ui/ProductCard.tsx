@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Heart, Share2, Plus, Minus } from "lucide-react";
 import { useCartStore } from "@/lib/store/cart.store";
+import { useWishlistStore } from "@/lib/store/wishlist.store";
 import ZoomableImage from "@/components/public/ui/ZoomableImage";
 
 interface ProductCardProps {
@@ -16,7 +17,10 @@ export default function ProductCard({ product }: ProductCardProps) {
   const updateQuantity = useCartStore((state) => state.updateQuantity);
   const cartItems = useCartStore((state) => state.items);
   
-  const [isLiked, setIsLiked] = useState(false);
+  const toggleWishlist = useWishlistStore((state) => state.toggleWishlist);
+  const isInWishlist = useWishlistStore((state) => state.isInWishlist);
+  
+  const isLiked = isInWishlist(product.id);
   
   const cartItem = cartItems.find(item => item.product.id === product.id);
   const inCartQty = cartItem ? cartItem.quantity : 0;
@@ -50,7 +54,15 @@ export default function ProductCard({ product }: ProductCardProps) {
   const handleLike = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setIsLiked(!isLiked);
+    toggleWishlist({
+      id: product.id,
+      name: product.name,
+      slug: product.slug,
+      price: Number(product.sellingPrice),
+      mrp: Number(product.mrp),
+      imageUrl: product.images?.[0]?.url || "/placeholder.png",
+      packInfo: product.packInfo || "1 Box"
+    });
   };
   
   const handleShare = async (e: React.MouseEvent) => {
@@ -88,10 +100,10 @@ export default function ProductCard({ product }: ProductCardProps) {
   const packInfo = product.packInfo || "1 Box";
   
   // Decide border color based on cart state to match screenshot
-  const cardBorderClass = inCartQty > 0 ? "border-[#22c55e]" : "border-pink-200";
+  const cardBorderClass = inCartQty > 0 ? "border-[#22c55e]" : "border-primary";
 
   return (
-    <div className={`group relative bg-white border-2 ${cardBorderClass} rounded-2xl md:rounded-3xl overflow-hidden shadow-sm hover:shadow-[0_15px_40px_rgba(225,29,72,0.25)] hover:border-[#e11d48] transition-all duration-500 ease-out flex flex-col hover:-translate-y-2`}>
+    <div className={`group relative bg-white border-2 ${cardBorderClass} rounded-2xl md:rounded-3xl overflow-hidden shadow-sm hover:shadow-[0_15px_40px_rgba(223,38,12,0.25)] hover:border-primary transition-all duration-500 ease-out flex flex-col hover:-translate-y-2`}>
       
       {/* Image Container (No longer a link, just Zoomable) */}
       <div className="relative h-32 sm:h-40 w-full overflow-hidden flex items-center justify-center bg-[#fdfbf6]">
@@ -127,21 +139,21 @@ export default function ProductCard({ product }: ProductCardProps) {
         <div className="flex items-center gap-2 mb-1.5">
           <button 
             onClick={handleLike}
-            className={`w-6 h-6 rounded-full border border-pink-200 flex items-center justify-center transition-colors active:scale-90 ${isLiked ? 'bg-pink-500 text-white border-pink-500 shadow-md' : 'text-pink-500 bg-pink-50 hover:bg-pink-100'}`}
+            className={`w-6 h-6 rounded-full border border-primary/30 flex items-center justify-center transition-colors active:scale-90 ${isLiked ? 'bg-primary text-white border-primary shadow-md' : 'text-primary bg-red-50 hover:bg-red-100'}`}
             title="Like"
           >
             <Heart className="w-3 h-3" fill={isLiked ? "currentColor" : "none"} />
           </button>
           <button 
             onClick={handleShare}
-            className="w-6 h-6 rounded-full border border-pink-200 flex items-center justify-center text-pink-500 bg-pink-50 hover:bg-pink-100 transition-colors active:scale-90"
+            className="w-6 h-6 rounded-full border border-primary/30 flex items-center justify-center text-primary bg-red-50 hover:bg-red-100 transition-colors active:scale-90"
             title="Share"
           >
             <Share2 className="w-3 h-3" />
           </button>
         </div>
 
-        <div className="text-[10px] text-pink-500 mb-1">{packInfo}</div>
+        <div className="text-[10px] text-primary mb-1">{packInfo}</div>
         
         {/* Price */}
         <div className="flex items-center gap-2 mb-1">
@@ -169,10 +181,10 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
         
         {/* Max 99 text */}
-        <div className="text-[10px] text-pink-500 mb-1 mt-auto">Max 99</div>
+        <div className="text-[10px] text-primary mb-1 mt-auto">Max 99</div>
         
         {/* Quantity Selector / Add to Cart */}
-        <div className={`flex items-center justify-between border-2 ${inCartQty > 0 ? 'border-[#dc2626]' : 'border-pink-200'} rounded-xl overflow-hidden h-9 w-full bg-red-50/10 transition-colors`}>
+        <div className={`flex items-center justify-between border-2 ${inCartQty > 0 ? 'border-[#dc2626]' : 'border-primary/30'} rounded-xl overflow-hidden h-9 w-full bg-red-50/10 transition-colors`}>
           <button 
             onClick={handleDecrement}
             disabled={isOutOfStock && inCartQty === 0}

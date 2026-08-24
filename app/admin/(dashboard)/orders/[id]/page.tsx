@@ -49,7 +49,7 @@ export default async function OrderDetailsPage({
               {order.items.map((item: any) => (
                 <div key={item.id} className="flex items-center justify-between border-b last:border-0 pb-4 last:pb-0">
                   <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 rounded-lg border bg-slate-50 dark:bg-slate-800 flex items-center justify-center overflow-hidden">
+                    <div className="w-16 h-16 rounded-lg border bg-muted dark:bg-slate-800 flex items-center justify-center overflow-hidden">
                       {item.product?.images?.[0]?.url ? (
                         <Image src={item.product.images[0].url} alt={item.productName} width={64} height={64} className="object-cover w-full h-full" />
                       ) : (

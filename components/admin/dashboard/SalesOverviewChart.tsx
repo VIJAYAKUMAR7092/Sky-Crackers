@@ -81,12 +81,12 @@ export default function SalesOverviewChart() {
       {/* Chart Area */}
       <div className="flex-1 relative w-full h-full min-h-[250px]">
         {loading ? (
-          <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/50 backdrop-blur-sm z-10 rounded-xl">
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-background/50 backdrop-blur-sm z-10 rounded-xl">
             <Loader2 className="h-8 w-8 text-primary animate-spin mb-2" />
             <span className="text-sm font-medium text-muted-foreground animate-pulse">Loading analytics...</span>
           </div>
         ) : chartData.length === 0 ? (
-          <div className="absolute inset-0 flex items-center justify-center border border-dashed border-border/60 rounded-xl bg-gray-50/50">
+          <div className="absolute inset-0 flex items-center justify-center border border-dashed border-border/60 rounded-xl bg-muted/30">
             <span className="text-sm text-muted-foreground">No sales data found for this period.</span>
           </div>
         ) : (
@@ -99,24 +99,24 @@ export default function SalesOverviewChart() {
                     <stop offset="95%" stopColor="#dc2626" stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3f4f6" />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="currentColor" className="text-border" />
                 <XAxis 
                   dataKey="date" 
                   axisLine={false} 
                   tickLine={false} 
-                  tick={{ fontSize: 12, fill: '#6b7280' }}
+                  tick={{ fontSize: 12, fill: 'currentColor' }}
                   dy={10}
                 />
                 <YAxis 
                   axisLine={false} 
                   tickLine={false} 
-                  tick={{ fontSize: 12, fill: '#6b7280' }}
+                  tick={{ fontSize: 12, fill: 'currentColor' }}
                   tickFormatter={(val) => `₹${val.toLocaleString()}`}
                   width={60}
                 />
                 <Tooltip 
-                  contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', fontWeight: 500 }}
-                  itemStyle={{ color: '#111827', fontWeight: 700 }}
+                  contentStyle={{ borderRadius: '12px', border: '1px solid var(--border)', backgroundColor: 'var(--popover)', color: 'var(--popover-foreground)', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', fontWeight: 500 }}
+                  itemStyle={{ color: 'inherit', fontWeight: 700 }}
                   formatter={(value: any, name: any) => [
                     name === 'sales' ? `₹${value.toLocaleString()}` : value, 
                     name === 'sales' ? 'Sales' : 'Orders'

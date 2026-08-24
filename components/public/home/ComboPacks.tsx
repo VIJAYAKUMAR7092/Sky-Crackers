@@ -6,45 +6,9 @@ import ZoomableImage from "@/components/public/ui/ZoomableImage";
 import { ShoppingCart } from "lucide-react";
 import { useCartStore } from "@/lib/store/cart.store";
 
-const comboPacks = [
-  {
-    id: "combo-1",
-    name: "Silver Combo Pack",
-    mrp: 30000,
-    price: 3000,
-    image: "/images/combos/silver-combo.jpg"
-  },
-  {
-    id: "combo-2",
-    name: "Silver Night Combo Pack",
-    mrp: 30000,
-    price: 3000,
-    image: "/images/combos/silver-night-combo.jpg"
-  },
-  {
-    id: "combo-3",
-    name: "Kid's Special Pack",
-    mrp: 40000,
-    price: 4000,
-    image: "/images/combos/kids-combo.jpg"
-  },
-  {
-    id: "combo-4",
-    name: "Gold Combo Pack",
-    mrp: 50000,
-    price: 5000,
-    image: "/images/combos/gold-combo.jpg"
-  },
-  {
-    id: "combo-5",
-    name: "Gold Night Combo Pack",
-    mrp: 50000,
-    price: 5000,
-    image: "/images/combos/gold-night-combo.jpg"
-  }
-];
 
-export default function ComboPacks() {
+
+export default function ComboPacks({ combos }: { combos: any[] }) {
   const addItem = useCartStore((state) => state.addItem);
 
   const handleAddToCart = (pack: any) => {
@@ -52,9 +16,9 @@ export default function ComboPacks() {
       id: pack.id,
       name: pack.name,
       slug: pack.name.toLowerCase().replace(/ /g, '-'),
-      price: pack.price,
-      mrp: pack.mrp,
-      imageUrl: pack.image,
+      price: Number(pack.sellingPrice),
+      mrp: Number(pack.mrp),
+      imageUrl: pack.images?.find((img: any) => img.isPrimary)?.url || pack.images?.[0]?.url || "/placeholder.png",
       stockStatus: "IN_STOCK",
       categoryId: "combos"
     } as any, 1);
@@ -82,7 +46,7 @@ export default function ComboPacks() {
 
         {/* Responsive Grid: 2 cols on mobile, up to 5 on desktop */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-6">
-          {comboPacks.map((pack) => (
+          {combos.map((pack) => (
             <div 
               key={pack.id} 
               className="bg-white rounded-xl md:rounded-2xl overflow-hidden shadow-lg border border-orange-100 flex flex-col group transform transition-all duration-500 hover:-translate-y-3 hover:scale-105 hover:shadow-2xl hover:border-orange-400 relative"
@@ -92,7 +56,7 @@ export default function ComboPacks() {
               {/* Pack Image containing full details */}
               <div className="relative w-full aspect-[1/1.3] bg-gray-50 border-b border-orange-50 overflow-hidden">
                 <ZoomableImage 
-                  src={pack.image} 
+                  src={pack.images?.find((img: any) => img.isPrimary)?.url || pack.images?.[0]?.url || "/placeholder.png"} 
                   alt={pack.name} 
                   fill 
                   className="object-cover object-top transition-transform duration-700 group-hover:scale-110"
@@ -116,7 +80,7 @@ export default function ComboPacks() {
                   </span>
                 </div>
                 <div className="text-lg md:text-2xl font-black text-primary mb-2 md:mb-3 drop-shadow-sm group-hover:scale-110 transition-transform">
-                  ₹{pack.price}
+                  ₹{Number(pack.sellingPrice).toLocaleString()}
                 </div>
                 
                 <button

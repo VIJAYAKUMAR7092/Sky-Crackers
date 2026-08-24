@@ -45,6 +45,8 @@ export default function Navbar({ settings }: { settings?: any }) {
     { name: "Shop", href: "/shop" },
     { name: "About Us", href: "/#about" },
     { name: "Contact", href: "/#contact" },
+    { name: "Order Tracking", href: "/track-order" },
+    { name: "Payments", href: "/payments" },
   ];
 
   return (
@@ -146,11 +148,7 @@ export default function Navbar({ settings }: { settings?: any }) {
               
               
 
-              {/* Desktop Order Tracking */}
-              <Link href="/track-order" className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 hover:border-red-500 text-gray-800 hover:text-red-600 text-sm font-bold transition-all shadow-sm">
-                <PackageSearch className="h-4 w-4" />
-                Order Tracking
-              </Link>
+              
 
               {/* Quick Order Button */}
               <Link href="/shop" className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-red-500 hover:bg-red-600 text-white text-sm font-bold transition-colors shadow-sm">
@@ -158,14 +156,7 @@ export default function Navbar({ settings }: { settings?: any }) {
                 Quick Order
               </Link>
 
-              {/* Mobile Order Tracking */}
-              <Link 
-                href="/track-order"
-                className="relative p-2 text-gray-800 hover:text-primary transition-colors group flex sm:hidden"
-                aria-label="Track Order"
-              >
-                <PackageSearch className="h-6 w-6 group-hover:scale-110 transition-transform" />
-              </Link>
+              
 
               {/* Cart Toggle */}
               <button 

@@ -39,7 +39,7 @@ export default function FloatingStoreWidgets() {
             href="/shop"
             className="fixed bottom-6 right-2 md:bottom-8 md:right-8 z-50 group hover:scale-110 transition-transform duration-300"
           >
-            <div className="relative animate-[wiggle_4s_infinite] drop-shadow-[0_4px_15px_rgba(0,0,0,0.5)] w-32 md:w-48">
+            <div className="relative animate-[premiumFloat_2.5s_ease-in-out_infinite] drop-shadow-[0_4px_15px_rgba(0,0,0,0.5)] w-32 md:w-48">
               <Image 
                 src="/images/home/quick-purchase.png" 
                 alt="Quick Purchase" 
@@ -51,9 +51,9 @@ export default function FloatingStoreWidgets() {
           </Link>
           
           <style dangerouslySetInnerHTML={{__html: `
-            @keyframes wiggle {
-              0%, 100% { transform: rotate(-3deg) scale(1); }
-              50% { transform: rotate(3deg) scale(1.02); }
+            @keyframes premiumFloat {
+              0%, 100% { transform: translateY(0); }
+              50% { transform: translateY(-18px); }
             }
           `}} />
         </>

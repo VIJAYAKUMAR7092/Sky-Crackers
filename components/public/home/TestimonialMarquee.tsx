@@ -51,10 +51,19 @@ export default function TestimonialMarquee() {
     <section className="py-20 bg-gray-50 border-t border-gray-200 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6 mb-10">
         <div className="text-center">
-          <span className="text-yellow-600 font-bold tracking-[0.2em] uppercase text-xs mb-3 block">TESTIMONIALS</span>
-          <h2 className="text-4xl md:text-5xl font-black mb-4 uppercase leading-none tracking-tighter">
-            <span className="text-[#2e7d32] block md:inline">WHAT OUR </span>
-            <span className="text-[#827717] block md:inline">CUSTOMERS SAY</span>
+          <style dangerouslySetInnerHTML={{__html: `
+            @keyframes softGlowFloat {
+              0%, 100% { transform: translateY(0); text-shadow: 0 0 2px rgba(223, 38, 12, 0.1); opacity: 0.8; }
+              50% { transform: translateY(-3px); text-shadow: 0 0 12px rgba(223, 38, 12, 0.6); opacity: 1; }
+            }
+            @keyframes redGlowPulse {
+              0%, 100% { transform: scale(1); text-shadow: 0 0 5px rgba(223,38,12,0.2); }
+              50% { transform: scale(1.02); text-shadow: 0 0 20px rgba(223,38,12,0.7); }
+            }
+          `}} />
+          <span className="text-primary font-bold tracking-[0.2em] uppercase text-xs mb-3 block w-full" style={{ animation: 'softGlowFloat 4s ease-in-out infinite' }}>TESTIMONIALS</span>
+          <h2 className="text-4xl md:text-5xl font-black mb-4 uppercase leading-none tracking-tighter text-primary block w-full" style={{ animation: 'redGlowPulse 3s ease-in-out infinite' }}>
+            WHAT OUR CUSTOMERS SAY
           </h2>
         </div>
       </div>

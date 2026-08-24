@@ -63,9 +63,9 @@ export default function OrderFlowchart() {
   return (
     // Business process visualization flow
     // Represents customer order lifecycle
-    <Card className="border-border/60 shadow-md bg-white mb-6 overflow-hidden relative group">
-      <CardHeader className="pb-4 border-b border-gray-50 bg-gray-50/50">
-        <CardTitle className="text-lg font-bold text-gray-900 flex items-center gap-2">
+    <Card className="border-border/60 shadow-md bg-background mb-6 overflow-hidden relative group">
+      <CardHeader className="pb-4 border-b border-gray-50 bg-muted/50">
+        <CardTitle className="text-lg font-bold text-foreground flex items-center gap-2">
           <span className="bg-primary/10 text-primary p-1.5 rounded-md">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
           </span>
@@ -87,13 +87,13 @@ export default function OrderFlowchart() {
               className="relative z-10 flex flex-col items-center text-center w-40 group/card animate-[fadeIn_0.5s_ease-out_forwards]"
               style={{ animationDelay: `${idx * 150}ms`, opacity: 0 }}
             >
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-3 shadow-sm border ${step.color} transition-all duration-300 group-hover/card:-translate-y-1.5 group-hover/card:shadow-md bg-white`}>
+              <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-3 shadow-sm border ${step.color} transition-all duration-300 group-hover/card:-translate-y-1.5 group-hover/card:shadow-md bg-background`}>
                 <div className={`p-2 rounded-lg ${step.iconBg}`}>
                   {step.icon}
                 </div>
               </div>
               <h4 className={`text-sm font-bold mb-1 ${step.textColor}`}>{step.title}</h4>
-              <p className="text-[11px] text-gray-500 leading-tight px-2">{step.desc}</p>
+              <p className="text-[11px] text-muted-foreground leading-tight px-2">{step.desc}</p>
             </div>
           ))}
         </div>
@@ -111,14 +111,14 @@ export default function OrderFlowchart() {
               className="relative z-10 flex items-center gap-4 group/card animate-[fadeInUp_0.5s_ease-out_forwards]"
               style={{ animationDelay: `${idx * 150}ms`, opacity: 0 }}
             >
-              <div className={`w-10 h-10 shrink-0 rounded-xl flex items-center justify-center shadow-sm border ${step.color} transition-all duration-300 group-hover/card:-translate-y-1 group-hover/card:shadow-md bg-white z-10`}>
+              <div className={`w-10 h-10 shrink-0 rounded-xl flex items-center justify-center shadow-sm border ${step.color} transition-all duration-300 group-hover/card:-translate-y-1 group-hover/card:shadow-md bg-background z-10`}>
                 <div className={`p-1.5 rounded-lg ${step.iconBg}`}>
                   {step.icon}
                 </div>
               </div>
-              <div className="bg-white border border-gray-50 shadow-sm rounded-xl p-3 flex-1 transition-all duration-300 group-hover/card:shadow-md group-hover/card:border-gray-100">
+              <div className="bg-background border border-gray-50 shadow-sm rounded-xl p-3 flex-1 transition-all duration-300 group-hover/card:shadow-md group-hover/card:border-gray-100">
                 <h4 className={`text-sm font-bold mb-0.5 ${step.textColor}`}>{step.title}</h4>
-                <p className="text-xs text-gray-500">{step.desc}</p>
+                <p className="text-xs text-muted-foreground">{step.desc}</p>
               </div>
             </div>
           ))}

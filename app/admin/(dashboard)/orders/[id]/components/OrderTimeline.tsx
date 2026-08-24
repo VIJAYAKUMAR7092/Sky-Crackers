@@ -51,8 +51,8 @@ export function OrderTimeline({ status }: OrderTimelineProps) {
                       isCompleted
                         ? 'bg-blue-600 text-white'
                         : isCurrent
-                        ? 'border-2 border-blue-600 bg-white text-blue-600'
-                        : 'border-2 border-input bg-white text-slate-400'
+                        ? 'border-2 border-blue-600 bg-background text-blue-600'
+                        : 'border-2 border-input bg-background text-slate-400'
                     }`}
                   >
                     {isCompleted ? (

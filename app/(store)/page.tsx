@@ -1,4 +1,5 @@
 ﻿import React from "react";
+import prisma from "@/lib/db/prisma";
 import Link from "next/link";
 import Image from "next/image";
 import WhatsAppIcon from "@/components/public/ui/WhatsAppIcon";
@@ -27,6 +28,19 @@ export async function generateMetadata() {
 export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
+    const combos = await prisma.product.findMany({
+    where: { isCombo: true },
+    orderBy: { comboOrder: 'asc' },
+    include: { images: true, category: true }
+  });
+
+  const comboProducts = combos.map(combo => ({
+    ...combo,
+    mrp: Number(combo.mrp).toString(),
+    sellingPrice: Number(combo.sellingPrice).toString(),
+    discount: combo.discount ? Number(combo.discount).toString() : null
+  }));
+
   const [featuredProducts, bestSellers, dbCategories, heroBanners, videos, testimonials, websiteSettings] = await Promise.all([
     getFeaturedProducts(),
     getBestSellingProducts(),
@@ -117,7 +131,7 @@ export default async function HomePage() {
             <span className="absolute inset-0 rounded-full ring-[1.5px] ring-[#fce074]/60 animate-ping opacity-40"></span>
             
             {/* Shimmer Effect */}
-            <span className="absolute inset-0 -translate-x-[150%] animate-[shimmer_2.5s_infinite_ease-in-out] bg-gradient-to-r from-transparent via-white/60 to-transparent skew-x-12 z-0"></span>
+            <span className="absolute inset-0 -translate-x-[150%] animate-[shimmer_1.5s_infinite_linear] bg-gradient-to-r from-transparent via-white/60 to-transparent skew-x-12 z-0"></span>
 
             <span className="tracking-[0.18em] uppercase relative z-10 drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">Shop Now</span>
             <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1.5 transition-transform duration-300 relative z-10" />
@@ -126,7 +140,7 @@ export default async function HomePage() {
         <style dangerouslySetInnerHTML={{__html: `
           @keyframes shimmer {
             0% { transform: translateX(-150%) skewX(12deg); }
-            50%, 100% { transform: translateX(150%) skewX(12deg); }
+            100% { transform: translateX(150%) skewX(12deg); }
           }
         `}} />
       </section>
@@ -186,7 +200,7 @@ export default async function HomePage() {
           </div>
         </section>
 
-      <ComboPacks />
+      <ComboPacks combos={comboProducts} />
 
       {/* 3. CATEGORIES SECTION */}
       <section className="py-20 bg-gray-50">
@@ -268,7 +282,7 @@ export default async function HomePage() {
                   <ScrollReveal key={video.id} animation="fade-right">
                     <a href={video.youtubeUrl} target="_blank" rel="noopener noreferrer" className="block bg-white p-2 rounded-[2rem] shadow-2xl border border-gray-200 group cursor-pointer relative overflow-hidden aspect-video">
                       <Image
-                        src={video.thumbnailUrl || HOMEPAGE_IMAGES.youtube}
+                        src={(video as any).thumbnail || HOMEPAGE_IMAGES.youtube}
                         alt={video.title || "YouTube Video"}
                         fill
                         className="object-cover rounded-[1.5rem] group-hover:scale-105 transition-transform duration-700"

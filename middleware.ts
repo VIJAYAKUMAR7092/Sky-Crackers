@@ -1,33 +1,37 @@
-import { withAuth } from "next-auth/middleware";
+import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-export default withAuth(
-  function middleware(req) {
-    // Only logged in users can reach here due to withAuth wrapper
-    // We can add further generic checks if needed.
-    return NextResponse.next();
-  },
-  {
-    callbacks: {
-      authorized: ({ token }) => {
-        // Enforce SUPERADMIN role globally for all /admin frontend routes.
-        // For future scalability, update this check (e.g., ['SUPERADMIN', 'ADMIN'].includes(token?.role))
-        return !!token && token.role === 'SUPERADMIN';
-      },
-    },
-    pages: {
-      signIn: "/admin/login",
-    },
+export async function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+
+  // We only care about /admin routes
+  if (pathname.startsWith('/admin')) {
+    // Exclude login page from protection
+    if (pathname === '/admin/login') {
+      // If already logged in, redirect to dashboard
+      const token = await getToken({ req });
+      if (token && token.role === 'SUPERADMIN') {
+        return NextResponse.redirect(new URL('/admin', req.url));
+      }
+      return NextResponse.next();
+    }
+
+    // Protect all other /admin routes
+    const token = await getToken({ req });
+    if (!token || token.role !== 'SUPERADMIN') {
+      const loginUrl = new URL('/admin/login', req.url);
+      loginUrl.searchParams.set('callbackUrl', req.url);
+      return NextResponse.redirect(loginUrl);
+    }
   }
-);
 
-// Protect all /admin routes EXCEPT /admin/login
+  return NextResponse.next();
+}
+
 export const config = {
   matcher: [
-    /*
-     * Match all request paths under /admin
-     * Except /admin/login
-     */
-    "/admin/((?!login).*)",
+    "/admin",
+    "/admin/:path*",
   ],
 };

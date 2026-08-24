@@ -103,21 +103,21 @@ export function SortCategoriesModal({ isOpen, onClose, onSaved }: SortModalProps
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-      <div className="bg-white rounded-xl shadow-2xl w-full max-w-lg max-h-[85vh] flex flex-col overflow-hidden">
+      <div className="bg-background rounded-xl shadow-2xl w-full max-w-lg max-h-[85vh] flex flex-col overflow-hidden">
         
-        <div className="flex justify-between items-center p-5 border-b border-gray-100 bg-white">
+        <div className="flex justify-between items-center p-5 border-b border-gray-100 bg-background">
           <div>
-            <h2 className="text-xl font-bold text-gray-900">Category Order</h2>
-            <p className="text-sm text-gray-500 mt-1">Assign positions to your categories</p>
+            <h2 className="text-xl font-bold text-foreground">Category Order</h2>
+            <p className="text-sm text-muted-foreground mt-1">Assign positions to your categories</p>
           </div>
           <button onClick={onClose} className="p-2 hover:bg-red-50 rounded-full transition-colors group">
             <X className="w-5 h-5 text-gray-400 group-hover:text-red-600" />
           </button>
         </div>
 
-        <div className="p-6 overflow-y-auto flex-1 bg-gray-50/50">
+        <div className="p-6 overflow-y-auto flex-1 bg-muted/50">
           {loading ? (
-            <div className="text-center text-gray-500 font-medium py-10">Loading categories...</div>
+            <div className="text-center text-muted-foreground font-medium py-10">Loading categories...</div>
           ) : (
             <div className="space-y-5">
               {errorMsg && (
@@ -144,7 +144,7 @@ export function SortCategoriesModal({ isOpen, onClose, onSaved }: SortModalProps
                       <select
                         value={selections[index] || ''}
                         onChange={(e) => handleSelectionChange(index, e.target.value)}
-                        className={`w-full p-3 bg-white border ${isDuplicate ? 'border-red-400 focus:ring-red-500' : 'border-gray-200 focus:ring-red-500 focus:border-red-500'} rounded-lg shadow-sm appearance-none outline-none transition-all cursor-pointer text-gray-700 font-medium`}
+                        className={`w-full p-3 bg-background border ${isDuplicate ? 'border-red-400 focus:ring-red-500' : 'border-border focus:ring-red-500 focus:border-red-500'} rounded-lg shadow-sm appearance-none outline-none transition-all cursor-pointer text-gray-700 font-medium`}
                       >
                         <option value="" disabled>Select Category ▼</option>
                         {categories.map(c => (
@@ -160,14 +160,14 @@ export function SortCategoriesModal({ isOpen, onClose, onSaved }: SortModalProps
               })}
 
               {categories.length === 0 && (
-                <div className="text-center text-gray-500 py-4">No categories found.</div>
+                <div className="text-center text-muted-foreground py-4">No categories found.</div>
               )}
             </div>
           )}
         </div>
 
-        <div className="p-5 border-t border-gray-100 bg-white flex justify-end gap-3 shadow-[0_-4px_10px_-4px_rgba(0,0,0,0.05)]">
-           <Button variant="outline" onClick={onClose} className="border-gray-200 hover:bg-gray-50">Cancel</Button>
+        <div className="p-5 border-t border-gray-100 bg-background flex justify-end gap-3 shadow-[0_-4px_10px_-4px_rgba(0,0,0,0.05)]">
+           <Button variant="outline" onClick={onClose} className="border-border hover:bg-muted">Cancel</Button>
            <Button 
              className="bg-red-600 hover:bg-red-700 text-white min-w-[120px] shadow-sm shadow-red-200" 
              onClick={handleSave} 

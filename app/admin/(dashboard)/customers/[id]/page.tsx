@@ -123,7 +123,7 @@ export default async function CustomerDetailsPage({
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full text-sm text-left">
-                  <thead className="text-xs text-muted-foreground bg-slate-50 dark:bg-slate-800/50 rounded-t-lg">
+                  <thead className="text-xs text-muted-foreground bg-muted dark:bg-slate-800/50 rounded-t-lg">
                     <tr>
                       <th className="px-4 py-3 rounded-tl-lg font-medium">Order Ref</th>
                       <th className="px-4 py-3 font-medium">Date</th>
@@ -134,7 +134,7 @@ export default async function CustomerDetailsPage({
                   </thead>
                   <tbody>
                     {customer.orders.map((order: any) => (
-                      <tr key={order.id} className="border-b border-slate-100 dark:border-slate-800 last:border-0 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                      <tr key={order.id} className="border-b border-slate-100 dark:border-slate-800 last:border-0 hover:bg-muted dark:hover:bg-slate-800/50 transition-colors">
                         <td className="px-4 py-3 font-medium">
                           <Link href={`/admin/orders/${order.id}`} className="text-blue-600 dark:text-blue-400 hover:underline">
                             {order.orderReference}

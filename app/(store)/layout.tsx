@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../../components/public/layout/Navbar";
 import Footer from "../../components/public/layout/Footer";
 import FloatingStoreWidgets from "../../components/public/layout/FloatingStoreWidgets";
+import WishlistWidget from "../../components/public/ui/WishlistWidget";
 import { getWebsiteSettings } from "@/lib/services/cms/cms.service";
 
 export default async function StoreLayout({ children }: { children: React.ReactNode }) {
@@ -12,6 +13,7 @@ export default async function StoreLayout({ children }: { children: React.ReactN
       <main className="flex-1 flex flex-col">{children}</main>
       <Footer settings={websiteSettings} />
       <FloatingStoreWidgets />
+      <WishlistWidget />
     </div>
   );
 }

@@ -16,7 +16,8 @@ import {
   BarChart,
   LogOut,
   X,
-  Sparkles
+  Sparkles,
+  Gift
 } from "lucide-react"
 
 export interface NavItem {
@@ -40,6 +41,7 @@ export const sidebarConfig = [
       { title: "Orders", href: "/admin/orders", icon: ShoppingCart },
       { title: "Products", href: "/admin/products", icon: Package },
       { title: "Categories", href: "/admin/categories", icon: FolderTree },
+      { title: "Combo Management", href: "/admin/combos", icon: Gift },
       { title: "Customers", href: "/admin/customers", icon: Users },
       { title: "Coupons", href: "/admin/coupons", icon: Ticket },
     ]
@@ -69,7 +71,7 @@ export function Sidebar({ userRole, isOpen, setIsOpen, className, ...props }: Si
       {/* Mobile Overlay */}
       {isOpen && (
         <div 
-          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden transition-opacity"
+          className="fixed inset-0 z-40 bg-black/80 backdrop-blur-sm lg:hidden transition-opacity"
           onClick={() => setIsOpen(false)}
         />
       )}
@@ -77,24 +79,24 @@ export function Sidebar({ userRole, isOpen, setIsOpen, className, ...props }: Si
       {/* Sidebar Container */}
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex w-[280px] flex-col border-r border-gray-200 bg-white backdrop-blur-xl transition-transform duration-300 ease-in-out shadow-2xl lg:static lg:translate-x-0",
+          "fixed inset-y-0 left-0 z-50 flex w-[280px] flex-col border-r border-border bg-background backdrop-blur-xl transition-transform duration-300 ease-in-out shadow-2xl lg:static lg:translate-x-0",
           isOpen ? "translate-x-0" : "-translate-x-full",
           className
         )}
         {...props}
       >
-        <div className="flex h-[72px] items-center justify-between px-6 border-b border-gray-200 bg-white">
-          <Link href="/admin" className="flex items-center gap-3 font-bold text-lg tracking-wider text-gray-900 uppercase group">
-            <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-primary/80 text-red-600-foreground shadow-[0_0_15px_rgba(197,160,89,0.3)] group-hover:shadow-[0_0_20px_rgba(197,160,89,0.5)] transition-all duration-500">
-              <Sparkles className="w-4 h-4" />
+        <div className="flex h-[72px] items-center justify-between px-6 border-b border-border bg-background">
+          <Link href="/admin" className="flex items-center gap-3 font-bold text-lg tracking-wider text-foreground uppercase group">
+            <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-red-600 shadow-[0_0_15px_rgba(220,38,38,0.3)] group-hover:shadow-[0_0_20px_rgba(220,38,38,0.5)] transition-all duration-500">
+              <Sparkles className="w-4 h-4 text-white" />
               <div className="absolute inset-0 rounded-lg ring-1 ring-white/20"></div>
             </div>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-700">
+            <span className="bg-clip-text text-foreground">
               Sky Crackers
             </span>
           </Link>
           <button 
-            className="lg:hidden text-gray-500 hover:text-gray-900 transition-colors"
+            className="lg:hidden text-muted-foreground hover:text-foreground transition-colors"
             onClick={() => setIsOpen(false)}
           >
             <X className="h-5 w-5" />
@@ -105,7 +107,7 @@ export function Sidebar({ userRole, isOpen, setIsOpen, className, ...props }: Si
           <nav className="flex flex-col gap-6">
             {sidebarConfig.map((group, groupIdx) => (
               <div key={groupIdx}>
-                <h4 className="mb-2 px-4 text-xs font-semibold uppercase tracking-widest text-gray-500/70">
+                <h4 className="mb-2 px-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground/70">
                   {group.group}
                 </h4>
                 <div className="grid gap-1">
@@ -121,8 +123,8 @@ export function Sidebar({ userRole, isOpen, setIsOpen, className, ...props }: Si
                         className={cn(
                           "group relative flex items-center gap-3 rounded-lg px-4 py-2.5 text-sm font-medium transition-all duration-300 overflow-hidden",
                           actualIsActive
-                            ? "bg-red-50 text-red-600 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]"
-                            : "text-gray-500 hover:bg-red-50 hover:text-gray-900"
+                            ? "bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-500 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]"
+                            : "text-muted-foreground hover:bg-muted hover:text-foreground"
                         )}
                         onClick={() => setIsOpen(false)}
                       >
@@ -131,7 +133,7 @@ export function Sidebar({ userRole, isOpen, setIsOpen, className, ...props }: Si
                         )}
                         <item.icon className={cn(
                           "h-5 w-5 transition-all duration-300", 
-                          actualIsActive ? "text-red-600 scale-110 drop-shadow-[0_0_8px_rgba(197,160,89,0.5)]" : "text-gray-500 group-hover:text-gray-900 group-hover:scale-110"
+                          actualIsActive ? "text-red-600 dark:text-red-500 scale-110 drop-shadow-[0_0_8px_rgba(220,38,38,0.5)]" : "text-muted-foreground group-hover:text-foreground group-hover:scale-110"
                         )} />
                         {item.title}
                       </Link>

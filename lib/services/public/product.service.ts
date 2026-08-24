@@ -24,6 +24,10 @@ export async function getFeaturedProducts() {
   }
 }
 
+export async function getComboProducts() {
+  return serializeDecimals(await prisma.product.findMany({ where: { isCombo: true, active: true }, include: { images: true, category: true }, orderBy: { comboOrder: 'asc' } }));
+}
+
 export async function getBestSellingProducts() {
   try {
     const results = await prisma.product.findMany({

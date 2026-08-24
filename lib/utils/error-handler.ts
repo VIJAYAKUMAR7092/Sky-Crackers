@@ -39,7 +39,7 @@ export async function withErrorHandler(
         return errorResponse('Record not found.', 'NOT_FOUND', 404);
       }
       // Log other Prisma errors but do not expose details to the client
-      return errorResponse('Database operation failed.', 'DATABASE_ERROR', 500);
+      return errorResponse('Database operation failed: ' + error.message, 'DATABASE_ERROR', 500);
     }
 
     if (error instanceof Prisma.PrismaClientValidationError) {

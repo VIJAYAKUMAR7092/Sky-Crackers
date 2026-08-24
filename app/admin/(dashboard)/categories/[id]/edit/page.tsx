@@ -25,7 +25,7 @@ export default async function EditCategoryPage({ params }: { params: Promise<{ i
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4 border-b pb-4">
-        <Link href="/admin/categories" className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+        <Link href="/admin/categories" className="p-2 hover:bg-muted/50 dark:hover:bg-slate-800 rounded-full transition-colors">
           <ArrowLeft className="w-5 h-5 text-muted-foreground" />
         </Link>
         <div>
