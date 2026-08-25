@@ -14,10 +14,11 @@ export default function MobileProductRow({ product }: MobileProductRowProps) {
   const addItem = useCartStore((state) => state.addItem);
   const updateQuantity = useCartStore((state) => state.updateQuantity);
   const removeItem = useCartStore((state) => state.removeItem);
-  const cartItems = useCartStore((state) => state.items);
   
-  const cartItem = cartItems.find(item => item.product.id === product.id);
-  const inCartQty = cartItem ? cartItem.quantity : 0;
+  const inCartQty = useCartStore((state) => {
+    const item = state.items.find(i => i.product.id === product.id);
+    return item ? item.quantity : 0;
+  });
   const rowTotal = inCartQty * Number(product.sellingPrice);
 
   const [isZoomed, setIsZoomed] = useState(false);

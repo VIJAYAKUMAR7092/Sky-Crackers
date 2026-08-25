@@ -1,11 +1,9 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
-import { Search, ChevronRight, Check, Sparkles, Filter, SlidersHorizontal, ArrowDownWideNarrow } from "lucide-react";
-import { getProducts, getAllCategories } from "@/lib/services/public/product.service";
-import ScrollReveal from "@/components/public/ui/ScrollReveal";
-import ShopClientView from "@/components/public/shop/ShopClientView";
-
-export const dynamic = 'force-dynamic';
+import { Search, Filter } from "lucide-react";
+import { getAllCategories } from "@/lib/services/public/product.service";
+import ShopContent from "@/components/public/shop/ShopContent";
+import ShopSkeleton from "@/components/public/shop/ShopSkeleton";
 
 export const metadata = {
   title: "Shop Premium Fireworks | Sky Crackers",
@@ -22,48 +20,11 @@ export default async function ShopPage({
   const categoryId = categoryIdParam === 'all' ? undefined : categoryIdParam;
   const search = typeof resolvedSearchParams.search === 'string' ? resolvedSearchParams.search : undefined;
 
-  // We fetch a high limit for wholesale view so we can show all products grouped
-  const { products } = await getProducts({
-    categoryId,
-    search,
-    limit: 1000 
-  });
-  
   const categories = await getAllCategories();
-
-  // Group products by category, preserving the strict displayOrder from categories
-  const tempGroups: Record<string, any[]> = {};
-  
-  products.forEach((product: any) => {
-    const catName = product.category?.name || "Uncategorized";
-    if (!tempGroups[catName]) {
-      tempGroups[catName] = [];
-    }
-    tempGroups[catName].push(product);
-  });
-
-  const groupedProducts: Record<string, any[]> = {};
-  
-  // 1. Insert groups in the exact order of sorted categories
-  categories.forEach((cat: any) => {
-    if (tempGroups[cat.name] && tempGroups[cat.name].length > 0) {
-      groupedProducts[cat.name] = tempGroups[cat.name];
-    }
-  });
-
-  // 2. Append any leftover groups (e.g. Uncategorized)
-  Object.keys(tempGroups).forEach(key => {
-    if (!groupedProducts[key]) {
-      groupedProducts[key] = tempGroups[key];
-    }
-  });
-
-  // Calculate total products count for "All Products" link from the categories counts
   const totalProductsCount = categories.reduce((sum, cat: any) => sum + (cat._count?.products || 0), 0);
 
   return (
     <div className="min-h-screen bg-white pb-20 text-gray-900">
-      
       <div className="container mx-auto px-4 mt-6">
         <div className="flex flex-col lg:flex-row gap-6">
           
@@ -124,15 +85,15 @@ export default async function ShopPage({
             </div>
           </aside>
 
-          {/* Main Content */}
-          <ShopClientView 
-            products={products}
-            groupedProducts={groupedProducts}
-            categories={categories}
-            categoryId={categoryId}
-            search={search}
-            totalProductsCount={totalProductsCount}
-          />
+          {/* Main Content with Suspense */}
+          <Suspense fallback={<ShopSkeleton />}>
+            <ShopContent 
+              categoryId={categoryId} 
+              search={search} 
+              categories={categories} 
+              totalProductsCount={totalProductsCount} 
+            />
+          </Suspense>
         </div>
       </div>
     </div>

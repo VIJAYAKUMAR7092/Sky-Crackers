@@ -15,10 +15,11 @@ interface ProductListItemProps {
 export default function ProductListItem({ product, index }: ProductListItemProps) {
   const addItem = useCartStore((state) => state.addItem);
   const updateQuantity = useCartStore((state) => state.updateQuantity);
-  const cartItems = useCartStore((state) => state.items);
   
-  const cartItem = cartItems.find(item => item.product.id === product.id);
-  const inCartQty = cartItem ? cartItem.quantity : 0;
+  const inCartQty = useCartStore((state) => {
+    const item = state.items.find(i => i.product.id === product.id);
+    return item ? item.quantity : 0;
+  });
   
   const [mounted, setMounted] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);

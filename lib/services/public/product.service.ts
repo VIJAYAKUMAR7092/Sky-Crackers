@@ -1,7 +1,8 @@
 import { serializeDecimals } from '@/lib/utils/serialization';
-﻿import prisma from "@/lib/db/prisma";
+import prisma from "@/lib/db/prisma";
+import { unstable_cache } from 'next/cache';
 
-export async function getFeaturedProducts() {
+export const getFeaturedProducts = unstable_cache(async () => {
   try {
     const results = await prisma.product.findMany({
       where: { 
@@ -22,13 +23,13 @@ export async function getFeaturedProducts() {
     console.error("Error fetching featured products:", error);
     return [];
   }
-}
+}, ['public-featured-products'], { revalidate: 3600, tags: ['products'] });
 
-export async function getComboProducts() {
+export const getComboProducts = unstable_cache(async () => {
   return serializeDecimals(await prisma.product.findMany({ where: { isCombo: true, active: true }, include: { images: true, category: true }, orderBy: { comboOrder: 'asc' } }));
-}
+}, ['public-combo-products'], { revalidate: 3600, tags: ['products'] });
 
-export async function getBestSellingProducts() {
+export const getBestSellingProducts = unstable_cache(async () => {
   try {
     const results = await prisma.product.findMany({
       where: { 
@@ -49,14 +50,13 @@ export async function getBestSellingProducts() {
     console.error("Error fetching best selling products:", error);
     return [];
   }
-}
+}, ['public-bestselling-products'], { revalidate: 3600, tags: ['products'] });
 
-export async function getProducts(params?: { categoryId?: string, search?: string, limit?: number, skip?: number }) {
+export const getProducts = unstable_cache(async (params?: { categoryId?: string, search?: string, limit?: number, skip?: number }) => {
   try {
     const whereClause: any = { active: true };
     
     if (params?.categoryId) {
-      // Support both CUID (from sidebar) and slug (from footer)
       whereClause.OR = [
         { categoryId: params.categoryId },
         { category: { slug: params.categoryId } }
@@ -104,9 +104,9 @@ export async function getProducts(params?: { categoryId?: string, search?: strin
     console.error("Error fetching products:", error);
     return { products: [], total: 0 };
   }
-}
+}, ['public-products-list'], { revalidate: 3600, tags: ['products'] });
 
-export async function getProductBySlug(slug: string) {
+export const getProductBySlug = unstable_cache(async (slug: string) => {
   try {
     const result = await prisma.product.findUnique({
       where: { slug },
@@ -122,9 +122,9 @@ export async function getProductBySlug(slug: string) {
     console.error("Error fetching product by slug:", error);
     return null;
   }
-}
+}, ['public-product-slug'], { revalidate: 3600, tags: ['products'] });
 
-export async function getAllCategories() {
+export const getAllCategories = unstable_cache(async () => {
   try {
     return await prisma.category.findMany({
       where: { active: true },
@@ -139,4 +139,4 @@ export async function getAllCategories() {
     console.error("Error fetching categories:", error);
     return [];
   }
-}
+}, ['public-all-categories'], { revalidate: 3600, tags: ['categories'] });

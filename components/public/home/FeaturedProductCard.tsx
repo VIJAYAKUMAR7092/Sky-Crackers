@@ -12,13 +12,12 @@ interface FeaturedProductCardProps {
 
 export default function FeaturedProductCard({ product }: FeaturedProductCardProps) {
   const addItem = useCartStore((state) => state.addItem);
-  const cartItems = useCartStore((state) => state.items);
-  
   const [localQty, setLocalQty] = useState(1);
   const [isAdded, setIsAdded] = useState(false);
-
-  const cartItem = cartItems.find(item => item.product.id === product.id);
-  const inCartQty = cartItem ? cartItem.quantity : 0;
+  const inCartQty = useCartStore((state) => {
+    const item = state.items.find(i => i.product.id === product.id);
+    return item ? item.quantity : 0;
+  });
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();

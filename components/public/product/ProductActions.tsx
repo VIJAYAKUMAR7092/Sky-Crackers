@@ -24,9 +24,10 @@ export default function ProductActions({ product }: ProductActionsProps) {
   const [qty, setQty] = useState(1);
   const router = useRouter();
   const addItem = useCartStore((state) => state.addItem);
-  const cartItems = useCartStore((state) => state.items);
-  const cartItem = cartItems.find((i) => i.product.id === product.id);
-  const currentCartQty = cartItem ? cartItem.quantity : 0;
+  const currentCartQty = useCartStore((state) => {
+    const item = state.items.find(i => i.product.id === product.id);
+    return item ? item.quantity : 0;
+  });
   
   const [added, setAdded] = useState(false);
   const isOutOfStock = product.stockStatus === "OUT_OF_STOCK";

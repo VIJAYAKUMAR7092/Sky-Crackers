@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import prisma from "@/lib/db/prisma";
 import Link from "next/link";
 import Image from "next/image";
@@ -25,7 +25,7 @@ export async function generateMetadata() {
   };
 }
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
 export default async function HomePage() {
     const combos = await prisma.product.findMany({

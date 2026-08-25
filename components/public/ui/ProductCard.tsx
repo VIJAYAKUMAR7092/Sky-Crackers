@@ -15,15 +15,14 @@ export default function ProductCard({ product }: ProductCardProps) {
   const addItem = useCartStore((state) => state.addItem);
   const removeItem = useCartStore((state) => state.removeItem);
   const updateQuantity = useCartStore((state) => state.updateQuantity);
-  const cartItems = useCartStore((state) => state.items);
-  
   const toggleWishlist = useWishlistStore((state) => state.toggleWishlist);
   const isInWishlist = useWishlistStore((state) => state.isInWishlist);
   
   const isLiked = isInWishlist(product.id);
-  
-  const cartItem = cartItems.find(item => item.product.id === product.id);
-  const inCartQty = cartItem ? cartItem.quantity : 0;
+  const inCartQty = useCartStore((state) => {
+    const item = state.items.find(i => i.product.id === product.id);
+    return item ? item.quantity : 0;
+  });
 
   const handleIncrement = (e: React.MouseEvent) => {
     e.preventDefault();
