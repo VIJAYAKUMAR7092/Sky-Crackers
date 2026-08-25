@@ -83,7 +83,7 @@ export default function FeaturedProductCard({ product }: FeaturedProductCardProp
       )}
 
       {/* Image Container */}
-      <Link href={`/product/${product.slug}`} className="relative h-48 sm:h-56 w-full overflow-hidden flex items-center justify-center bg-gray-50 p-6">
+      <div className="relative h-48 sm:h-56 w-full overflow-hidden flex items-center justify-center bg-gray-50 p-6">
         <Image 
           src={product.images?.[0]?.url || "/placeholder.png"}
           alt={product.name}
@@ -91,18 +91,18 @@ export default function FeaturedProductCard({ product }: FeaturedProductCardProp
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
           className="object-contain p-4 group-hover:scale-110 transition-transform duration-500 z-0"
         />
-      </Link>
+      </div>
 
       {/* Content Container */}
       <div className="relative p-4 flex flex-col flex-grow bg-white">
         
         {/* Category & Title */}
         <div className="mb-2">
-          <Link href={`/product/${product.slug}`}>
+          <div>
             <h3 className="font-bold text-gray-800 text-sm md:text-base group-hover:text-primary transition-colors duration-200 line-clamp-2 leading-tight min-h-[40px]">
               {product.name}
             </h3>
-          </Link>
+          </div>
         </div>
         
         <div className="mt-auto flex flex-col gap-3">

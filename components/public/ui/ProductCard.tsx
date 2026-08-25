@@ -129,11 +129,11 @@ export default function ProductCard({ product }: ProductCardProps) {
       <div className="p-3 flex flex-col flex-1 bg-white">
         
         {/* Title */}
-        <Link href={`/product/${product.slug}`} className="mb-2">
+        <div className="mb-2">
           <h3 className="font-bold text-xs sm:text-sm text-gray-900 group-hover:text-primary transition-colors duration-300 line-clamp-2 leading-tight">
             {product.name}
           </h3>
-        </Link>
+        </div>
         
         {/* Icons row */}
         <div className="flex items-center gap-2 mb-1.5">

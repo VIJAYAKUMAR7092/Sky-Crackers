@@ -117,117 +117,56 @@ export default async function HomePage() {
       {/* 1. HERO SECTION */}
       <section className="relative w-full overflow-hidden bg-[#050505]">
         <HeroSlider banners={displayBanners} />
-      </section>            {/* 2. PREMIUM SHOP NOW CTA */}
-        <section className="w-full py-10 sm:py-14 flex justify-center items-center bg-white relative z-10 overflow-hidden">
-          
-          
-
-          
-          
-        <div className="relative animate-[luxuryFloat_6s_ease-in-out_infinite] z-10 group">
+      </section>            {/* 2. EXACT SHOP NOW CTA */}
+        <section className="w-full py-4 sm:py-8 md:py-10 relative z-10 bg-[#FCF8E8] flex justify-center">
+          <div className="relative w-[95%] sm:w-[85%] md:w-[75%] max-w-[1000px] aspect-[1024/409]">
+            <Image 
+              src="/images/shop-banner.jpg" 
+              alt="Shop Fireworks Collection" 
+              fill 
+              className="object-contain"
+              priority
+            />
             
-            {/* WhatsApp style Expanding Bubbles */}
-            <div className="absolute inset-0 rounded-full bg-[#dca42b] opacity-40 animate-[luxuryPing_2s_ease-out_infinite] pointer-events-none"></div>
-            <div className="absolute inset-0 rounded-full bg-[#fce074] opacity-30 animate-[luxuryPing_2.5s_ease-out_infinite_0.8s] pointer-events-none"></div>
-
+            {/* Clickable Button Area with Animation */}
             <Link 
               href="/shop"
-              className="relative flex items-center justify-center gap-3 px-8 py-3.5 sm:px-12 sm:py-5 bg-gradient-to-r from-[#dca42b] via-[#fce074] to-[#dca42b] rounded-full font-black text-sm sm:text-base text-gray-900 shadow-[0_4px_15px_rgba(220,164,43,0.3)] hover:shadow-[0_8px_30px_rgba(220,164,43,0.6)] transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] border-2 border-[#fef1a7]"
+              className="absolute z-20 group cursor-pointer"
+              style={{
+                left: '29.5%',
+                top: '32.5%',
+                width: '41%',
+                height: '35%',
+                borderRadius: '100px'
+              }}
             >
-              <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none">
-                {/* Gentle Red Glow */}
-                <span className="absolute inset-0 shadow-[0_0_20px_rgba(225,29,72,0.5)] animate-[luxuryGlow_4s_ease-in-out_infinite]"></span>
-                
-                {/* Shine Sweep */}
-                <span className="absolute inset-0 -translate-x-[200%] animate-[luxuryShine_5s_infinite_linear] bg-gradient-to-r from-transparent via-white/80 to-transparent skew-x-12 w-1/2"></span>
-              </div>
-  
-              <span className="tracking-[0.2em] uppercase relative z-10 drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">Shop Now</span>
-              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1.5 transition-transform duration-300 relative z-10" />
+              {/* Pulsing glow behind/around the button */}
+              <span className="absolute inset-0 rounded-[100px] shadow-[0_0_20px_rgba(255,215,0,0.5)] animate-[luxuryPulse_3s_infinite] opacity-50 group-hover:opacity-100 transition-opacity duration-300"></span>
+              
+              {/* Shine sweep effect inside the button area */}
+              <span className="absolute inset-0 rounded-[100px] overflow-hidden">
+                <span className="absolute inset-0 -translate-x-[200%] animate-[luxuryShine_3s_infinite_linear] bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 w-1/2"></span>
+              </span>
             </Link>
           </div>
+
           <style dangerouslySetInnerHTML={{__html: `
-            @keyframes syncCycle1 {
-              0%, 30% { opacity: 1; transform: scale(1); }
-              33%, 97% { opacity: 0; transform: scale(0.8); }
-              100% { opacity: 1; transform: scale(1); }
-            }
-            @keyframes syncCycle2 {
-              0%, 30% { opacity: 0; transform: scale(0.8); }
-              33%, 63% { opacity: 1; transform: scale(1); }
-              66%, 100% { opacity: 0; transform: scale(0.8); }
-            }
-            @keyframes syncCycle3 {
-              0%, 63% { opacity: 0; transform: scale(0.8); }
-              66%, 97% { opacity: 1; transform: scale(1); }
-              100% { opacity: 0; transform: scale(0.8); }
-            }
-
-            @keyframes fountainSparks {
-              0% { transform: translateY(0) scale(1); opacity: 1; }
-              100% { transform: translateY(-60px) scale(0); opacity: 0; }
-            }
-            @keyframes fireworkBurst {
-              0% { transform: translateY(0) scale(1); opacity: 1; }
-              100% { transform: translateY(-60px) scale(0); opacity: 0; }
-            }
-
-            @keyframes rocketFloat {
-              0%, 100% { transform: translateY(0) rotate(0deg); }
-              50% { transform: translateY(-20px) rotate(5deg); }
-            }
-            @keyframes flicker {
-              0%, 100% { opacity: 1; transform: scaleY(1); }
-              50% { opacity: 0.8; transform: scaleY(0.9); }
-            }
-            @keyframes fountainBurst {
-              0% { transform: translateY(0) scale(1); opacity: 0.8; }
-              100% { transform: translateY(-10px) scale(1.1); opacity: 1; }
-            }
-            @keyframes fireworkRotate {
-              0% { transform: rotate(0deg) scale(1); }
-              50% { transform: rotate(180deg) scale(1.1); }
-              100% { transform: rotate(360deg) scale(1); }
-            }
-            @keyframes fireworkDash {
-              0% { stroke-dashoffset: 25; opacity: 1; }
-              100% { stroke-dashoffset: 0; opacity: 0; }
-            }
-
-            @keyframes waveSparkler {
-              0%, 100% { transform: rotate(-15deg); }
-              50% { transform: rotate(15deg); }
-            }
-            @keyframes sparklerSparks {
-              0% { transform: translateY(0) scale(1); opacity: 1; }
-              100% { transform: translateY(-30px) scale(0); opacity: 0; }
-            }
-
-            @keyframes luxuryFloat {
-              0%, 100% { transform: translateY(0); }
-              50% { transform: translateY(-3px); }
-            }
-            @keyframes luxuryGlow {
-              0%, 100% { opacity: 0.3; }
-              50% { opacity: 0.8; }
-            }
             @keyframes luxuryShine {
               0% { transform: translateX(-200%) skewX(25deg); opacity: 0; }
-              5%, 15% { opacity: 1; }
-              20% { transform: translateX(200%) skewX(25deg); opacity: 0; }
+              10%, 20% { opacity: 1; }
+              30% { transform: translateX(200%) skewX(25deg); opacity: 0; }
               100% { transform: translateX(200%) skewX(25deg); opacity: 0; }
             }
-            @keyframes luxuryPing {
-              0% { transform: scale(1); opacity: 0.6; }
-              100% { transform: scale(1.35); opacity: 0; }
+            @keyframes luxuryPulse {
+              0%, 100% { box-shadow: 0 0 10px rgba(255,215,0,0.3); }
+              50% { box-shadow: 0 0 25px rgba(255,215,0,0.8); }
             }
           `}} />
         </section>
 
       <BrandMarquee />
 
-        {/* 2. WHY CHOOSE US / FEATURES (Cracker City Style) */}
-        <section className="py-10 sm:py-12 bg-white relative z-30 -mt-8 sm:-mt-10 overflow-hidden">
+      <section className="py-10 sm:py-12 bg-white relative z-30 -mt-8 sm:-mt-10 overflow-hidden">
           <div className="container mx-auto px-4 md:px-6">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
               
@@ -560,6 +499,44 @@ export default async function HomePage() {
 
       {/* 7. TESTIMONIALS SECTION */}
       <TestimonialMarquee />
+
+        {/* 8. LEGAL COMPLIANCE NOTICE */}
+        <section className="py-12 sm:py-16 bg-gray-50 border-t border-gray-100 overflow-hidden">
+          <div className="container mx-auto px-4 md:px-6 max-w-5xl">
+            <ScrollReveal animation="fade-up">
+              <div className="relative group bg-gradient-to-br from-[#1a0505] via-[#2a0808] to-[#1a0505] rounded-3xl p-6 sm:p-10 shadow-2xl border border-red-900/50 overflow-hidden transition-all duration-500 hover:shadow-red-900/30 hover:-translate-y-1">
+                
+                {/* Animated Background Elements */}
+                <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-red-600/10 blur-[80px] rounded-full animate-pulse pointer-events-none"></div>
+                <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 bg-[#fce074]/5 blur-[80px] rounded-full animate-pulse pointer-events-none delay-1000"></div>
+                
+                <div className="relative z-10 flex flex-col items-center text-center">
+                  <div className="flex items-center gap-3 mb-6 sm:mb-8">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-red-950 flex items-center justify-center border border-red-800 shadow-inner group-hover:scale-110 transition-transform duration-500">
+                      <ShieldCheck className="w-6 h-6 sm:w-7 sm:h-7 text-[#fce074]" />
+                    </div>
+                    <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-white tracking-widest uppercase">
+                      Legal Compliance Notice
+                    </h2>
+                  </div>
+                  
+                  <div className="space-y-4 sm:space-y-5 text-sm sm:text-base text-gray-300 leading-relaxed max-w-4xl font-medium text-justify sm:text-center">
+                    <p>
+                      As per 2018 Supreme Court order, online sale of firecrackers are not permitted! We value our customers and at the same time, respect jurisdiction. We request you to add your products to the cart and submit the required crackers through the enquiry button.
+                    </p>
+                    <p>
+                      We will contact you within 24 hrs and confirm the order through WhatsApp or phone call. Please add and submit your enquiries and enjoy your Diwali with <span className="text-[#fce074] font-bold">SKY CRACKERS</span>.
+                    </p>
+                    <p>
+                      <span className="text-[#fce074] font-bold">SKY CRACKERS</span> as a company following 100% legal & statutory compliances and all our shops, go-downs are maintained as per the explosive acts. We send the parcels through registered and legal transport service providers as like every other major companies in Sivakasi is doing so.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+
 
     </div>
   );
