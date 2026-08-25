@@ -20,7 +20,7 @@ interface FilterBarProps {
   className?: string;
 }
 
-export function FilterBar({ onSearch, searchPlaceholder = 'Search...', filters = [], actions, className }: FilterBarProps) {
+export const FilterBar = React.memo(function FilterBar({ onSearch, searchPlaceholder = 'Search...', filters = [], actions, className }: FilterBarProps) {
   return (
     <div className={cn("flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between bg-card p-4 border border-border rounded-xl shadow-sm", className)}>
       <div className="flex flex-col sm:flex-row gap-3 flex-1 w-full sm:w-auto min-w-0">
@@ -56,4 +56,4 @@ export function FilterBar({ onSearch, searchPlaceholder = 'Search...', filters =
       )}
     </div>
   );
-}
+});

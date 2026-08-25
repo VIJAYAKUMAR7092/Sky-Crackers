@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Plus, Edit, Trash2 } from 'lucide-react';
@@ -35,7 +35,7 @@ export function ProductClient({ data, categories }: ProductClientProps) {
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const createQueryString = (name: string, value: string) => {
+  const createQueryString = useCallback((name: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString());
     if (value) {
       params.set(name, value);
@@ -44,7 +44,7 @@ export function ProductClient({ data, categories }: ProductClientProps) {
     }
     params.set('page', '1'); // Reset to page 1 on filter
     return params.toString();
-  };
+  }, [searchParams]);
 
   const handleDelete = async () => {
     if (!deleteId) return;
@@ -63,7 +63,7 @@ export function ProductClient({ data, categories }: ProductClientProps) {
     }
   };
 
-  const columns: ColumnDef<ProductWithCategory>[] = [
+  const columns = useMemo<ColumnDef<ProductWithCategory>[]>(() => [
     {
       header: 'Product',
       accessorKey: 'name',
@@ -130,16 +130,16 @@ export function ProductClient({ data, categories }: ProductClientProps) {
         </div>
       ),
     },
-  ];
+    ], [router]);
 
   const searchParamFilters = Object.fromEntries(searchParams.entries());
 
   return (
     <div className="space-y-6">
       <FilterBar
-        onSearch={(q) => router.push(`?${createQueryString('search', q)}`)}
+        onSearch={useCallback((q: string) => router.push(`?${createQueryString('search', q)}`), [createQueryString, router])}
         searchPlaceholder="Search products by name or SKU..."
-        filters={[
+        filters={useMemo(() => [
           {
             name: 'All Categories',
             options: categories.map(c => ({ label: c.name, value: c.id })),
@@ -163,8 +163,8 @@ export function ProductClient({ data, categories }: ProductClientProps) {
             ],
             value: searchParams.get('stockStatus') || '',
             onChange: (val) => router.push(`?${createQueryString('stockStatus', val)}`)
-          }
-        ]}
+            }
+          ], [categories, searchParams, createQueryString, router])}
         actions={
           <Link href="/admin/products/new">
             <Button>

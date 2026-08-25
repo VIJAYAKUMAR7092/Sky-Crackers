@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState, useRef, useCallback } from 'react';
 import Image from 'next/image';
@@ -20,7 +20,7 @@ interface ImageUploaderProps {
   className?: string;
 }
 
-export function ImageUploader({ images, onChange, maxImages = 10, className }: ImageUploaderProps) {
+export const ImageUploader = React.memo(function ImageUploader({ images, onChange, maxImages = 10, className }: ImageUploaderProps) {
   const [isUploading, setIsUploading] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -260,4 +260,4 @@ export function ImageUploader({ images, onChange, maxImages = 10, className }: I
       />
     </div>
   );
-}
+});

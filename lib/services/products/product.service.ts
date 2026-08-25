@@ -1,4 +1,5 @@
 import { serializeDecimals } from '@/lib/utils/serialization';
+import { revalidateTag } from 'next/cache';
 import prisma from '../../db/prisma';
 import { NotFoundError } from '../../utils/errors';
 import { PaginationQuery } from '../../validations/common';
@@ -173,6 +174,7 @@ export async function createProduct(data: z.infer<typeof import('../../validatio
     include: { images: true, category: true },
   });
 
+  revalidateTag('products', 'max');
   return serializeDecimals(product);
 }
 
@@ -182,9 +184,6 @@ export async function getProductById(id: string) {
     include: {
       images: {
         orderBy: { displayOrder: 'asc' },
-      },
-      category: {
-        select: { name: true, id: true },
       },
     },
   });
@@ -220,6 +219,7 @@ export async function updateProduct(id: string, data: z.infer<typeof import('../
     include: { images: true, category: true },
   });
 
+  revalidateTag('products', 'max');
   return serializeDecimals(product);
 }
 
@@ -229,5 +229,6 @@ export async function softDeleteProduct(id: string) {
     data: { active: false },
   });
 
+  revalidateTag('products', 'max');
   return serializeDecimals(product);
 }

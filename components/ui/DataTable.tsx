@@ -16,7 +16,7 @@ interface DataTableProps<T> {
   isLoading?: boolean;
 }
 
-export function DataTable<T>({ data, columns, keyExtractor, className, isLoading }: DataTableProps<T>) {
+const DataTableInner = function<T>({ data, columns, keyExtractor, className, isLoading }: DataTableProps<T>) {
   if (isLoading) {
     return (
       <div className="w-full border border-border/60 rounded-xl bg-card shadow-sm overflow-hidden animate-pulse">
@@ -78,3 +78,6 @@ export function DataTable<T>({ data, columns, keyExtractor, className, isLoading
     </div>
   );
 }
+
+
+export const DataTable = React.memo(DataTableInner) as typeof DataTableInner;
