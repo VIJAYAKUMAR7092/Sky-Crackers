@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { requireAdmin } from '@/lib/auth/server-auth';
 import { getAdminProducts } from '@/lib/services/products/product.service';
 import { getAdminProductsQuerySchema } from '@/lib/validations/product';
@@ -6,21 +6,25 @@ import { ProductClient } from './components/ProductClient';
 import { serializeDecimals } from '@/lib/utils/serialization';
 import { getActiveCategories } from '@/lib/services/categories/category.service';
 import { Metadata } from 'next';
+import { Loader2 } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Products | Sky Crackers Admin',
 };
 
-export default async function ProductsPage({
-  searchParams,
-}: {
-  searchParams: Promise<Record<string, string | string[] | undefined>>
-}) {
-  await requireAdmin();
+// Simple skeleton that matches the table layout area
+function TableSkeleton() {
+  return (
+    <div className="w-full space-y-4 animate-pulse">
+      <div className="h-16 w-full bg-card border border-border/50 rounded-xl" />
+      <div className="h-64 w-full bg-card border border-border/50 rounded-xl flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-primary/50" />
+      </div>
+    </div>
+  );
+}
 
-  const resolvedParams = await searchParams;
-  
-  // Safely parse params, converting single values appropriately
+async function ProductsDataWrapper({ resolvedParams }: { resolvedParams: Record<string, any> }) {
   const parsedQuery = getAdminProductsQuerySchema.parse({
     page: resolvedParams.page ? Number(resolvedParams.page) : undefined,
     limit: resolvedParams.limit ? Number(resolvedParams.limit) : undefined,
@@ -32,11 +36,23 @@ export default async function ProductsPage({
     sortOrder: resolvedParams.sortOrder as any,
   });
 
-  // Use sequential fetching to avoid overwhelming the local Prisma proxy
-  const data = await getAdminProducts(parsedQuery);
-  const categories = await getActiveCategories();
+  const [data, categories] = await Promise.all([
+    getAdminProducts(parsedQuery),
+    getActiveCategories()
+  ]);
 
   const serializedData = serializeDecimals(data);
+
+  return <ProductClient data={serializedData} categories={categories} />;
+}
+
+export default async function ProductsPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>
+}) {
+  await requireAdmin();
+  const resolvedParams = await searchParams;
 
   return (
     <div className="space-y-6">
@@ -47,7 +63,9 @@ export default async function ProductsPage({
         </p>
       </div>
 
-      <ProductClient data={serializedData} categories={categories} />
+      <Suspense fallback={<TableSkeleton />}>
+        <ProductsDataWrapper resolvedParams={resolvedParams} />
+      </Suspense>
     </div>
   );
 }

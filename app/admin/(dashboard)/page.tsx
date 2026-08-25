@@ -2,7 +2,7 @@ import * as React from "react"
 import { PageHeader } from "../../../components/admin/layout/PageHeader"
 import { Card, CardContent, CardHeader, CardTitle } from "../../../components/ui/Card"
 import { getDashboardStats } from "../../../lib/services/dashboard/dashboard.service"
-import { Sparkles, IndianRupee, Package, ShoppingCart, Users, AlertCircle, Clock, TrendingUp, Ticket, Truck, MapPin, Briefcase, BarChart, FolderTree, ArrowRight, Activity, Bell } from "lucide-react"
+import { Sparkles, IndianRupee, Package, ShoppingCart, Users, AlertCircle, Clock, TrendingUp, Ticket, Truck, MapPin, Briefcase, BarChart, FolderTree, ArrowRight, Activity, Bell, Loader2 } from "lucide-react"
 import Link from "next/link"
 import SalesOverviewChart from '../../../components/admin/dashboard/SalesOverviewChart';
 
@@ -11,18 +11,29 @@ export const metadata = {
   title: "Dashboard | Sky Crackers Admin",
 }
 
-export default async function AdminDashboardPage() {
+function DashboardSkeleton() {
+  return (
+    <div className="w-full space-y-8 animate-pulse">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {[1, 2, 3, 4].map(i => (
+          <div key={i} className="h-32 bg-card border border-border/50 rounded-xl" />
+        ))}
+      </div>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-7">
+        <div className="lg:col-span-5 h-[350px] bg-card border border-border/50 rounded-xl flex items-center justify-center">
+          <Loader2 className="h-8 w-8 animate-spin text-primary/50" />
+        </div>
+        <div className="lg:col-span-2 h-[350px] bg-card border border-border/50 rounded-xl" />
+      </div>
+    </div>
+  );
+}
+
+async function DashboardDataWrapper() {
   const stats = await getDashboardStats()
 
   return (
-    <div className="flex-1 space-y-8 pb-8">
-      <div className="flex items-center justify-between space-y-2">
-        <h2 className="text-3xl font-bold tracking-tight text-foreground">Dashboard</h2>
-        <div className="flex items-center space-x-2">
-          <span className="text-sm text-muted-foreground">Premium Commerce Dashboard</span>
-        </div>
-      </div>
-
+    <>
       {/* 1. HERO ANALYTICS SECTION */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 fade-in-up">
         {/* Revenue */}
@@ -153,6 +164,106 @@ export default async function AdminDashboardPage() {
           </CardContent>
         </Card>
       </div>
+
+      {/* 3. BUSINESS METRICS */}
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 fade-in-up" style={{ animationDelay: '400ms' }}>
+        <Card className="border-border/60 bg-card/50 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium text-foreground">Categories</CardTitle>
+            <FolderTree className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-foreground">{stats.totalCategories}</div>
+            <p className="text-xs text-muted-foreground mt-1">Active categories</p>
+          </CardContent>
+        </Card>
+        
+        <Card className="border-border/60 bg-card/50 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium text-foreground">Pending Orders</CardTitle>
+            <Clock className="h-4 w-4 text-amber-500" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-foreground">{stats.pendingOrders}</div>
+            <p className="text-xs text-muted-foreground mt-1">Awaiting processing</p>
+          </CardContent>
+        </Card>
+        
+        <Card className="border-border/60 bg-card/50 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium text-foreground">Out of Stock</CardTitle>
+            <AlertCircle className="h-4 w-4 text-red-500" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-foreground">{stats.outOfStock}</div>
+            <p className="text-xs text-muted-foreground mt-1">Requires restock</p>
+          </CardContent>
+        </Card>
+        
+        <Card className="border-border/60 bg-card/50 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium text-foreground">Active Coupons</CardTitle>
+            <Ticket className="h-4 w-4 text-blue-500" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-foreground">{stats.activeCoupons}</div>
+            <p className="text-xs text-muted-foreground mt-1">Currently running</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* 4. DELIVERY METRICS */}
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 fade-in-up" style={{ animationDelay: '500ms' }}>
+        <Card className="border-border/60 bg-card/50 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium text-foreground">Delivery Zones</CardTitle>
+            <MapPin className="h-4 w-4 text-emerald-500" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-foreground">{stats.activeDeliveryZones}</div>
+            <p className="text-xs text-muted-foreground mt-1">Active configured zones</p>
+          </CardContent>
+        </Card>
+        
+        <Card className="border-border/60 bg-card/50 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium text-foreground">Covered Pincodes</CardTitle>
+            <Truck className="h-4 w-4 text-blue-500" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-foreground">{stats.coveredPincodes}</div>
+            <p className="text-xs text-muted-foreground mt-1">Total serviceable areas</p>
+          </CardContent>
+        </Card>
+        
+        <Card className="border-border/60 bg-card/50 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium text-foreground">Serviceable States</CardTitle>
+            <Briefcase className="h-4 w-4 text-purple-500" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-foreground">{stats.deliverableStates}</div>
+            <p className="text-xs text-muted-foreground mt-1">States with active delivery</p>
+          </CardContent>
+        </Card>
+      </div>
+    </>
+  )
+}
+
+export default function AdminDashboardPage() {
+  return (
+    <div className="flex-1 space-y-8 pb-8">
+      <div className="flex items-center justify-between space-y-2">
+        <h2 className="text-3xl font-bold tracking-tight text-foreground">Dashboard</h2>
+        <div className="flex items-center space-x-2">
+          <span className="text-sm text-muted-foreground">Premium Commerce Dashboard</span>
+        </div>
+      </div>
+
+      <React.Suspense fallback={<DashboardSkeleton />}>
+        <DashboardDataWrapper />
+      </React.Suspense>
     </div>
   )
 }

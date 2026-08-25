@@ -1,16 +1,54 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { PageHeader } from '@/components/admin/layout/PageHeader';
 import { getAdminCoupons } from '@/lib/services/coupons/coupon.service';
 import { requireAdmin } from '@/lib/auth/server-auth';
 import { CouponsClient } from './components/CouponsClient';
 import { Pagination } from '@/components/ui/Pagination';
 import { Button } from '@/components/ui/Button';
-import { Plus } from 'lucide-react';
+import { Plus, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata = {
   title: 'Coupons | Sky Crackers Admin',
 };
+
+function TableSkeleton() {
+  return (
+    <div className="w-full space-y-4 animate-pulse">
+      <div className="h-16 w-full bg-card border border-border/50 rounded-xl" />
+      <div className="h-64 w-full bg-card border border-border/50 rounded-xl flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-primary/50" />
+      </div>
+    </div>
+  );
+}
+
+async function CouponsDataWrapper({ resolvedParams, page, limit }: { resolvedParams: Record<string, any>, page: number, limit: number }) {
+  const result = await getAdminCoupons({
+    search: resolvedParams.search as string,
+    status: resolvedParams.status as string,
+    type: resolvedParams.type as string,
+    sortBy: resolvedParams.sortBy as string,
+    page: page.toString(),
+    limit: limit.toString(),
+  });
+
+  return (
+    <>
+      <CouponsClient initialData={result.data} searchParams={resolvedParams} />
+      
+      {result.meta.totalPages > 1 && (
+        <div className="mt-6 flex justify-center">
+          <Pagination
+            currentPage={result.meta.page}
+            totalPages={result.meta.totalPages}
+            baseUrl="/admin/coupons"
+          />
+        </div>
+      )}
+    </>
+  );
+}
 
 export default async function CouponsPage({
   searchParams,
@@ -22,15 +60,6 @@ export default async function CouponsPage({
 
   const page = typeof resolvedParams.page === 'string' ? parseInt(resolvedParams.page) : 1;
   const limit = 10;
-
-  const result = await getAdminCoupons({
-    search: resolvedParams.search as string,
-    status: resolvedParams.status as string,
-    type: resolvedParams.type as string,
-    sortBy: resolvedParams.sortBy as string,
-    page: page.toString(),
-    limit: limit.toString(),
-  });
 
   return (
     <div className="space-y-6">
@@ -52,17 +81,9 @@ export default async function CouponsPage({
       </div>
 
       <div className="bg-card border border-border rounded-xl p-4 sm:p-6 shadow-sm">
-        <CouponsClient initialData={result.data} searchParams={resolvedParams} />
-        
-        {result.meta.totalPages > 1 && (
-          <div className="mt-6 flex justify-center">
-            <Pagination
-              currentPage={result.meta.page}
-              totalPages={result.meta.totalPages}
-              baseUrl="/admin/coupons"
-            />
-          </div>
-        )}
+        <Suspense fallback={<TableSkeleton />}>
+          <CouponsDataWrapper resolvedParams={resolvedParams} page={page} limit={limit} />
+        </Suspense>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { PageHeader } from '@/components/admin/layout/PageHeader';
 import { Button } from '@/components/ui/Button';
-import { Plus } from 'lucide-react';
+import { Plus, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { requireAdmin } from '@/lib/auth/server-auth';
 import { getAdminCategories } from '@/lib/services/categories/category.service';
@@ -11,6 +11,36 @@ import { Pagination } from '@/components/ui/Pagination';
 export const metadata = {
   title: 'Categories | Sky Crackers Admin',
 };
+
+function TableSkeleton() {
+  return (
+    <div className="w-full space-y-4 animate-pulse">
+      <div className="h-16 w-full bg-card border border-border/50 rounded-xl" />
+      <div className="h-64 w-full bg-card border border-border/50 rounded-xl flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-primary/50" />
+      </div>
+    </div>
+  );
+}
+
+async function CategoriesDataWrapper({ resolvedParams, safeParams }: { resolvedParams: Record<string, any>, safeParams: any }) {
+  const { data, meta } = await getAdminCategories(safeParams);
+
+  return (
+    <>
+      <CategoryClient initialData={data} meta={meta} searchParams={resolvedParams as Record<string, string>} />
+      
+      {meta.totalPages > 1 && (
+        <Pagination
+          currentPage={meta.page}
+          totalPages={meta.totalPages}
+          baseUrl="/admin/categories"
+          searchParams={resolvedParams as any}
+        />
+      )}
+    </>
+  );
+}
 
 export default async function CategoriesPage({
   searchParams,
@@ -29,8 +59,6 @@ export default async function CategoriesPage({
     page: typeof resolvedParams.page === 'string' ? Number(resolvedParams.page) : 1,
     limit: typeof resolvedParams.limit === 'string' ? Number(resolvedParams.limit) : 100,
   };
-
-  const { data, meta } = await getAdminCategories(safeParams);
 
   return (
     <div className="space-y-6">
@@ -51,16 +79,9 @@ export default async function CategoriesPage({
         </Button>
       </div>
 
-      <CategoryClient initialData={data} meta={meta} searchParams={resolvedParams as Record<string, string>} />
-      
-      {meta.totalPages > 1 && (
-        <Pagination
-          currentPage={meta.page}
-          totalPages={meta.totalPages}
-          baseUrl="/admin/categories"
-          searchParams={searchParams as any}
-        />
-      )}
+      <Suspense fallback={<TableSkeleton />}>
+        <CategoriesDataWrapper resolvedParams={resolvedParams} safeParams={safeParams} />
+      </Suspense>
     </div>
   );
 }
