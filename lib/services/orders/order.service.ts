@@ -28,8 +28,9 @@ export async function getAdminOrders(queryParams: unknown) {
     where.paymentStatus = paymentStatus;
   }
 
-  const total = await prisma.order.count({ where });
-  const orders = await prisma.order.findMany({
+  const [total, orders] = await Promise.all([
+    prisma.order.count({ where }),
+    prisma.order.findMany({
     where,
     skip,
     take: limit,
@@ -45,7 +46,7 @@ export async function getAdminOrders(queryParams: unknown) {
         }
       },
     }
-  });
+  })]);
 
   return {
     data: serializeDecimals(orders),

@@ -1,4 +1,4 @@
-﻿import prisma from '@/lib/db/prisma';
+import prisma from '@/lib/db/prisma';
 
 export interface DashboardStats {
   totalProducts: number;
@@ -32,14 +32,26 @@ export async function getDashboardStats(): Promise<DashboardStats> {
     }
   };
 
-  const totalProducts = await safeCount(prisma.product.count({ where: { active: true } }));
-  const totalOrders = await safeCount(prisma.order.count());
-  const totalCustomers = await safeCount(prisma.customer.count());
-  const totalCategories = await safeCount(prisma.category.count({ where: { active: true } }));
-  const pendingOrders = await safeCount(prisma.order.count({ where: { status: 'PENDING' } }));
-  const outOfStock = await safeCount(prisma.product.count({ where: { stockStatus: 'OUT_OF_STOCK' } }));
-  const activeCoupons = await safeCount(prisma.coupon.count({ where: { active: true, OR: [{ expiryDate: null }, { expiryDate: { gt: new Date() } }] } }));
-  const activeDeliveryZones = await safeCount(prisma.deliveryZone.count({ where: { active: true } }));
+  // Run all counts in parallel for significant performance improvement
+  const [
+    totalProducts,
+    totalOrders,
+    totalCustomers,
+    totalCategories,
+    pendingOrders,
+    outOfStock,
+    activeCoupons,
+    activeDeliveryZones
+  ] = await Promise.all([
+    safeCount(prisma.product.count({ where: { active: true } })),
+    safeCount(prisma.order.count({ where: { isDeleted: false } })),
+    safeCount(prisma.customer.count()),
+    safeCount(prisma.category.count({ where: { active: true } })),
+    safeCount(prisma.order.count({ where: { status: 'PENDING', isDeleted: false } })),
+    safeCount(prisma.product.count({ where: { stockStatus: 'OUT_OF_STOCK' } })),
+    safeCount(prisma.coupon.count({ where: { active: true, OR: [{ expiryDate: null }, { expiryDate: { gt: new Date() } }] } })),
+    safeCount(prisma.deliveryZone.count({ where: { active: true } }))
+  ]);
   
   let coveredPincodes = 0;
   let deliverableStates = 0;
@@ -75,6 +87,7 @@ export async function getDashboardStats(): Promise<DashboardStats> {
   let revenue = 0;
   try {
     const result = await prisma.order.aggregate({
+      where: { isDeleted: false, status: { not: 'CANCELLED' } },
       _sum: {
         finalTotal: true
       }
@@ -109,6 +122,7 @@ export async function getDashboardStats(): Promise<DashboardStats> {
 export async function getRecentOrders(limit: number = 5) {
   try {
     return await prisma.order.findMany({
+      where: { isDeleted: false },
       take: limit,
       orderBy: { createdAt: 'desc' },
       include: { customer: true }
@@ -131,7 +145,6 @@ export async function getInventoryAlerts(limit: number = 5) {
     return [];
   }
 }
-
 
 export async function getSalesChartData(preset: '7days' | 'yesterday' | '30days' | 'thisMonth' = '7days') {
   const now = new Date();
