@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
@@ -19,6 +19,7 @@ interface ProductFormProps {
 export function ProductForm({ categories, initialData, isCombo }: ProductFormProps) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isPending, startTransition] = useTransition();
   const [images, setImages] = useState<ImageItem[]>(
     initialData?.images?.map(img => ({
       id: img.id,
@@ -107,8 +108,10 @@ export function ProductForm({ categories, initialData, isCombo }: ProductFormPro
         return;
       }
 
-      router.push(isCombo ? '/admin/combos' : '/admin/products');
-      router.refresh();
+      startTransition(() => {
+        router.push(isCombo ? '/admin/combos' : '/admin/products');
+        router.refresh();
+      });
     } catch (error) {
       console.error(error);
       alert('An unexpected error occurred.');

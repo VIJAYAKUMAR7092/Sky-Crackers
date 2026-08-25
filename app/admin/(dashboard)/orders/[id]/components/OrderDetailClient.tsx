@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { Save } from 'lucide-react';
@@ -17,6 +17,7 @@ export function OrderDetailClient({ orderId, currentStatus, currentPaymentStatus
   const [status, setStatus] = useState(currentStatus);
   const [paymentStatus, setPaymentStatus] = useState(currentPaymentStatus);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [isPending, startTransition] = useTransition();
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   const handleUpdate = async () => {
@@ -80,9 +81,9 @@ export function OrderDetailClient({ orderId, currentStatus, currentPaymentStatus
         </div>
       </div>
       <div className="flex justify-end pt-2">
-        <Button onClick={handleTriggerUpdate} disabled={isUpdating || (status === currentStatus && paymentStatus === currentPaymentStatus)}>
+        <Button onClick={handleTriggerUpdate} disabled={isUpdating || isPending || (status === currentStatus && paymentStatus === currentPaymentStatus)}>
           <Save className="w-4 h-4 mr-2" />
-          {isUpdating ? 'Updating...' : 'Update Order'}
+          {isUpdating || isPending ? 'Updating...' : 'Update Order'}
         </Button>
       </div>
 

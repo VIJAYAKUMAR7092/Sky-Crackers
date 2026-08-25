@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useTransition } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Plus, Edit, Trash2 } from 'lucide-react';
@@ -34,6 +34,7 @@ export function ProductClient({ data, categories }: ProductClientProps) {
   const searchParams = useSearchParams();
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   const createQueryString = useCallback((name: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -54,7 +55,7 @@ export function ProductClient({ data, categories }: ProductClientProps) {
         method: 'DELETE',
       });
       if (!res.ok) throw new Error('Failed to delete');
-      router.refresh();
+      startTransition(() => router.refresh());
     } catch (error) {
       alert('Failed to delete product.');
     } finally {

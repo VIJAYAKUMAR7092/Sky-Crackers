@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Eye, Trash2 } from 'lucide-react';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 
 import Link from 'next/link';
 import { format } from 'date-fns';
@@ -23,6 +23,7 @@ export function OrdersClient({ initialData, searchParams }: OrdersClientProps) {
   const router = useRouter();
   const [orderToDelete, setOrderToDelete] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   const handleDelete = async () => {
     if (!orderToDelete) return;
@@ -34,7 +35,7 @@ export function OrdersClient({ initialData, searchParams }: OrdersClientProps) {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed to delete order");
       alert("Order deleted successfully");
-      router.refresh();
+      startTransition(() => router.refresh());
     } catch (err: any) {
       alert(err.message);
     } finally {
@@ -172,7 +173,7 @@ export function OrdersClient({ initialData, searchParams }: OrdersClientProps) {
         onConfirm={handleDelete}
         title="Delete Order"
         description="Are you sure you want to delete this order? This action cannot be undone."
-        confirmText={isDeleting ? "Deleting..." : "Delete"}
+        confirmText={isDeleting || isPending ? "Deleting..." : "Delete"}
         variant="danger"
       />
     </div>
