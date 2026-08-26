@@ -1,10 +1,10 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { ShoppingCart, Menu, X, PhoneCall, MessageCircle, PackageSearch } from "lucide-react";
+import { ShoppingCart, Menu, X, PhoneCall, MessageCircle, PackageSearch, FileText } from "lucide-react";
 import { useCartStore } from "@/lib/store/cart.store";
 import CartDrawer from "../cart/CartDrawer";
 
@@ -183,6 +183,10 @@ export default function Navbar({ settings }: { settings?: any }) {
                   </Link>
                 );
               })}
+              <a href={settings?.priceListUrl || "#"} target={settings?.priceListUrl ? "_blank" : "_self"} rel="noreferrer" className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-red-500 hover:bg-red-600 text-white text-[11px] uppercase tracking-wider font-bold transition-colors shadow-sm whitespace-nowrap ml-2">
+                <FileText className="h-3.5 w-3.5" />
+                Download Price List
+              </a>
             </nav>
 
             {/* Right Actions */}
@@ -259,6 +263,9 @@ export default function Navbar({ settings }: { settings?: any }) {
               <Link href="/shop" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-center gap-2 py-2 rounded-lg bg-red-500 text-white font-bold text-sm">
                 <ShoppingCart className="h-4 w-4" /> Quick Order
               </Link>
+              <a href={settings?.priceListUrl || "#"} target={settings?.priceListUrl ? "_blank" : "_self"} rel="noreferrer" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-center gap-2 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white font-bold text-sm">
+                <FileText className="h-4 w-4" /> Download Price List
+              </a>
             </div>
           </div>
         </div>

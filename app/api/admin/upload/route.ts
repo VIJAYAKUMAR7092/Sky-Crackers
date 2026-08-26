@@ -16,13 +16,13 @@ export const POST = async (request: NextRequest) => {
         return errorResponse('No file uploaded.', 'BAD_REQUEST', 400);
       }
 
-      if (!file.type.startsWith('image/')) {
-        return errorResponse('Only image files are allowed.', 'BAD_REQUEST', 400);
+      if (!file.type.startsWith('image/') && file.type !== 'application/pdf') {
+        return errorResponse('Only image and PDF files are allowed.', 'BAD_REQUEST', 400);
       }
       
-      const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'application/pdf'];
       if (!allowedTypes.includes(file.type)) {
-        return errorResponse('Only PNG, JPG, and WEBP files are allowed.', 'BAD_REQUEST', 400);
+        return errorResponse('Only PNG, JPG, WEBP, and PDF files are allowed.', 'BAD_REQUEST', 400);
       }
 
       const buffer = Buffer.from(await file.arrayBuffer());

@@ -93,19 +93,28 @@ export async function processManualCheckout(data: CheckoutInput) {
 
     const finalTotal = Math.max(0, subtotal - discountAmount + deliveryCharge);
 
-    // 3. Upsert Customer
+    // 3. Upsert Customer with Email Conflict Handling
+    let emailToUse = data.customer.email || undefined;
+    if (emailToUse) {
+      const existingEmail = await tx.customer.findUnique({ where: { email: emailToUse } });
+      if (existingEmail && existingEmail.phone !== data.customer.phone) {
+        // Email belongs to someone else (e.g. family member). Skip updating email to avoid unique constraint 500 error.
+        emailToUse = undefined;
+      }
+    }
+
     const customer = await tx.customer.upsert({
       where: { phone: data.customer.phone },
       update: {
         fullName: data.customer.fullName,
         altPhone: data.customer.altPhone,
-        email: data.customer.email || undefined,
+        email: emailToUse,
       },
       create: {
         fullName: data.customer.fullName,
         phone: data.customer.phone,
         altPhone: data.customer.altPhone,
-        email: data.customer.email || undefined,
+        email: emailToUse,
       }
     });
 

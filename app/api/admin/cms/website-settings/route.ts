@@ -17,6 +17,11 @@ export const PUT = async (request: NextRequest) => {
     await requireAdmin();
     const body = await request.json();
     const result = await updateWebsiteSettings(body);
+    
+    // Revalidate frontend layout so the changes reflect immediately
+    const { revalidatePath } = require('next/cache');
+    revalidatePath('/', 'layout');
+    
     return successResponse(result);
   });
 };

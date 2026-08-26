@@ -1,4 +1,4 @@
-﻿import { NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { processManualCheckout } from "@/lib/services/public/checkout.service";
 import { AppError } from "@/lib/utils/errors";
 import { successResponse, errorResponse } from "@/lib/utils/api-response";
@@ -26,6 +26,7 @@ export async function POST(req: Request) {
     return successResponse(order, 201);
   } catch (error: any) {
     console.error("Checkout Error:", error);
+    require('fs').writeFileSync('checkout-error.log', String(error?.stack || error));
     if (error instanceof AppError) {
       return errorResponse(error.message, error.code, error.statusCode);
     }

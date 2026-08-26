@@ -297,6 +297,7 @@ model WebsiteSettings {
   youtube      String?
   twitter      String?
   footerText   String?
+  priceListUrl String?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }

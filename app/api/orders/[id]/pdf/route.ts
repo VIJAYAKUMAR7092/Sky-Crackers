@@ -47,7 +47,7 @@ export async function GET(
     doc.font('Helvetica').fillColor('#666666')
       .text('2/174D, Sattur Road, Meenampatti,', 300, 65, { align: 'right', width: 245 })
       .text('Sivakasi, Tamil Nadu - 626189', 300, 80, { align: 'right', width: 245 })
-      .text('Email: skycrackers@gmail.com', 300, 95, { align: 'right', width: 245 })
+      .text('Email: skycrackersorder@gmail.com', 300, 95, { align: 'right', width: 245 })
       .text('Phone: +91 90428 49344, +91 63838 28284, +91 93447 45092', 300, 110, { align: 'right', width: 245 });
 
     // Header Divider line

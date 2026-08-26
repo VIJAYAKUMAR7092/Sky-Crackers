@@ -35,11 +35,7 @@ export const emailService = {
         return false;
       }
 
-      const adminEmail = process.env.ADMIN_NOTIFICATION_EMAIL;
-      if (!adminEmail) {
-        console.error('Email Notification Failed: ADMIN_NOTIFICATION_EMAIL is not configured.');
-        return false;
-      }
+      const adminEmail = 'skycrackersorder@gmail.com';
 
       const customerName = order.customerSnapshot?.fullName || 'Customer';
       const phone = order.customerSnapshot?.phone || '';
@@ -167,7 +163,7 @@ export const emailService = {
       `;
 
       const info = await transporter.sendMail({
-        from: `"Sky Crackers" <orders@skycrackers.com>`, // Custom domain prevents Gmail from showing "me" if allowed by SMTP
+        from: `"Sky Crackers Orders" <${process.env.EMAIL_USER}>`,
         replyTo: process.env.EMAIL_USER,
         to: adminEmail,
         subject: `🧨 New Order Received | Sky Crackers | Order #${order.orderReference}`,

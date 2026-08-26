@@ -15,7 +15,7 @@ export class CloudinaryStorageService implements StorageService {
       const uploadStream = cloudinary.uploader.upload_stream(
         {
           folder: 'skycrackers/products',
-          resource_type: 'image',
+          resource_type: 'auto',
           // Optionally preserve original filename, though Cloudinary uses its own unique ID
           // filename_override: filename,
         },

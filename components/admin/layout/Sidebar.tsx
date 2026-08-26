@@ -17,7 +17,8 @@ import {
   LogOut,
   X,
   Sparkles,
-  Gift
+  Gift,
+  FileText
 } from "lucide-react"
 
 export interface NavItem {
@@ -44,6 +45,7 @@ export const sidebarConfig = [
       { title: "Combo Management", href: "/admin/combos", icon: Gift },
       { title: "Customers", href: "/admin/customers", icon: Users },
       { title: "Coupons", href: "/admin/coupons", icon: Ticket },
+      { title: "Price List", href: "/admin/pricelist", icon: FileText },
     ]
   },
   {
