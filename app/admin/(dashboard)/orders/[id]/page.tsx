@@ -4,6 +4,7 @@ import { PageHeader } from '@/components/admin/layout/PageHeader';
 import { requireAdmin } from '@/lib/auth/server-auth';
 import { getOrderById } from '@/lib/services/orders/order.service';
 import { OrderDetailClient } from './components/OrderDetailClient';
+import { DownloadPdfButton } from '@/app/(store)/thank-you/components/DownloadPdfButton';
 import { OrderTimeline } from './components/OrderTimeline';
 import { Badge } from '@/components/ui/Badge';
 import Image from 'next/image';
@@ -37,6 +38,9 @@ export default async function OrderDetailsPage({
             { label: order.orderReference },
           ]}
         />
+        <div className="mt-4 sm:mt-0">
+          <DownloadPdfButton orderId={order.id} orderReference={order.orderReference} />
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

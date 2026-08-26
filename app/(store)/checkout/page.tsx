@@ -10,6 +10,7 @@ import Link from "next/link";
 export default function CheckoutPage() {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
+  const [isOrderPlaced, setIsOrderPlaced] = useState(false);
   const { items, getSubtotal, clearCart, updateQuantity, removeItem } = useCartStore();
   
   const [step, setStep] = useState<2 | 3>(2); // 2 = Details, 3 = Confirm
@@ -32,7 +33,7 @@ export default function CheckoutPage() {
   }, []);
 
   useEffect(() => {
-    if (mounted && items.length === 0) {
+    if (mounted && items.length === 0 && !isOrderPlaced) {
       router.push('/shop');
     }
   }, [mounted, items.length, router]);
@@ -89,10 +90,10 @@ export default function CheckoutPage() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Failed to place order');
 
+      setIsOrderPlaced(true);
       clearCart();
-      router.push('/shop');
-      
-    } catch (err: any) {
+      router.push('/thank-you?order=' + (data.data?.id || data.id || ''));
+} catch (err: any) {
       setError(err.message);
       setLoading(false);
       setStep(2); // Go back to details if error
@@ -320,8 +321,7 @@ export default function CheckoutPage() {
               
               {step === 2 ? (
                 <button
-                  type="submit"
-                  form="checkout-form"
+                  type="button" onClick={(e) => { const form = document.getElementById("checkout-form") as HTMLFormElement; if (form && form.reportValidity()) { e.preventDefault(); setStep(3); window.scrollTo(0,0); } }}
                   disabled={subtotal < 3000}
                   className="w-full bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 text-white py-3.5 rounded-xl font-bold text-lg shadow-lg shadow-red-500/30 flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
