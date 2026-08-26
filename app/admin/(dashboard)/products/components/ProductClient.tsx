@@ -31,6 +31,7 @@ interface ProductClientProps {
 
 export function ProductClient({ data, categories }: ProductClientProps) {
   const router = useRouter();
+  const searchParamsHook = useSearchParams();
   const searchParams = useSearchParams();
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);

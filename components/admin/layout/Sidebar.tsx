@@ -3,7 +3,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "../../ui/utils"
 import {
-  LayoutDashboard,
+  LayoutDashboard, Play,
   Package,
   FolderTree,
   ShoppingCart,
@@ -18,7 +18,8 @@ import {
   X,
   Sparkles,
   Gift,
-  FileText
+  FileText,
+  IndianRupee
 } from "lucide-react"
 
 export interface NavItem {
@@ -51,7 +52,11 @@ export const sidebarConfig = [
   {
     group: "Configuration",
     items: [
-      { title: "Delivery", href: "/admin/delivery", icon: Truck },
+      { title: "Minimum Order", href: "/admin/minimum-order", icon: IndianRupee },
+        { title: "Delivery", href: "/admin/delivery", icon: Truck },
+      { title: "Homepage Categories", href: "/admin/homepage-categories", icon: FolderTree },
+      { title: "Top Banner", href: "/admin/top-banner", icon: LayoutTemplate },
+      { title: "YouTube Section", href: "/admin/youtube-section", icon: Play },
       { title: "Homepage CMS", href: "/admin/cms", icon: LayoutTemplate },
       { title: "Notifications", href: "/admin/notifications", icon: Bell },
       { title: "Settings", href: "/admin/settings", icon: Settings },

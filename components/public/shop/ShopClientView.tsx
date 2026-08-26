@@ -27,6 +27,23 @@ export default function ShopClientView({
 }: ShopClientViewProps) {
   // Try to load initial view mode from localStorage (default to 'list' for wholesale style)
   const [viewMode, setViewMode] = useState<"list" | "grid">("grid");
+  const [sortOption, setSortOption] = useState("Price: Low to High");
+
+  // Sort grouped products based on the selected option
+  const getSortedProducts = (prods: any[]) => {
+    const sorted = [...prods];
+    if (sortOption === "Price: Low to High") {
+      sorted.sort((a, b) => Number(a.sellingPrice) - Number(b.sellingPrice));
+    } else if (sortOption === "Price: High to Low") {
+      sorted.sort((a, b) => Number(b.sellingPrice) - Number(a.sellingPrice));
+    }
+    return sorted;
+  };
+
+  const sortedGroupedProducts: Record<string, any[]> = {};
+  Object.keys(groupedProducts).forEach((key) => {
+    sortedGroupedProducts[key] = getSortedProducts(groupedProducts[key]);
+  });
 
   return (
     <div className="flex-1 w-full max-w-full">
@@ -78,8 +95,12 @@ export default function ShopClientView({
             )}
           </p>
           <div className="flex w-full sm:w-auto justify-between sm:justify-end items-center gap-3">
-            <select className="text-sm border border-gray-300 rounded-md px-3 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none">
-              <option>↑↓ Default</option>
+            <select 
+              value={sortOption}
+              onChange={(e) => setSortOption(e.target.value)}
+              className="text-sm border border-gray-300 rounded-md px-3 py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+            >
+              <option>✨ Default</option>
               <option>Price: Low to High</option>
               <option>Price: High to Low</option>
             </select>
@@ -121,7 +142,7 @@ export default function ShopClientView({
             </div>
           )}
 
-          {Object.entries(groupedProducts).map(([categoryName, categoryProducts]) => (
+          {Object.entries(sortedGroupedProducts).map(([categoryName, categoryProducts]) => (
             <div
               key={categoryName}
               className="bg-white border-0 md:border-2 border-primary/20 rounded-none md:rounded-2xl overflow-hidden shadow-none md:shadow-sm flex flex-col mb-4 md:mb-0"

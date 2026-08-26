@@ -2,7 +2,7 @@
 import { format } from 'date-fns';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { DataTable, ColumnDef } from '@/components/ui/DataTable';
 import { FilterBar } from '@/components/ui/FilterBar';
 import { Badge } from '@/components/ui/Badge';
@@ -17,6 +17,7 @@ interface CustomersClientProps {
 
 export function CustomersClient({ initialData, searchParams }: CustomersClientProps) {
   const router = useRouter();
+  const searchParamsHook = useSearchParams();
 
   const statusFilters = [
     { label: 'All', value: 'all' },
@@ -32,7 +33,7 @@ export function CustomersClient({ initialData, searchParams }: CustomersClientPr
   ];
 
   const handleFilterChange = (key: string, value: string) => {
-    const params = new URLSearchParams(searchParams as Record<string, string>);
+    const params = new URLSearchParams(searchParamsHook.toString());
     if (value && value !== 'all') {
       params.set(key, value);
     } else {
@@ -107,7 +108,7 @@ export function CustomersClient({ initialData, searchParams }: CustomersClientPr
           {
             name: 'Status',
             options: statusFilters,
-            value: searchParams.status || 'all',
+            value: searchParamsHook.get('status') || 'all',
             onChange: (val: string) => handleFilterChange('status', val),
           },
           {

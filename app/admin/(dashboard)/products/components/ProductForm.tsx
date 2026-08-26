@@ -64,10 +64,22 @@ export function ProductForm({ categories, initialData, isCombo }: ProductFormPro
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
     
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
-    }));
+    setFormData(prev => {
+      const newData = {
+        ...prev,
+        [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
+      };
+
+      if (name === 'sellingPrice' && value) {
+        const sp = Number(value);
+        if (!isNaN(sp)) {
+          newData.mrp = (sp * 10).toString();
+          newData.discount = '90';
+        }
+      }
+
+      return newData;
+    });
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -209,14 +221,14 @@ export function ProductForm({ categories, initialData, isCombo }: ProductFormPro
               Pricing
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-              <div className="space-y-2">
-                <Label htmlFor="mrp" className="text-muted-foreground font-medium uppercase tracking-wider text-[10px]">MRP (₹) *</Label>
-                <Input id="mrp" name="mrp" type="number" step="0.01" min="0" value={formData.mrp} onChange={handleChange} required />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="sellingPrice" className="text-muted-foreground font-medium uppercase tracking-wider text-[10px]">Selling Price (₹) *</Label>
-                <Input id="sellingPrice" name="sellingPrice" type="number" step="0.01" min="0" value={formData.sellingPrice} onChange={handleChange} required />
-              </div>
+                <div className="space-y-2">
+                  <Label htmlFor="sellingPrice" className="text-muted-foreground font-medium uppercase tracking-wider text-[10px]">Actual Selling Price (₹) *</Label>
+                  <Input id="sellingPrice" name="sellingPrice" type="number" step="0.01" min="0" value={formData.sellingPrice} onChange={handleChange} required placeholder="e.g. 3000" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="mrp" className="text-muted-foreground font-medium uppercase tracking-wider text-[10px]">Strike-out Box MRP (₹) *</Label>
+                  <Input id="mrp" name="mrp" type="number" step="0.01" min="0" value={formData.mrp} onChange={handleChange} required className="bg-muted" readOnly />
+                </div>
               <div className="space-y-2">
                 <Label htmlFor="discount" className="text-muted-foreground font-medium uppercase tracking-wider text-[10px]">Discount (₹)</Label>
                 <Input id="discount" name="discount" type="number" step="0.01" min="0" value={formData.discount} onChange={handleChange} />

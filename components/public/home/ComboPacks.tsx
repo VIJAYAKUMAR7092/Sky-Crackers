@@ -8,7 +8,7 @@ import { useCartStore } from "@/lib/store/cart.store";
 
 
 
-export default function ComboPacks({ combos }: { combos: any[] }) {
+export default function ComboPacks({ combos, validUpto = "13TH AUGUST" }: { combos: any[], validUpto?: string }) {
   const addItem = useCartStore((state) => state.addItem);
 
   const handleAddToCart = (pack: any) => {
@@ -40,7 +40,7 @@ export default function ComboPacks({ combos }: { combos: any[] }) {
             Sky Crackers <br className="md:hidden" /><span className="text-primary">Special Combo Pack</span>
           </h2>
           <p className="inline-block bg-primary text-white font-bold px-6 py-2 rounded-full uppercase tracking-wider text-sm md:text-base animate-pulse shadow-lg shadow-orange-500/30">
-            Valid up to 13th August
+            Valid up to {validUpto}
           </p>
         </div>
 

@@ -8,7 +8,7 @@ import { ShoppingCart, Menu, X, PhoneCall, MessageCircle, PackageSearch, FileTex
 import { useCartStore } from "@/lib/store/cart.store";
 import CartDrawer from "../cart/CartDrawer";
 
-export default function Navbar({ settings }: { settings?: any }) {
+export default function Navbar({ settings, topBanners = [] }: { settings?: any, topBanners?: string[] }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
@@ -17,11 +17,7 @@ export default function Navbar({ settings }: { settings?: any }) {
   
   const cartItemsCount = useCartStore((state) => state.getTotalItems());
   const [bannerIndex, setBannerIndex] = useState(0);
-  const bannerMessages = [
-    "Welcome to Sky Crackers Up to 90%",
-    "Minimum Tamilnadu Order Rs 3,000",
-    "Minimum Other State Orders 5,000"
-  ];
+  const bannerMessages = topBanners && topBanners.length > 0 ? topBanners : ["Welcome to Sky Crackers Up to 90%", "Minimum Tamilnadu Order Rs 3,000", "Minimum Other State Orders 5,000"];
 
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 0);
@@ -95,11 +91,11 @@ export default function Navbar({ settings }: { settings?: any }) {
                 </div>
                 <span className="text-sm font-bold tracking-wide">+91 90428 49344</span>
               </a>
-              <a href="tel:+916383828284" className="flex items-center gap-2 group text-gray-800 hover:text-[#dc2626] transition-colors">
+              <a href="tel:+916383511818" className="flex items-center gap-2 group text-gray-800 hover:text-[#dc2626] transition-colors">
                 <div className="bg-[#dc2626]/10 p-1.5 rounded-full group-hover:bg-[#dc2626] transition-colors">
                   <PhoneCall className="w-4 h-4 text-[#dc2626] group-hover:text-white animate-[wiggle_2s_infinite]" />
                 </div>
-                <span className="text-sm font-bold tracking-wide">+91 63838 28284</span>
+                <span className="text-sm font-bold tracking-wide">+91 63835 11818</span>
               </a>
               <a href="tel:+919344745092" className="flex items-center gap-2 group text-gray-800 hover:text-[#dc2626] transition-colors">
                 <div className="bg-[#dc2626]/10 p-1.5 rounded-full group-hover:bg-[#dc2626] transition-colors">
@@ -122,11 +118,11 @@ export default function Navbar({ settings }: { settings?: any }) {
                     </div>
                     <span className="text-[10px] sm:text-xs font-bold tracking-wide">+91 90428 49344</span>
                   </a>
-                  <a href="tel:+916383828284" className="flex items-center gap-1.5 group text-gray-800 hover:text-[#dc2626] transition-colors">
+                  <a href="tel:+916383511818" className="flex items-center gap-1.5 group text-gray-800 hover:text-[#dc2626] transition-colors">
                     <div className="bg-[#dc2626]/10 p-1 rounded-full group-hover:bg-[#dc2626] transition-colors">
                       <PhoneCall className="w-3 h-3 text-[#dc2626] group-hover:text-white animate-[wiggle_2s_infinite]" />
                     </div>
-                    <span className="text-[10px] sm:text-xs font-bold tracking-wide">+91 63838 28284</span>
+                    <span className="text-[10px] sm:text-xs font-bold tracking-wide">+91 63835 11818</span>
                   </a>
                   <a href="tel:+919344745092" className="flex items-center gap-1.5 group text-gray-800 hover:text-[#dc2626] transition-colors">
                     <div className="bg-[#dc2626]/10 p-1 rounded-full group-hover:bg-[#dc2626] transition-colors">

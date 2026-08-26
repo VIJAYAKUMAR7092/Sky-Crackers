@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { DataTable, ColumnDef } from '@/components/ui/DataTable';
 import { FilterBar } from '@/components/ui/FilterBar';
 import { Badge } from '@/components/ui/Badge';
@@ -18,6 +18,7 @@ interface DeliveryClientProps {
 
 export function DeliveryClient({ initialData, searchParams }: DeliveryClientProps) {
   const router = useRouter();
+  const searchParamsHook = useSearchParams();
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -55,7 +56,7 @@ export function DeliveryClient({ initialData, searchParams }: DeliveryClientProp
   ];
 
   const handleFilterChange = (key: string, value: string) => {
-    const params = new URLSearchParams(searchParams as Record<string, string>);
+    const params = new URLSearchParams(searchParamsHook.toString());
     if (value && value !== 'all') {
       params.set(key, value);
     } else {
@@ -200,19 +201,19 @@ export function DeliveryClient({ initialData, searchParams }: DeliveryClientProp
           {
             name: 'State',
             options: stateFilters,
-            value: (searchParams.state as string) || 'all',
+            value: searchParamsHook.get('state') || 'all',
             onChange: (val: string) => handleFilterChange('state', val),
           },
           {
             name: 'Courier',
             options: courierFilters,
-            value: (searchParams.courier as string) || 'all',
+            value: searchParamsHook.get('courier') || 'all',
             onChange: (val: string) => handleFilterChange('courier', val),
           },
           {
             name: 'Status',
             options: statusFilters,
-            value: (searchParams.status as string) || 'all',
+            value: searchParamsHook.get('status') || 'all',
             onChange: (val: string) => handleFilterChange('status', val),
           },
           {

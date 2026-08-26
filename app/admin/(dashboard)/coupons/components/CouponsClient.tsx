@@ -2,7 +2,7 @@
 import { format } from 'date-fns';
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { DataTable, ColumnDef } from '@/components/ui/DataTable';
 import { FilterBar } from '@/components/ui/FilterBar';
 import { Badge } from '@/components/ui/Badge';
@@ -20,6 +20,7 @@ interface CouponsClientProps {
 
 export function CouponsClient({ initialData, searchParams }: CouponsClientProps) {
   const router = useRouter();
+  const searchParamsHook = useSearchParams();
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -44,7 +45,7 @@ export function CouponsClient({ initialData, searchParams }: CouponsClientProps)
   ];
 
   const handleFilterChange = (key: string, value: string) => {
-    const params = new URLSearchParams(searchParams as Record<string, string>);
+    const params = new URLSearchParams(searchParamsHook.toString());
     if (value && value !== 'all') {
       params.set(key, value);
     } else {
@@ -172,13 +173,13 @@ export function CouponsClient({ initialData, searchParams }: CouponsClientProps)
           {
             name: 'Status',
             options: statusFilters,
-            value: (searchParams.status as string) || 'all',
+            value: searchParamsHook.get('status') || 'all',
             onChange: (val: string) => handleFilterChange('status', val),
           },
           {
             name: 'Type',
             options: typeFilters,
-            value: (searchParams.type as string) || 'all',
+            value: searchParamsHook.get('type') || 'all',
             onChange: (val: string) => handleFilterChange('type', val),
           },
           {

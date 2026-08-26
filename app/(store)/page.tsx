@@ -52,24 +52,14 @@ export default async function HomePage() {
   ]);
 
 
-  const targetCategories = [
-    { name: "Sparklers", image: CATEGORY_IMAGES.sparklers },
-    { name: "Flower Pots", image: CATEGORY_IMAGES.flowerPots },
-    { name: "Rockets", image: CATEGORY_IMAGES.rockets },
-    { name: "Chakkars", image: CATEGORY_IMAGES.chakkars },
-    { name: "Fancy Shots", image: CATEGORY_IMAGES.fancyShots },
-    { name: "Sound Crackers", image: CATEGORY_IMAGES.soundCrackers },
-    { name: "Kids Collection", image: CATEGORY_IMAGES.kidsCollection },
-    { name: "Gift Boxes", image: CATEGORY_IMAGES.giftBoxes }
-  ];
-  
-  const displayCategories = targetCategories.map(cat => {
+  const homePageCats = await prisma.homePageCategory.findMany({ orderBy: { sortOrder: 'asc' } });
+  const displayCategories = homePageCats.map(cat => {
     const found = dbCategories.find(c => c.name.toLowerCase().includes(cat.name.toLowerCase()));
     return {
       id: found?.id || cat.name.toLowerCase().replace(/\s+/g, '-'),
       name: found?.name || cat.name,
       slug: found?.slug || cat.name.toLowerCase().replace(/\s+/g, '-'),
-      image: found?.image || cat.image
+      image: found?.image || cat.image || "/images/home/sky-crackers-tv.jpg"
     };
   });
 
@@ -177,12 +167,13 @@ export default async function HomePage() {
             priority
           />
           <Link 
-            href="/shop"
-            className="absolute z-20 group cursor-pointer"
-            style={{ left: '29.5%', top: '32.5%', width: '41%', height: '35%', borderRadius: '100px' }}
-          >
-            <span className="absolute inset-0 rounded-[100px] shadow-[0_0_20px_rgba(255,215,0,0.5)] animate-[luxuryPulse_3s_infinite] opacity-50 group-hover:opacity-100 transition-opacity duration-300"></span>
-          </Link>
+              href="/shop"
+              className="absolute z-20 group cursor-pointer animate-[bounce_2s_infinite]"
+              style={{ left: '29.5%', top: '32.5%', width: '41%', height: '35%', borderRadius: '100px' }}
+            >
+              <div className="absolute inset-0 rounded-[100px] border-2 border-yellow-400 shadow-[0_0_20px_rgba(255,215,0,0.8)]"></div>
+              <div className="absolute inset-0 rounded-[100px] bg-yellow-400 opacity-40 animate-ping"></div>
+            </Link>
         </div>
       </section>
 
@@ -240,7 +231,7 @@ export default async function HomePage() {
           </div>
         </section>
 
-      <ComboPacks combos={comboProducts} />
+      <ComboPacks combos={comboProducts} validUpto={websiteSettings?.comboValidUpto || "13TH AUGUST"} />
 
       {/* 3. CATEGORIES SECTION */}
       <section className="py-20 bg-gray-50">
@@ -363,9 +354,9 @@ export default async function HomePage() {
                 </p>
                 
                 <div className="mt-12">
-                  <a href="https://youtube.com/@skycrackersofficial" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-extrabold px-8 py-4 rounded-full transition-all shadow-xl hover:shadow-red-600/30 hover:-translate-y-1 text-lg group">
+                  <a href={displayVideos[0]?.youtubeUrl || "https://youtube.com/@skycrackersofficial"} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-extrabold px-8 py-4 rounded-full transition-all shadow-xl hover:shadow-red-600/30 hover:-translate-y-1 text-lg group">
                     <svg className="w-7 h-7 fill-current group-hover:animate-bounce" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
-                    Visit Us Live
+                    Watch Now
                   </a>
                 </div>
               </ScrollReveal>

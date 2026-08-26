@@ -19,6 +19,10 @@ export default async function CombosPage() {
     orderBy: { comboOrder: 'asc' }
   });
 
+  const settings = await prisma.websiteSettings.findUnique({
+    where: { id: 'global' }
+  });
+
   const serializedData = serializeDecimals(combos);
 
   return (
@@ -30,7 +34,7 @@ export default async function CombosPage() {
         </p>
       </div>
 
-      <ComboClient data={serializedData} />
+      <ComboClient data={serializedData} validUpto={settings?.comboValidUpto || "13TH AUGUST"} />
     </div>
   );
 }

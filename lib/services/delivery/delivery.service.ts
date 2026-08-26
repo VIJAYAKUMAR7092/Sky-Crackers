@@ -56,8 +56,10 @@ export async function getAdminDeliveryZones(queryParams: Record<string, string |
     orderBy,
   });
 
+  const { serializeDecimals } = await import('@/lib/utils/serialization');
+
   return {
-    data: zones,
+    data: serializeDecimals(zones),
     meta: {
       total,
       page: Number(page),
@@ -76,7 +78,8 @@ export async function getDeliveryZoneById(id: string) {
     throw new DeliveryZoneNotFoundError();
   }
 
-  return zone;
+  const { serializeDecimals } = await import('@/lib/utils/serialization');
+  return serializeDecimals(zone);
 }
 
 export async function createDeliveryZone(data: Record<string, unknown>) {

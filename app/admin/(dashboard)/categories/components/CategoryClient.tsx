@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { DataTable, ColumnDef } from '@/components/ui/DataTable';
 import { FilterBar } from '@/components/ui/FilterBar';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
@@ -19,6 +19,7 @@ interface CategoryClientProps {
 
 export function CategoryClient({ initialData, searchParams }: CategoryClientProps) {
   const router = useRouter();
+  const searchParamsHook = useSearchParams();
   
   const isFiltered = !!searchParams.search || (searchParams.active && searchParams.active !== 'all');
   const [items, setItems] = useState(initialData);
@@ -196,7 +197,7 @@ export function CategoryClient({ initialData, searchParams }: CategoryClientProp
   };
 
   const handleFilterChange = (key: string, value: string) => {
-    const params = new URLSearchParams(searchParams as Record<string, string>);
+    const params = new URLSearchParams(searchParamsHook.toString());
     if (value && value !== 'all') {
       params.set(key, value);
     } else {
@@ -218,7 +219,7 @@ export function CategoryClient({ initialData, searchParams }: CategoryClientProp
             {
               name: 'Status',
               options: statusFilters,
-              value: searchParams.active || 'all',
+              value: searchParamsHook.get('active') || 'all',
               onChange: (val: string) => handleFilterChange('active', val),
             },
           ]}

@@ -188,6 +188,39 @@ export default function ReportClient({ initialData, summaryData, currentPreset }
           </div>
         )}
 
+        {activeTab === 'orders' && (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
+            <Card className="border-border/60 shadow-lg bg-card/50 backdrop-blur-sm fade-in-up">
+              <CardHeader><CardTitle className="text-foreground">Order Status Distribution ({currentPreset})</CardTitle></CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {Object.entries(initialData.orders).map(([status, count]) => {
+                    let color = 'bg-secondary text-secondary-foreground';
+                    if (status === 'DELIVERED') color = 'bg-green-500/10 text-green-600 border border-green-500/20';
+                    else if (status === 'CANCELLED') color = 'bg-destructive/10 text-destructive border border-destructive/20';
+                    else if (status === 'PENDING') color = 'bg-amber-500/10 text-amber-600 border border-amber-500/20';
+                    else if (['CONFIRMED', 'PACKED', 'SHIPPED'].includes(status)) color = 'bg-blue-500/10 text-blue-600 border border-blue-500/20';
+                    
+                    return (
+                      <div key={status} className="flex justify-between items-center border-b border-border pb-3 last:border-0 last:pb-0">
+                        <span className="font-medium text-foreground capitalize">{status.toLowerCase()}</span>
+                        <span className={`font-bold px-3 py-1 rounded-md text-sm ${color}`}>{count as number} orders</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-border/60 shadow-lg bg-card/50 backdrop-blur-sm fade-in-up">
+              <CardHeader><CardTitle className="text-foreground">Order Workflow</CardTitle></CardHeader>
+              <CardContent>
+                <OrderFlowchart />
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
         {activeTab === 'customers' && (
           <Card className="border-border/60 shadow-lg bg-card/50 backdrop-blur-sm fade-in-up">
             <CardHeader><CardTitle className="text-foreground">Top Customers ({currentPreset})</CardTitle></CardHeader>

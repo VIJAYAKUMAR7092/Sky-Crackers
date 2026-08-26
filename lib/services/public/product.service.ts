@@ -94,7 +94,7 @@ export const getProducts = unstable_cache(async (params?: { categoryId?: string,
         },
         take: params?.limit || 20,
         skip: params?.skip || 0,
-        orderBy: { name: 'asc' }
+        orderBy: { sellingPrice: 'asc' }
       }),
       prisma.product.count({ where: whereClause })
     ]);

@@ -6,10 +6,19 @@ import WishlistWidget from "../../components/public/ui/WishlistWidget";
 import { getWebsiteSettings } from "@/lib/services/cms/cms.service";
 
 export default async function StoreLayout({ children }: { children: React.ReactNode }) {
-  const websiteSettings = await getWebsiteSettings();
+  const rawSettings = await getWebsiteSettings();
+  const websiteSettings = JSON.parse(JSON.stringify(rawSettings));
+  
+  // Fetch top banners
+  const prisma = (await import('@/lib/db/prisma')).default;
+  const topBanners = await prisma.topBanner.findMany({
+    where: { isActive: true },
+    orderBy: { sortOrder: 'asc' }
+  });
+  const banners = topBanners.map(b => b.text);
   return (
     <div className="flex min-h-screen flex-col bg-white font-sans antialiased text-gray-900 selection:bg-primary/20 relative overflow-x-hidden w-full max-w-[100vw]">
-      <Navbar settings={websiteSettings} />
+      <Navbar settings={websiteSettings} topBanners={banners} />
       <main className="flex-1 flex flex-col">{children}</main>
       <Footer settings={websiteSettings} />
       <FloatingStoreWidgets />

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { DataTable, ColumnDef } from '@/components/ui/DataTable';
 import { FilterBar } from '@/components/ui/FilterBar';
 import { Badge } from '@/components/ui/Badge';
@@ -21,6 +21,7 @@ interface OrdersClientProps {
 
 export function OrdersClient({ initialData, searchParams }: OrdersClientProps) {
   const router = useRouter();
+  const searchParamsHook = useSearchParams();
   const [orderToDelete, setOrderToDelete] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isPending, startTransition] = useTransition();
@@ -132,7 +133,7 @@ export function OrdersClient({ initialData, searchParams }: OrdersClientProps) {
   ];
 
   const handleFilterChange = (key: string, value: string) => {
-    const params = new URLSearchParams(searchParams as Record<string, string>);
+    const params = new URLSearchParams(searchParamsHook.toString());
     if (value && value !== 'all') {
       params.set(key, value);
     } else {
@@ -152,13 +153,13 @@ export function OrdersClient({ initialData, searchParams }: OrdersClientProps) {
           {
             name: 'Status',
             options: statusFilters,
-            value: searchParams.status || 'all',
+            value: searchParamsHook.get('status') || 'all',
             onChange: (val: string) => handleFilterChange('status', val),
           },
           {
             name: 'Payment',
             options: paymentFilters,
-            value: searchParams.paymentStatus || 'all',
+            value: searchParamsHook.get('paymentStatus') || 'all',
             onChange: (val: string) => handleFilterChange('paymentStatus', val),
           },
         ]}

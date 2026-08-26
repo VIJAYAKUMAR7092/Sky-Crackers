@@ -125,21 +125,25 @@ export const emailService = {
                   <tbody>
                     ${itemsHtml}
                   </tbody>
-                  <tfoot>
-                    <tr>
-                      <td colspan="3" style="padding: 12px 15px; text-align: right; color: #64748b; font-weight: 600; border-top: 2px solid #e2e8f0;">Subtotal</td>
-                      <td style="padding: 12px 15px; text-align: right; color: #0f172a; font-weight: 700; border-top: 2px solid #e2e8f0;">₹${Number(order.subtotal).toFixed(2)}</td>
-                    </tr>
-                    <tr>
-                      <td colspan="3" style="padding: 12px 15px; text-align: right; color: #64748b; font-weight: 600;">Shipping</td>
-                      <td style="padding: 12px 15px; text-align: right; color: #0f172a; font-weight: 700;">₹${Number(order.deliveryCharge || 0).toFixed(2)}</td>
-                    </tr>
-                    <tr>
-                      <td colspan="3" style="padding: 15px; text-align: right; color: #0f172a; font-weight: 900; font-size: 16px; border-top: 1px dashed #cbd5e1;">GRAND TOTAL</td>
-                      <td style="padding: 15px; text-align: right; color: #e11d48; font-weight: 900; font-size: 18px; border-top: 1px dashed #cbd5e1;">₹${Number(order.finalTotal).toFixed(2)}</td>
-                    </tr>
-                  </tfoot>
                 </table>
+              </div>
+
+              <!-- Order Totals (Extracted for better mobile visibility) -->
+              <div style="background-color: #f8fafc; padding: 15px 20px; border-radius: 0 0 8px 8px; margin-bottom: 25px; border: 1px solid #e2e8f0; border-top: none;">
+                <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
+                  <span style="color: #64748b; font-weight: 600; width: 120px; text-align: right; margin-right: 15px;">Subtotal:</span>
+                  <span style="color: #0f172a; font-weight: 700; width: 100px; text-align: right; white-space: nowrap;">₹${Number(order.subtotal).toFixed(2)}</span>
+                </div>
+                ${Number(order.deliveryCharge) > 0 ? `
+                <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
+                  <span style="color: #64748b; font-weight: 600; width: 120px; text-align: right; margin-right: 15px;">Shipping:</span>
+                  <span style="color: #0f172a; font-weight: 700; width: 100px; text-align: right; white-space: nowrap;">₹${Number(order.deliveryCharge).toFixed(2)}</span>
+                </div>
+                ` : ''}
+                <div style="display: flex; justify-content: flex-end; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
+                  <span style="color: #0f172a; font-weight: 900; font-size: 16px; width: 120px; text-align: right; margin-right: 15px;">GRAND TOTAL:</span>
+                  <span style="color: #e11d48; font-weight: 900; font-size: 18px; width: 100px; text-align: right; white-space: nowrap;">₹${Number(order.finalTotal).toFixed(2)}</span>
+                </div>
               </div>
 
               <!-- Admin Action Box -->

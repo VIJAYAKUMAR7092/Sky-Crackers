@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Plus, Edit, Trash2, ArrowUp, ArrowDown } from 'lucide-react';
+import { updateComboDate } from '../actions';
 import { Button } from '@/components/ui/Button';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 import { Badge } from '@/components/ui/Badge';
@@ -15,13 +16,33 @@ type ProductWithCategory = Product & {
 
 interface ComboClientProps {
   data: ProductWithCategory[];
+  validUpto: string;
 }
 
-export function ComboClient({ data }: ComboClientProps) {
+export function ComboClient({ data, validUpto }: ComboClientProps) {
   const router = useRouter();
   const [items, setItems] = useState(data);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [dateValue, setDateValue] = useState(validUpto);
+  const [isSavingDate, setIsSavingDate] = useState(false);
+
+  const handleSaveDate = async () => {
+    setIsSavingDate(true);
+    try {
+      const res = await updateComboDate(dateValue);
+      if (res.success) {
+        alert("Validity date updated successfully!");
+        router.refresh();
+      } else {
+        alert("Failed to update date: " + res.error);
+      }
+    } catch (err) {
+      alert("Failed to update date");
+    } finally {
+      setIsSavingDate(false);
+    }
+  };
 
   const handleMove = async (index: number, direction: 'up' | 'down') => {
     if (
@@ -75,6 +96,18 @@ export function ComboClient({ data }: ComboClientProps) {
 
   return (
     <div className="space-y-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-card p-4 rounded-xl border border-border/60 shadow-sm gap-4">
+        <div>
+          <h2 className="text-lg font-semibold tracking-tight text-foreground">Validity Configuration</h2>
+          <p className="text-sm text-muted-foreground">Set the "Valid up to" text shown on the website for Combo Packages.</p>
+        </div>
+        <div className="flex gap-2 w-full sm:w-auto">
+          <input type="text" value={dateValue} onChange={e => setDateValue(e.target.value)} className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" placeholder="e.g. 13TH AUGUST" />
+          <Button onClick={handleSaveDate} disabled={isSavingDate} className="bg-primary hover:bg-primary/90 text-white whitespace-nowrap">
+            {isSavingDate ? "Saving..." : "Save Date"}
+          </Button>
+        </div>
+      </div>
       <div className="flex justify-between items-center bg-card p-4 rounded-xl border border-border/60 shadow-sm">
         <h2 className="text-lg font-semibold tracking-tight text-foreground">Combo Products</h2>
         <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
