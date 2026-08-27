@@ -128,7 +128,7 @@ export default function Footer({ settings }: { settings?: any }) {
         {/* Copyright */}
         <div className="border-t border-white/20 pt-6 mt-6 text-center">
           <p className="text-xs sm:text-sm text-orange-100/60 font-medium">
-            &copy; {new Date().getFullYear()} Sky Crackers. All rights reserved. Designed for joyful celebrations.
+            &copy; {new Date().getFullYear()} Sky Crackers. All rights reserved. Designed by Launch Forge.
           </p>
         </div>
       </div>
