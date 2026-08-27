@@ -54,12 +54,19 @@ export default async function HomePage() {
 
   const homePageCats = await prisma.homePageCategory.findMany({ orderBy: { sortOrder: 'asc' } });
   const displayCategories = homePageCats.map(cat => {
-    const found = dbCategories.find(c => c.name.toLowerCase().includes(cat.name.toLowerCase()));
+    let searchName = cat.name.toLowerCase();
+    if (searchName === 'chakkars') searchName = 'ground chakkar';
+    if (searchName === 'fancy shots') searchName = 'single ariel fancy';
+    if (searchName === 'kids collection') searchName = 'kids novelties';
+
+    // We do exact match or include for the overridden search name
+    const found = dbCategories.find(c => c.name.toLowerCase().includes(searchName));
+    
     return {
       id: found?.id || cat.name.toLowerCase().replace(/\s+/g, '-'),
-      name: found?.name || cat.name,
+      name: cat.name, // Keep the display name as is (e.g. "Chakkars")
       slug: found?.slug || cat.name.toLowerCase().replace(/\s+/g, '-'),
-      image: found?.image || cat.image || "/images/home/sky-crackers-tv.jpg"
+      image: cat.image || found?.image || "/images/home/sky-crackers-tv.jpg"
     };
   });
 
