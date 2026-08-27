@@ -203,6 +203,7 @@ export default function CheckoutClient({ defaultMinOrder, deliveryZones }: Check
                     >
                       <option value="Tamil Nadu">Tamil Nadu</option>
                       <option value="Puducherry">Puducherry</option>
+                      <option value="Kerala">Kerala</option>
                       <option value="Karnataka">Karnataka</option>
                       <option value="Andhra Pradesh">Andhra Pradesh</option>
                       <option value="Telangana">Telangana</option>
