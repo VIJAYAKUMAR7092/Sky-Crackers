@@ -155,8 +155,20 @@ export async function processManualCheckout(data: CheckoutInput) {
     });
 
     // 5. Generate Order Reference
-    const count = await tx.order.count();
-    const orderReference = `SC-${new Date().getFullYear()}-${String(count + 1001).padStart(4, '0')}`;
+    const currentYear = new Date().getFullYear();
+    const lastOrder = await tx.order.findFirst({
+      where: { orderReference: { startsWith: `SC-${currentYear}-` } },
+      orderBy: { orderReference: 'desc' }
+    });
+    let nextNumber = 1001;
+    if (lastOrder) {
+      const parts = lastOrder.orderReference.split('-');
+      if (parts.length === 3) {
+        const lastNum = parseInt(parts[2], 10);
+        if (!isNaN(lastNum)) nextNumber = lastNum + 1;
+      }
+    }
+    const orderReference = `SC-${currentYear}-${String(nextNumber).padStart(4, '0')}`;
 
     // 6. Create Order
     const order = await tx.order.create({

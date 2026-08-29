@@ -30,6 +30,6 @@ export async function POST(req: Request) {
     if (error instanceof AppError) {
       return errorResponse(error.message, error.code, error.statusCode);
     }
-    return errorResponse("Failed to process order", "SERVER_ERROR", 500);
+    return errorResponse(error?.message || "Failed to process order", "SERVER_ERROR", 500);
   }
 }

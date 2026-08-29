@@ -96,7 +96,7 @@ export default function CheckoutClient({ defaultMinOrder, deliveryZones }: Check
       });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Failed to place order');
+      if (!res.ok) throw new Error(data.error?.message || (typeof data.error === 'string' ? data.error : 'Failed to place order'));
 
       setIsOrderPlaced(true);
       clearCart();

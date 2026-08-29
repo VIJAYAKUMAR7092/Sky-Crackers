@@ -1,13 +1,9 @@
 const fs = require('fs');
-const p = 'app/api/admin/combos/validity/route.ts';
-let code = fs.readFileSync(p, 'utf8');
+let code = fs.readFileSync('app/api/checkout/route.ts', 'utf8');
+
 code = code.replace(
-  'import prisma from "@/lib/db/prisma";',
-  'import prisma from "@/lib/db/prisma";\nimport { revalidatePath } from "next/cache";'
+  'return errorResponse("Failed to process order", "SERVER_ERROR", 500);',
+  'return errorResponse(error?.message || "Failed to process order", "SERVER_ERROR", 500);'
 );
-code = code.replace(
-  'return successResponse(settings);',
-  'revalidatePath("/", "layout");\n    return successResponse(settings);'
-);
-fs.writeFileSync(p, code);
-console.log('Fixed API route cache revalidation');
+
+fs.writeFileSync('app/api/checkout/route.ts', code);
