@@ -26,7 +26,7 @@ export async function POST(req: Request) {
     return successResponse(order, 201);
   } catch (error: any) {
     console.error("Checkout Error:", error);
-    require('fs').writeFileSync('checkout-error.log', String(error?.stack || error));
+    // Removed fs.writeFileSync because Vercel is read-only
     if (error instanceof AppError) {
       return errorResponse(error.message, error.code, error.statusCode);
     }
