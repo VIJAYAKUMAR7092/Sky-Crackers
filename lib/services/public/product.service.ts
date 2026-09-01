@@ -54,52 +54,56 @@ export const getBestSellingProducts = unstable_cache(async () => {
 
 export const getProducts = async (params?: { categoryId?: string, search?: string, limit?: number, skip?: number }) => {
   try {
-    const whereClause: any = { active: true };
-    
-    if (params?.categoryId) {
-      whereClause.OR = [
-        { categoryId: params.categoryId },
-        { category: { slug: params.categoryId } }
-      ];
-    }
-    
-    if (params?.search) {
-      const searchCondition = {
-        OR: [
-          { name: { contains: params.search, mode: 'insensitive' } },
-          { description: { contains: params.search, mode: 'insensitive' } },
-        ]
-      };
+    const fetchCached = unstable_cache(async () => {
+      const whereClause: any = { active: true };
       
-      if (whereClause.OR) {
-        whereClause.AND = [
-          { OR: whereClause.OR },
-          searchCondition
+      if (params?.categoryId) {
+        whereClause.OR = [
+          { categoryId: params.categoryId },
+          { category: { slug: params.categoryId } }
         ];
-        delete whereClause.OR;
-      } else {
-        whereClause.OR = searchCondition.OR;
       }
-    }
+      
+      if (params?.search) {
+        const searchCondition = {
+          OR: [
+            { name: { contains: params.search, mode: 'insensitive' } },
+            { description: { contains: params.search, mode: 'insensitive' } },
+          ]
+        };
+        
+        if (whereClause.OR) {
+          whereClause.AND = [
+            { OR: whereClause.OR },
+            searchCondition
+          ];
+          delete whereClause.OR;
+        } else {
+          whereClause.OR = searchCondition.OR;
+        }
+      }
 
-    const [products, total] = await Promise.all([
-      prisma.product.findMany({
-        where: whereClause,
-        include: {
-          images: {
-            orderBy: { displayOrder: 'asc' },
-            take: 1
+      const [products, total] = await Promise.all([
+        prisma.product.findMany({
+          where: whereClause,
+          include: {
+            images: {
+              orderBy: { displayOrder: 'asc' },
+              take: 1
+            },
+            category: true
           },
-          category: true
-        },
-        take: params?.limit || 20,
-        skip: params?.skip || 0,
-        orderBy: { sellingPrice: 'asc' }
-      }),
-      prisma.product.count({ where: whereClause })
-    ]);
+          take: params?.limit || 20,
+          skip: params?.skip || 0,
+          orderBy: { sellingPrice: 'asc' }
+        }),
+        prisma.product.count({ where: whereClause })
+      ]);
 
-    return { products: serializeDecimals(products), total };
+      return { products: serializeDecimals(products), total };
+    }, ['public-products', params?.categoryId || 'all', params?.search || 'none', String(params?.limit || 20)], { revalidate: 60, tags: ['products'] });
+
+    return await fetchCached();
   } catch (error) {
     console.error("Error fetching products:", error);
     return { products: [], total: 0 };
