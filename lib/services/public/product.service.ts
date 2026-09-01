@@ -52,7 +52,7 @@ export const getBestSellingProducts = unstable_cache(async () => {
   }
 }, ['public-bestselling-products'], { revalidate: 3600, tags: ['products'] });
 
-export const getProducts = unstable_cache(async (params?: { categoryId?: string, search?: string, limit?: number, skip?: number }) => {
+export const getProducts = async (params?: { categoryId?: string, search?: string, limit?: number, skip?: number }) => {
   try {
     const whereClause: any = { active: true };
     
@@ -104,7 +104,7 @@ export const getProducts = unstable_cache(async (params?: { categoryId?: string,
     console.error("Error fetching products:", error);
     return { products: [], total: 0 };
   }
-}, ['public-products-list'], { revalidate: 3600, tags: ['products'] });
+};
 
 export const getProductBySlug = unstable_cache(async (slug: string) => {
   try {
