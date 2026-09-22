@@ -1,1 +1,360 @@
-aW1wb3J0IHsgUHJpc21hQ2xpZW50IH0gZnJvbSAnQHByaXNtYS9jbGllbnQnOwppbXBvcnQgcGcgZnJvbSAncGcnOwppbXBvcnQgeyBQcmlzbWFQZyB9IGZyb20gJ0BwcmlzbWEvYWRhcHRlci1wZyc7Cgpjb25zdCBwb29sID0gbmV3IHBnLlBvb2woeyBjb25uZWN0aW9uU3RyaW5nOiAicG9zdGdyZXNxbDovL2FkbWluOnNreWNyYWNrZXJzMTIzQGxvY2FsaG9zdDo1NDMyL3NreWNyYWNrZXJzP3NjaGVtYT1wdWJsaWMiIH0pOwpjb25zdCBhZGFwdGVyID0gbmV3IFByaXNtYVBnKHBvb2wpOwpjb25zdCBwcmlzbWEgPSBuZXcgUHJpc21hQ2xpZW50KHsgYWRhcHRlciB9KTsKCmNvbnN0IHJhd0RhdGEgPSBgQ29tYm8gUGFja2FnZQozMDAwIFNQRUNJQUwgQ0FNQk8gCjMwMDAgU1BFQ0lBTCxDQU1CTwrigKkxNTAwMArigKkzMDAwClRvdGFsOiDigKkwLjAwCjMwMDAgbmlnaHQgY2FtYm8oMzEgaXRlbXMpCjMwMDAgbmlnaHQgY2FtYm8oMzEgaXRlbXMpCuKAqTE1MDAwCuKAqTMwMDAKVG90YWw6IOKAqTAuMDAKMzAwMCBjYW1ibyAoNDQgaXRlbXMpCjMwMDAgY2FtYm8gKDQ0IGl0ZW1zKQrigKkxNTAwMArigKkzMDAwClRvdGFsOiDigKkwLjAwCjQwMDAga2lkcyBjYW1ibyg0MCBpdGVtcykKNDAwMCBraWRzIGNhbWJvKDQwIGl0ZW1zKQrigKkyMDAwMArigKk0MDAwClRvdGFsOiDigKkwLjAwCjUwMDAgY2FtYm8gKDUwIGl0ZW1zKQo1MDAwIGNhbWJvICg1MGl0ZW1zKQrigKkyNTAwMArigKk1MDAwClRvdGFsOiDigKkwLjAwCjUwMDAgbmlnaHQgY2FtYm8gKDQxIGl0ZW1zKQo1MDAwIG5pZ2h0IGNhbWJvICg0MSBpdGVtcykK4oCpMjUwMDAK4oCpNTAwMApUb3RhbDog4oCpMC4wMAoKU1BBUktMRVJTCjEwY20gRWxlY3RyaWMKMTBjbSBFbGVjdHJpYwoxMCDRj+Cnh+Cnhy7RruCngiDjhprjhq7jhq4g44Wa44Kk44Wd44WKCuKAqTc1CuKAqTE1ClRvdGFsOiDigKkwLjAwCjEwY20gQ29sb3VyCjEwY20gQ29sb3VyCjEwINGP4KeH4KeHLtGu4KeCIOOGleOGs+OGsSDjhZrjgqTjhZ3jhYoK4oCpODAK4oCpMTYKVG90YWw6IOKAqTAuMDAKMTVjbSBFbGVjdHJpYwoxNWNtIEVsZWN0cmljCjE1INGP4KeH4KeHLtGu4KeCIOOGmuOGruOGriDjhZrjgqTjhZ3jhYoK4oCpMTc1CuKAqTM1ClRvdGFsOiDigKkwLjAwCjMwY20gRWxlY3RyaWMKMzBjbSBFbGVjdHJpYwozMCDRj+Cnh+Cnhy7RruCngiDjhprjhq7jhq4g44Wa44Kk44Wd44WKCuKAqTE3NQrigKkzNQpUb3RhbDog4oCpMC4wMAoxNWNtIENvbG91cgoxNWNtIENvbG91cgoxNSDRj+Cnh+Cnhy7RruCngiDjhpXjhrPjhrEg44Wa44Kk44Wd44WKCuKAqTE4NQrigKkzNwpUb3RhbDog4oCpMC4wMAozMGNtIENvbG91cgozMGNtIENvbG91cgozMCDRj+Cnh+Cnhy7RruCngiDjhpXjhrPjhrEg44Wa44Kk44Wd44WKCuKAqTE4NQrigKkzNwpUb3RhbDog4oCpMC4wMAoxNWNtIEdyZWVuCjE1Y20gR3JlZW4KMTUg0Y/gp4fgp4cu0a7gp4Ig44aw44aF44a+44azIOOFmuOCpOOFneOFigrigKkyMjUK4oCpNDUKVG90YWw6IOKAqTAuMDAKMTVjbSBSZWQKMTVjbSBSZWQKMTUg0Y/gp4fgp4cu0a7gp4Ig44a344aP44aZ44ay44avIOOFmuOCpOOFneOFigrigKkyMjUK4oCpNDUKMTg0ClRvdGFsOiDigKk4MjgwLjAwCjMwY20gUmVkCjMwY20gUmVkCjMwINGP4KeH4KeHLtGu4KeCIOOGt+OGj+OGmeOesuOGryDjhZrjgqTjhZ3jhYoK4oCpMjI1CuKAqTQ1ClRvdGFsOiDigKkwLjAwCjMwY20gR3JlZW4KMzBjbSBHcmVlbgozMCDRj+Cnh+Cnhy7RruCngiDjhrDjhoXjhr7jhrMg44Wa44Kk44Wd44WKCuKAqTIyNQrigKk0NQpUb3RhbDog4oCpMC4wMAo1MGNtIGVsZWN0cmljIHNwYXJrbGVycwo1MGNtIGVsZWN0cmljIHNwYXJrbGVycwo1MCDRj+Cnh+Cnhy7RruCngiDjhprjhq7jhq4g44Wa44Kk44Wd44WKCuKAqTc1MArgqTE1MApUb3RhbDog4oCpMC4wMAo1MGNtIENvbG91cgo1MGNtIENvbG91cgo1MCDRj+Cnh+Cnhy7RruCngiDjhpXjhrPjhrEg44Wa44Kk44Wd44WKCuKAqTgwMArgqTE2MApUb3RhbDog4oCpMC4wMAoKc3BlY2lhbCBjb2xvdXIgc3BhcmtsZXJzCk9yYW5nZSBjb2xvciBzcGFya2xlcnMKT3JhbmdlIGNvbG9yIHNwYXJrbGVycwrigKkyMjUK4oCpNDUKVG90YWw6IOKAqTAuMDAKUGluayBjb2xvciBzcGFya2xlcnMKUGluayBjb2xvciBzcGFya2xlcnMK4oCpMjUwCuKAqTUwClRvdGFsOiDigKkwLjAwCkJsdWUgY29sb3Igc3BhcmtsZXJzCkJsdWUgY29sb3Igc3BhcmtsZXJzCuKAqTI1MArgqTUwClRvdGFsOiDigKkwLjAwCkxvdmVseSBoZWFydApMb3ZlbHkgaGVhcnQK44aV44a+44au44azIOOFmuOCpOOFneOFigrigKk3MDAK4oCpMTQwClRvdGFsOiDigKkwLjAwClJvdGF0aW5nIHNwYXJrbGVycwpSb3RhdGluZyBzcGFya2xlcnMK4oCpMTAwMArgqTIwMApUb3RhbDog4oCpMC4wMAoKR1JPVU5EIENIQUtLQVIKR3JvdW5kIGNoYWtrYXIgYmlnCkdyb3VuZCBjaGFra2FyIGJpZwrjhrPjhZ3jhZ7jhrDjqK8g44aq44Kk44WdCuKAqTE1MArgqTMwClRvdGFsOiDigKkwLjAwCkdyb3VuZCBjaGFra2FyIGFzaG9rYQpHcm91bmQgY2hha2thciBhc2hva2EK44az44Wd44We44aw46ivIOOGheOaseOCreOGigrigKkyMjUK4oCpNDUKVG90YWw6IOKAqTAuMDAKR3JvdW5kIGNoYWtrYXIgU1BMCkdyb3VuZCBjaGFra2FyIFNQTArjhrPjhZ3jhZ7jhrAg44a444aZ44aa44ay44azCuKAqTM1MArgqTcwClRvdGFsOiDigKkwLjAwCkdyb3VuZCBjaGFra2FyIGRlbHV4ZQpHcm91bmQgY2hha2thciBkZWx1eGUK44az44Wd44We44aw46ivIOOGn+CnguOGs+OFneOev+OeruOFnQrigKk1NTAK4oCpMTEwClRvdGFsOiDigKkwLjAwCgpzcGNpYWwgY29sb3IgY2hha2thcgp3aGl6dGxpbmcgd2hlZWwKd2hpenRsaW5nIHdoZWVsCuKAqTYwMArgqTEyMApUb3RhbDog4oCpMC4wMApXaXJlIGNoYWtrZXIoMTBwY3MpCldpcmUgY2hha2tlcigxMHBjcykK4oCpNzUwCuKAqTE1MApUb3RhbDog4oCpMC4wMApMT1RVUyBXSEVFTCAKTE9UVVMgV0hFRUwK4oCpODAwCuKAqTE2MApUb3RhbDog4oCpMC4wMApSYWNpbmcgNCo0d2hlZWwgClJhY2luZyA0KjR3aGVlbArgqTg1MArgqTE3MApUb3RhbDog4oCpMC4wMApab2RpYWMgc3Bpbm5lcig1cGNzKQpab2RpYWMgc3Bpbm5lcig1cGNzKQrigKkxMDAwCuKAqTIwMApUb3RhbDog4oCpMC4wMAp0aW50byB3aGVlbChSZWQgJmdyZWVuKSA1cGNzCnRpbnRvIHdoZWVsKFJlZCAmZ3JlZW4pIDVwY3MK4oCpMTAwMArgqTIwMApUb3RhbDog4oCpMC4wMAoKRkxPV0VSIFBPVFMKRmxvd2VyIHBvdHMgYmlnIApGbG93ZXIgcG90cyBiaWcK44aw44aC44aZ44az44aH44aj44aX44asIOOGquOCpOOFnQrigKkzMDAK4oCpNjAKVG90YWw6IOKAqTAuMDAKRmxvd2VyIFBvdHMgU3BlY2lhbCAgCkZsb3dlciBQb3RzIFNwZWNpYWwK44aw44aC44aZ44az44aH44aj44aX44asIOOGuOOGmeOGmuOGsuOGswrigKk0MDAK4oCpODAKVG90YWw6IOKAqTAuMDAKRmxvd2VyIHBvdCBBc2hva2EKRmxvd2VyIHBvdCBBc2hva2EK44aw44aC44aZ44az44aH44aj44aX44asIOOGheOaseOCreOGigrigKk1MDAK4oCpMTAwClRvdGFsOiDigKkwLjAwClBhY2hyYW5nYSAocmVkICYgZ3JlZW4pClBhY2hyYW5nYSAocmVkICYgZ3JlZW4pCuKAqTY1MArgqTEzMApUb3RhbDog4oCpMC4wMApDb2xvciBrb3RpCkNvbG9yIGtvdGkK4oCpODAwCuKAqTE2MApUb3RhbDog4oCpMC4wMApNaW5pIHRyaSBjb2xvcig1cGNzKQpNaW5pIHRyaSBjb2xvcig1cGNzKQrigKk5NTAK4oCpMTkwClRvdGFsOiDigKkwLjAwCkNvbG9yIGtvdGkgZGVsdXhlCkNvbG9yIGtvdGkgZGVsdXhlCuOGleOas+OGsSDjhqLjqK/jhZ7jhq/jhpwg44af4KeC44az44Wd456/456u44WdCuKAqTEzNTAK4oCpMjcwClRvdGFsOiDigKkwLjAwClRyaSBjb2xvdXIgZGx4ClRyaSBjb2xvdXIgZGx4CuKAqTEzMDAK4oCpMzAwClRvdGFsOiDigKkwLjAwCm1lZ2EganVtYm8gcG90cyAKbWVnYSBqdW1ibyBwb3RzCuKAqTIyNTAK4oCpNDUwClRvdGFsOiDigKkwLjAwCgpvbmUgc291bmQgY3JhY2tlcnMKMiAzLzQgJyBLdXJ1dmkKMiAzLzQgJyBLdXJ1dmkKMiAzLzQgJ+OGleOascOCmuOaseOGsgo4oCpNDAK4oCpOApUb3RhbDog4oCpMC4wMAozIDEvMiAnIExha3NobWkKMyAxLzIgJyBMYWtzaG1pCjMgMS8yICcg44ay44aZ44aO44a144au44ayCuKAqTYwCuKAqTEyClRvdGFsOiDigKkwLjAwCjQgJyBMYWtzaG1pCjQgJyBMYWtzaG1pCjQgJ+OGsuOGmeOGjuOGteOGruOGsgrigKk4MArgqTE2ClRvdGFsOiDigKkwLjAwCkRlbHV4ZSBnb2xkIGxha3NobWkKRGVsdXhlIGdvbGQgbGFrc2htaQrigKkxNTAK4oCpMzAKVG90YWw6IOKAqTAuMDAKNSAiIGphbGxpa2F0dHUKNSAiIGphbGxpa2F0dHUKNSAi44a646iv44Wd44aZ44Wa44aw44WdIOOGt+OGueOGt+OGsgrigKkyMjUK4oCpNDUKVG90YWw6IOKAqTAuMDAKNiAiIGt1bWtpCjYgIiBrdW1raQo2ICfjhp/jhq/jhbTjhqXjhZ3jhprjhq/jhZ0g44a344a544a344ayCuKAqTMyNQrigKk2NQpUb3RhbDog4oCpMC4wMAogQmVzdCByaWRlciBtZWdhIGRseApCZXN0IHJpZGVyIG1lZ2EgZGx4CuKAqTQwMArgqTgwClRvdGFsOiDigKkwLjAwCgpCb21icwpCdWxsZXQgQm9tYgpCdWxsZXQgQm9tYgrjhq/hpr/jhZ3jhZ7jhrTjhZ0g44aq44a+44aZCuKAqTE3NQrigKkzNQpUb3RhbDog4oCpMC4wMApIeWRybyBCb21iCkh5ZHJvIEJvbWIK44eT44aZ44a/46iv44a/44aaIOOGquOGvuOGmQrigKkzNTAK4oCpNzAKVG90YWw6IOKAqTAuMDAKS2luZyBPZiBraW5nIEJvbWJzCktpbmcgT2Yga2luZyBCb21icwrjhprjhZ/jhZ7jhZ0g44aG44av44aZIOOGmuOFn+OFnuOFnSDjhqrjhr7jhpkK4oCpNTUwCuKAqTExMApUb3RhbDog4oCpMC4wMApDbGFzc2ljIEJvbWIKQ2xhc3NpYyBCb21iCuKAqTY1MArgqTEzMApUb3RhbDog4oCpMC4wMApEaWdpdGFsIEJvbWIKRGlnaXRhbCBCb21iCuOGn+OFp+OGmuOFn+OGn+OaseOFnSDjhqrjhr7jhpkK4oCpMTE1MArgqTIzMApUb3RhbDog4oCpMC4wMAoKUEFQRVIgQk9NQgoyNTBHIHBhcGVyIGJvbWIKMjUwRyBwYXBlciBib21iCjI1MCDjhqXjhrDjhq/jhr3jhprjhZ0g44aX4KeC44av44av44WdIGJvbWIK4oCpMjUwCuKAqTUwClRvdGFsOiDigKkwLjAwCjUwMCBHbSBQYXBlciBCb21iCjUwMCBHbSBQYXBlciBCb21iCjUwMCDjhqXjhrDjhq/jhr3jhprjhZ0g44aX4KeC44av44av44WdIOOGquOaseOGmQrigKk1MDAK4oCpMTAwClRvdGFsOiDigKkwLjAwCjEgS2cgUGFwZXIgQm9tYgoxIEtnIFBhcGVyIEJvbWIKMUtnIOOGl+CnguOGr+OGr+OFnSDjhqrjhrHjhpkK4oCpOTUwCuKAqTE5MApUb3RhbDog4oCpMC4wMAoKVFdJTktMRSBTVEFSCjEgMS8yIFR3aW5rbGluZyBTdGFyCjEgMS8yIFR3aW5rbGluZyBTdGFyCjEgMS8yIiDjhbrjhq7jhq3jhq3jhZ/jhZ/jhqsg44a444aZ44aO44a544a444a/44ayCuKAqTEyNQrigKkyNQpUb3RhbDog4oCpMC4wMAo0ICcgVHdpbmtsaW5nIFN0YXIKNCAnIFR3aW5rbGluZyBTdGFyCjQiIOOFuuOGruOGreOGreOFn+OFn+OGqyDjhrjjhpnjho7jhrnjhrjjhr/jhrIK4oCpMjUwCuKAqTUwClRvdGFsOiDigKkwLjAwCgpTUEVDSUFMIE5PVkVMVElFUwpLaXQga2F0IApLaXQga2F0CuKAqTEyNQrigKkyNQpUb3RhbDog4oCpMC4wMApwaG90byBmbGFzaApwaG90byBmbGFzaArgqTMwMArgqTYwClRvdGFsOiDigKkwLjAwCkJ1dHRlcmZseQpCdXR0ZXJmbHkK44a/44aZ44aO44ay44a/44Wd44az44We44asIOOGleOas+OGsQrigKk0MDAK4oCpODAKVG90YWw6IOKAqTAuMDAKSGVsaWNvcHRlcgpIZWxpY29wdGVyCuKAqTQ1MArgqTkwClRvdGFsOiDigKkwLjAwCkJhbWJhcmFtCkJhbWJhcmFtCuOGr+OGmeOGquOGs+OGriDjhq8K4oCpNTAwCuKAqTEwMApUb3RhbDog4oCpMC4wMAo1JyB0aW4gd2F0ZXIgcXVlZW4gCjUnIHRpbiB3YXRlciBxdWVlbgrigKk2MDAK4oCpMTIwClRvdGFsOiDigKkwLjAwCm1pbmkgc2lyZW4gKDUgcGNlKQptaW5pIHNpemVuICg1IHBjZSkK4oCpNzI1CuKAqTE0NQpUb3RhbDog4oCpMC4wMApNZWdhIFNpcmVuCk1lZ2EgU2lyZW4K44au4KeH44aV44a+IOOGmuOet+OGs+OGrgrigKk4MDAK4oCpMTYwClRvdGFsOiDigKkwLjAwCgpLaWRzIE5vdmVsdGllcwpzbmFrZSBzZXJwaGFudApzbmFrZSBzZXJwaGFudArgqTEyNQrigKkyNQpUb3RhbDog4oCpMC4wMApBc3JhZmkgKDVwY3MpCkFzcmFmaSAoNXBjcykK4oCpMjI1CuKAqTQ1ClRvdGFsOiDigKkwLjAwCkFuZ3J5IGJpcmQoNSB2YXJpZXRpZXMpCkFuZ3J5IGJpcmQoNSB2YXJpZXRpZXMpCuKAqTIyNQrigKk0NQpUb3RhbDog4oCpMC4wMApFbGVjdHJpYyBzdG9uZSgxMGJveCkKRWxlY3RyaWMgc3RvbmUoMTBib3gpCuKAqTQwMArgqTgwClRvdGFsOiDigKkwLjAwCnN3YXJkCnN3YXJkCuKAqTYwMArgqTEyMApUb3RhbDog4oCpMC4wMApwb2dvICg1cGNzKQpwb2dvICg1cGNzKQrigKk3NTAK4oCpMTUwClRvdGFsOiDigKkwLjAwCnNvbm55J3MgcmVkIGZvdW50YWluCnNvbm55J3MgcmVkIGZvdW50YWluCuKAqTgwMArgqTE2MApUb3RhbDog4oCpMC4wMApTb25ueSdzIGdyZWVuIGZvdW50YWluClNvbm55J3MgZ3JlZW4gZm91bnRhaW4K4oCpODAwCuKAqTE2MApUb3RhbDog4oCpMC4wMApMdWNreSBtb25leQpMdWNreSBtb25leQrjhqjjhpnjhqDjhqkg44au44axCuKAqTgwMArgqTE2MApUb3RhbDog4oCpMC4wMApMb2xsaSBwb3AKTG9sbGkgcG9wCuKAqTkwMArgqTE4MApUb3RhbDog4oCpMC4wMApMaW9uIGtpbmcgb3IgZWxlcGhhbnQKTGlvbiBraW5nIG9yIGVsZXBoYW50CuKAqTkwMArgqTE4MApUb3RhbDog4oCpMC4wMApNT05FWSBCQU5LICgyUElTKQpNT05FWSBCQU5LICgyUElTKQrjhrjjhpnjhprjhq7jhqsg44aV44az44axIOOGl+CnguOGr+OGr+OFnSDjhqrjhrHjhpkK4oCpOTAwCuKAqTE4MApUb3RhbDog4oCpMC4wMApGcmVlIGZpcmUgZ3VuKDJwY3MpCkZyZWUgZmlyZSBndW4oMnBjcykK4oCpOTAwCuKAqTE4MApUb3RhbDog4oCpMC4wMApBmsQ3CkFrNDcK4oCpMTE1MArgqTIzMApUb3RhbDog4oCpMC4wMAoKQ29sb3VyIGZvdW50YWluCmF5eWFuJ3MgbGl0dGxlIGRvdmUgCmF5eWFuJ3MgbGl0dGxlIGRvdmUK4oCpMzgwCuKAqTgwClRvdGFsOiDigKkwLjAwClRpbiBmb3VudGFpbihjcmFja2xpbmcpClRpbiBmb3VudGFpbihjcmFja2xpbmcpCuKAqTQwMArgqTgwClRvdGFsOiDigKkwLjAwCkF5eWFuJ3MgcG9nbyBtaXgoNSBjb2xvcnMpCkF5eWFuJ3MgcG9nbyBtaXgoNSBjb2xvcnMpCuKAqTQ1MArgqTkwClRvdGFsOiDigKkwLjAwCnBlYWNvY2sgZmVhdGhlcig1cGNzKQpwZWFjb2NrIGZlYXRoZXIoNXBjcykK4oCpNDUwCuKAqTkwClRvdGFsOiDigKkwLjAwCkRpc2NvIFNob3dlcig1cGNzKQpEaXNjbyBTaG93ZXIoNXBjcykK4oCpNDUwCuKAqTkwClRvdGFsOiDigKkwLjAwClZvbGNhbm8gKDMgdmFyYXRpZXMpClZvbGNhbm8gKDMgdmFyYXRpZXMpCuKAqTYwMArgqTEyMApUb3RhbDog4oCpMC4wMApzdGFyIGRydW0gY3JhY2tsaW5nCnN0YXIgZHJ1bSBjcmFja2xpbmcK4oCpNjAwCuKAqTEyMApUb3RhbDog4oCpMC4wMApMZW1vbiB0cmVlCkxlbW9uIHRyZWUK4oCpNjAwCuKAqTEyMApUb3RhbDog4oCpMC4wMApwb3AgY29ybiBmb3VudGFpbgpwb3AgY29ybiBmb3VudGFpbgrigKk2MDAK4oCpMTIwClRvdGFsOiDigKkwLjAwClBvd2VyIHB1ZmYgZ2lybHMoMyB2YXJpdGllcykKUG93ZXIgcHVmZiBnaXJscygzIHZhcml0aWVzKQrigKk4MDAK4oCpMTYwClRvdGFsOiDigKkwLjAwClBvd2VyIHBvdCAoNSBjb2xvcnMpClBvd2VyIHBvdCAoNSBjb2xvcnMpCuKAqTgwMArgqTE2MApUb3RhbDog4oCpMC4wMApJIENPTkUKSSBDT05FCuKAqTkwMArgqTE4MApUb3RhbDog4oCpMC4wMApNb2ppdG8oMnBjcykgCk1vaml0bygycGNzKQrigKk5MjUK4oCpMTg1ClRvdGFsOiDigKkwLjAwCkNyYWNrbGluZyBmb3VudGFpbigzcGNzKQpDcmFja2xpbmcgZm91bnRhaW4oM3BjcykK4oCpMTMwMArgqTI2MApUb3RhbDog4oCpMC4wMAoKcGVhY29jayBmb3VudGFpbgpwZWFjb2NrIDMgcGhhc2UKcGVhY29jayAzIHBoYXNlCuKAqTcwMArgqTE0MApUb3RhbDog4oCpMC4wMApDb2xvdXIgc21va2UgcGVhY29jawpDb2xvdXIgc21va2UgcGVhY29jawrigKk5MDAK4oCpMTgwClRvdGFsOiDigKkwLjAwCkJhZGEgUGVhY29jayAKQmFkYSBQZWFjb2NrCuOGmuOFn+OGs+OFn+OFtSDjhq7jhajjhq/jhZ0g44a144aO44a544aO44a+44aw44WdCuKAqTE3MDAK4oCpMzQwClRvdGFsOiDigKkwLjAwCgpjb2xvdXIgc3RpY2tzCnNlbGZpZSBzdGljayAKc2VsZmllIHN0aWNrCuKAqTI1MArgqTUwClRvdGFsOiDigKkwLjAwCkhJIEZJIHBlbmNpbApISSBGSSBwZW5jaWwK4oCpNzUwCuKAqTE1MApUb3RhbDog4oCpMC4wMApSZWQgZmxhcmUoNXBjcykKUmVkIGZsYXJlKDVwY3MpCuKAqTgwMArgqTE2MApUb3RhbDog4oCpMC4wMApzbW9rZSh0cmlwbGUgY29sb3IpCnNtb2tlKHRyaXBsZSBjb2xvcikK4oCpODAwCuKAqTE2MApUb3RhbDog4oCpMC4wMAoKUm9ja2V0cwpyb2NrZXQgYm9tYgpyb2NrZXQgYm9tYgrigKkzNTAK4oCpNzAKVG90YWw6IOKAqTAuMDAKTHVuaWsgcm9ja2V0Ckx1bmlrIHJvY2tldArgqTU1MArgqTExMApUb3RhbDog4oCpMC4wMApXaGlzdGxpbmcgcm9ja2V0CldoaXN0bGluZyByb2NrZXQK4oCpODAwCuKAqTE2MApUb3RhbDog4oCpMC4wMAoKTmV3IEFycml2YWxzIDIwMjYKNiIgQ3JhY2tsaW5nIGZvdW50YWluCjYiIENyYWNrbGluZyBmb3VudGFpbgrigKk3NTAK4oCpMTUwClRvdGFsOiDigKkwLjAwCkN5bGluZGVyIGJvbWIoc21va2Ugd2l0aCBjb2xvciBwYXBlcikKQ3lsaW5kZXIgYm9tYihzbW9rZSB3aXRoIGNvbG9yIHBhcGVyKQrigKk3NTAK4oCpMTUwClRvdGFsOiDigKkwLjAwClRvbSZqZXJyeSAoNiB2YXJhdGllcykKVG9tJmplcnJ5ICg2IHZhcmF0aWVzKQrigKk3NTAK4oCpMTUwClRvdGFsOiDigKkwLjAwCkRvdWJsZSBkdWNra2VyCkRvdWJsZSBkdWNra2VyCuKAqTgwMArgqTE2MApUb3RhbDog4oCpMC4wMApIeWJyaWQoZG91YmxlIGNvbG9yKQpIeWJyaWQoZG91YmxlIGNvbG9yKQrigKk4NTAK4oCpMTcwClRvdGFsOiDigKkwLjAwCkpvbGx5IGJvYmJ5CkpvbGx5IGJvYmJ5CuKAqTEwNTAK4oCpMjEwClRvdGFsOiDigKkwLjAwCmt1bGZpIGNhbmRsZQprdWxmaSBjYW5kbGUK4oCpMTMwMArgqTI2MApUb3RhbDog4oCpMC4wMApQaXp6YSg2cGNzKQpQaXp6YSg2cGNzKQrigKkyMTAwCuKAqTQyMApUb3RhbDog4oCpMC4wMApKb2xseSBib2JieSAoM3BjcykKSm9sbHkgYm9iYnkgKDNwY3MpCuKAqTMwMDAK4oCpNjAwClRvdGFsOiDigKkwLjAwCkhBTkQgU0hPVCA4ODggQlJBTkQKSEFORCBTSE9UIDg4OCBCUkFORArgqTg1MDAK4oCpMTcwMApUb3RhbDog4oCpMC4wMAoKTG9vc2UgQ3JhY2tlcnMKUmVkIGJpamxpKDEwMCBwaWMpClJlZCBiaWpsaSgxMDAgcGljKQrigKkxOTAK4oCpMzgKVG90YWw6IOKAqTAuMDAKU3RyaXBwZWQgYmlqbGkoMTAwIHBpYykKU3RyaXBwZWQgYmlqbGkoMTAwIHBpYykK4oCpMjAwCuKAqTQwClRvdGFsOiDigKkwLjAwCgpzaW5nbGUgb3V0cwpTa3kgc2hvdCg1cGNzKQpTa3kgc2hvdCg1cGNzKQrigKkzMDAK4oCpNjAKVG90YWw6IOKAqTAuMDAKNyBzaG90ICg1IHBjcykKNyBzaG90ICg1IHBjcykK4oCpNDUwCuKAqTkwClRvdGFsOiDigKkwLjAwClJhaWRlciBzaG90KDEwcGljKQpSYWlkZXIgc2hvdCgxMHBpYykK4oCpNzAwCuKAqTE1MApUb3RhbDog4oCpMC4wMApQZW50YSBmb3JjZSg1cGNzKQpQZW50YSBmb3JjZSg1cGNzKQrigKk5MDAK4oCpMTgwClRvdGFsOiDigKkwLjAwOldoaXRlIGhvdXNlKDVwY3MpCldoaXRlIGhvdXNlKDVwY3MpCuKAqTExMDAK4oCpMjIwClRvdGFsOiDigKkwLjAwCgpzaW5nbGUgYXJpZWwgb3V0cwpDaG90dGEgZmFuY3kKQ2hvdHRhIGZhbmN5CuKAqTE0MArgqTI4ClRvdGFsOiDigKkwLjAwCjJpbmNoIEZhbmN5IAoyaW5jaCBGYW5jeQrigKk0MDAK4oCpODAKVG90YWw6IOKAqTAuMDAKMiBpbmNoIGZhbmN5IChibHVlIHN0YXIgYnJhbmQpCjIgaW5jaCBmYW5jeSAoYmx1ZSBzdGFyIGJyYW5kKQrigKk2MDAK4oCpMTIwClRvdGFsOiDigKkwLjAwCjMgaW5jaCBGYW5jeSAKMyBpbmNoIEZhbmN5CuKAqTExNTAK4oCpMjMwClRvdGFsOiDigKkwLjAwCjMgwqwgaW5jaCAgRmFuY3kgCjMgMS8yIGluY2ggRmFuY3kK4oCpMTM1MArgqTI3MApUb3RhbDog4oCpMC4wMAozIDEvMiAgaW5jaCBmYW5jeSggYmx1ZSBzdGFyIGJyYW5kKSAKMyAxLzIgaW5jaCBmYW5jeSggYmx1ZSBzdGFyIGJyYW5kKQrigKkxNTAwCuKAqTMwMApUb3RhbDog4oCpMC4wMAo0IGluY2ggZmFuY3kgcGlwZQo0IGluY2ggZmFuY3kgcGlwZQrigKkxNzUwCuKAqTM1MApUb3RhbDog4oCpMC4wMAo0IiBUaW4gZmFuY3kgCjQiIFRpbiBmYW5jeQrigKkyMDAwCuKAqTQwMApUb3RhbDog4oCpMC4wMAoKc3BlY2lhbCBjb2xvdXIgc2luZ2xlIGFpcmVhbCBvdXRzCjMgMS8yIGZhbmN5IHNpenppbGluZwozIDEvMiBmYW5jeSBzaXp6aWxpbmcK4oCpMTUwMArgqTMwMApUb3RhbDog4oCpMC4wMApraW5nIGZpc2hlciAoY3JhY2tsaW5nKQpraW5nIGZpc2hlciAoY3JhY2tsaW5nKQrigKkxNTAwCuKAqTMwMApUb3RhbDog4oCpMC4wMAozIDEvMiBpbmNoIG5heWFnYXJhIGZhbGxzCjMgMS8yIGluY2ggbmF5YWdhcmEgZmFsbHMK4oCpMTUwMArgqTMwMApUb3RhbDog4oCpMC4wMAoxMiBTdGVwCjEyIFN0ZXAK4oCpMjAwMArgqTQwMApUb3RhbDog4oCpMC4wMAo0IiB0aW4gcGlwZSAoNSBjb2xvcnMpCjQiIHRpbiBwaXBlICg1IGNvbG9ycykK4oCpODAwCuKAqTQwMApUb3RhbDog4oCpMC4wMAo0aW5jaCB3b3cgcGluawo0aW5jaCB3b3cgcGluawrigKkyMjUwCuKAqTQ1MApUb3RhbDog4oCpMC4wMAo3IFN0ZXAoNCBpbmNoKQo3IFN0ZXAoNCBpbmNoKQrigKkyMjUwCuKAqTQ1MApUb3RhbDog4oCpMC4wMAogNGluY2ggRG91YmxlIGJhbGwgZmFuY3kKNGluY2ggRG91YmxlIGJhbGwgZmFuY3kK4oCpMjI1MArgqTQ1MApUb3RhbDog4oCpMC4wMAoKY29tYm8gYXJpZWwgb3V0CjIgaW5jaCBGYW5jeSAoIDMgcGljKSAKMiBpbmNoIEZhbmN5ICggMyBwaWMpCuKAqTExNTAK4oCpMjMwClRvdGFsOiDigKkwLjAwCjIgMy80ICBpbmNoIGZhbmN5ICgzcGljKQoyIDMvNCBpbmNoIGZhbmN5ICgzcGljKQrigKkyMjUwCuKAqTQ1MApUb3RhbDog4oCpMC4wMAo0aW5jaCBmYW5jeSAoMnBpYykKNGluY2ggZmFuY3kgKDJwaWMpCuKAqTQwMDAK4oCpODAwClRvdGFsOiDigKkwLjAwCjUgaW5jaCBGYW55ICggMlBpYykgCjUgaW5jaCBGYW55ICggMlBpYykK4oCpNDUwMArgqTkwMApUb3RhbDog4oCpMC4wMAoKUmVwZWF0aW5nIG11bHRpIGNvbG91ciBzaG90cwoxMiBzaG90IHJpZGVyCjEyIHNob3QgcmlkZXIK4oCpNjUwCuKAqTEzMApUb3RhbDog4oCpMC4wMAoyNSBTaG90IFJpZGVyCjI1IFNob3QgUmlkZXIK4oCpMTIwMArgqTI0MApUb3RhbDog4oCpMC4wMAozMCBTaG90cyBNdWx0aWNvbG91cgozMCBTaG90cyBNdWx0aWNvbG91cgozMCDjhrfjhr7jhp3jhZ0g44a144ay44Wd44af44a/IOOGleOas+OGsQrigKkxOTAwCuKAqTM4MApUb3RhbDog4oCpMC4wMAozMCBTaG90IG11bHRpIGNvbG9yIHByaW1lCjMwIFNob3QgbXVsdGkgY29sb3IgcHJpbWUK4oCpMjQwMArgqTQ4MApUb3RhbDog4oCpMC4wMAo2MCBTaG90cyBNdWx0aWNvbG91cgo2MCBTaG90cyBNdWx0aWNvbG91cgo2MCDjhrfjhr7jhp3jhZ0g44a144ay44Wd44af44a/IOOGleOas+OGsQrigKkzODAwCuKAqTc2MApUb3RhbDog4oCpMC4wMAo2MCBTaG90IG11bHRpIGNvbG9yIHByaW1lCjYwIFNob3QgbXVsdGkgY29sb3IgcHJpbWUK4oCpNDgwMArgqTk2MApUb3RhbDog4oCpMC4wMAoxMjAgU2hvdHMgTXVsdGljb2xvdXIKMTIwIFNob3RzIE11bHRpY29sb3VyCjEyMCDjhrfjhr7jhp3jhZ0g44a144ay44Wd44af44a/IOOGleOas+OGsQrigKk3ODAwCuKAqTE1NjAKVG90YWw6IOKAqTAuMDAKMTIwIHNob3QgbXVsdGkgY29sb3IgcHJpbWUKMTIwIHNob3QgbXVsdGkgY29sb3IgcHJpbWUK4oCpOTUwMArgqTE5MDAKVG90YWw6IOKAqTAuMDAKMjQwIFNob3RzIE11bHRpY29sb3VyIHByaW1lCjI0MCBTaG90cyBNdWx0aWNvbG91ciBwcmltZQoyNDAg44a344a+44ad44WdIOOGteOGsuOFneOHn+OGvyDjhpXjmrPjhrEK4oCpMTkwMDAK4oCpMzgwMApUb3RhbDog4oCpMC4wMAo1MTAgU2hvdHMgTXVsdGljb2xvdXIgcHJpbWUKNTEwIFNob3RzIE11bHRpY29sb3VyIHByaW1lCjUxMCDjhrfjhr7jhp3jhZ0g44a144ay44Wd44af44a/IOOGleOas+OGsQrigKk0MDAwMArgqTgwMDAKVG90YWw6IOKAqTAuMDAKCnNwZWNpYWwgbXVsdGkgY29sb3VyIHNob3QgMjAyNgpwZWFjb2NrIGRhbmNlKGlwbCBmdW5jdGlvbikKcGVhY29jayBkYW5jZShpcGwgZnVuY3Rpb24pCuKAqTIyNTAK4oCpNDUwClRvdGFsOiDigKkwLjAwCjI1IHNob3Qgd2hpc3RsaW5nCjI1IHNob3Qgd2hpc3RsaW5nCuKAqDQwMDAK4oCpODAwClRvdGFsOiDigKkwLjAwCgpmZXN0aXZhbCBkaXNwbGF5CjEgIDEvMiBpbmNoIHNldG91dCAoNDhzaG90J3MpCjEgMS8yIGluY2ggc2V0b3V0ICg0OHNob3QncykK4oCpMTUwMDAK4oCpMzAwMApUb3RhbDog4oCpMC4wMAoxMCBYIDEwIG11bHRpIGNvbG91ciBzaG90cwoxMCBYIDEwIG11bHRpIGNvbG91ciBzaG90cwrigKkxNzUwMArgqTM1MDAKVG90YWw6IOKAqTAuMDAKCmRpZ2l0YWwgbGFyCjFrIHByaW1lIAoxayBwcmltZQrigKkxNTAwCuKAqTMwMApUb3RhbDog4oCpMC4wMAoyayBQcmltZQoyayBQcmltZQrigKkzMDAwCuKAqTYwMApUb3RhbDog4oCpMC4wMAo1ayBwcmltZQo1ayBwcmltZQrigKk3NTAwCuKAqTE1MDAKVG90YWw6IOKAqTAuMDAKMTBrIHByaW1lCjEwayBwcmltZQrigKkxNTAwMArgqTMwMDAKVG90YWw6IOKAqTAuMDAKCmNvbG91ciBtYXRjaGVzCmtpbmdzIG1hdGNocwpraW5ncyBtYXRjaHMK4oCpMzUwCuKAqTcwClRvdGFsOiDigKkwLjAwCjd1cCA1IGluIDEgY29sb3IKN3VwIDUgaW4gMSBjb2xvcgrigKk5MDAK4oCpMTgwClRvdGFsOiDigKkwLjAwCgpHdW5zClJpbmcgY2FwcwpSaW5nIGNhcHMK4oCpNTAK4oCpMTAKVG90YWw6IOKAqTAuMDAKUm9sbCBjYXAKUm9sbCBjYXAK4oCpMzAwCuKAqTYwClRvdGFsOiDigKkwLjAwClNvbnkgZ3VuClNvbnkgZ3VuCuKAqTc1MArgqTE1MApUb3RhbDog4oCpMC4wMAoKR2lmdCBib3gKMjAgaXRlbSBib3gKMjAgaXRlbSBib3gK4oCpMTM1MArgqTI3MApUb3RhbDog4oCpMC4wMAoyNSBpdGVtIGJveAoyNSBpdGVtIGJveArgqTE2NTAK4oCpMzMwClRvdGFsOiDigKkwLjAwCjMwIGl0ZW0gdXYgYm94CjMwIGl0ZW0gdXYgYm94CuKAqTIyNTAK4oCpNDUwClRvdGFsOiDigKkwLjAwCjQwIGl0ZW0gdXYgYm94CjQwIGl0ZW0gdXYgYm94CuKAqTMyNTAK4oCpNjUwClRvdGFsOiDigKkwLjAwCjUwIGl0ZW0gdXYgYm94CjUwIGl0ZW0gdXYgYm94CuKAqTQyNTAK4oCpODUwClRvdGFsOiDigKkwLjAwCgp2YW5pdGhhIGZpcmV3b3JrcyBzcGVjaWFsIGZhbmN5IG91dHMKNCAxLzIiIHBpbmsgb3V0ICgycGNzKQo0IDEvMiIgcGluayBvdXQgKDJwY3MpCuKAqTkwMDAK4oCpMTgwMApUb3RhbDog4oCpMC4wMAo1IiBwdXJwbGUgcmFpbgo1IiBwdXJwbGUgcmFpbgrigKkxMDAwMArgqTIwMDAKVG90YWw6IOKAqTAuMDAKNiIgb2NlYW4gYmx1ZSBqYW1ibyBwaXBlCjYiIG9jZWFuIGJsdWUgamFtYm8gcGlwZQrigKkxMjUwMArgqTI1MDAKVG90YWw6IOKAqTAuMDAKCnNvbm55IGZhbmN5Ck9yYW5nZSAoMnBjcykKT3JhbmdlICgycGNzKQrigKkyNzUwCuKAqDU1MApUb3RhbDog4oCpMC4wMApCbHVlIHBlYXJscygycGNzKQpCbHVlIHBlYXJscygycGNzKQrigKkyNzUwCuKAqDU1MApUb3RhbDog4oCpMC4wMAo1IGluY2ggb3NjYXIgc2VyaWVzICgycGNzKQo1IGluY2ggb3NjYXIgc2VyaWVzICgycGNzKQrigKk3NTAwCuKAqTE1MDAKVG90YWw6IOKAqTAuMDBgOwoKY29uc3QgY2F0TWFwID0gewogICJjb21ibyBwYWNrYWdlIjogImNvbWJvLXBhY2siLAogICJzcGFya2xlcnMiOiAic3BhcmtsZXMiLAogICJzcGVjaWFsIGNvbG91ciBzcGFya2xlcnMiOiAic3BlY2lhbC1jb2xvdXItc3BhcmtsZXJlcyIsCiAgImdyb3VuZCBjaGFra2FyIjogImdyb3VuZC1jaGVja2VyIiwKICAic3BjaWFsIGNvbG9yIGNoYWtrYXIiOiAiZmFuY3ktd2hlZWxzIiwKICAiZmxvd2VyIHBvdHMiOiAiZmxvd2VyLXBvdCIsCiAgIm9uZSBzb3VuZCBjcmFja2VycyI6ICJvbmUtc291bmQtY3JhY2tlcnMiLAogICJib21icyI6ICJib21icyIsCiAgInBhcGVyIGJvbWIiOiAicGFwZXItYm9tYnMiLAogICJ0d2lua2xlIHN0YXIiOiAidHdpbmtsaW5nLXN0YXIiLAogICJzcGVjaWFsIG5vdmVsdGllcyI6ICJmYW5jeS1ub3ZlbHRpZXMiLAogICJraWRzIG5vdmVsdGllcyI6ICJraWRzLW5vdmVsdGllcyIsCiAgImNvbG91ciBmb3VudGFpbiI6ICJmYW5jeS1mb3VudGFpbi1tdWx0aWNvbG9yIiwKICAicGVhY29jayBmb3VudGFpbiI6ICJwZWFjb2NrLWZvdW50YWluIiwKICAiY29sb3VyIHN0aWNrcyI6ICJ0b3JjaGVzLWFuZC1wZW5jaWwiLAogICJyb2NrZXRzIjogInJvY2tldCIsCiAgIm5ldyBhcnJpdmFscyAyMDI2IjogIm5ldy1hcnJpdmFscy0yMDI2IiwKICAibG9vc2UgY3JhY2tlcnMiOiAibG9vc2UtY3JhY2tlcnMiLAogICJzaW5nbGUgb3V0cyI6ICJzaW5nbGUtYXJpZWwtZmFuY3ktNXBjcyIsCiAgInNpbmdsZSBhcmllbCBvdXRzIjogInNpbmdsZS1hcmlhbC1mYW5jeSIsCiAgInNwZWNpYWwgY29sb3VyIHNpbmdsZSBhaXJlYWwgb3V0cyI6ICJzcGVjaWFsLWNvbG91ci1hcmllbC1mYW5jeSIsCiAgImNvbWJvIGFyaWVsIG91dCI6ICJjb21iby1hcmllbC1mYW5jeSIsCiAgInJlcGVhdGluZyBtdWx0aSBjb2xvdXIgc2hvdHMiOiAicmVwZWF0aW5nLW11bHRpY29sb3Itc2hvdHMiLAogICJzcGVjaWFsIG11bHRpIGNvbG91ciBzaG90IDIwMjYiOiAic3BlY2lhbC1tdWx0aS1jb2xvdXItc2hpcnRzLTIwMjYiLAogICJmZXN0aXZhbCBkaXNwbGF5IjogImZlc3RpdmFsLWRpc3BsYXktc2V0LW91dCIsCiAgImRpZ2l0YWwgbGFyIjogImRpZ2l0YWwtbGFyIiwKICAiY29sb3VyIG1hdGNoZXMiOiAiY29sb3VyLW1hdGNoZXMiLAogICJndW5zIjogImd1bnMiLAogICJnaWZ0IGJveCI6ICJnaWZ0LWJveCIsCiAgInZhbml0aGEgZmlyZXdvcmtzIHNwZWNpYWwgZmFuY3kgb3V0cyI6ICJ2YW5pdGhhLWZpcmUtd29yay1zcGVjaWFsLWZhbmN5LW91dHMiLAogICJzb25ueSBmYW5jeSI6ICJzb255LWZhbmN5Igp9OwoKYXN5bmMgZnVuY3Rpb24gbWFpbigpIHsKICBjb25zb2xlLmxvZygiU3RhcnRpbmcgdG8gcGFyc2UgYW5kIGluc2VydCAxMDArIHByb2R1Y3RzLi4uIik7CiAgY29uc3QgZGJDYXRlZ29yaWVzID0gYXdhaXQgcHJpc21hLmNhdGVnb3J5LmZpbmRNYW55KCk7CiAgCiAgY29uc3QgbGluZXMgPSByYXdEYXRhLnNwbGl0KCdcXG4nKS5tYXAobCA9PiBsLnRyaW0oKSkuZmlsdGVyKGwgPT4gbCAhPT0gJycpOwogIGxldCBjdXJyZW50Q2F0ZWdvcnlJZCA9IG51bGw7CiAgbGV0IG5hbWVCdWZmZXIgPSBbXTsKICBsZXQgYWRkZWRDb3VudCA9IDA7CgogIGZvciAobGV0IGkgPSAwOyBpIDwgbGluZXMubGVuZ3RoOyBpKyspIHsKICAgIGNvbnN0IGxpbmUgPSBsaW5lc1tpXTsKICAgIAogICAgY29uc3QgbWF0Y2hlZEtleSA9IE9iamVjdC5rZXlzKGNhdE1hcCkuZmluZChrID0+IGsgPT09IGxpbmUudG9Mb3dlckNhc2UoKSk7CiAgICBpZiAobWF0Y2hlZEtleSkgewogICAgICBjb25zdCB0YXJnZXRTbHVnID0gY2F0TWFwW21hdGNoZWRLZXldOwogICAgICBjb25zdCBkYkNhdCA9IGRiQ2F0ZWdvcmllcy5maW5kKGMgPT4gYy5zbHVnID09PSB0YXJnZXRTbHVnKTsKICAgICAgaWYgKGRiQ2F0KSB7CiAgICAgICAgY3VycmVudENhdGVnb3J5SWQgPSBkYkNhdC5pZDsKICAgICAgfQogICAgICBuYW1lQnVmZmVyID0gW107CiAgICAgIGNvbnRpbnVlOwogICAgfQoKICAgIGlmIChsaW5lLnRvTG93ZXJDYXNlKCkuc3RhcnRzV2l0aCgndG90YWw6JykpIHsKICAgICAgaWYgKCFjdXJyZW50Q2F0ZWdvcnlJZCkgewogICAgICAgIG5hbWVCdWZmZXIgPSBbXTsKICAgICAgICBjb250aW51ZTsKICAgICAgfQogICAgICAKICAgICAgbGV0IG1ycCA9IDA7CiAgICAgIGxldCBwcmljZSA9IDA7CiAgICAgIGNvbnN0IHByaWNlTGluZXMgPSBuYW1lQnVmZmVyLmZpbHRlcihsID0+IGwuaW5jbHVkZXMoJ+KAnScpKTsKICAgICAgCiAgICAgIGlmIChwcmljZUxpbmVzLmxlbmd0aCA+PSAyKSB7CiAgICAgICAgIG1ycCA9IHBhcnNlSW50KHByaWNlTGluZXNbMF0ucmVwbGFjZSgvW14wLTldL2csICcnKSk7CiAgICAgICAgIHByaWNlID0gcGFyc2VJbnQocHJpY2VMaW5lc1sxXS5yZXBsYWNlKC9bXjAtOV0vZywgJycpKTsKICAgICAgfSBlbHNlIGlmIChwcmljZUxpbmVzLmxlbmd0aCAKPT09IDEpIHsKICAgICAgICAgcHJpY2UgPSBwYXJzZUludChwcmljZUxpbmVzWzBdLnJlcGxhY2UoL1teMC05XS9nLCAnJykpOwogICAgICAgICBtcnAgPSBwcmljZTsgCiAgICAgIH0KICAgICAgCiAgICAgIGNvbnN0IG5hbWUgPSBuYW1lQnVmZmVyWzBdOwogICAgICBpZiAobmFtZSAmJiBwcmljZSA+IDApIHsKICAgICAgICAgY29uc3Qgc2x1ZyA9IG5hbWUudG9Mb3dlckNhc2UoKS5yZXBsYWNlKC9bXmEtejAtOV0rL2csICctJykucmVwbGFjZSgvKF4tfC0kKSsvZywgJycpICsgJy0nICsgTWF0aC5mbG9vcihNYXRoLnJhbmRvbSgpKjEwMDAwKTsKICAgICAgICAgCiAgICAgICAgIHRyeSB7CiAgICAgICAgICAgYXdhaXQgcHJpc21hLnByb2R1Y3QuY3JlYXRlKHsKICAgICAgICAgICAgIGRhdGE6IHsKICAgICAgICAgICAgICAgbmFtZTogbmFtZSwKICAgICAgICAgICAgICAgc2x1Zzogc2x1ZywKICAgICAgICAgICAgICAgbXJwOiBtcnAsCiAgICAgICAgICAgICAgIHNlbGxpbmdQcmljZTogcHJpY2UsCiAgICAgICAgICAgICAgIGNhdGVnb3J5SWQ6IGN1cnJlbnRDYXRlZ29yeUlkLAogICAgICAgICAgICAgICBhY3RpdmU6IHRydWUKICAgICAgICAgICAgIH0KICAgICAgICAgICB9KTsKICAgICAgICAgICBjb25zb2xlLmxvZyhg4pyFIEFkZGVkIFByb2R1Y3Q6ICR7bmFtZX0gKE1SUDog4oCdJHttcnB9IHwgUHJpY2U6IOKAnSR7cHJpY2V9KWApOwogICAgICAgICAgIGFkZGVkQ291bnQrKzsKICAgICAgICAgfSBjYXRjaCAoZSkgewogICAgICAgICAgIGNvbnNvbGUubG9nKGDinYwgRmFpbGVkIHRvIGFkZCAke25hbWV9YCk7CiAgICAgICAgIH0KICAgICAgfQogICAgICBuYW1lQnVmZmVyID0gW107CiAgICB9IGVsc2UgewogICAgICBuYW1lQnVmZmVyLnB1c2gobGluZSk7CiAgICB9CiAgfQogIGNvbnN0IGxvZyA9IGBcbvCfjokgQWxsICR7YWRkZWRDb3VudH0gUHJvZHVjdHMgYWRkZWQgc3VjY2Vzc2Z1bGx5IWA7CiAgY29uc29sZS5sb2cobG9nKTsKfQoKbWFpbigpLmZpbmFsbHkoKCkgPT4gcHJpc21hLiRkaXNjb25uZWN0KCkpOw==
+import { PrismaClient } from '@prisma/client';
+import pg from 'pg';
+import { PrismaPg } from '@prisma/adapter-pg';
+
+const pool = new pg.Pool({ connectionString: "postgresql://admin:skycrackers123@localhost:5432/skycrackers?schema=public" });
+const adapter = new PrismaPg(pool);
+const prisma = new PrismaClient({ adapter });
+
+const rawData = `Combo Package
+3000 SPECIAL CAMBO 
+3000 SPECIAL,CAMBO
+ 15000
+ 3000
+Total:  0.00
+3000 night cambo(31 items)
+3000 night cambo(31 items)
+ 15000
+ 3000
+Total:  0.00
+3000 cambo (44 items)
+3000 cambo (44 items)
+ 15000
+ 3000
+Total:  0.00
+4000 kids cambo(40 items)
+4000 kids cambo(40 items)
+ 20000
+ 4000
+Total:  0.00
+5000 cambo (50 items)
+5000 cambo (50items)
+ 25000
+ 5000
+Total:  0.00
+5000 night cambo (41 items)
+5000 night cambo (41 items)
+ 25000
+ 5000
+Total:  0.00
+
+SPARKLERS
+10cm Electric
+10cm Electric
+10 яেে.Ѯূ ㆚ㆮㆮ ㅚイㅝㅊ
+ 75
+ 15
+Total:  0.00
+10cm Colour
+10cm Colour
+10 яেে.Ѯূ ㆕ㆳㆱ ㅚイㅝㅊ
+ 80
+ 16
+Total:  0.00
+15cm Electric
+15cm Electric
+15 яেে.Ѯূ ㆚ㆮㆮ ㅚイㅝㅊ
+ 175
+ 35
+Total:  0.00
+30cm Electric
+30cm Electric
+30 яেে.Ѯূ ㆚ㆮㆮ ㅚイㅝㅊ
+ 175
+ 35
+Total:  0.00
+15cm Colour
+15cm Colour
+15 яেে.Ѯূ ㆕ㆳㆱ ㅚイㅝㅊ
+ 185
+ 37
+Total:  0.00
+30cm Colour
+30cm Colour
+30 яেে.Ѯূ ㆕ㆳㆱ ㅚイㅝㅊ
+ 185
+ 37
+Total:  0.00
+15cm Green
+15cm Green
+15 яেে.Ѯূ ㆰㆅㆾㆳ ㅚイㅝㅊ
+ 225
+ 45
+Total:  0.00
+15cm Red
+15cm Red
+15 яেে.Ѯূ ㆷ㆏㆙ㆲㆯ ㅚイㅝㅊ
+ 225
+ 45
+184
+Total:  8280.00
+30cm Red
+30cm Red
+30 яেে.Ѯূ ㆷ㆏㆙㞲ㆯ ㅚイㅝㅊ
+ 225
+ 45
+Total:  0.00
+30cm Green
+30cm Green
+30 яেে.Ѯূ ㆰㆅㆾㆳ ㅚイㅝㅊ
+ 225
+ 45
+Total:  0.00
+50cm electric sparklers
+50cm electric sparklers
+50 яেে.Ѯূ ㆚ㆮㆮ ㅚイㅝㅊ
+ 750
+�150
+Total:  0.00
+50cm Colour
+50cm Colour
+50 яেে.Ѯূ ㆕ㆳㆱ ㅚイㅝㅊ
+ 800
+�160
+Total:  0.00
+
+special colour sparklers
+Orange color sparklers
+Orange color sparklers
+ 225
+ 45
+Total:  0.00
+Pink color sparklers
+Pink color sparklers
+ 250
+ 50
+Total:  0.00
+Blue color sparklers
+Blue color sparklers
+ 250
+�50
+Total:  0.00
+Lovely heart
+Lovely heart
+㆕ㆾㆮㆳ ㅚイㅝㅊ
+ 700
+ 140
+Total:  0.00
+Rotating sparklers
+Rotating sparklers
+ 1000
+�200
+Total:  0.00
+
+GROUND CHAKKAR
+Ground chakkar big
+Ground chakkar big
+ㆳㅝㅞㆰ㨯 ㆪイㅝ
+ 150
+�30
+Total:  0.00
+Ground chakkar ashoka
+Ground chakkar ashoka
+ㆳㅝㅞㆰ㨯 ㆅ㚱キㆊ
+ 225
+ 45
+Total:  0.00
+Ground chakkar SPL
+Ground chakkar SPL
+ㆳㅝㅞㆰ ㆸ㆙㆚ㆲㆳ
+ 350
+�70
+Total:  0.00
+Ground chakkar deluxe
+Ground chakkar deluxe
+ㆳㅝㅞㆰ㨯 ㆟ূㆳㅝ㞿㞮ㅝ
+ 550
+ 110
+Total:  0.00
+
+spcial color chakkar
+whiztling wheel
+whiztling wheel
+ 600
+�120
+Total:  0.00
+Wire chakker(10pcs)
+Wire chakker(10pcs)
+ 750
+ 150
+Total:  0.00
+LOTUS WHEEL 
+LOTUS WHEEL
+ 800
+ 160
+Total:  0.00
+Racing 4*4wheel 
+Racing 4*4wheel
+�850
+�170
+Total:  0.00
+Zodiac spinner(5pcs)
+Zodiac spinner(5pcs)
+ 1000
+ 200
+Total:  0.00
+tinto wheel(Red &green) 5pcs
+tinto wheel(Red &green) 5pcs
+ 1000
+�200
+Total:  0.00
+
+FLOWER POTS
+Flower pots big 
+Flower pots big
+ㆰㆂ㆙ㆳㆇㆣ㆗ㆬ ㆪイㅝ
+ 300
+ 60
+Total:  0.00
+Flower Pots Special  
+Flower Pots Special
+ㆰㆂ㆙ㆳㆇㆣ㆗ㆬ ㆸ㆙㆚ㆲㆳ
+ 400
+ 80
+Total:  0.00
+Flower pot Ashoka
+Flower pot Ashoka
+ㆰㆂ㆙ㆳㆇㆣ㆗ㆬ ㆅ㚱キㆊ
+ 500
+ 100
+Total:  0.00
+Pachranga (red & green)
+Pachranga (red & green)
+ 650
+�130
+Total:  0.00
+Color koti
+Color koti
+ 800
+ 160
+Total:  0.00
+Mini tri color(5pcs)
+Mini tri color(5pcs)
+ 950
+ 190
+Total:  0.00
+Color koti deluxe
+Color koti deluxe
+㆕㚳ㆱ ㆢ㨯ㅞㆯ㆜ ㆟ূㆳㅝ㞿㞮ㅝ
+ 1350
+ 270
+Total:  0.00
+Tri colour dlx
+Tri colour dlx
+ 1300
+ 300
+Total:  0.00
+mega jumbo pots 
+mega jumbo pots
+ 2250
+ 450
+Total:  0.00
+
+one sound crackers
+2 3/4 ' Kuruvi
+2 3/4 ' Kuruvi
+2 3/4 '㆕㚱Â�㚱ㆲ
+8�*M��*N��[�8�*L���K̈	�Z��ZB��K̈	�Z��ZB��K̈	�8ᬸ�x᣸�x᫸ᬂ��*M���*LL���[�8�*L��	�Z��ZB�	�Z��ZB�	�ᬸ�x᣸�x᫸ᬂ��*N�*LM���[�8�*L��[^H��Z��ZB�[^H��Z��ZB��*LML��*L���[�8�*L��H��[Z�]B�H��[Z�]B�H�᮸�+��gx�x�f��8�gH8���x��ᬂ��*L��B��*MB��[�8�*L�����[Z�B����[Z�B��	������m8�x�gxᦸ���gH8���x��ᬂ��*L̍B��*M�B��[�8�*L���\��Y\�YY�H��\��Y\�YY�H��*M�*N��[�8�*L�����X��[]��X���[]��X����i���gx�g��8�gH8᪸᯸�B��*LM�B��*L�B��[�8�*L��Y����X��Y����X������x���+���ᦈ8᪸᯸�B��*L�L��*M���[�8�*L���[��و�[����X��[��و�[����X�¸ᦸ�g��g��gH8ᡸ���H8ᦸ�g��g��gH8᪸᯸�B��*MML��*LLL��[�8�*L���\��X���X���\��X���X���*M�L�*LL���[�8�*L��Y�][��X��Y�][��X�����i�ᦸ�g����x�gH8᪸᯸�B��*LLML�*L����[�8�*L���TT���P���L�\\���X���L�\\���X���L8�x�8���xᦸ�gH8��)������gH��X���*L�L��*ML��[�8�*L��L�H\\���X��L�H\\���X��L8�x�8���xᦸ�gH8��)������gH8᪸�x�B��*ML��*LL��[�8�*L��H��\\���X��H��\\���X��R��8��)������gH8᪸�x�B��*NML��*LNL��[�8�*L����S��H�T��HK̈�[��[���\��HK̈�[��[���\��HK̈�8�n�᫸�x�x�g��g���8�8�x᣸�x�8��ᬂ��*LL�B��*L�B��[�8�*L��	��[��[���\��	��[��[���\���8�n�᫸�x�x�g��g���8�8�x᣸�x�8��ᬂ��*L�L��*ML��[�8�*L����P�PS�ՑSQT�]�]��]�]��*LL�B��*L�B��[�8�*L�����\�����\��*L��*M���[�8�*L���]\��B��]\��B����x᣸ᬸ���gx���g��8�x���B��*M��*N��[�8�*L��[X��\��[X��\���*ML�*NL��[�8�*L���[X�\�[B��[X�\�[B����x᪸��᫈8�¸�*ML��*LL��[�8�*L��I�[��]\�]YY[��I�[��]\�]YY[���*M���*LL���[�8�*L��Z[�H�\�[�
+H�JB�Z[�H�^�[�
+H�JB��*M̍B��*LMB��[�8�*L��YY�H�\�[��YY�H�\�[��᫸)���xᯈ8ᦸ����᫂��*N��*LM���[�8�*L����Y��ݙ[Y\ۘZ�H�\�[��ۘZ�H�\�[��*LL�B��*L�B��[�8�*L��\ܘY�H
+\��B�\ܘY�H
+\��B��*L��B��*MB��[�8�*L��[�ܞH�\�
+H�\�Y]Y\�B�[�ܞH�\�
+H�\�Y]Y\�B��*L��B��*MB��[�8�*L��[X��X��ۙJL��
+B�[X��X��ۙJL��
+B��*M�*N��[�8�*L����\����\���*M��*LL���[�8�*L�����
+\��B����
+\��B��*M�L��*LML��[�8�*L���ۛ�I���Y��[�Z[���ۛ�I���Y��[�Z[���*N�*LM���[�8�*L���ۛ�I��ܙY[���[�Z[���ۛ�I��ܙY[���[�Z[���*N��*LM���[�8�*L��X��H[ۙ^B�X��H[ۙ^B��8�x�8�H8᫸�B��*N�*LM���[�8�*L���H���H���*NL�*LN��[�8�*L��[ۈ�[��܈[\[��[ۈ�[��܈[\[���*NL�*LN��[�8�*L��SӑVH�S��
+�T�B�SӑVH�S��
+�T�B��8�xᦸ᫸��8�x���H8��)������gH8᪸�x�B��*NL��*LN��[�8�*L����YH�\�H�[����B���YH�\�H�[����B��*NL��*LN��[�8�*L��f�Z�¸�*LLML�*L����[�8�*L������\���[�Z[��^^X[���]HݙH�^^X[���]HݙB��*L���*N��[�8�*L��[���[�Z[�ܘX��[��B�[���[�Z[�ܘX��[��B��*M�*N��[�8�*L��^^X[������Z^
+H��ܜ�B�^^X[������Z^
+H��ܜ�B��*ML�*NL��[�8�*L��XX�����X]\�\��B�XX�����X]\�\��B��*ML��*NL��[�8�*L��\������\�\��B�\������\�\��B��*ML��*NL��[�8�*L�����[��
+��\�]Y\�B����[��
+��\�]Y\�B��*M��*LL���[�8�*L���\��[HܘX��[��\��[HܘX��[�¸�*M���*LL���[�8�*L��[[ۈ�YB�[[ۈ�YB��*M���*LL���[�8�*L����ܛ���[�Z[����ܛ���[�Z[���*M���*LL���[�8�*L����\�Y���\����\�]Y\�B���\�Y���\����\�]Y\�B��*N��*LM���[�8�*L����\��
+H��ܜ�B���\��
+H��ܜ�B��*N�*LM���[�8�*L��H�ӑB�H�ӑB��*NL�*LN��[�8�*L��[ښ]����H�[ښ]����B��*NL�B��*LNB��[�8�*L��ܘX��[����[�Z[����B�ܘX��[����[�Z[����B��*LL��*L����[�8�*L���XX������[�Z[��XX�����\�B�XX�����\�B��*M��*LM��[�8�*L�����\��[��HXX������\��[��HXX���¸�*NL��*LN��[�8�*L���YHXX������YHXX���¸ᦸ�g����g��mH8᫸�j8���gH8�x᣸�x᣸᯸�8�gB��*LM���*L���[�8�*L������\��X���[�YH�X����[�YH�X�¸�*L�L�*ML��[�8�*L��H�H[��[�H�H[��[��*M�L��*LML��[�8�*L���Y�\�J\��B��Y�\�J\��B��*N�*LM���[�8�*L���[��J�\H��܊B��[��J�\H��܊B��*N��*LM���[�8�*L�������]����]��X������]��X���*L�L��*M���[�8�*L��[�Z�����]�[�Z�����]�*MML�*LLL��[�8�*L���\�[������]��\�[������]��*N��*LM���[�8�*L����]�\��]�[�������ܘX��[����[�Z[����ܘX��[����[�Z[���*M�L��*LML��[�8�*L���[[�\���X��[��H�]��܈\\�B��[[�\���X��[��H�]��܈\\�B��*M�L��*LML��[�8�*L���I��\��H
+��\�]Y\�B��I��\��H
+��\�]Y\�B��*M�L��*LML��[�8�*L���X�HX���\���X�HX���\���*N�*LM���[�8�*L��X��Y
+�X�H��܊B�X��Y
+�X�H��܊B��*NL��*LM���[�8�*L����H�ؘ�B���H�ؘ�B��*LLL��*L�L��[�8�*L���[�H�[�B��[�H�[�B��*LL��*L����[�8�*L��^��J���B�^��J���B��*L�L��*M���[�8�*L����H�ؘ�H
+���B���H�ؘ�H
+���B��*L���*M���[�8�*L��S�����S��S�����S��*NL��*LM���[�8�*L������HܘX��\��Y�Z�JLX�B��Y�Z�JLX�B��*LNL��*L���[�8�*L����\Y�Z�JLX�B���\Y�Z�JLX�B��*L���*M��[�8�*L����[��H�]��H��
+\��B���H��
+\��B��*L���*M���[�8�*L�����
+H��B����
+H��B��*ML��*NL��[�8�*L���ZY\���
+LX�B��ZY\���
+LX�B��*M���*LML��[�8�*L��[�H�ܘ�J\��B�[�H�ܘ�J\��B��*NL��*LN��[�8�*L���]H�\�J\��B��]H�\�J\��B��*LLL��*L����[�8�*L����[��H\�Y[�]��H�[��B���H�[��B��*LM�*L���[�8�*L���[���[��H��[���[��B��*M��*N��[�8�*L���[���[��H
+�YH�\���[�
+B��[���[��H
+�YH�\���[�
+B��*M���*LL���[�8�*L���[���[��H��[���[��B��*LLML��*L����[�8�*L���0�[���[��H��K̈[���[��B��*LL�L�*L����[�8�*L���K̈[���[��J�YH�\���[�
+H��K̈[���[��J�YH�\���[�
+B��*LML��*L���[�8�*L��[���[��H\B�[���[��H\B��*LM�L��*L�L��[�8�*L���[��[��H��[��[��B��*L���*M��[�8�*L����X�X[���\��[��HZ\�X[�]�K̈�[��H�^��[[��K̈�[��H�^��[[�¸�*LML�*L���[�8�*L���[���\�\�
+ܘX��[��B��[���\�\�
+ܘX��[��B��*LML��*L���[�8�*L���K̈[���^XY�\�H�[�K̈[���^XY�\�H�[¸�*LML�*L���[�8�*L��L��\�L��\��*L��*M��[�8�*L���[�\H
+H��ܜ�B��[�\H
+H��ܜ�B��*N��*M��[�8�*L��[�����[�[�����[�¸�*L��L��*ML��[�8�*L����\
+[��
+B���\
+[��
+B��*L��L��*ML��[�8�*L��[���X�H�[�[��B�[���X�H�[�[��B��*L��L�*ML��[�8�*L�����X��\�Y[�]��[���[��H
+�X�H��[���[��H
+�X�B��*LLML��*L����[�8�*L�����[���[��H
+�X�B����[���[��H
+�X�B��*L��L��*ML��[�8�*L��[���[��H
+�X�B�[���[��H
+�X�B��*M��*N��[�8�*L��H[���[�H
+�X�H�H[���[�H
+�X�B��*ML�*NL��[�8�*L����\X][��][H���\���L����Y\��L����Y\���*M�L��*LL���[�8�*L���H���Y\���H���Y\���*LL��*L���[�8�*L������][X���\������][X���\���8��᯸�x�gH8�xᬸ�gx����8�x���B��*LNL��*L���[�8�*L�����][H��܈�[YB����][H��܈�[YB��*L��*M��[�8�*L������][X���\������][X���\���8��᯸�x�gH8�xᬸ�gx����8�x���B��*L���*M͌��[�8�*L�����][H��܈�[YB����][H��܈�[YB��*M�*NM���[�8�*L��L����][X���\��L����][X���\��L�8��᯸�x�gH8�xᬸ�gx����8�x���B��*M���*LMM���[�8�*L��L���][H��܈�[YB�L���][H��܈�[YB��*NML�*LNL��[�8�*L������][X���\��[YB�����][X���\��[YB��8��᯸�x�gH8�xᬸ�gx�����8�x���B��*LNL��*L���[�8�*L��LL���][X���\��[YB�LL���][X���\��[YB�LL8��᯸�x�gH8�xᬸ�gx����8�x���B��*M�*N��[�8�*L����X�X[][H���\�������XX����[��J\�[��[ۊB�XX����[��J\�[��[ۊB��*L��L��*ML��[�8�*L���H���\�[��H���\�[�¸�*��*N��[�8�*L����\�]�[\�^B�HK̈[���]�]
+��	��B�HK̈[���]�]
+��	��B��*LML��*L���[�8�*L��LL][H���\���LL][H���\���¸�*LM�L�*L�L��[�8�*L���Y�][\��Z��[YH�Z��[YB��*LML��*L���[�8�*L�����[YB����[YB��*L���*M���[�8�*L��Z��[YB�Z��[YB��*M�L��*LML��[�8�*L��L��[YB�L��[YB��*LML�*L���[�8�*L������\�X]�\�[���X]��[���X]�¸�*L�L��*M���[�8�*L���\H[�H��܂��\H[�H��܂��*NL��*LN��[�8�*L����[��[���\�[���\¸�*ML��*LL��[�8�*L�����\����\��*L���*M���[�8�*L���۞H�[���۞H�[���*M�L�*LML��[�8�*L����Y�����][H����][H����*LL�L�*L����[�8�*L���H][H����H][H���*LM�L��*L����[�8�*L���][H]�����][H]�����*L��L��*ML��[�8�*L��][H]����][H]�����*L̍L��*M�L��[�8�*L��L][H]����L][H]�����*M�L��*NL��[�8�*L����[�]H�\�]�ܚ���X�X[�[��H�]K̈�[���]
+���B�K̈�[���]
+���B��*NL��*LN��[�8�*L��H�\�H�Z[��H�\�H�Z[���*LL�*L���[�8�*L������X[��YH�[X��\B�����X[��YH�[X��\B��*LL�L�*L�L��[�8�*L����ۛ�H�[��B�ܘ[��H
+���B�ܘ[��H
+���B��*L��L��*ML��[�8�*L���YHX\�����B��YHX\�����B��*L��L��*ML��[�8�*L��H[�����\��\�Y\�
+���B�H[�����\��\�Y\�
+���B��*M�L��*LML��[�8�*L���ۜ��]X\H���X��X��Y�H�����X��\X�ȋ���\��\�Ȏ���\��\ȋ���X�X[���\��\��\�Ȏ���X�X[X���\�\�\��\�\ȋ��ܛ�[��Z��\����ܛ�[�X�X��\������X[��܈�Z��\�����[��K]�Y[ȋ�����\��Ȏ�����\�\����ۙH��[�ܘX��\�Ȏ��ۙK\��[�XܘX��\�ȋ����X�Ȏ����X�ȋ��\\���X����\\�X��X�ȋ���[��H�\�����[��[��\�\�����X�X[�ݙ[Y\Ȏ���[��K[�ݙ[Y\ȋ���Y��ݙ[Y\Ȏ���Y�[�ݙ[Y\ȋ�����\���[�Z[�����[��KY��[�Z[�[][X��܈���XX������[�Z[����XX����Y��[�Z[�������\��X��Ȏ��ܘ�\�X[�\[��[�������]Ȏ������]����]�\��]�[��������]�X\��]�[�L���������HܘX��\�Ȏ�����KXܘX��\�ȋ���[��H�]Ȏ���[��KX\�Y[Y�[��KM\�ȋ���[��H\�Y[�]Ȏ���[��KX\�X[Y�[��H����X�X[���\��[��HZ\�X[�]Ȏ���X�X[X���\�X\�Y[Y�[��H�����X��\�Y[�]�����X��X\�Y[Y�[��H����\X][��][H���\���Ȏ���\X][��[][X��܋\��ȋ���X�X[][H���\����������X�X[[][KX���\�\�\��L�������\�]�[\�^H����\�]�[Y\�^K\�][�]���Y�][\����Y�][[\�������\�X]�\Ȏ�����\�[X]�\ȋ���[�Ȏ���[�ȋ���Y�������Y�X������[�]H�\�]�ܚ���X�X[�[��H�]Ȏ���[�]KY�\�K]�ܚ�\�X�X[Y�[��K[�]ȋ���ۛ�H�[��H����۞KY�[��H��N�\�[���[��[ۈXZ[�
+H�ۜ��K�����\�[���\��H[�[��\�L
+���X�ˋ���N�ۜ���]Y�ܚY\�H]�Z]�\�XK��]Y�ܞK��[�X[�J
+N��ۜ�[�\�H�]�]K��]
+	���K�X\
+O���[J
+JK��[\�O�OOH	��N]�\��[��]Y�ܞRYH�[]�[YP�Y��\�H�N]YY��[�H��܈
+]HH�H[�\˛[���J��H�ۜ�[�HH[�\��WN��ۜ�X]�Y�^HHؚ�X���^\��]X\
+K��[�
+�O��OOH[�K����\��\�J
+JNY�
+X]�Y�^JH�ۜ�\��]�Y�H�]X\�X]�Y�^WN�ۜ���]H��]Y�ܚY\˙�[�
+�O�˜�Y�OOH\��]�Y�NY�
+��]
+H�\��[��]Y�ܞRYH��]�YB��[YP�Y��\�H�N�۝[�YNB��Y�
+[�K����\��\�J
+K��\���]
+	��[��JHY�
+X�\��[��]Y�ܞRY
+H�[YP�Y��\�H�N�۝[�YNB��]\�H]�X�HH�ۜ��X�S[�\�H�[YP�Y��\���[\�O��[��Y\�	��'I�JN�Y�
+�X�S[�\˛[���H�H\�H\��R[�
+�X�S[�\��K��\X�J�׌NWK��	��JN�X�HH\��R[�
+�X�S[�\��WK��\X�J�׌NWK��	��JNH[�HY�
+�X�S[�\˛[���OOHJH�X�HH\��R[�
+�X�S[�\��K��\X�J�׌NWK��	��JN\�H�X�N��B���ۜ��[YHH�[YP�Y��\��NY�
+�[YH	���X�H�
+H�ۜ��Y�H�[YK����\��\�J
+K��\X�J�טK^�NWJ���	�I�K��\X�J��_I
+J���	��H
+�	�I�
+�X]���܊X]��[��J
+J�L
+N��H]�Z]�\�XK���X��ܙX]J]N��[YN��[YK��YΈ�Y��\��\���[[���X�N��X�K��]Y�ܞRY��\��[��]Y�ܞRY�X�]�N��YB�B�JN�ۜ��K���8�!HYY��X��	ۘ[Y_H
+T��8�'I�\�H�X�N�8�'I��X�_JX
+NYY��[�
+��H�]�
+JH�ۜ��K���8�c�Z[Y�Y	ۘ[Y_X
+NB�B��[YP�Y��\�H�NH[�H�[YP�Y��\��\�
+[�JNB�B��ۜ���H�'�H[	�YY��[�H��X��YY�X��\�ٝ[HX�ۜ��K�����NB��XZ[�
+K��[�[J
+
+HO��\�XK�\��ۛ�X�
+
+JN
