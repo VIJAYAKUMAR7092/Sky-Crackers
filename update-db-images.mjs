@@ -1,7 +1,12 @@
 import { PrismaClient } from '@prisma/client';
+import { PrismaPg } from '@prisma/adapter-pg';
+import pg from 'pg';
 import fs from 'fs';
 
-const prisma = new PrismaClient();
+const connectionString = process.env.DATABASE_URL || "postgresql://admin:skycrackers123@localhost:5432/skycrackers?schema=public";
+const pool = new pg.Pool({ connectionString });
+const adapter = new PrismaPg(pool);
+const prisma = new PrismaClient({ adapter });
 
 async function main() {
     const updates = JSON.parse(fs.readFileSync('db-image-updates.json', 'utf8'));
