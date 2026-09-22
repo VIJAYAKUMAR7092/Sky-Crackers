@@ -9,13 +9,18 @@ export default async function StoreLayout({ children }: { children: React.ReactN
   const rawSettings = await getWebsiteSettings();
   const websiteSettings = JSON.parse(JSON.stringify(rawSettings));
   
-  // Fetch top banners
-  const prisma = (await import('@/lib/db/prisma')).default;
-  const topBanners = await prisma.topBanner.findMany({
-    where: { isActive: true },
-    orderBy: { sortOrder: 'asc' }
-  });
-  const banners = topBanners.map(b => b.text);
+  // Fetch top banners gracefully
+  let banners: string[] = [];
+  try {
+    const prisma = (await import('@/lib/db/prisma')).default;
+    const topBanners = await prisma.topBanner.findMany({
+      where: { isActive: true },
+      orderBy: { sortOrder: 'asc' }
+    });
+    banners = topBanners.map(b => b.text);
+  } catch (err) {
+    console.error("Error fetching top banners:", err);
+  }
   return (
     <div className="flex min-h-screen flex-col bg-white font-sans antialiased text-gray-900 selection:bg-primary/20 relative overflow-x-hidden w-full max-w-[100vw]">
       <Navbar settings={websiteSettings} topBanners={banners} />

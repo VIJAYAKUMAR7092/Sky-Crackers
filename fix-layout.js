@@ -1,24 +1,26 @@
 const fs = require('fs');
-const p = 'app/(store)/layout.tsx';
-let c = fs.readFileSync(p, 'utf8');
+let code = fs.readFileSync('app/(store)/layout.tsx', 'utf8');
 
-const target = `const rawSettings = await getWebsiteSettings();
-  const websiteSettings = JSON.parse(JSON.stringify(rawSettings));`;
-
-const replacement = `const rawSettings = await getWebsiteSettings();
-  const websiteSettings = JSON.parse(JSON.stringify(rawSettings));
-  
-  // Fetch top banners
-  const { PrismaClient } = require('@prisma/client');
-  const prisma = new PrismaClient();
+const oldCode = `  // Fetch top banners
+  const prisma = (await import('@/lib/db/prisma')).default;
   const topBanners = await prisma.topBanner.findMany({
     where: { isActive: true },
     orderBy: { sortOrder: 'asc' }
   });
   const banners = topBanners.map(b => b.text);`;
 
-c = c.replace(target, replacement);
-c = c.replace('<Navbar settings={websiteSettings} />', '<Navbar settings={websiteSettings} topBanners={banners} />');
+const newCode = `  // Fetch top banners gracefully
+  let banners: string[] = [];
+  try {
+    const prisma = (await import('@/lib/db/prisma')).default;
+    const topBanners = await prisma.topBanner.findMany({
+      where: { isActive: true },
+      orderBy: { sortOrder: 'asc' }
+    });
+    banners = topBanners.map(b => b.text);
+  } catch (err) {
+    console.error("Error fetching top banners:", err);
+  }`;
 
-fs.writeFileSync(p, c);
-console.log("Fixed layout");
+code = code.replace(oldCode, newCode);
+fs.writeFileSync('app/(store)/layout.tsx', code);

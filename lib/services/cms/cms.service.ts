@@ -1,14 +1,19 @@
 import prisma from '@/lib/db/prisma';
 import { Prisma } from '@prisma/client';
+import { unstable_cache } from 'next/cache';
 
 // WebsiteSettings
-export async function getWebsiteSettings() {
-  return prisma.websiteSettings.upsert({
-    where: { id: 'global' },
-    update: {},
-    create: { id: 'global' },
-  });
-}
+export const getWebsiteSettings = unstable_cache(async () => {
+  try {
+    const settings = await prisma.websiteSettings.findUnique({
+      where: { id: 'global' },
+    });
+    return settings || { id: 'global', siteName: 'Sky Crackers', logoUrl: null, primaryPhone: null, whatsapp: null, email: null, address: null, facebook: null, instagram: null, youtube: null, twitter: null, footerText: null, priceListUrl: null, comboValidUpto: null, defaultMinOrder: 5000 as any };
+  } catch (err) {
+    console.error("Error fetching website settings:", err);
+    return { id: 'global', siteName: 'Sky Crackers', logoUrl: null, primaryPhone: null, whatsapp: null, email: null, address: null, facebook: null, instagram: null, youtube: null, twitter: null, footerText: null, priceListUrl: null, comboValidUpto: null, defaultMinOrder: 5000 as any };
+  }
+}, ['website-settings-global'], { revalidate: 3600, tags: ['settings'] });
 
 export async function updateWebsiteSettings(data: Prisma.WebsiteSettingsUpdateInput) {
   return prisma.websiteSettings.upsert({
@@ -83,9 +88,17 @@ export async function deleteStaticPage(id: string) {
 }
 
 // SEOSettings
-export async function getSEOSettings(path: string) {
-  return prisma.sEOSettings.findUnique({ where: { path } });
-}
+export const getSEOSettings = async (path: string) => {
+  const fetchCached = unstable_cache(async () => {
+    try {
+      return await prisma.sEOSettings.findUnique({ where: { path } });
+    } catch (err) {
+      console.error("Error fetching SEO settings:", err);
+      return null;
+    }
+  }, ['seo-settings', path], { revalidate: 3600, tags: ['settings'] });
+  return fetchCached();
+};
 
 export async function getAllSEOSettings() {
   return prisma.sEOSettings.findMany();
