@@ -8,353 +8,1096 @@ const prisma = new PrismaClient({ adapter });
 
 const rawData = `Combo Package
 3000 SPECIAL CAMBO 
-3000 SPECIAL,CAMBO
- 15000
- 3000
-Total:  0.00
+3000 SPECIAL CAMBO
+₹15000
+₹3000
+Total: ₹0.00
 3000 night cambo(31 items)
 3000 night cambo(31 items)
- 15000
- 3000
-Total:  0.00
+₹15000
+₹3000
+Total: ₹0.00
 3000 cambo (44 items)
 3000 cambo (44 items)
- 15000
- 3000
-Total:  0.00
+₹15000
+₹3000
+Total: ₹0.00
 4000 kids cambo(40 items)
 4000 kids cambo(40 items)
- 20000
- 4000
-Total:  0.00
+₹20000
+₹4000
+Total: ₹0.00
 5000 cambo (50 items)
-5000 cambo (50items)
- 25000
- 5000
-Total:  0.00
+5000 cambo (50 items)
+₹25000
+₹5000
+Total: ₹0.00
 5000 night cambo (41 items)
 5000 night cambo (41 items)
- 25000
- 5000
-Total:  0.00
+₹25000
+₹5000
+Total: ₹0.00
 
 SPARKLERS
 10cm Electric
 10cm Electric
-10 яেে.Ѯূ ㆚ㆮㆮ ㅚイㅝㅊ
- 75
- 15
-Total:  0.00
+10 செ.மீ சாதா கம்பி
+₹75
+₹15
+Total: ₹0.00
 10cm Colour
 10cm Colour
-10 яেে.Ѯূ ㆕ㆳㆱ ㅚイㅝㅊ
- 80
- 16
-Total:  0.00
+10 செ.மீ கலர் கம்பி
+₹80
+₹16
+Total: ₹0.00
 15cm Electric
 15cm Electric
-15 яেে.Ѯূ ㆚ㆮㆮ ㅚイㅝㅊ
- 175
- 35
-Total:  0.00
+15 செ.மீ சாதா கம்பி
+₹175
+₹35
+Total: ₹0.00
 30cm Electric
 30cm Electric
-30 яেে.Ѯূ ㆚ㆮㆮ ㅚイㅝㅊ
- 175
- 35
-Total:  0.00
+30 செ.மீ சாதா கம்பி
+₹175
+₹35
+Total: ₹0.00
 15cm Colour
 15cm Colour
-15 яেে.Ѯূ ㆕ㆳㆱ ㅚイㅝㅊ
- 185
- 37
-Total:  0.00
+15 செ.மீ கலர் கம்பி
+₹185
+₹37
+Total: ₹0.00
 30cm Colour
 30cm Colour
-30 яেে.Ѯূ ㆕ㆳㆱ ㅚイㅝㅊ
- 185
- 37
-Total:  0.00
+30 செ.மீ கலர் கம்பி
+₹185
+₹37
+Total: ₹0.00
 15cm Green
 15cm Green
-15 яেে.Ѯূ ㆰㆅㆾㆳ ㅚイㅝㅊ
- 225
- 45
-Total:  0.00
+15 செ.மீ பச்சை கம்பி
+₹225
+₹45
+Total: ₹0.00
 15cm Red
 15cm Red
-15 яেে.Ѯূ ㆷ㆏㆙ㆲㆯ ㅚイㅝㅊ
- 225
- 45
+15 செ.மீ சிகப்பு கம்பி
+₹225
+₹45
 184
-Total:  8280.00
+Total: ₹8280.00
 30cm Red
 30cm Red
-30 яেে.Ѯূ ㆷ㆏㆙㞲ㆯ ㅚイㅝㅊ
- 225
- 45
-Total:  0.00
+30 செ.மீ சிகப்பு கம்பி
+₹225
+₹45
+Total: ₹0.00
 30cm Green
 30cm Green
-30 яেে.Ѯূ ㆰㆅㆾㆳ ㅚイㅝㅊ
- 225
- 45
-Total:  0.00
+30 செ.மீ பச்சை கம்பி
+₹225
+₹45
+Total: ₹0.00
 50cm electric sparklers
 50cm electric sparklers
-50 яেে.Ѯূ ㆚ㆮㆮ ㅚイㅝㅊ
- 750
-�150
-Total:  0.00
+50 செ.மீ சாதா கம்பி
+₹750
+₹150
+Total: ₹0.00
 50cm Colour
 50cm Colour
-50 яেে.Ѯূ ㆕ㆳㆱ ㅚイㅝㅊ
- 800
-�160
-Total:  0.00
+50 செ.மீ கலர் கம்பி
+₹800
+₹160
+Total: ₹0.00
 
 special colour sparklers
 Orange color sparklers
 Orange color sparklers
- 225
- 45
-Total:  0.00
+₹225
+₹45
+Total: ₹0.00
 Pink color sparklers
 Pink color sparklers
- 250
- 50
-Total:  0.00
+₹250
+₹50
+Total: ₹0.00
 Blue color sparklers
 Blue color sparklers
- 250
-�50
-Total:  0.00
+₹250
+₹50
+Total: ₹0.00
 Lovely heart
 Lovely heart
-㆕ㆾㆮㆳ ㅚイㅝㅊ
- 700
- 140
-Total:  0.00
+லவ்லி ஹாட்
+₹700
+₹140
+Total: ₹0.00
 Rotating sparklers
 Rotating sparklers
- 1000
-�200
-Total:  0.00
+₹1000
+₹200
+Total: ₹0.00
 
 GROUND CHAKKAR
 Ground chakkar big
 Ground chakkar big
-ㆳㅝㅞㆰ㨯 ㆪイㅝ
- 150
-�30
-Total:  0.00
+தரை சக்கரம் பெரியது
+₹150
+₹30
+Total: ₹0.00
 Ground chakkar ashoka
 Ground chakkar ashoka
-ㆳㅝㅞㆰ㨯 ㆅ㚱キㆊ
- 225
- 45
-Total:  0.00
+தரை சக்கரம் அசோகா
+₹225
+₹45
+Total: ₹0.00
 Ground chakkar SPL
 Ground chakkar SPL
-ㆳㅝㅞㆰ ㆸ㆙㆚ㆲㆳ
- 350
-�70
-Total:  0.00
+தரை சக்கரம் ஸ்பெஷல்
+₹350
+₹70
+Total: ₹0.00
 Ground chakkar deluxe
 Ground chakkar deluxe
-ㆳㅝㅞㆰ㨯 ㆟ূㆳㅝ㞿㞮ㅝ
- 550
- 110
-Total:  0.00
+தரை சக்கரம் டீலக்ஸ்
+₹550
+₹110
+Total: ₹0.00
 
 spcial color chakkar
 whiztling wheel
 whiztling wheel
- 600
-�120
-Total:  0.00
+₹600
+₹120
+Total: ₹0.00
 Wire chakker(10pcs)
 Wire chakker(10pcs)
- 750
- 150
-Total:  0.00
+₹750
+₹150
+Total: ₹0.00
 LOTUS WHEEL 
 LOTUS WHEEL
- 800
- 160
-Total:  0.00
+₹800
+₹160
+Total: ₹0.00
 Racing 4*4wheel 
 Racing 4*4wheel
-�850
-�170
-Total:  0.00
+₹850
+₹170
+Total: ₹0.00
 Zodiac spinner(5pcs)
 Zodiac spinner(5pcs)
- 1000
- 200
-Total:  0.00
+₹1000
+₹200
+Total: ₹0.00
 tinto wheel(Red &green) 5pcs
 tinto wheel(Red &green) 5pcs
- 1000
-�200
-Total:  0.00
+₹1000
+₹200
+Total: ₹0.00
 
 FLOWER POTS
 Flower pots big 
 Flower pots big
-ㆰㆂ㆙ㆳㆇㆣ㆗ㆬ ㆪイㅝ
- 300
- 60
-Total:  0.00
+பூச்சட்டி பெரியது
+₹300
+₹60
+Total: ₹0.00
 Flower Pots Special  
 Flower Pots Special
-ㆰㆂ㆙ㆳㆇㆣ㆗ㆬ ㆸ㆙㆚ㆲㆳ
- 400
- 80
-Total:  0.00
+பூச்சட்டி ஸ்பெஷல்
+₹400
+₹80
+Total: ₹0.00
 Flower pot Ashoka
 Flower pot Ashoka
-ㆰㆂ㆙ㆳㆇㆣ㆗ㆬ ㆅ㚱キㆊ
- 500
- 100
-Total:  0.00
+பூச்சட்டி அசோகா
+₹500
+₹100
+Total: ₹0.00
 Pachranga (red & green)
 Pachranga (red & green)
- 650
-�130
-Total:  0.00
+₹650
+₹130
+Total: ₹0.00
 Color koti
 Color koti
- 800
- 160
-Total:  0.00
+₹800
+₹160
+Total: ₹0.00
 Mini tri color(5pcs)
 Mini tri color(5pcs)
- 950
- 190
-Total:  0.00
+₹950
+₹190
+Total: ₹0.00
 Color koti deluxe
 Color koti deluxe
-㆕㚳ㆱ ㆢ㨯ㅞㆯ㆜ ㆟ূㆳㅝ㞿㞮ㅝ
- 1350
- 270
-Total:  0.00
+கலர் கோட்டி டீலக்ஸ்
+₹1350
+₹270
+Total: ₹0.00
 Tri colour dlx
 Tri colour dlx
- 1300
- 300
-Total:  0.00
+₹1300
+₹300
+Total: ₹0.00
 mega jumbo pots 
 mega jumbo pots
- 2250
- 450
-Total:  0.00
+₹2250
+₹450
+Total: ₹0.00
 
 one sound crackers
 2 3/4 ' Kuruvi
 2 3/4 ' Kuruvi
-2 3/4 '㆕㚱Â�㚱ㆲ
-8�*M��*N��[�8�*L���K̈	�Z��ZB��K̈	�Z��ZB��K̈	�8ᬸ�x᣸�x᫸ᬂ��*M���*LL���[�8�*L��	�Z��ZB�	�Z��ZB�	�ᬸ�x᣸�x᫸ᬂ��*N�*LM���[�8�*L��[^H��Z��ZB�[^H��Z��ZB��*LML��*L���[�8�*L��H��[Z�]B�H��[Z�]B�H�᮸�+��gx�x�f��8�gH8���x��ᬂ��*L��B��*MB��[�8�*L�����[Z�B����[Z�B��	������m8�x�gxᦸ���gH8���x��ᬂ��*L̍B��*M�B��[�8�*L���\��Y\�YY�H��\��Y\�YY�H��*M�*N��[�8�*L�����X��[]��X���[]��X����i���gx�g��8�gH8᪸᯸�B��*LM�B��*L�B��[�8�*L��Y����X��Y����X������x���+���ᦈ8᪸᯸�B��*L�L��*M���[�8�*L���[��و�[����X��[��و�[����X�¸ᦸ�g��g��gH8ᡸ���H8ᦸ�g��g��gH8᪸᯸�B��*MML��*LLL��[�8�*L���\��X���X���\��X���X���*M�L�*LL���[�8�*L��Y�][��X��Y�][��X�����i�ᦸ�g����x�gH8᪸᯸�B��*LLML�*L����[�8�*L���TT���P���L�\\���X���L�\\���X���L8�x�8���xᦸ�gH8��)������gH��X���*L�L��*ML��[�8�*L��L�H\\���X��L�H\\���X��L8�x�8���xᦸ�gH8��)������gH8᪸�x�B��*ML��*LL��[�8�*L��H��\\���X��H��\\���X��R��8��)������gH8᪸�x�B��*NML��*LNL��[�8�*L����S��H�T��HK̈�[��[���\��HK̈�[��[���\��HK̈�8�n�᫸�x�x�g��g���8�8�x᣸�x�8��ᬂ��*LL�B��*L�B��[�8�*L��	��[��[���\��	��[��[���\���8�n�᫸�x�x�g��g���8�8�x᣸�x�8��ᬂ��*L�L��*ML��[�8�*L����P�PS�ՑSQT�]�]��]�]��*LL�B��*L�B��[�8�*L�����\�����\��*L��*M���[�8�*L���]\��B��]\��B����x᣸ᬸ���gx���g��8�x���B��*M��*N��[�8�*L��[X��\��[X��\���*ML�*NL��[�8�*L���[X�\�[B��[X�\�[B����x᪸��᫈8�¸�*ML��*LL��[�8�*L��I�[��]\�]YY[��I�[��]\�]YY[���*M���*LL���[�8�*L��Z[�H�\�[�
-H�JB�Z[�H�^�[�
-H�JB��*M̍B��*LMB��[�8�*L��YY�H�\�[��YY�H�\�[��᫸)���xᯈ8ᦸ����᫂��*N��*LM���[�8�*L����Y��ݙ[Y\ۘZ�H�\�[��ۘZ�H�\�[��*LL�B��*L�B��[�8�*L��\ܘY�H
-\��B�\ܘY�H
-\��B��*L��B��*MB��[�8�*L��[�ܞH�\�
-H�\�Y]Y\�B�[�ܞH�\�
-H�\�Y]Y\�B��*L��B��*MB��[�8�*L��[X��X��ۙJL��
-B�[X��X��ۙJL��
-B��*M�*N��[�8�*L����\����\���*M��*LL���[�8�*L�����
-\��B����
-\��B��*M�L��*LML��[�8�*L���ۛ�I���Y��[�Z[���ۛ�I���Y��[�Z[���*N�*LM���[�8�*L���ۛ�I��ܙY[���[�Z[���ۛ�I��ܙY[���[�Z[���*N��*LM���[�8�*L��X��H[ۙ^B�X��H[ۙ^B��8�x�8�H8᫸�B��*N�*LM���[�8�*L���H���H���*NL�*LN��[�8�*L��[ۈ�[��܈[\[��[ۈ�[��܈[\[���*NL�*LN��[�8�*L��SӑVH�S��
-�T�B�SӑVH�S��
-�T�B��8�xᦸ᫸��8�x���H8��)������gH8᪸�x�B��*NL��*LN��[�8�*L����YH�\�H�[����B���YH�\�H�[����B��*NL��*LN��[�8�*L��f�Z�¸�*LLML�*L����[�8�*L������\���[�Z[��^^X[���]HݙH�^^X[���]HݙB��*L���*N��[�8�*L��[���[�Z[�ܘX��[��B�[���[�Z[�ܘX��[��B��*M�*N��[�8�*L��^^X[������Z^
-H��ܜ�B�^^X[������Z^
-H��ܜ�B��*ML�*NL��[�8�*L��XX�����X]\�\��B�XX�����X]\�\��B��*ML��*NL��[�8�*L��\������\�\��B�\������\�\��B��*ML��*NL��[�8�*L�����[��
-��\�]Y\�B����[��
-��\�]Y\�B��*M��*LL���[�8�*L���\��[HܘX��[��\��[HܘX��[�¸�*M���*LL���[�8�*L��[[ۈ�YB�[[ۈ�YB��*M���*LL���[�8�*L����ܛ���[�Z[����ܛ���[�Z[���*M���*LL���[�8�*L����\�Y���\����\�]Y\�B���\�Y���\����\�]Y\�B��*N��*LM���[�8�*L����\��
-H��ܜ�B���\��
-H��ܜ�B��*N�*LM���[�8�*L��H�ӑB�H�ӑB��*NL�*LN��[�8�*L��[ښ]����H�[ښ]����B��*NL�B��*LNB��[�8�*L��ܘX��[����[�Z[����B�ܘX��[����[�Z[����B��*LL��*L����[�8�*L���XX������[�Z[��XX�����\�B�XX�����\�B��*M��*LM��[�8�*L�����\��[��HXX������\��[��HXX���¸�*NL��*LN��[�8�*L���YHXX������YHXX���¸ᦸ�g����g��mH8᫸�j8���gH8�x᣸�x᣸᯸�8�gB��*LM���*L���[�8�*L������\��X���[�YH�X����[�YH�X�¸�*L�L�*ML��[�8�*L��H�H[��[�H�H[��[��*M�L��*LML��[�8�*L���Y�\�J\��B��Y�\�J\��B��*N�*LM���[�8�*L���[��J�\H��܊B��[��J�\H��܊B��*N��*LM���[�8�*L�������]����]��X������]��X���*L�L��*M���[�8�*L��[�Z�����]�[�Z�����]�*MML�*LLL��[�8�*L���\�[������]��\�[������]��*N��*LM���[�8�*L����]�\��]�[�������ܘX��[����[�Z[����ܘX��[����[�Z[���*M�L��*LML��[�8�*L���[[�\���X��[��H�]��܈\\�B��[[�\���X��[��H�]��܈\\�B��*M�L��*LML��[�8�*L���I��\��H
-��\�]Y\�B��I��\��H
-��\�]Y\�B��*M�L��*LML��[�8�*L���X�HX���\���X�HX���\���*N�*LM���[�8�*L��X��Y
-�X�H��܊B�X��Y
-�X�H��܊B��*NL��*LM���[�8�*L����H�ؘ�B���H�ؘ�B��*LLL��*L�L��[�8�*L���[�H�[�B��[�H�[�B��*LL��*L����[�8�*L��^��J���B�^��J���B��*L�L��*M���[�8�*L����H�ؘ�H
-���B���H�ؘ�H
-���B��*L���*M���[�8�*L��S�����S��S�����S��*NL��*LM���[�8�*L������HܘX��\��Y�Z�JLX�B��Y�Z�JLX�B��*LNL��*L���[�8�*L����\Y�Z�JLX�B���\Y�Z�JLX�B��*L���*M��[�8�*L����[��H�]��H��
-\��B���H��
-\��B��*L���*M���[�8�*L�����
-H��B����
-H��B��*ML��*NL��[�8�*L���ZY\���
-LX�B��ZY\���
-LX�B��*M���*LML��[�8�*L��[�H�ܘ�J\��B�[�H�ܘ�J\��B��*NL��*LN��[�8�*L���]H�\�J\��B��]H�\�J\��B��*LLL��*L����[�8�*L����[��H\�Y[�]��H�[��B���H�[��B��*LM�*L���[�8�*L���[���[��H��[���[��B��*M��*N��[�8�*L���[���[��H
-�YH�\���[�
-B��[���[��H
-�YH�\���[�
-B��*M���*LL���[�8�*L���[���[��H��[���[��B��*LLML��*L����[�8�*L���0�[���[��H��K̈[���[��B��*LL�L�*L����[�8�*L���K̈[���[��J�YH�\���[�
-H��K̈[���[��J�YH�\���[�
-B��*LML��*L���[�8�*L��[���[��H\B�[���[��H\B��*LM�L��*L�L��[�8�*L���[��[��H��[��[��B��*L���*M��[�8�*L����X�X[���\��[��HZ\�X[�]�K̈�[��H�^��[[��K̈�[��H�^��[[�¸�*LML�*L���[�8�*L���[���\�\�
-ܘX��[��B��[���\�\�
-ܘX��[��B��*LML��*L���[�8�*L���K̈[���^XY�\�H�[�K̈[���^XY�\�H�[¸�*LML�*L���[�8�*L��L��\�L��\��*L��*M��[�8�*L���[�\H
-H��ܜ�B��[�\H
-H��ܜ�B��*N��*M��[�8�*L��[�����[�[�����[�¸�*L��L��*ML��[�8�*L����\
-[��
-B���\
-[��
-B��*L��L��*ML��[�8�*L��[���X�H�[�[��B�[���X�H�[�[��B��*L��L�*ML��[�8�*L�����X��\�Y[�]��[���[��H
-�X�H��[���[��H
-�X�B��*LLML��*L����[�8�*L�����[���[��H
-�X�B����[���[��H
-�X�B��*L��L��*ML��[�8�*L��[���[��H
-�X�B�[���[��H
-�X�B��*M��*N��[�8�*L��H[���[�H
-�X�H�H[���[�H
-�X�B��*ML�*NL��[�8�*L����\X][��][H���\���L����Y\��L����Y\���*M�L��*LL���[�8�*L���H���Y\���H���Y\���*LL��*L���[�8�*L������][X���\������][X���\���8��᯸�x�gH8�xᬸ�gx����8�x���B��*LNL��*L���[�8�*L�����][H��܈�[YB����][H��܈�[YB��*L��*M��[�8�*L������][X���\������][X���\���8��᯸�x�gH8�xᬸ�gx����8�x���B��*L���*M͌��[�8�*L�����][H��܈�[YB����][H��܈�[YB��*M�*NM���[�8�*L��L����][X���\��L����][X���\��L�8��᯸�x�gH8�xᬸ�gx����8�x���B��*M���*LMM���[�8�*L��L���][H��܈�[YB�L���][H��܈�[YB��*NML�*LNL��[�8�*L������][X���\��[YB�����][X���\��[YB��8��᯸�x�gH8�xᬸ�gx�����8�x���B��*LNL��*L���[�8�*L��LL���][X���\��[YB�LL���][X���\��[YB�LL8��᯸�x�gH8�xᬸ�gx����8�x���B��*M�*N��[�8�*L����X�X[][H���\�������XX����[��J\�[��[ۊB�XX����[��J\�[��[ۊB��*L��L��*ML��[�8�*L���H���\�[��H���\�[�¸�*��*N��[�8�*L����\�]�[\�^B�HK̈[���]�]
-��	��B�HK̈[���]�]
-��	��B��*LML��*L���[�8�*L��LL][H���\���LL][H���\���¸�*LM�L�*L�L��[�8�*L���Y�][\��Z��[YH�Z��[YB��*LML��*L���[�8�*L�����[YB����[YB��*L���*M���[�8�*L��Z��[YB�Z��[YB��*M�L��*LML��[�8�*L��L��[YB�L��[YB��*LML�*L���[�8�*L������\�X]�\�[���X]��[���X]�¸�*L�L��*M���[�8�*L���\H[�H��܂��\H[�H��܂��*NL��*LN��[�8�*L����[��[���\�[���\¸�*ML��*LL��[�8�*L�����\����\��*L���*M���[�8�*L���۞H�[���۞H�[���*M�L�*LML��[�8�*L����Y�����][H����][H����*LL�L�*L����[�8�*L���H][H����H][H���*LM�L��*L����[�8�*L���][H]�����][H]�����*L��L��*ML��[�8�*L��][H]����][H]�����*L̍L��*M�L��[�8�*L��L][H]����L][H]�����*M�L��*NL��[�8�*L����[�]H�\�]�ܚ���X�X[�[��H�]K̈�[���]
-���B�K̈�[���]
-���B��*NL��*LN��[�8�*L��H�\�H�Z[��H�\�H�Z[���*LL�*L���[�8�*L������X[��YH�[X��\B�����X[��YH�[X��\B��*LL�L�*L�L��[�8�*L����ۛ�H�[��B�ܘ[��H
-���B�ܘ[��H
-���B��*L��L��*ML��[�8�*L���YHX\�����B��YHX\�����B��*L��L��*ML��[�8�*L��H[�����\��\�Y\�
-���B�H[�����\��\�Y\�
-���B��*M�L��*LML��[�8�*L���ۜ��]X\H���X��X��Y�H�����X��\X�ȋ���\��\�Ȏ���\��\ȋ���X�X[���\��\��\�Ȏ���X�X[X���\�\�\��\�\ȋ��ܛ�[��Z��\����ܛ�[�X�X��\������X[��܈�Z��\�����[��K]�Y[ȋ�����\��Ȏ�����\�\����ۙH��[�ܘX��\�Ȏ��ۙK\��[�XܘX��\�ȋ����X�Ȏ����X�ȋ��\\���X����\\�X��X�ȋ���[��H�\�����[��[��\�\�����X�X[�ݙ[Y\Ȏ���[��K[�ݙ[Y\ȋ���Y��ݙ[Y\Ȏ���Y�[�ݙ[Y\ȋ�����\���[�Z[�����[��KY��[�Z[�[][X��܈���XX������[�Z[����XX����Y��[�Z[�������\��X��Ȏ��ܘ�\�X[�\[��[�������]Ȏ������]����]�\��]�[��������]�X\��]�[�L���������HܘX��\�Ȏ�����KXܘX��\�ȋ���[��H�]Ȏ���[��KX\�Y[Y�[��KM\�ȋ���[��H\�Y[�]Ȏ���[��KX\�X[Y�[��H����X�X[���\��[��HZ\�X[�]Ȏ���X�X[X���\�X\�Y[Y�[��H�����X��\�Y[�]�����X��X\�Y[Y�[��H����\X][��][H���\���Ȏ���\X][��[][X��܋\��ȋ���X�X[][H���\����������X�X[[][KX���\�\�\��L�������\�]�[\�^H����\�]�[Y\�^K\�][�]���Y�][\����Y�][[\�������\�X]�\Ȏ�����\�[X]�\ȋ���[�Ȏ���[�ȋ���Y�������Y�X������[�]H�\�]�ܚ���X�X[�[��H�]Ȏ���[�]KY�\�K]�ܚ�\�X�X[Y�[��K[�]ȋ���ۛ�H�[��H����۞KY�[��H��N�\�[���[��[ۈXZ[�
-H�ۜ��K�����\�[���\��H[�[��\�L
-���X�ˋ���N�ۜ���]Y�ܚY\�H]�Z]�\�XK��]Y�ܞK��[�X[�J
-N��ۜ�[�\�H�]�]K��]
-	���K�X\
-O���[J
-JK��[\�O�OOH	��N]�\��[��]Y�ܞRYH�[]�[YP�Y��\�H�N]YY��[�H��܈
-]HH�H[�\˛[���J��H�ۜ�[�HH[�\��WN��ۜ�X]�Y�^HHؚ�X���^\��]X\
-K��[�
-�O��OOH[�K����\��\�J
-JNY�
-X]�Y�^JH�ۜ�\��]�Y�H�]X\�X]�Y�^WN�ۜ���]H��]Y�ܚY\˙�[�
-�O�˜�Y�OOH\��]�Y�NY�
-��]
-H�\��[��]Y�ܞRYH��]�YB��[YP�Y��\�H�N�۝[�YNB��Y�
-[�K����\��\�J
-K��\���]
-	��[��JHY�
-X�\��[��]Y�ܞRY
-H�[YP�Y��\�H�N�۝[�YNB��]\�H]�X�HH�ۜ��X�S[�\�H�[YP�Y��\���[\�O��[��Y\�	��'I�JN�Y�
-�X�S[�\˛[���H�H\�H\��R[�
-�X�S[�\��K��\X�J�׌NWK��	��JN�X�HH\��R[�
-�X�S[�\��WK��\X�J�׌NWK��	��JNH[�HY�
-�X�S[�\˛[���OOHJH�X�HH\��R[�
-�X�S[�\��K��\X�J�׌NWK��	��JN\�H�X�N��B���ۜ��[YHH�[YP�Y��\��NY�
-�[YH	���X�H�
-H�ۜ��Y�H�[YK����\��\�J
-K��\X�J�טK^�NWJ���	�I�K��\X�J��_I
-J���	��H
-�	�I�
-�X]���܊X]��[��J
-J�L
-N��H]�Z]�\�XK���X��ܙX]J]N��[YN��[YK��YΈ�Y��\��\���[[���X�N��X�K��]Y�ܞRY��\��[��]Y�ܞRY�X�]�N��YB�B�JN�ۜ��K���8�!HYY��X��	ۘ[Y_H
-T��8�'I�\�H�X�N�8�'I��X�_JX
-NYY��[�
-��H�]�
-JH�ۜ��K���8�c�Z[Y�Y	ۘ[Y_X
-NB�B��[YP�Y��\�H�NH[�H�[YP�Y��\��\�
-[�JNB�B��ۜ���H�'�H[	�YY��[�H��X��YY�X��\�ٝ[HX�ۜ��K�����NB��XZ[�
-K��[�[J
+2 3/4 'குருவி
+₹40
+₹8
+Total: ₹0.00
+3 1/2 ' Lakshmi
+3 1/2 ' Lakshmi
+3 1/2 ' லட்சுமி
+₹60
+₹12
+Total: ₹0.00
+4 ' Lakshmi
+4 ' Lakshmi
+4 'லட்சுமி
+₹80
+₹16
+Total: ₹0.00
+Deluxe gold lakshmi
+Deluxe gold lakshmi
+₹150
+₹30
+Total: ₹0.00
+5 " jallikattu
+5 " jallikattu
+5 "ஜல்லிக்கட்டு
+₹225
+₹45
+Total: ₹0.00
+6 " kumki
+6 " kumki
+6 "கும்ப்கி
+₹325
+₹65
+Total: ₹0.00
+ Best rider mega dlx
+Best rider mega dlx
+₹400
+₹80
+Total: ₹0.00
 
-HO��\�XK�\��ۛ�X�
+Bombs
+Bullet Bomb
+Bullet Bomb
+புல்லட் பாம்
+₹175
+₹35
+Total: ₹0.00
+Hydro Bomb
+Hydro Bomb
+ஹைட்ரோ பாம்
+₹350
+₹70
+Total: ₹0.00
+King Of king Bombs
+King Of king Bombs
+கிங் ஆஃப் பாம்
+₹550
+₹110
+Total: ₹0.00
+Classic Bomb
+Classic Bomb
+₹650
+₹130
+Total: ₹0.00
+Digital Bomb
+Digital Bomb
+டிஜிட்டல் பாம்
+₹1150
+₹230
+Total: ₹0.00
 
-JN
+PAPER BOMB
+250G paper bomb
+250G paper bomb
+250 கிராம் bomb
+₹250
+₹50
+Total: ₹0.00
+500 Gm Paper Bomb
+500 Gm Paper Bomb
+500 கிராம் பாம்
+₹500
+₹100
+Total: ₹0.00
+1 Kg Paper Bomb
+1 Kg Paper Bomb
+1Kg கிராம் பாம்
+₹950
+₹190
+Total: ₹0.00
+
+TWINKLE STAR
+1 1/2 Twinkling Star
+1 1/2 Twinkling Star
+1 1/2" சாட்டை
+₹125
+₹25
+Total: ₹0.00
+4 ' Twinkling Star
+4 ' Twinkling Star
+4" சாட்டை
+₹250
+₹50
+Total: ₹0.00
+
+SPECIAL NOVELTIES
+Kit kat 
+Kit kat
+₹125
+₹25
+Total: ₹0.00
+photo flash
+photo flash
+₹300
+₹60
+Total: ₹0.00
+Butterfly
+Butterfly
+பட்டாம்பூச்சி
+₹400
+₹80
+Total: ₹0.00
+Helicopter
+Helicopter
+₹450
+₹90
+Total: ₹0.00
+Bambaram
+Bambaram
+பம்பரம்
+₹500
+₹100
+Total: ₹0.00
+5' tin water queen 
+5' tin water queen
+₹600
+₹120
+Total: ₹0.00
+mini siren (5 pce)
+mini siren (5 pce)
+₹725
+₹145
+Total: ₹0.00
+Mega Siren
+Mega Siren
+மெகா சைரன்
+₹800
+₹160
+Total: ₹0.00
+
+Kids Novelties
+snake serphant
+snake serphant
+₹125
+₹25
+Total: ₹0.00
+Asrafi (5pcs)
+Asrafi (5pcs)
+₹225
+₹45
+Total: ₹0.00
+Angry bird(5 varieties)
+Angry bird(5 varieties)
+₹225
+₹45
+Total: ₹0.00
+Electric stone(10box)
+Electric stone(10box)
+₹400
+₹80
+Total: ₹0.00
+sward
+sward
+₹600
+₹120
+Total: ₹0.00
+pogo (5pcs)
+pogo (5pcs)
+₹750
+₹150
+Total: ₹0.00
+sonny's red fountain
+sonny's red fountain
+₹800
+₹160
+Total: ₹0.00
+Sonny's green fountain
+Sonny's green fountain
+₹800
+₹160
+Total: ₹0.00
+Lucky money
+Lucky money
+பணம்
+₹800
+₹160
+Total: ₹0.00
+Lolli pop
+Lolli pop
+₹900
+₹180
+Total: ₹0.00
+Lion king or elephant
+Lion king or elephant
+₹900
+₹180
+Total: ₹0.00
+MONEY BANK (2PIS)
+MONEY BANK (2PIS)
+உண்டியல் பாம்
+₹900
+₹180
+Total: ₹0.00
+Free fire gun(2pcs)
+Free fire gun(2pcs)
+₹900
+₹180
+Total: ₹0.00
+Ak47
+Ak47
+₹1150
+₹230
+Total: ₹0.00
+
+Colour fountain
+ayyan's little dove 
+ayyan's little dove
+₹380
+₹80
+Total: ₹0.00
+Tin fountain(crackling)
+Tin fountain(crackling)
+₹400
+₹80
+Total: ₹0.00
+Ayyan's pogo mix(5 colors)
+Ayyan's pogo mix(5 colors)
+₹450
+₹90
+Total: ₹0.00
+peacock feather(5pcs)
+peacock feather(5pcs)
+₹450
+₹90
+Total: ₹0.00
+Disco Shower(5pcs)
+Disco Shower(5pcs)
+₹450
+₹90
+Total: ₹0.00
+Volcano (3 varaties)
+Volcano (3 varaties)
+₹600
+₹120
+Total: ₹0.00
+star drum crackling
+star drum crackling
+₹600
+₹120
+Total: ₹0.00
+Lemon tree
+Lemon tree
+₹600
+₹120
+Total: ₹0.00
+pop corn fountain
+pop corn fountain
+₹600
+₹120
+Total: ₹0.00
+Power puff girls(3 varities)
+Power puff girls(3 varities)
+₹800
+₹160
+Total: ₹0.00
+Power pot (5 colors)
+Power pot (5 colors)
+₹800
+₹160
+Total: ₹0.00
+I CONE
+I CONE
+₹900
+₹180
+Total: ₹0.00
+Mojito(2pcs) 
+Mojito(2pcs)
+₹925
+₹185
+Total: ₹0.00
+Crackling fountain(3pcs)
+Crackling fountain(3pcs)
+₹1300
+₹260
+Total: ₹0.00
+
+peacock fountain
+peacock 3 phase
+peacock 3 phase
+₹700
+₹140
+Total: ₹0.00
+Colour smoke peacock
+Colour smoke peacock
+₹900
+₹180
+Total: ₹0.00
+Bada Peacock 
+Bada Peacock
+மயில் பவுண்டன்
+₹1700
+₹340
+Total: ₹0.00
+
+colour sticks
+selfie stick 
+selfie stick
+₹250
+₹50
+Total: ₹0.00
+HI FI pencil
+HI FI pencil
+₹750
+₹150
+Total: ₹0.00
+Red flare(5pcs)
+Red flare(5pcs)
+₹800
+₹160
+Total: ₹0.00
+smoke(triple color)
+smoke(triple color)
+₹800
+₹160
+Total: ₹0.00
+
+Rockets
+rocket bomb
+rocket bomb
+₹350
+₹70
+Total: ₹0.00
+Lunik rocket
+Lunik rocket
+₹550
+₹110
+Total: ₹0.00
+Whistling rocket
+Whistling rocket
+₹800
+₹160
+Total: ₹0.00
+
+New Arrivals 2026
+6" Crackling fountain
+6" Crackling fountain
+₹750
+₹150
+Total: ₹0.00
+Cylinder bomb(smoke with color paper)
+Cylinder bomb(smoke with color paper)
+₹750
+₹150
+Total: ₹0.00
+Tom&jerry (6 varaties)
+Tom&jerry (6 varaties)
+₹750
+₹150
+Total: ₹0.00
+Double duckker
+Double duckker
+₹800
+₹160
+Total: ₹0.00
+Hybrid(double color)
+Hybrid(double color)
+₹850
+₹170
+Total: ₹0.00
+Jolly bobby
+Jolly bobby
+₹1050
+₹210
+Total: ₹0.00
+kulfi candle
+kulfi candle
+₹1300
+₹260
+Total: ₹0.00
+Pizza(6pcs)
+Pizza(6pcs)
+₹2100
+₹420
+Total: ₹0.00
+Jolly bobby (3pcs)
+Jolly bobby (3pcs)
+₹3000
+₹600
+Total: ₹0.00
+HAND SHOT 888 BRAND
+HAND SHOT 888 BRAND
+₹8500
+₹1700
+Total: ₹0.00
+
+Loose Crackers
+Red bijli(100 pic)
+Red bijli(100 pic)
+₹190
+₹38
+Total: ₹0.00
+Stripped bijli(100 pic)
+Stripped bijli(100 pic)
+₹200
+₹40
+Total: ₹0.00
+
+single outs
+Sky shot(5pcs)
+Sky shot(5pcs)
+₹300
+₹60
+Total: ₹0.00
+7 shot (5 pcs)
+7 shot (5 pcs)
+₹450
+₹90
+Total: ₹0.00
+Raider shot(10pic)
+Raider shot(10pic)
+₹700
+₹150
+Total: ₹0.00
+Penta force(5pcs)
+Penta force(5pcs)
+₹900
+₹180
+Total: ₹0.00
+White house(5pcs)
+White house(5pcs)
+₹1100
+₹220
+Total: ₹0.00
+
+single ariel outs
+Chotta fancy
+Chotta fancy
+₹140
+₹28
+Total: ₹0.00
+2inch Fancy 
+2inch Fancy
+₹400
+₹80
+Total: ₹0.00
+2 inch fancy (blue star brand)
+2 inch fancy (blue star brand)
+₹600
+₹120
+Total: ₹0.00
+3 inch Fancy 
+3 inch Fancy
+₹1150
+₹230
+Total: ₹0.00
+3 ½ inch  Fancy 
+3 1/2 inch Fancy
+₹1350
+₹270
+Total: ₹0.00
+3 1/2  inch fancy( blue star brand) 
+3 1/2 inch fancy( blue star brand)
+₹1500
+₹300
+Total: ₹0.00
+4 inch fancy pipe
+4 inch fancy pipe
+₹1750
+₹350
+Total: ₹0.00
+4" Tin fancy 
+4" Tin fancy
+₹2000
+₹400
+Total: ₹0.00
+
+special colour single aireal outs
+3 1/2 fancy sizziling
+3 1/2 fancy sizziling
+₹1500
+₹300
+Total: ₹0.00
+king fisher (crackling)
+king fisher (crackling)
+₹1500
+₹300
+Total: ₹0.00
+3 1/2 inch nayagara falls
+3 1/2 inch nayagara falls
+₹1500
+₹300
+Total: ₹0.00
+12 Step
+12 Step
+₹2000
+₹400
+Total: ₹0.00
+4" tin pipe (5 colors)
+4" tin pipe (5 colors)
+₹800
+₹400
+Total: ₹0.00
+4inch wow pink
+4inch wow pink
+₹2250
+₹450
+Total: ₹0.00
+7 Step(4 inch)
+7 Step(4 inch)
+₹2250
+₹450
+Total: ₹0.00
+ 4inch Double ball fancy
+4inch Double ball fancy
+₹2250
+₹450
+Total: ₹0.00
+
+combo ariel out
+2 inch Fancy ( 3 pic) 
+2 inch Fancy ( 3 pic)
+₹1150
+₹230
+Total: ₹0.00
+2 3/4  inch fancy (3pic)
+2 3/4  inch fancy (3pic)
+₹2250
+₹450
+Total: ₹0.00
+4inch fancy (2pic)
+4inch fancy (2pic)
+₹4000
+₹800
+Total: ₹0.00
+5 inch Fany ( 2Pic) 
+5 inch Fany ( 2Pic)
+₹4500
+₹900
+Total: ₹0.00
+
+Repeating multi colour shots
+12 shot rider
+12 shot rider
+₹650
+₹130
+Total: ₹0.00
+25 Shot Rider
+25 Shot Rider
+₹1200
+₹240
+Total: ₹0.00
+30 Shots Multicolour
+30 Shots Multicolour
+30 ஷாட் மல்டி கலர்
+₹1900
+₹380
+Total: ₹0.00
+30 Shot multi color prime
+30 Shot multi color prime
+₹2400
+₹480
+Total: ₹0.00
+60 Shots Multicolour
+60 Shots Multicolour
+60 ஷாட் மல்டி கலர்
+₹3800
+₹760
+Total: ₹0.00
+60 Shot multi color prime
+60 Shot multi color prime
+₹4800
+₹960
+Total: ₹0.00
+120 Shots Multicolour
+120 Shots Multicolour
+120 ஷாட் மல்டி கலர்
+₹7800
+₹1560
+Total: ₹0.00
+120 shot multi color prime
+120 shot multi color prime
+₹9500
+₹1900
+Total: ₹0.00
+240 Shots Multicolour prime
+240 Shots Multicolour prime
+240 ஷாட் மல்டி கலர்
+₹19000
+₹3800
+Total: ₹0.00
+510 Shots Multicolour prime
+510 Shots Multicolour prime
+510 ஷாட் மல்டி கலர்
+₹40000
+₹8000
+Total: ₹0.00
+
+special multi colour shot 2026
+peacock dance(ipl function)
+peacock dance(ipl function)
+₹2250
+₹450
+Total: ₹0.00
+25 shot whistling
+25 shot whistling
+₹4000
+₹800
+Total: ₹0.00
+
+festival display
+1  1/2 inch setout (48shot's)
+1 1/2 inch setout (48shot's)
+₹15000
+₹3000
+Total: ₹0.00
+10 X 10 multi colour shots
+10 X 10 multi colour shots
+₹17500
+₹3500
+Total: ₹0.00
+
+digital lar
+1k prime 
+1k prime
+₹1500
+₹300
+Total: ₹0.00
+2k Prime
+2k Prime
+₹3000
+₹600
+Total: ₹0.00
+5k prime
+5k prime
+₹7500
+₹1500
+Total: ₹0.00
+10k prime
+10k prime
+₹15000
+₹3000
+Total: ₹0.00
+
+colour matches
+kings matchs
+kings matchs
+₹350
+₹70
+Total: ₹0.00
+7up 5 in 1 color
+7up 5 in 1 color
+₹900
+₹180
+Total: ₹0.00
+
+Guns
+Ring caps
+Ring caps
+₹50
+₹10
+Total: ₹0.00
+Roll cap
+Roll cap
+₹300
+₹60
+Total: ₹0.00
+Sony gun
+Sony gun
+₹750
+₹150
+Total: ₹0.00
+
+Gift box
+20 item box
+20 item box
+₹1350
+₹270
+Total: ₹0.00
+25 item box
+25 item box
+₹1650
+₹330
+Total: ₹0.00
+30 item uv box
+30 item uv box
+₹2250
+₹450
+Total: ₹0.00
+40 item uv box
+40 item uv box
+₹3250
+₹650
+Total: ₹0.00
+50 item uv box
+50 item uv box
+₹4250
+₹850
+Total: ₹0.00
+
+vanitha fireworks special fancy outs
+4 1/2" pink out (2pcs)
+4 1/2" pink out (2pcs)
+₹9000
+₹1800
+Total: ₹0.00
+5" purple rain
+5" purple rain
+₹10000
+₹2000
+Total: ₹0.00
+6" ocean blue jambo pipe
+6" ocean blue jambo pipe
+₹12500
+₹2500
+Total: ₹0.00
+
+sonny fancy
+Orange (2pcs)
+Orange (2pcs)
+₹2750
+₹550
+Total: ₹0.00
+Blue pearls(2pcs)
+Blue pearls(2pcs)
+₹2750
+₹550
+Total: ₹0.00
+5 inch oscar series (2pcs)
+5 inch oscar series (2pcs)
+₹7500
+₹1500
+Total: ₹0.00`;
+
+const catMap = {
+  "combo package": "combo-pack",
+  "sparklers": "sparkles",
+  "special colour sparklers": "special-colour-sparkleres",
+  "ground chakkar": "ground-checker",
+  "spcial color chakkar": "fancy-wheels",
+  "flower pots": "flower-pot",
+  "one sound crackers": "one-sound-crackers",
+  "bombs": "bombs",
+  "paper bomb": "paper-bombs",
+  "twinkle star": "twinkling-star",
+  "special novelties": "fancy-novelties",
+  "kids novelties": "kids-novelties",
+  "colour fountain": "fancy-fountain-multicolor",
+  "peacock fountain": "peacock-fountain",
+  "colour sticks": "torches-and-pencil",
+  "rockets": "rocket",
+  "new arrivals 2026": "new-arrivals-2026",
+  "loose crackers": "loose-crackers",
+  "single outs": "single-ariel-fancy-5pcs",
+  "single ariel outs": "single-arial-fancy",
+  "special colour single aireal outs": "special-colour-ariel-fancy",
+  "combo ariel out": "combo-ariel-fancy",
+  "repeating multi colour shots": "repeating-multicolor-shots",
+  "special multi colour shot 2026": "special-multi-colour-shirts-2026",
+  "festival display": "festival-display-set-out",
+  "digital lar": "digital-lar",
+  "colour matches": "colour-matches",
+  "guns": "guns",
+  "gift box": "gift-box",
+  "vanitha fireworks special fancy outs": "vanitha-fire-work-special-fancy-outs",
+  "sonny fancy": "sony-fancy"
+};
+
+async function main() {
+  console.log("Starting to parse and insert 100+ products...");
+  const dbCategories = await prisma.category.findMany();
+  
+  const lines = rawData.split('\n').map(l => l.trim()).filter(l => l !== '');
+  let currentCategoryId = null;
+  let nameBuffer = [];
+  let addedCount = 0;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    
+    const matchedKey = Object.keys(catMap).find(k => k === line.toLowerCase());
+    if (matchedKey) {
+      const targetSlug = catMap[matchedKey];
+      const dbCat = dbCategories.find(c => c.slug === targetSlug);
+      if (dbCat) {
+        currentCategoryId = dbCat.id;
+      }
+      nameBuffer = [];
+      continue;
+    }
+
+    if (line.toLowerCase().startsWith('total:')) {
+      if (!currentCategoryId) {
+        nameBuffer = [];
+        continue;
+      }
+      
+      let mrp = 0;
+      let price = 0;
+      const priceLines = nameBuffer.filter(l => l.includes('₹'));
+      
+      if (priceLines.length >= 2) {
+         mrp = parseInt(priceLines[0].replace(/[^0-9]/g, ''));
+         price = parseInt(priceLines[1].replace(/[^0-9]/g, ''));
+      } else if (priceLines.length === 1) {
+         price = parseInt(priceLines[0].replace(/[^0-9]/g, ''));
+         mrp = price; 
+      }
+      
+      const name = nameBuffer[0];
+      if (name && price > 0) {
+         const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') + '-' + Math.floor(Math.random()*10000);
+         
+         try {
+           await prisma.product.create({
+             data: {
+               name: name,
+               slug: slug,
+               mrp: mrp,
+               sellingPrice: price,
+               categoryId: currentCategoryId,
+               active: true
+             }
+           });
+           console.log(`✅ Added Product: ${name} (MRP: ₹${mrp} | Price: ₹${price})`);
+           addedCount++;
+         } catch (e) {
+           console.log(`❌ Failed to add ${name}`);
+         }
+      }
+      nameBuffer = [];
+    } else {
+      nameBuffer.push(line);
+    }
+  }
+  const log = `\n🎉 All ${addedCount} Products added successfully!`;
+  console.log(log);
+}
+
+main().finally(() => prisma.$disconnect());
