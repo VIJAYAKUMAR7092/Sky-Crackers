@@ -13,18 +13,32 @@ async function main() {
     let updated = 0;
     
     for (const item of updates) {
-        // Find product by name and update imageUrl
+        // Find product by name and update imageUrl via related ProductImage
         const prod = await prisma.product.findFirst({
-            where: { name: item.name }
+            where: { name: item.name },
+            include: { images: true }
         });
         
         if (prod) {
-            await prisma.product.update({
-                where: { id: prod.id },
-                data: { imageUrl: item.imageUrl }
-            });
-            updated++;
-            console.log(`Updated image for ${item.name}`);
+            // Check if image already exists to prevent duplicates if run multiple times
+            const hasImage = prod.images.some(img => img.url === item.imageUrl);
+            if (!hasImage) {
+                await prisma.product.update({
+                    where: { id: prod.id },
+                    data: { 
+                        images: {
+                            create: {
+                                url: item.imageUrl,
+                                isPrimary: true
+                            }
+                        }
+                    }
+                });
+                updated++;
+                console.log(`Updated image for ${item.name}`);
+            } else {
+                console.log(`Image already exists for ${item.name}`);
+            }
         } else {
             console.log(`Product not found: ${item.name}`);
         }
