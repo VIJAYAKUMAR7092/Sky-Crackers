@@ -174,7 +174,9 @@ export async function createProduct(data: z.infer<typeof import('../../validatio
     include: { images: true, category: true },
   });
 
-  revalidateTag('products', 'max');
+  revalidateTag('products');
+  const { revalidatePath } = require('next/cache');
+  revalidatePath('/', 'layout');
   return serializeDecimals(product);
 }
 
@@ -219,7 +221,9 @@ export async function updateProduct(id: string, data: z.infer<typeof import('../
     include: { images: true, category: true },
   });
 
-  revalidateTag('products', 'max');
+  revalidateTag('products');
+  const { revalidatePath } = require('next/cache');
+  revalidatePath('/', 'layout');
   return serializeDecimals(product);
 }
 
@@ -229,6 +233,8 @@ export async function softDeleteProduct(id: string) {
     data: { active: false },
   });
 
-  revalidateTag('products', 'max');
+  revalidateTag('products');
+  const { revalidatePath } = require('next/cache');
+  revalidatePath('/', 'layout');
   return serializeDecimals(product);
 }

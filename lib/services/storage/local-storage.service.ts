@@ -7,7 +7,6 @@ export class LocalStorageService implements StorageService {
   private uploadDir: string;
 
   constructor() {
-    // Store in public/uploads/products
     this.uploadDir = path.join(process.cwd(), 'public', 'uploads', 'products');
     this.ensureDirectoryExists();
   }
@@ -30,11 +29,12 @@ export class LocalStorageService implements StorageService {
 
     await fs.writeFile(filePath, file);
 
-    const url = `/uploads/products/${newFilename}`;
+    // Changed to use the dynamic API route instead of static public folder
+    const url = `/api/uploads/products/${newFilename}`;
 
     return {
       url,
-      id: newFilename, // For local storage, id is the filename
+      id: newFilename,
       size: file.length,
     };
   }
@@ -43,8 +43,7 @@ export class LocalStorageService implements StorageService {
     try {
       let filename = identifier;
       
-      // If identifier is a full URL, extract the filename
-      if (identifier.startsWith('/uploads/products/')) {
+      if (identifier.includes('/uploads/products/')) {
         filename = identifier.split('/').pop() || identifier;
       }
 
@@ -52,7 +51,6 @@ export class LocalStorageService implements StorageService {
       await fs.unlink(filePath);
     } catch (error) {
       console.error(`Failed to delete file ${identifier}:`, error);
-      // We might not want to throw if it's already deleted
     }
   }
 }
