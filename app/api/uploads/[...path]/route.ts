@@ -23,11 +23,14 @@ export async function GET(
     else if (ext === '.webp') contentType = 'image/webp';
     else if (ext === '.gif') contentType = 'image/gif';
     else if (ext === '.svg') contentType = 'image/svg+xml';
+    else if (ext === '.pdf') contentType = 'application/pdf';
     
     return new NextResponse(fileBuffer, {
       headers: {
         'Content-Type': contentType,
         'Cache-Control': 'public, max-age=31536000, immutable',
+        // Optional: you could add content-disposition if you want it to always download instead of inline
+        // 'Content-Disposition': `inline; filename="${path.basename(filePath)}"`,
       },
     });
   } catch (error) {
