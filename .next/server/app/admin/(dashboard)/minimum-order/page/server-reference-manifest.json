@@ -1,0 +1,16 @@
+{
+  "node": {
+    "60f1604d3e23b7e463723efbbfc06e3b4e3fc7baeb": {
+      "workers": {
+        "app/admin/(dashboard)/minimum-order/page": {
+          "moduleId": 99450,
+          "async": true,
+          "codeHash": null
+        }
+      },
+      "exportedName": "updateMinimumOrder",
+      "filename": "app/admin/(dashboard)/minimum-order/actions.ts"
+    }
+  },
+  "edge": {}
+}

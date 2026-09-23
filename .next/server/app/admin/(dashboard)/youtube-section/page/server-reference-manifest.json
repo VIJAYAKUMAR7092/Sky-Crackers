@@ -1,0 +1,16 @@
+{
+  "node": {
+    "40df81fc66944fcb9bef782cf5e21c1beeaa30ada1": {
+      "workers": {
+        "app/admin/(dashboard)/youtube-section/page": {
+          "moduleId": 13250,
+          "async": true,
+          "codeHash": null
+        }
+      },
+      "exportedName": "saveYouTubeVideo",
+      "filename": "app/admin/(dashboard)/youtube-section/actions.ts"
+    }
+  },
+  "edge": {}
+}

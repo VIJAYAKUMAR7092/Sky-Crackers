@@ -1,0 +1,3 @@
+{
+  "/api/admin/homepage/singleton/[type]/route": "app/api/admin/homepage/singleton/[type]/route.js"
+}

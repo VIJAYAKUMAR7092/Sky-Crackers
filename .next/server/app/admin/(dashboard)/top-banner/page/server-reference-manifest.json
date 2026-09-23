@@ -1,0 +1,16 @@
+{
+  "node": {
+    "40d864086554a49c0eb6fa5358b969c39f7cd060d6": {
+      "workers": {
+        "app/admin/(dashboard)/top-banner/page": {
+          "moduleId": 47061,
+          "async": true,
+          "codeHash": null
+        }
+      },
+      "exportedName": "saveBanners",
+      "filename": "app/admin/(dashboard)/top-banner/actions.ts"
+    }
+  },
+  "edge": {}
+}
