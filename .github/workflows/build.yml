@@ -1,0 +1,24 @@
+name: Build for Ubuntu AWS
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install
+      - run: npx prisma generate
+      - run: npm run build
+      - name: Push .next to production branch
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git checkout -b production-build
+          sed -i 's/\.next\/cache\///g' .gitignore || true
+          sed -i 's/\.next\///g' .gitignore || true
+          git add -f .next/
+          git commit -m "Auto-build Ubuntu .next files"
+          git push -f origin production-build
