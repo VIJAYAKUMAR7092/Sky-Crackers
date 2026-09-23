@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/VIJAYAKUMAR/.gemini/antigravity/scratch/sky-crackers/app/(store)/track-order/layout.tsx"],"sourcesContent":["export const metadata = {\n  title: 'Track Your Order | Sky Crackers',\n  description: 'Track the status of your Sky Crackers order in real-time.',\n};\n\nexport default function TrackOrderLayout({ children }: { children: React.ReactNode }) {\n  return children;\n}\r\n"],"names":["metadata","title","description","TrackOrderLayout","children"],"mappings":";;;;;;AAAO,MAAMA,WAAW;IACtBC,OAAO;IACPC,aAAa;AACf;AAEe,SAASC,iBAAiB,EAAEC,QAAQ,EAAiC;IAClF,OAAOA;AACT"}}]
+}

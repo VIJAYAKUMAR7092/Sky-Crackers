@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/VIJAYAKUMAR/.gemini/antigravity/scratch/sky-crackers/app/(store)/template.tsx"],"sourcesContent":["import React from 'react';\n\nexport default function Template({ children }: { children: React.ReactNode }) {\n  // Premium smooth page transition for ecommerce navigation\n  return (\n    <div className=\"animate-[pageFadeIn_0.6s_ease-out_forwards]\">\n      {children}\n    </div>\n  );\n}\n"],"names":["Template","children","className"],"mappings":";;;;;;AAEe,SAASA,SAAS,EAAEC,QAAQ,EAAiC;IAC1E,0DAA0D;IAC1D,qBACE,8OAAC;QAAIC,WAAU;kBACZD;;;;;;AAGP"}}]
+}

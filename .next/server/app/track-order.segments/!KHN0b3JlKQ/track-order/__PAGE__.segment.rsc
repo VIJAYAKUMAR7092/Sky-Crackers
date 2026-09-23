@@ -1,0 +1,22 @@
+1:"$Sreact.fragment"
+2:I[47257,["/_next/static/chunks/2w760dxlumjeh.js"],"ClientPageRoot"]
+3:I[54579,["/_next/static/chunks/2w760dxlumjeh.js","/_next/static/chunks/2s-pbd40schwt.js","/_next/static/chunks/2u3vtxs6qk162.js","/_next/static/chunks/1cz_va3ia6o3u.js"],"default"]
+6:I[97367,["/_next/static/chunks/2w760dxlumjeh.js"],"OutletBoundary"]
+7:"$Sreact.suspense"
+b:I[97367,["/_next/static/chunks/2w760dxlumjeh.js"],"ViewportBoundary"]
+c:I[97367,["/_next/static/chunks/2w760dxlumjeh.js"],"MetadataBoundary"]
+d:I[27201,["/_next/static/chunks/2w760dxlumjeh.js"],"IconMark"]
+f:I[39756,["/_next/static/chunks/2w760dxlumjeh.js"],"default"]
+10:I[37457,["/_next/static/chunks/2w760dxlumjeh.js"],"default"]
+a:X
+0:{"buildId":"GVG3dQ1In9q_YyInwKqGs","data":[{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/_next/static/chunks/1cz_va3ia6o3u.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"isPartial":"$@9","staleTime":"$a","varyParams":null},{"rsc":["$","$1","h",{"children":[null,["$","$Lb",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$Lc",null,{"children":["$","$7",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Track Your Order | Sky Crackers"}],["$","meta","1",{"name":"description","content":"Track the status of your Sky Crackers order in real-time."}],["$","link","2",{"rel":"icon","href":"/icon.png?icon.2_qhw7qi_e2nu.png","sizes":"722x692","type":"image/png"}],["$","$Ld","3",{}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"isPartial":"$@e","staleTime":"$a","varyParams":null},{"rsc":["$","$1","c",{"children":[null,["$","$Lf",null,{"parallelRouterKey":"children","template":["$","$L10",null,{}]}]]}],"isPartial":"$@11","staleTime":"$a","varyParams":null}],"isUpgradeableISRFallback":false,"a":"$@12","rootVaryParams":null,"needsRuntimeRequest":"$@13"}
+4:{}
+5:"$0:data:0:rsc:props:children:0:props:serverProvidedParams:params"
+8:null
+13:true
+a:300
+a:C
+12:0
+e:"$undefined"
+11:"$undefined"
+9:"$undefined"
