@@ -14,6 +14,9 @@ jobs:
       - run: npm install
       - run: npx prisma generate
       - run: npm run build
+        env:
+          NEXTAUTH_URL: https://skycrackers.in
+          NEXTAUTH_SECRET: skycrackers_secret_key_2024
       - name: Push .next to production branch
         run: |
           git config --global user.name 'github-actions[bot]'
