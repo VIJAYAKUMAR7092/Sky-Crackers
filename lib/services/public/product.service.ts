@@ -104,7 +104,7 @@ export const getProducts = async (params?: { categoryId?: string, search?: strin
       ]);
 
       return { products: serializeDecimals(products), total };
-    }, ['public-products', params?.categoryId || 'all', params?.search || 'none', String(params?.limit || 20)], { revalidate: 60, tags: ['products'] });
+    }, ['public-products-v2', params?.categoryId || 'all', params?.search || 'none', String(params?.limit || 20)], { revalidate: 60, tags: ['products'] });
 
     return await fetchCached();
   } catch (error) {
@@ -146,4 +146,4 @@ export const getAllCategories = unstable_cache(async () => {
     console.error("Error fetching categories:", error);
     return [];
   }
-}, ['public-all-categories'], { revalidate: 3600, tags: ['categories'] });
+}, ['public-all-categories-v2'], { revalidate: 3600, tags: ['categories'] });
