@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import React from "react";
 import Navbar from "../../components/public/layout/Navbar";
 import Footer from "../../components/public/layout/Footer";
