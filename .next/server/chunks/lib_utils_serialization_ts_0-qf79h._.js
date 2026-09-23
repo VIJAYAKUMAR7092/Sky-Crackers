@@ -1,3 +1,0 @@
-module.exports=[94985,e=>{"use strict";var r=e.i(63021);e.s(["serializeDecimals",0,function e(t){if(null==t)return t;if(r.Prisma.Decimal.isDecimal(t))return t.toNumber();if(t instanceof Date)return t;if(Array.isArray(t))return t.map(r=>e(r));if("object"==typeof t){let r={};for(let[i,n]of Object.entries(t))r[i]=e(n);return r}return t}])}];
-
-//# sourceMappingURL=lib_utils_serialization_ts_0-qf79h._.js.map

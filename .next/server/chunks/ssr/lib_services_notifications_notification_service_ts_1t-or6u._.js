@@ -1,3 +1,0 @@
-module.exports=[6353,a=>a.a(async(b,c)=>{try{var d=a.i(1241),e=b([d]);async function f(a=1,b=20){let[c,e]=await Promise.all([d.default.notification.findMany({where:{recipientType:"ADMIN"},orderBy:{createdAt:"desc"},skip:(a-1)*b,take:b,include:{order:{select:{id:!0,orderReference:!0}}}}),d.default.notification.count({where:{recipientType:"ADMIN"}})]);return{notifications:c,total:e,totalPages:Math.ceil(e/b),currentPage:a}}async function g(){return d.default.notification.count({where:{recipientType:"ADMIN",isRead:!1}})}[d]=e.then?(await e)():e,a.s(["getAdminNotifications",0,f,"getUnreadAdminNotificationCount",0,g]),c()}catch(a){c(a)}},!1)];
-
-//# sourceMappingURL=lib_services_notifications_notification_service_ts_1t-or6u._.js.map

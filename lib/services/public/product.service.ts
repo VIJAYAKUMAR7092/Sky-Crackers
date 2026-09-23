@@ -58,9 +58,12 @@ export const getProducts = async (params?: { categoryId?: string, search?: strin
       const whereClause: any = { active: true };
       
       if (params?.categoryId) {
+        const catTerm = params.categoryId.replace(/-/g, ' '); // e.g. "flower-pots" -> "flower pots"
         whereClause.OR = [
           { categoryId: params.categoryId },
-          { category: { slug: params.categoryId } }
+          { category: { slug: params.categoryId } },
+          { category: { name: { contains: catTerm, mode: 'insensitive' } } },
+          { category: { slug: { contains: params.categoryId, mode: 'insensitive' } } }
         ];
       }
       

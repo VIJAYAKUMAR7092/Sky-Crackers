@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 46, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/VIJAYAKUMAR/.gemini/antigravity/scratch/sky-crackers/components/theme-provider.tsx"],"sourcesContent":["\"use client\";\n\nimport * as React from \"react\";\nimport { ThemeProvider as NextThemesProvider } from \"next-themes\";\nimport { type ThemeProviderProps } from \"next-themes\";\n\n// Next.js 15 / React 19 throws a warning when next-themes injects its script.\n// We intercept console.error to hide this specific warning to keep the console clean\n// while maintaining full next-themes functionality.\nif (typeof window !== \"undefined\") {\n  const originalError = console.error;\n  console.error = (...args: any[]) => {\n    if (typeof args[0] === \"string\" && args[0].includes(\"Encountered a script tag while rendering React component\")) {\n      return;\n    }\n    originalError.apply(console, args);\n  };\n}\n\nexport function ThemeProvider({ children, ...props }: ThemeProviderProps) {\n  return <NextThemesProvider {...props}>{children}</NextThemesProvider>;\n}\n"],"names":["ThemeProvider","children","props"],"mappings":";;;;;AAGA;AAHA;;;AAMA,8EAA8E;AAC9E,qFAAqF;AACrF,oDAAoD;AACpD;;AAUO,SAASA,cAAc,EAAEC,QAAQ,EAAE,GAAGC,OAA2B;IACtE,qBAAO,8OAAC,iKAAkB;QAAE,GAAGA,KAAK;kBAAGD;;;;;;AACzC"}}]
-}

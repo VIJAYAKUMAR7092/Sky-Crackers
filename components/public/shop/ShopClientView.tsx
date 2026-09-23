@@ -60,7 +60,10 @@ export default function ShopClientView({
           <span>All</span>
         </Link>
         {categories.map((cat: any) => {
-          const isSelected = categoryId === cat.slug || categoryId === cat.id;
+          const normalizedCatId = categoryId?.toLowerCase().replace(/-/g, ' ') || '';
+          const isSelected = categoryId === cat.slug || categoryId === cat.id || 
+                             (normalizedCatId && cat.name.toLowerCase().includes(normalizedCatId)) || 
+                             (normalizedCatId && cat.slug.toLowerCase().includes(normalizedCatId));
           return (
             <Link
               key={cat.id}
