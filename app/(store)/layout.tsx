@@ -6,7 +6,40 @@ import FloatingStoreWidgets from "../../components/public/layout/FloatingStoreWi
 import WishlistWidget from "../../components/public/ui/WishlistWidget";
 import { getWebsiteSettings } from "@/lib/services/cms/cms.service";
 
+// ============================================================================
+// 🛑 DIWALI ORDERS CLOSED / OFF-SEASON MODE TOGGLE 🛑
+// set to `true`  -> Shows ONLY the "Diwali Orders Closed / Thank You" banner
+// set to `false` -> Instantly restores the full website and shop!
+// ============================================================================
+export const IS_ORDERS_CLOSED = true;
+
 export default async function StoreLayout({ children }: { children: React.ReactNode }) {
+  if (IS_ORDERS_CLOSED) {
+    return (
+      <div className="min-h-screen w-full bg-[#080d22] flex items-center justify-center overflow-x-hidden select-none m-0 p-0">
+        {/* MOBILE VIEW (Screens < 768px): Vertical / Portrait Poster */}
+        <div className="flex md:hidden w-full min-h-screen bg-[#080d22] items-center justify-center">
+          <img
+            src="/images/diwali-closed-mobile.jpg"
+            alt="Sky Crackers - Diwali Orders are Closed / Thank You"
+            className="w-full h-auto max-w-full pointer-events-none select-none block"
+            loading="eager"
+          />
+        </div>
+
+        {/* DESKTOP & TABLET VIEW (Screens >= 768px): Horizontal / Landscape Poster */}
+        <div className="hidden md:flex w-full min-h-screen bg-[#080d22] items-center justify-center">
+          <img
+            src="/images/diwali-closed-desktop.jpg"
+            alt="Sky Crackers - Diwali Orders are Closed / Thank You"
+            className="w-full h-auto max-h-screen object-contain pointer-events-none select-none block"
+            loading="eager"
+          />
+        </div>
+      </div>
+    );
+  }
+
   const rawSettings = await getWebsiteSettings();
   const websiteSettings = JSON.parse(JSON.stringify(rawSettings));
   
@@ -32,3 +65,4 @@ export default async function StoreLayout({ children }: { children: React.ReactN
     </div>
   );
 }
+
