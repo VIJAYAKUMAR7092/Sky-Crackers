@@ -5,13 +5,7 @@ import Footer from "../../components/public/layout/Footer";
 import FloatingStoreWidgets from "../../components/public/layout/FloatingStoreWidgets";
 import WishlistWidget from "../../components/public/ui/WishlistWidget";
 import { getWebsiteSettings } from "@/lib/services/cms/cms.service";
-
-// ============================================================================
-// 🛑 DIWALI ORDERS CLOSED / OFF-SEASON MODE TOGGLE 🛑
-// set to `true`  -> Shows ONLY the "Diwali Orders Closed / Thank You" banner
-// set to `false` -> Instantly restores the full website and shop!
-// ============================================================================
-export const IS_ORDERS_CLOSED = true;
+import { IS_ORDERS_CLOSED } from "@/lib/constants/site-mode";
 
 export default async function StoreLayout({ children }: { children: React.ReactNode }) {
   if (IS_ORDERS_CLOSED) {

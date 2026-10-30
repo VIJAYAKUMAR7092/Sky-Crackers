@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ShoppingCart, Trash2, ArrowRight, Minus, Plus, ShoppingBag, ShieldCheck, Truck } from "lucide-react";
 import { useCartStore } from "@/lib/store/cart.store";
+import { IS_ORDERS_CLOSED } from "@/lib/constants/site-mode";
 
 export default function CartPage() {
   const router = useRouter();
@@ -13,8 +14,12 @@ export default function CartPage() {
   const { items, updateQuantity, removeItem, clearCart, getSubtotal } = useCartStore();
 
   useEffect(() => {
+    if (IS_ORDERS_CLOSED) {
+      router.replace('/');
+      return;
+    }
     setMounted(true);
-  }, []);
+  }, [router]);
 
   if (!mounted) return <div className="min-h-screen bg-[#050505]" />;
 

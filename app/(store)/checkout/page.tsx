@@ -11,7 +11,14 @@ export const metadata: Metadata = {
 // Next.js dynamic render for checkout
 export const dynamic = 'force-dynamic';
 
+import { redirect } from 'next/navigation';
+import { IS_ORDERS_CLOSED } from '@/lib/constants/site-mode';
+
 export default async function CheckoutPage() {
+  if (IS_ORDERS_CLOSED) {
+    redirect('/');
+  }
+
   const [settings, zones] = await Promise.all([
     prisma.websiteSettings.findUnique({ where: { id: 'global' } }),
     prisma.deliveryZone.findMany({

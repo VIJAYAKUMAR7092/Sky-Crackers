@@ -3,8 +3,13 @@ import { processManualCheckout } from "@/lib/services/public/checkout.service";
 import { AppError } from "@/lib/utils/errors";
 import { successResponse, errorResponse } from "@/lib/utils/api-response";
 import { emailService } from "@/lib/services/email/email.service";
+import { IS_ORDERS_CLOSED } from "@/lib/constants/site-mode";
 
 export async function POST(req: Request) {
+  if (IS_ORDERS_CLOSED) {
+    return errorResponse("Diwali orders are closed for this season. Thank you!", "ORDERS_CLOSED", 403);
+  }
+
   try {
     const body = await req.json();
     

@@ -14,6 +14,7 @@ import { getFeaturedProducts, getBestSellingProducts, getAllCategories } from "@
 import { getHeroBanners, getVideoContent, getTestimonials, getSEOSettings, getWebsiteSettings } from "@/lib/services/cms/cms.service";
 import { HOMEPAGE_IMAGES } from "@/lib/constants/homepage-images";
 import { CATEGORY_IMAGES } from "@/lib/constants/category-images";
+import { IS_ORDERS_CLOSED } from "@/lib/constants/site-mode";
 
 export async function generateMetadata() {
   const seo = await getSEOSettings('/');
@@ -28,6 +29,10 @@ export async function generateMetadata() {
 export const revalidate = 3600;
 
 export default async function HomePage() {
+  if (IS_ORDERS_CLOSED) {
+    return null;
+  }
+
     const combos = await prisma.product.findMany({
     where: { isCombo: true },
     orderBy: { comboOrder: 'asc' },

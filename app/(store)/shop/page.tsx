@@ -4,6 +4,8 @@ import { Search, Filter } from "lucide-react";
 import { getAllCategories } from "@/lib/services/public/product.service";
 import ShopContent from "@/components/public/shop/ShopContent";
 import ShopSkeleton from "@/components/public/shop/ShopSkeleton";
+import { redirect } from "next/navigation";
+import { IS_ORDERS_CLOSED } from "@/lib/constants/site-mode";
 
 export const metadata = {
   title: "Shop Premium Fireworks | Sky Crackers",
@@ -15,6 +17,10 @@ export default async function ShopPage({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
+  if (IS_ORDERS_CLOSED) {
+    redirect('/');
+  }
+
   const resolvedSearchParams = await searchParams;
   const categoryIdParam = typeof resolvedSearchParams.category === 'string' ? resolvedSearchParams.category : undefined;
   const categoryId = categoryIdParam === 'all' ? undefined : categoryIdParam;
