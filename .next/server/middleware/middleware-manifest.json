@@ -1,0 +1,80 @@
+{
+  "sorted_middleware": [],
+  "middleware": {
+    "/": {
+      "files": [
+        "server/edge/chunks/node_modules_next_dist_esm_build_templates_edge-wrapper_0h-u1c1.js",
+        "server/edge/chunks/[root-of-the-server]__138leme._.js",
+        "server/edge/chunks/turbopack-node_modules_next_dist_esm_build_templates_edge-wrapper_1ptmaqt.js"
+      ],
+      "name": "middleware",
+      "page": "/",
+      "entrypoint": "server/edge/chunks/turbopack-node_modules_next_dist_esm_build_templates_edge-wrapper_1ptmaqt.js",
+      "matchers": [
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/admin{(\\.json|\\.rsc|\\.segments/.+\\.segment\\.rsc)}?",
+          "originalSource": "/admin"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/admin/:path*{(\\.json|\\.rsc|\\.segments/.+\\.segment\\.rsc)}?",
+          "originalSource": "/admin/:path*"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/shop{(\\.json|\\.rsc|\\.segments/.+\\.segment\\.rsc)}?",
+          "originalSource": "/shop"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/shop/:path*{(\\.json|\\.rsc|\\.segments/.+\\.segment\\.rsc)}?",
+          "originalSource": "/shop/:path*"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/checkout{(\\.json|\\.rsc|\\.segments/.+\\.segment\\.rsc)}?",
+          "originalSource": "/checkout"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/checkout/:path*{(\\.json|\\.rsc|\\.segments/.+\\.segment\\.rsc)}?",
+          "originalSource": "/checkout/:path*"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/cart{(\\.json|\\.rsc|\\.segments/.+\\.segment\\.rsc)}?",
+          "originalSource": "/cart"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/cart/:path*{(\\.json|\\.rsc|\\.segments/.+\\.segment\\.rsc)}?",
+          "originalSource": "/cart/:path*"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/product/:path*{(\\.json|\\.rsc|\\.segments/.+\\.segment\\.rsc)}?",
+          "originalSource": "/product/:path*"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/products/:path*{(\\.json|\\.rsc|\\.segments/.+\\.segment\\.rsc)}?",
+          "originalSource": "/products/:path*"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/track-order/:path*{(\\.json|\\.rsc|\\.segments/.+\\.segment\\.rsc)}?",
+          "originalSource": "/track-order/:path*"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/thank-you/:path*{(\\.json|\\.rsc|\\.segments/.+\\.segment\\.rsc)}?",
+          "originalSource": "/thank-you/:path*"
+        },
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/api/checkout{(\\.json|\\.rsc|\\.segments/.+\\.segment\\.rsc)}?",
+          "originalSource": "/api/checkout"
+        }
+      ],
+      "wasm": [],
+      "assets": [],
+      "env": {
+        "__NEXT_BUILD_ID": "rQVTMD4Luwn-E5HVhVBhn",
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "W2F6DuCGyfoBgWnluM+Ik5zBrbRlrNk/3Uap36y8zpE=",
+        "__NEXT_PREVIEW_MODE_ID": "b0a4c760c8c56f1caf3b2140b1bdd6f4",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "4b5d260a07835c7126e5fdb51fc56eba9729d2da335172284d9e2c64946ed7e8",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "4c9402c592d905ed38965f69838f3826cab33ba3ef27de4edf96ff8223306e47"
+      }
+    }
+  },
+  "instrumentation": null,
+  "functions": {}
+}
