@@ -1,0 +1,3 @@
+module.exports=[68848,a=>{"use strict";var b=a.i(7997),c=a.i(54119);a.s(["default",0,function(){return(0,b.jsxs)("div",{className:"flex flex-col items-center justify-center min-h-[400px]",children:[(0,b.jsx)(c.Loader2,{className:"h-8 w-8 animate-spin text-blue-600"}),(0,b.jsx)("p",{className:"mt-4 text-sm text-muted-foreground",children:"Loading details..."})]})}])},68304,function(a){a.n(a.i(68848))}];
+
+//# sourceMappingURL=app_admin_%28dashboard%29_products_%5Bid%5D_edit_loading_tsx_0g-ypdy._.js.map
