@@ -4,4 +4,4 @@
 //                   redirects all store pages to "/", and blocks checkout orders.
 // set to `false` -> Instantly restores the full website, shop, cart, and checkout!
 // ============================================================================
-export const IS_ORDERS_CLOSED = true;
+export const IS_ORDERS_CLOSED = false;
